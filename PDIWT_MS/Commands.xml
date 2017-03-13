@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+
+  <RootKeyinTable ID="root">
+    <Keyword SubtableRef="PDIWT_MS" CommandClass="MacroCommand" CommandWord="PDIWT_MS">
+      <Options Required="true" />
+    </Keyword>
+  </RootKeyinTable>
+
+  <SubKeyinTables>
+    <KeyinTable ID="PDIWT_MS">
+      <Keyword CommandWord="Test"></Keyword>
+      <Keyword CommandWord="TestWPF"></Keyword>
+      <Keyword SubtableRef="Tools" CommandClass="MacroCommand" CommandWord="Tools">
+        <Options Required="true"/>
+      </Keyword>
+    </KeyinTable>
+  </SubKeyinTables>
+
+  <SubKeyinTables>
+    <KeyinTable ID="Tools">
+      <Keyword CommandWord="QuickInsert"></Keyword>
+      <Keyword CommandWord="GetQuantities"></Keyword>
+    </KeyinTable>
+  </SubKeyinTables>
+
+  <KeyinHandlers>
+    <KeyinHandler Keyin="PDIWT_MS Test" Function="PDIWT_MS.KeyinCommands.Test"/>
+    <KeyinHandler Keyin="PDIWT_MS TestWPF" Function="PDIWT_MS.KeyinCommands.TestWPF"/>
+    <KeyinHandler Keyin="PDIWT_MS Tools QuickInsert" Function="PDIWT_MS.KeyinCommands.QuickInsert"/>
+    <KeyinHandler Keyin="PDIWT_MS Tools GetQuantities" Function ="PDIWT_MS.KeyinCommands.GetQuantities"/>
+  </KeyinHandlers>
+
+</KeyinTree>
