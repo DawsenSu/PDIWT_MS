@@ -43,7 +43,7 @@ namespace PDIWT_MS.Tools
             currentControl.Attach(addIn, "QuickInsert", new System.Drawing.Size(100, 200));
             currentControl.Content = new QuickInsertUC(addIn);
             currentControl.WindowContent.CanDockHorizontally = false;
-            currentControl.Title = "快速插入";
+            currentControl.Title = "QuickInsert";
             currentControl.Show();
         }
 

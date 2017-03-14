@@ -9,14 +9,22 @@
 
   <SubKeyinTables>
     <KeyinTable ID="PDIWT_MS">
-      <Keyword CommandWord="Test"></Keyword>
-      <Keyword CommandWord="TestWPF"></Keyword>
+      <Keyword SubtableRef="Test" CommandClass="MacroCommand" CommandWord="Test">
+        <Options Required="true"/>
+      </Keyword>
       <Keyword SubtableRef="Tools" CommandClass="MacroCommand" CommandWord="Tools">
         <Options Required="true"/>
       </Keyword>
     </KeyinTable>
   </SubKeyinTables>
 
+  <SubKeyinTables>
+    <KeyinTable ID="Test">
+      <Keyword CommandWord="TestKeyin"></Keyword>
+      <Keyword CommandWord="TestWPF"></Keyword>
+    </KeyinTable>
+  </SubKeyinTables>
+  
   <SubKeyinTables>
     <KeyinTable ID="Tools">
       <Keyword CommandWord="QuickInsert"></Keyword>
@@ -25,8 +33,8 @@
   </SubKeyinTables>
 
   <KeyinHandlers>
-    <KeyinHandler Keyin="PDIWT_MS Test" Function="PDIWT_MS.KeyinCommands.Test"/>
-    <KeyinHandler Keyin="PDIWT_MS TestWPF" Function="PDIWT_MS.KeyinCommands.TestWPF"/>
+    <KeyinHandler Keyin="PDIWT_MS Test TestKeyin" Function="PDIWT_MS.KeyinCommands.Test"/>
+    <KeyinHandler Keyin="PDIWT_MS Test TestWPF" Function="PDIWT_MS.KeyinCommands.TestWPF"/>
     <KeyinHandler Keyin="PDIWT_MS Tools QuickInsert" Function="PDIWT_MS.KeyinCommands.QuickInsert"/>
     <KeyinHandler Keyin="PDIWT_MS Tools GetQuantities" Function ="PDIWT_MS.KeyinCommands.GetQuantities"/>
   </KeyinHandlers>

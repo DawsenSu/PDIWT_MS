@@ -1,14 +1,47 @@
-﻿<UserControl x:Class="PDIWT_MS.Tools.GetQuantitiesUC"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PDIWT_MS.Tools"
-             mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="150"
-             Unloaded="UserControl_Unloaded">
-    <StackPanel Margin="3">
-        <Label>存储文件路径：</Label>
-        <TextBox x:Name="tb_OutputPath" IsEnabled="False"></TextBox>
+﻿<UserControl
+    x:Class="PDIWT_MS.Tools.GetQuantitiesUC"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PDIWT_MS.Tools"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="240"
+    d:DesignWidth="150"
+    Unloaded="UserControl_Unloaded"
+    mc:Ignorable="d">
+    <StackPanel Margin="2">
+        <Label>按图层统计的工程量：</Label>
+        <ListView
+            x:Name="lv_output"
+            Height="150"
+            Margin="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn
+                        Width="60"
+                        DisplayMemberBinding="{Binding LevelName}"
+                        Header="图层名" />
+                    <GridViewColumn
+                        Width="70"
+                        DisplayMemberBinding="{Binding Quantities}"
+                        Header="工程量(m^3)" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <!--<TextBox x:Name="tb_OutputPath" IsEnabled="False"></TextBox>-->
+        <Button
+            Width="100"
+            Margin="0,3"
+            Click="tb_Calculation_Click">
+            计算工程量
+        </Button>
+        <Button
+            x:Name="bt_output"
+            Width="100"
+            Margin="0,3"
+            Click="bt_output_Click"
+            IsEnabled="{Binding Path=Items.Count, ElementName=lv_output, NotifyOnSourceUpdated=True}">
+            输出至Excel
+        </Button>
     </StackPanel>
 </UserControl>
