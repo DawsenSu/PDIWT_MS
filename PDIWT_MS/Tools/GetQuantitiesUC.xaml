@@ -18,11 +18,11 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn
-                        Width="60"
+                        Width="Auto"
                         DisplayMemberBinding="{Binding LevelName}"
                         Header="图层名" />
                     <GridViewColumn
-                        Width="70"
+                        Width="Auto"
                         DisplayMemberBinding="{Binding Quantities}"
                         Header="工程量(m^3)" />
                 </GridView>

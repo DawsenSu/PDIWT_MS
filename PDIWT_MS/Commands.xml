@@ -22,6 +22,7 @@
     <KeyinTable ID="Test">
       <Keyword CommandWord="TestKeyin"></Keyword>
       <Keyword CommandWord="TestWPF"></Keyword>
+      <Keyword CommandWord="TestWindowWPF"></Keyword>
     </KeyinTable>
   </SubKeyinTables>
   
@@ -35,6 +36,7 @@
   <KeyinHandlers>
     <KeyinHandler Keyin="PDIWT_MS Test TestKeyin" Function="PDIWT_MS.KeyinCommands.Test"/>
     <KeyinHandler Keyin="PDIWT_MS Test TestWPF" Function="PDIWT_MS.KeyinCommands.TestWPF"/>
+    <KeyinHandler Keyin="PDIWT_MS Test TestWindowWPF" Function="PDIWT_MS.KeyinCommands.TestWindowWPF"/>
     <KeyinHandler Keyin="PDIWT_MS Tools QuickInsert" Function="PDIWT_MS.KeyinCommands.QuickInsert"/>
     <KeyinHandler Keyin="PDIWT_MS Tools GetQuantities" Function ="PDIWT_MS.KeyinCommands.GetQuantities"/>
   </KeyinHandlers>

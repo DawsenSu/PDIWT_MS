@@ -48,13 +48,15 @@ namespace PDIWT_MS.Tools
             }
 
             currentControl = new BM.WPF.DockableWindow();
-            currentControl.Attach(addIn, "wpfControl", new System.Drawing.Size(150, 240));
+            //在Attach之前修改窗体属性
+            currentControl.Title = "按图层输出工程量";
+            currentControl.Attach(addIn, "wpfControl", new System.Drawing.Size(150, 250));
             currentControl.Content = new GetQuantitiesUC(addIn);
+            //currentControl.Icon = BitmapFrame.Create(new Uri(@"C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\Image\pdiwt_icon.ico", UriKind.Absolute));
             //不能停靠
             currentControl.WindowContent.CanDockHorizontally = false;
             currentControl.WindowContent.CanDockVertically = false;
-            currentControl.WindowContent.CanDockInCenter = false;
-            currentControl.Title = "GetQuantities";
+            currentControl.WindowContent.CanDockInCenter = false;            
             currentControl.Show();
         }
 
@@ -141,6 +143,7 @@ namespace PDIWT_MS.Tools
 
             lv_output.ItemsSource = result;
         }
+
 
         private List<QuantitiesByLevelResult> result = new List<QuantitiesByLevelResult>();
     }

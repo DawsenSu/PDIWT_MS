@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 using BM = Bentley.MstnPlatformNET;
 using BD = Bentley.DgnPlatformNET;
 
-namespace PDIWT_MS
+namespace PDIWT_MS.Test
 {
     /// <summary>
     /// wpfUC.xaml 的交互逻辑

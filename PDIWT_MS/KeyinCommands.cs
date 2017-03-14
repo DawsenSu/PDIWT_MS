@@ -40,14 +40,21 @@ namespace PDIWT_MS
         [DllImport("ustation.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
         internal static extern uint mdlElmdscr_getByElemRef(out  IntPtr edPP, IntPtr elemRef, IntPtr modelRef, int expandSharedCells, IntPtr filePos);
 
-        #endregion
-
         public static void TestWPF(string unparsed)
         {
-            wpfUC.ShowWindow(Program.Addin);
+            PDIWT_MS.Test.wpfUC.ShowWindow(Program.Addin);
         }
 
-        #region Tools
+        public static void TestWindowWPF(string unparsed)
+        {
+            PDIWT_MS.Test.Window1.ShowWindow();
+        }
+
+
+        #endregion
+
+
+        #region (PDIWT_MS Tools) command
         public static void QuickInsert(string unparsed)
         {
             Tools.QuickInsertUC.ShowWindow(Program.Addin);

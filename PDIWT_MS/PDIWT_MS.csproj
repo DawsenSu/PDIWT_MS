@@ -74,6 +74,9 @@
       <HintPath>..\packages\BentleyCore.1.0.0\lib\Bentley.GeometryNET.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Bentley.GeometryNET.FB">
+      <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Bentley.GeometryNET.FB.dll</HintPath>
+    </Reference>
     <Reference Include="Bentley.GeometryNET.Structs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=MSIL">
       <HintPath>..\packages\BentleyCore.1.0.0\lib\Bentley.GeometryNET.Structs.dll</HintPath>
       <Private>False</Private>
@@ -139,6 +142,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Test\Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\BentleyMarshal.cs" />
     <Compile Include="Tools\GetQuantitiesUC.xaml.cs">
       <DependentUpon>GetQuantitiesUC.xaml</DependentUpon>
@@ -146,7 +152,7 @@
     <Compile Include="Tools\QuickInsertUC.xaml.cs">
       <DependentUpon>QuickInsertUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="wpfUC.xaml.cs">
+    <Compile Include="Test\wpfUC.xaml.cs">
       <DependentUpon>wpfUC.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -166,6 +172,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Test\Window1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Tools\GetQuantitiesUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -174,12 +184,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="wpfUC.xaml">
+    <Page Include="Test\wpfUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
