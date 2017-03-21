@@ -134,6 +134,8 @@ namespace PDIWT_MS.Tools
                         volumeByLevel[eleLevelName] += volume / Math.Pow(uor_per_meter, 3);
                     }
                 }
+                //利用DoEvents强制循环队列,防止界面卡死
+                Bentley.UI.Threading.DispatcherHelper.DoEvents();
             }
 
             foreach (var i in volumeByLevel)

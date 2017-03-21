@@ -10,6 +10,6 @@
     Height="300"
     mc:Ignorable="d">
     <StackPanel Margin="5">
-        <Button>tThes</Button>
+        <Button Click="Button_Click">tThes</Button>
     </StackPanel>
 </Window>

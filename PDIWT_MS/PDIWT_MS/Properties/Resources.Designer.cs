@@ -59,14 +59,5 @@ namespace PDIWT_MS.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   查找类似 PDIWT_MS 的本地化字符串。
-        /// </summary>
-        internal static string AppName {
-            get {
-                return ResourceManager.GetString("AppName", resourceCulture);
-            }
-        }
     }
 }

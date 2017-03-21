@@ -4,23 +4,22 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A1D98526-9777-4047-A5E6-F7E5CCAEAE9C}</ProjectGuid>
+    <ProjectGuid>{6B073612-7FDC-4F27-A3E3-0486BCE1D32D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PDIWT_MS</RootNamespace>
     <AssemblyName>PDIWT_MS</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>3</WarningLevel>
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -31,24 +30,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Bentley.DgnDisplayNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9bfed12b64a9b7df, processorArchitecture=AMD64">
       <HintPath>..\packages\BentleyCore.1.0.0\lib\Bentley.DgnDisplayNet.dll</HintPath>
@@ -58,8 +39,24 @@
       <HintPath>..\packages\BentleyCore.1.0.0\lib\Bentley.DgnPlatformNET.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Bentley.EC.Persistence3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
+      <HintPath>..\packages\BentleyECFramework.1.0.0\lib\Bentley.EC.Persistence3.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Bentley.EC.Presentation3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
+      <HintPath>..\packages\BentleyECFramework.1.0.0\lib\Bentley.EC.Presentation3.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Bentley.ECObjects.MixedMode3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
+      <HintPath>..\packages\BentleyECFramework.1.0.0\lib\Bentley.ECObjects.MixedMode3.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Bentley.ECObjects3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
-      <HintPath>..\packages\BentleyCore.1.0.0\lib\Bentley.ECObjects3.dll</HintPath>
+      <HintPath>..\packages\BentleyECFramework.1.0.0\lib\Bentley.ECObjects3.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Bentley.ECSystem3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
+      <HintPath>..\packages\BentleyECFramework.1.0.0\lib\Bentley.ECSystem3.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.General.1.0, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
@@ -76,6 +73,7 @@
     </Reference>
     <Reference Include="Bentley.GeometryNET.FB">
       <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Bentley.GeometryNET.FB.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.GeometryNET.Structs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=MSIL">
       <HintPath>..\packages\BentleyCore.1.0.0\lib\Bentley.GeometryNET.Structs.dll</HintPath>
@@ -87,11 +85,19 @@
     </Reference>
     <Reference Include="Bentley.MicroStation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
       <HintPath>..\packages\BentleyCore.1.0.0\lib\Bentley.MicroStation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Bentley.MicroStation.General, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Assemblies\Bentley.MicroStation.General.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.MicroStation.Interfaces.1.0, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
       <HintPath>..\packages\BentleyWPF.1.0.0\lib\Bentley.MicroStation.Interfaces.1.0.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Bentley.MicroStation.WinForms.ECPropertyPane">
+      <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Assemblies\Bentley.MicroStation.WinForms.ECPropertyPane.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.MicroStation.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
@@ -106,32 +112,72 @@
       <HintPath>..\packages\BentleyCore.1.0.0\lib\Bentley.Platform.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Bentley.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
+      <HintPath>..\packages\BentleyWPF.1.0.0\lib\Bentley.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Bentley.UI.Vendor.Wpf">
+      <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Assemblies\ECFramework\Bentley.UI.Vendor.Wpf.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Bentley.Windowing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
-      <HintPath>..\packages\BentleyCore.1.0.0\lib\Bentley.Windowing.dll</HintPath>
+      <HintPath>..\packages\BentleyWPF.1.0.0\lib\Bentley.Windowing.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="EPPlus, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <Reference Include="PresentationCore">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xaml">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UIControls">
+      <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Assemblies\UIControls.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="ustation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9bfed12b64a9b7df, processorArchitecture=AMD64">
       <HintPath>..\packages\BentleyCore.1.0.0\lib\ustation.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsBase">
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="KeyinCommands.cs" />
@@ -142,8 +188,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Test\KeyinTest.cs" />
     <Compile Include="Test\Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Test\wpfUC.xaml.cs">
+      <DependentUpon>wpfUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\BentleyMarshal.cs" />
     <Compile Include="Tools\GetQuantitiesUC.xaml.cs">
@@ -152,41 +202,36 @@
     <Compile Include="Tools\QuickInsertUC.xaml.cs">
       <DependentUpon>QuickInsertUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Test\wpfUC.xaml.cs">
-      <DependentUpon>wpfUC.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Commands.xml">
       <LogicalName>CommandTable.xml</LogicalName>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Test\Window1.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Tools\GetQuantitiesUC.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Tools\QuickInsertUC.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Test\wpfUC.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\GetQuantitiesUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\QuickInsertUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

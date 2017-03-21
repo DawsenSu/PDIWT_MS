@@ -53,5 +53,11 @@ namespace PDIWT_MS.Test
             m_wndHelper.Dispose();
             m_window1 = null;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Bentley.MstnPlatformNET.WinForms.ECPropertyPane.LevelEditor le = new Bentley.MstnPlatformNET.WinForms.ECPropertyPane.LevelEditor();
+            
+        }
     }
 }

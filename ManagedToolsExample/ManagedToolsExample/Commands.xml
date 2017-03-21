@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+
+  <RootKeyinTable ID="root">
+    <Keyword SubtableRef="Commands" CommandWord="TOOLSEXAMPLE">
+      <Options Required="true" />
+    </Keyword>
+  </RootKeyinTable>
+
+  <SubKeyinTables>
+    <KeyinTable ID="Commands">
+      <Keyword SubtableRef="GroupedHoleCmd" CommandWord="PLACE">
+        <Options Required="true" />
+      </Keyword>
+      <Keyword SubtableRef="GroupedHoleCmd" CommandWord="MODIFY">
+        <Options Required="true" />
+      </Keyword>
+    </KeyinTable>
+
+    <KeyinTable ID="GroupedHoleCmd">
+      <Keyword CommandWord="GROUPEDHOLE" />
+    </KeyinTable>
+
+  </SubKeyinTables>
+
+  <KeyinHandlers>
+    <KeyinHandler Keyin="TOOLSEXAMPLE PLACE GROUPEDHOLE"            Function="ManagedToolsExample.Keyin.CmdStartPlaceGroupedHoleTool"/>
+    <KeyinHandler Keyin="TOOLSEXAMPLE MODIFY GROUPEDHOLE"            Function="ManagedToolsExample.Keyin.CmdModifyPlaceGroupedHoleTool"/>
+  </KeyinHandlers>
+
+</KeyinTree>
+
