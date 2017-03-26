@@ -39,5 +39,11 @@ namespace PDIWT_MS.Marshal
         /// <returns>成功为0,失败为1</returns>
         [DllImport("ustation.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
         internal static extern uint mdlElmdscr_getByElemRef(out IntPtr elemDescrPP, IntPtr elemRef, IntPtr modelRef, int expandSharedCells, IntPtr filePos);
+
+        [DllImport("ustation.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern uint mdlCell_getLibraryObject(out IntPtr librargObj, string LibName, bool unused);
+
+        [DllImport("ustation.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void mdlCell_getLibraryName(out string filename);
     }
 }

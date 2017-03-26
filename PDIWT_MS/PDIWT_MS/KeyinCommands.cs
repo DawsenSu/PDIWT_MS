@@ -15,7 +15,7 @@ namespace PDIWT_MS
         #region (PDIWT_MS Test) command
         public static void Test(string unparsed)
         {
-            PDIWT_MS.Test.KeyinTest.TestMSDocManager();
+            PDIWT_MS.Test.KeyinTest.TestSharedCell();
         }
 
         public static void TestWPF(string unparsed)
@@ -25,7 +25,7 @@ namespace PDIWT_MS
 
         public static void TestWindowWPF(string unparsed)
         {
-            PDIWT_MS.Test.Window1.ShowWindow();
+            PDIWT_MS.Test.WindowHost.ShowWindow();
         }
         #endregion
 
@@ -33,7 +33,7 @@ namespace PDIWT_MS
         #region (PDIWT_MS Tools) command
         public static void QuickInsert(string unparsed)
         {
-            Tools.QuickInsertUC.ShowWindow(Program.Addin);
+            PDIWT_MS.Tools.View.WindowHost.ShowWindow();
         }
 
         public static void GetQuantities(string unparsed)

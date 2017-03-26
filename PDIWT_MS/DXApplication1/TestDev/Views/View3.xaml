@@ -1,0 +1,93 @@
+﻿<UserControl
+    x:Class="TestDev.Views.View3"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    mc:Ignorable="d">
+    <Grid>
+        <dxlc:GroupBox
+            Name="groupBox2"
+            Padding="5"
+            Header="Standard Specifiers">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label
+                    Margin="0,4"
+                    VerticalAlignment="Center"
+                    Content="Currency:" />
+                <dxe:SpinEdit
+                    Name="spinEdit1"
+                    Grid.Column="1"
+                    Margin="1,-1,0,1"
+                    VerticalAlignment="Center"
+                    DisplayFormatString="c2">
+                    <dxe:SpinEdit.EditValue>
+                        349.99
+                    </dxe:SpinEdit.EditValue>
+                </dxe:SpinEdit>
+                <Label
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Margin="0,4,182,4"
+                    VerticalAlignment="Center"
+                    Content="Scientific" />
+                <dxe:SpinEdit
+                    Name="spinEdit2"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="1,0,0,0"
+                    VerticalAlignment="Center"
+                    DisplayFormatString="e1"
+                    MaskType="None">
+                    <dxe:SpinEdit.EditValue>
+                        12345
+                    </dxe:SpinEdit.EditValue>
+                </dxe:SpinEdit>
+                <Label
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Margin="0,4,182,4"
+                    VerticalAlignment="Center"
+                    Content="Short Date:" />
+                <dxe:DateEdit
+                    Name="dateEdit1"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="1,0,1,2"
+                    VerticalAlignment="Center"
+                    DisplayFormatString="d"
+                    EditValue="10.10.2010" />
+                <Label
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    Margin="0,4,182,4"
+                    VerticalAlignment="Center"
+                    Content="Full Date-Time:" />
+                <dxe:DateEdit
+                    Name="dateEdit2"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Margin="1,0,2,6"
+                    VerticalAlignment="Center"
+                    DataContext="{Binding}"
+                    DisplayFormatString="F"
+                    EditValue="10 September 2010 10:00 AM"
+                    Mask="dd, MMMM, yyyy hh:mm tt" />
+            </Grid>
+        </dxlc:GroupBox>
+    </Grid>
+</UserControl>

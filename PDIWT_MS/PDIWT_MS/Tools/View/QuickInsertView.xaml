@@ -1,0 +1,131 @@
+﻿<UserControl
+    x:Class="PDIWT_MS.Tools.View.QuickInsertView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:PDIWT_MS.Tools.ViewModels"
+    d:DesignHeight="400"
+    d:DesignWidth="500"
+    mc:Ignorable="d">
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService />
+        <dxmvvm:OpenFileDialogService />
+    </dxmvvm:Interaction.Behaviors>
+    <StackPanel Margin="5">
+        <Grid Margin="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock
+                Grid.Column="0"
+                VerticalAlignment="Center"
+                Text="打开文件路径：" />
+            <TextBlock
+                Name="tb_cellpath"
+                Grid.Column="1"
+                MinWidth="300"
+                VerticalAlignment="Center"
+                Text="{Binding CellLibPath}"
+                TextWrapping="Wrap" />
+            <Button
+                Grid.Column="2"
+                HorizontalAlignment="Right"
+                Command="{Binding OpenCellLibCommand}"
+                Content="打开Cell库文件" />
+        </Grid>
+        <Separator />
+        <Grid Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Column="0"
+                Margin="7,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Content="插入元素信息表"
+                FontSize="15" />
+            <Button
+                Grid.Column="1"
+                Margin="0,2"
+                HorizontalAlignment="Right"
+                Command="{Binding ImportFromFileCommand}"
+                Content="从Excel文件导入"
+                IsEnabled="{Binding ElementName=tb_cellpath, Path=Text.Length}" />
+        </Grid>
+        <dxg:GridControl
+            Name="gc_eleprop"
+            Height="200"
+            AllowLiveDataShaping="True"
+            AutoGenerateColumns="AddNew"
+            IsEnabled="{Binding ElementName=tb_cellpath, Path=Text.Length}"
+            ItemsSource="{Binding ElementPropList, Mode=TwoWay, NotifyOnSourceUpdated=True}"
+            SelectionMode="Cell">
+
+            <dxg:GridControl.View>
+                <dxg:TableView
+                    AllowPerPixelScrolling="True"
+                    AutoWidth="True"
+                    InitNewRow="TableView_InitNewRow"
+                    InvalidRowException="TableView_InvalidRowException"
+                    NewItemRowPosition="Bottom"
+                    ShowGroupPanel="False"
+                    ValidateRow="TableView_ValidateRow" />
+            </dxg:GridControl.View>
+            <dxg:GridColumn
+                Binding="{Binding CellNameType, Mode=TwoWay}"
+                Header="单元名称"
+                HorizontalHeaderContentAlignment="Center">
+                <dxg:GridColumn.EditSettings>
+                    <dxe:ComboBoxEditSettings
+                        DisplayMember="Name"
+                        ItemsSource="{Binding CellNameList, Mode=TwoWay, NotifyOnSourceUpdated=True}"
+                        ValueMember="Id" />
+                </dxg:GridColumn.EditSettings>
+            </dxg:GridColumn>
+            <dxg:GridColumn
+                Binding="{Binding X, Mode=TwoWay}"
+                Header="放置点X坐标"
+                HorizontalHeaderContentAlignment="Center"
+                Validate="GridColumn_Validate_XYZ" />
+            <dxg:GridColumn
+                Binding="{Binding Y, Mode=TwoWay}"
+                Header="放置点Y坐标"
+                HorizontalHeaderContentAlignment="Center"
+                Validate="GridColumn_Validate_XYZ" />
+            <dxg:GridColumn
+                Binding="{Binding Z, Mode=TwoWay}"
+                Header="放置点Z坐标"
+                HorizontalHeaderContentAlignment="Center"
+                Validate="GridColumn_Validate_XYZ" />
+            <dxg:GridColumn
+                Binding="{Binding AngelX, Mode=TwoWay}"
+                Header="对X轴转角°"
+                HorizontalHeaderContentAlignment="Center"
+                Validate="GridColumn_Validate" />
+            <dxg:GridColumn
+                Binding="{Binding AngelY, Mode=TwoWay}"
+                Header="对Y轴转角°"
+                HorizontalHeaderContentAlignment="Center"
+                Validate="GridColumn_Validate" />
+            <dxg:GridColumn
+                Binding="{Binding AngelZ, Mode=TwoWay}"
+                Header="对Z轴转角°"
+                HorizontalHeaderContentAlignment="Center"
+                Validate="GridColumn_Validate" />
+        </dxg:GridControl>
+        <Button
+            MaxWidth="100"
+            Margin="5"
+            Command="{Binding FastPutCommand}"
+            Content="快速布置" />
+    </StackPanel>
+</UserControl>

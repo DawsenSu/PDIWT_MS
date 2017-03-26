@@ -96,10 +96,6 @@
       <HintPath>..\packages\BentleyWPF.1.0.0\lib\Bentley.MicroStation.Interfaces.1.0.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Bentley.MicroStation.WinForms.ECPropertyPane">
-      <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Assemblies\Bentley.MicroStation.WinForms.ECPropertyPane.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Bentley.MicroStation.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
       <HintPath>..\packages\BentleyWPF.1.0.0\lib\Bentley.MicroStation.WPF.dll</HintPath>
       <Private>False</Private>
@@ -116,14 +112,18 @@
       <HintPath>..\packages\BentleyWPF.1.0.0\lib\Bentley.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Bentley.UI.Vendor.Wpf">
-      <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Assemblies\ECFramework\Bentley.UI.Vendor.Wpf.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Bentley.Windowing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
       <HintPath>..\packages\BentleyWPF.1.0.0\lib\Bentley.Windowing.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="DevExpress.Data.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Mvvm.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v16.1.Core, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Xpf.Core.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Grid.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Xpf.Grid.v16.1.Core, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="EPPlus, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
       <Private>True</Private>
@@ -137,6 +137,7 @@
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core">
       <Private>False</Private>
     </Reference>
@@ -189,6 +190,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Test\KeyinTest.cs" />
+    <Compile Include="Test\WPFTest.cs" />
+    <Compile Include="Test\WPFTestToolSetting.xaml.cs">
+      <DependentUpon>WPFTestToolSetting.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Test\Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
@@ -199,8 +204,13 @@
     <Compile Include="Tools\GetQuantitiesUC.xaml.cs">
       <DependentUpon>GetQuantitiesUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\QuickInsertUC.xaml.cs">
-      <DependentUpon>QuickInsertUC.xaml</DependentUpon>
+    <Compile Include="Tools\Model\ElementProp.cs" />
+    <Compile Include="Tools\ViewModels\QuickInsertViewModel.cs" />
+    <Compile Include="Tools\View\QuickInsertView.xaml.cs">
+      <DependentUpon>QuickInsertView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\View\WindowHost.xaml.cs">
+      <DependentUpon>WindowHost.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -211,12 +221,17 @@
       <LogicalName>CommandTable.xml</LogicalName>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Test\WPFTestToolSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Test\Window1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -229,11 +244,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Tools\QuickInsertUC.xaml">
+    <Page Include="Tools\View\QuickInsertView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\View\WindowHost.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

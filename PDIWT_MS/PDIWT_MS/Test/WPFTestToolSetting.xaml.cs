@@ -12,21 +12,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 using BM = Bentley.MstnPlatformNET;
-using BD = Bentley.DgnPlatformNET;
 
-namespace PDIWT_MS.Tools
+namespace PDIWT_MS.Test
 {
     /// <summary>
-    /// QuickInsertUC.xaml 的交互逻辑
+    /// ToolSettingWPF.xaml 的交互逻辑
     /// </summary>
-    public partial class QuickInsertUC : UserControl
+    public partial class WPFTestToolSetting : UserControl
     {
-        private static BM.WPF.DockableWindow currentControl;
+        #region Bentley DockableWindow
+        private static BM.WPF.ToolSettingsHost currentControl;
         private BM.AddIn m_addIn;
 
-        public QuickInsertUC(BM.AddIn addIn)
+        private WPFTestToolSetting(BM.AddIn addIn)
         {
             m_addIn = addIn;
             InitializeComponent();
@@ -39,17 +38,29 @@ namespace PDIWT_MS.Tools
                 currentControl.Focus();
                 return;
             }
-            currentControl = new BM.WPF.DockableWindow();
-            currentControl.Attach(addIn, "QuickInsert", new System.Drawing.Size(100, 200));
-            currentControl.Content = new QuickInsertUC(addIn);
-            currentControl.WindowContent.CanDockHorizontally = false;
-            currentControl.Title = "QuickInsert";
+
+            currentControl = new BM.WPF.ToolSettingsHost();
+            currentControl.Title = "Tool Setting Test";
+            currentControl.Content = new WPFTestToolSetting(addIn);
+            currentControl.Attach(addIn);
             currentControl.Show();
         }
 
+
+        #endregion
+
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
-            currentControl = null;
+            CloseWindow();
+        }
+        
+        public static void CloseWindow()
+        {
+            if (null != currentControl)
+            {
+                currentControl.Detach();
+                currentControl = null;
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ using BD = Bentley.DgnPlatformNET;
 using BCOM = Bentley.Interop.MicroStationDGN;
 using System.Runtime.InteropServices;
 using BM = Bentley.MstnPlatformNET;
+using BG = Bentley.GeometryNET;
 
 namespace PDIWT_MS.Test
 {
@@ -79,6 +80,51 @@ namespace PDIWT_MS.Test
             {
                 System.Windows.MessageBox.Show(dgndoc.FileName);
             }
+        }
+
+        public static void TestWPFToolSetting()
+        {
+            WPFTest tool = new WPFTest(0, 0);
+            tool.InstallNewInstance();
+        }
+
+        public static void TestSharedCell()
+        {
+            BCOM.Application app = BM.InteropServices.Utilities.ComApp;
+
+            BM.MSDocumentManager msdm = BM.MSDocumentManager.Manager;
+            BM.MSDocumentOpenDialogParams msodp = new BM.MSDocumentOpenDialogParams();
+            msodp.SetDialogTitle("载入CellLibrary");
+            msodp.SetDefaultFilter("*.cel");
+            BD.DgnDocument dgndoc = msdm.OpenDocumentDialog(msodp, BM.FileListAttr.Default, BD.DgnDocument.FetchMode.Read);
+            if (null!=dgndoc)
+            {
+                app.AttachCellLibrary(dgndoc.FileName);
+                //BCOM.Point3d p = app.Point3dZero();
+                //BCOM.SharedCellElement sharedcell = app.CreateSharedCellElement3("JD1", ref p, true);
+                BD.Elements.SharedCellElement sharecell = new BD.Elements.SharedCellElement(BM.Session.Instance.GetActiveDgnModel(), null, "JD1", BG.DPoint3d.Zero, BG.DMatrix3d.Identity, BG.DPoint3d.FromXYZ(1, 1, 1));
+                System.Windows.MessageBox.Show($"CellName:{sharecell.CellName}\n");
+                
+            }
+
+
+        }
+
+        public static void TestLibObj()
+        {
+            //var p = Program.GetActiveDgnFile().GetLoadedModelsCollection();
+            IntPtr filep;
+            uint i = PDIWT_MS.Marshal.BentleyMarshal.mdlCell_getLibraryObject(out filep, @"D:\项目\BIM实习\梅山二期\建模中间文件\码头\celllib\节点库.cel", true);
+            BD.DgnFile dgnFile = BD.DgnFile.GetDgnFile(filep);
+            string name = string.Empty;
+            foreach (var index in dgnFile.GetModelIndexCollection())
+            {
+                if (index.CellPlacementOptions == Bentley.DgnPlatformNET.CellPlacementOptions.CanBePlacedAsCell)
+                {
+                    name += " " + index.Name + "\n";
+                }
+            }
+            System.Windows.MessageBox.Show(name);
         }
     }
 }

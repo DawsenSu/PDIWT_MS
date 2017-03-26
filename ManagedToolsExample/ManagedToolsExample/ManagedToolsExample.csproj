@@ -16,10 +16,11 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -112,6 +113,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -124,15 +127,38 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GroupedHoleHelper.cs" />
+    <Compile Include="Keyin.cs" />
+    <Compile Include="ManagedToolsExample.cs" />
+    <Compile Include="ModifyGroupedHoleTool.cs" />
+    <Compile Include="PlaceGroupedHoleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlaceGroupedHoleForm.designer.cs">
+      <DependentUpon>PlaceGroupedHoleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PlaceGroupedHoleTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Commands.xml" >
-    	<LogicalName>CommandTable.xml</LogicalName>
+    <EmbeddedResource Include="Commands.xml">
+      <LogicalName>CommandTable.xml</LogicalName>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlaceGroupedHoleForm.resx">
+      <DependentUpon>PlaceGroupedHoleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

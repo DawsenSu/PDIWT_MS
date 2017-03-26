@@ -1,0 +1,22 @@
+﻿<UserControl
+    x:Class="PDIWT_MS.Test.WPFTestToolSetting"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxn="http://schemas.devexpress.com/winfx/2008/xaml/navbar"
+    xmlns:local="clr-namespace:PDIWT_MS.Test"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    Unloaded="UserControl_Unloaded"
+    mc:Ignorable="d">
+    <StackPanel Orientation="Horizontal">
+        <Button>sss</Button>
+        <Button>222</Button>
+        <Button>sss</Button>
+        <Button>222</Button>
+        <Button>sss</Button>
+        <Button>222</Button>
+    </StackPanel>
+</UserControl>

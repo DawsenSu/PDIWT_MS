@@ -1,0 +1,19 @@
+﻿<dx:DXWindow
+    x:Class="TestDev.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:CarsDBDataSetTableAdapters="clr-namespace:TestDev.CarsDBDataSetTableAdapters"
+    xmlns:View="clr-namespace:TestDev.Views"
+    xmlns:ViewModel="clr-namespace:TestDev.ViewModels"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:local="clr-namespace:TestDev"
+    Title="MainWindow"
+    Width="500"
+    Height="600">
+    <View:View4 />
+</dx:DXWindow>

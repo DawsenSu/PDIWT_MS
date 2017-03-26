@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 using Bentley.MstnPlatformNET.WPF;
 using Bentley.Windowing;
 
-namespace PDIWT_MS.Test
+namespace PDIWT_MS.Tools.View
 {
     /// <summary>
     /// Window1.xaml 的交互逻辑
@@ -52,11 +52,6 @@ namespace PDIWT_MS.Test
             m_wndHelper.Detach();
             m_wndHelper.Dispose();
             m_window1 = null;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            
         }
     }
 }

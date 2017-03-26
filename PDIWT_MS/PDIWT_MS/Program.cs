@@ -6,6 +6,7 @@ using System;
 using System.Resources;
 using BM = Bentley.MstnPlatformNET;
 using BD = Bentley.DgnPlatformNET;
+using BCOM = Bentley.Interop.MicroStationDGN;
 
 namespace PDIWT_MS
 {
@@ -43,6 +44,15 @@ namespace PDIWT_MS
         public static BD.DgnFile GetActiveDgnFile() => BM.Session.Instance.GetActiveDgnFile();
         public static BD.DgnModelRef GetActiveDgnModelRef() => BM.Session.Instance.GetActiveDgnModelRef();
         public static BD.DgnModel GetActiveDgnModel() => BM.Session.Instance.GetActiveDgnModel();
+
+        public static BCOM.Application COM_App
+        {
+            get
+            {
+                return BM.InteropServices.Utilities.ComApp;
+            }
+        }
+
 
 
         private static ResourceManager resourceManager
