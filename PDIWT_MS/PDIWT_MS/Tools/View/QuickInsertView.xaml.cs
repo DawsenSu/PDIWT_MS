@@ -52,6 +52,13 @@ namespace PDIWT_MS.Tools.View
         private void GridColumn_Validate(object sender, DevExpress.Xpf.Grid.GridCellValidationEventArgs e)
         {
             double AngelValue;
+            if (e.Value==null)
+            {
+                e.IsValid = false;
+                e.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+                e.ErrorContent = "不能为空";
+                return;
+            }
             if(!double.TryParse(e.Value.ToString(),out AngelValue))
             {
                 e.IsValid = false;
@@ -64,18 +71,26 @@ namespace PDIWT_MS.Tools.View
                 e.IsValid = false;
                 e.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
                 e.ErrorContent = "Angel的值必须在[-360,360]之间";
+                e.Handled = true;
             }
         }
 
         private void GridColumn_Validate_XYZ(object sender, DevExpress.Xpf.Grid.GridCellValidationEventArgs e)
         {
             double XYZ;
+            if (e.Value == null)
+            {
+                e.IsValid = false;
+                e.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
+                e.ErrorContent = "不能为空";
+                return;
+            }
             if (!double.TryParse(e.Value.ToString(), out XYZ))
             {
                 e.IsValid = false;
                 e.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Critical;
                 e.ErrorContent = "XYZ坐标必须为数字";
-                return;
+                e.Handled = true;
             }
         }
     }

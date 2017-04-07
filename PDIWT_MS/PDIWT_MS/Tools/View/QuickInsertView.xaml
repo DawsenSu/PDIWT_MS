@@ -8,6 +8,7 @@
     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:vm="clr-namespace:PDIWT_MS.Tools.ViewModels"
     d:DesignHeight="400"
     d:DesignWidth="500"
@@ -32,8 +33,11 @@
                 Grid.Column="1"
                 MinWidth="300"
                 VerticalAlignment="Center"
-                Text="{Binding CellLibPath}"
-                TextWrapping="Wrap" />
+                TextWrapping="Wrap">
+                <TextBlock.Text>
+                    <Binding IsAsync="True" Path="CellLibPath" />
+                </TextBlock.Text>
+            </TextBlock>
             <Button
                 Grid.Column="2"
                 HorizontalAlignment="Right"
@@ -122,6 +126,12 @@
                 HorizontalHeaderContentAlignment="Center"
                 Validate="GridColumn_Validate" />
         </dxg:GridControl>
+        <dxe:ProgressBarEdit
+            Name="pgb"
+            Margin="10,10,10,0"
+            Maximum="{Binding ElementPropList.Count}"
+            Minimum="0"
+            Value="{Binding ProcessNum}" />
         <Button
             MaxWidth="100"
             Margin="5"

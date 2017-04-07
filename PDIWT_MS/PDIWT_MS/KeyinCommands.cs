@@ -15,7 +15,7 @@ namespace PDIWT_MS
         #region (PDIWT_MS Test) command
         public static void Test(string unparsed)
         {
-            PDIWT_MS.Test.KeyinTest.TestSharedCell();
+            PDIWT_MS.Test.KeyinTest.TestHCHXQueryLib();
         }
 
         public static void TestWPF(string unparsed)
@@ -39,6 +39,13 @@ namespace PDIWT_MS
         public static void GetQuantities(string unparsed)
         {
             Tools.GetQuantitiesUC.ShowWindow(Program.Addin);
+        }
+        #endregion
+
+        #region (PDIWT_MS ZJCZL) command
+        public static void ZJCZLCalcu(string unparsed)
+        {
+            PDIWT_MS.ZJCZL.WindowHost.ShowWindow();
         }
         #endregion
     }

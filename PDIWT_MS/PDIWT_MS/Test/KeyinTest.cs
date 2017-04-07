@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 using BD = Bentley.DgnPlatformNET;
 using BCOM = Bentley.Interop.MicroStationDGN;
 using System.Runtime.InteropServices;
 using BM = Bentley.MstnPlatformNET;
 using BG = Bentley.GeometryNET;
+
+using HCHXCodeQueryLib;
 
 namespace PDIWT_MS.Test
 {
@@ -126,5 +129,83 @@ namespace PDIWT_MS.Test
             }
             System.Windows.MessageBox.Show(name);
         }
+        
+        public static void TestHCHXQueryLib()
+        {
+            HCHXCodeQuery clr1 = new HCHXCodeQuery();
+
+            AllLayerInfo idInfo = new AllLayerInfo();
+            HCHXCodeQueryErrorCode status = clr1.QueryById(ref idInfo, "6782");
+            OutputResult("D:\\QueryAllResult6782.txt", idInfo);
+
+
+            status = clr1.QueryById(ref idInfo, "4358");
+            OutputResult("D:\\QueryAllResult4358.txt", idInfo);
+
+            ColumnLayerInfoArray columnLayerInfo = new ColumnLayerInfoArray();
+            Point3d startPoint = new Point3d();
+            Point3d endPoint = new Point3d();
+            startPoint.X = 173928.573996;
+            startPoint.Y = 46617.477392;
+            startPoint.Z = 36875.226081;
+
+            endPoint.X = 28714.044367;
+            endPoint.Y = 130457.125163;
+            endPoint.Z = -801521.251635;
+            status = clr1.QueryByRay(ref columnLayerInfo, startPoint, endPoint);
+
+            OutputResult("D:\\QueryAllResultRay.txt", columnLayerInfo);
+
+            System.Windows.MessageBox.Show("Finished");
+        }
+        private static void OutputResult(string fileName, AllLayerInfo allInfo)
+        {
+            if (null == allInfo.BaseInfo)
+                return;
+
+            FileStream fs = new FileStream(fileName, FileMode.Create);
+            StreamWriter sw = new StreamWriter(fs);
+
+            if (allInfo.BaseInfo.Count <= 0)
+                return;
+            //用foreach的循环Dictionary的子项时用的是KeyValuePair
+            foreach (KeyValuePair<string, CodeInfo> codeInfo in allInfo.BaseInfo)
+            {
+                sw.Write("--------------------------------------------------------------------\r\n");
+                sw.Write(codeInfo.Value.ToString());
+
+                ColumnLayerInfoArray columnLayerInfo;
+                if (!allInfo.IntersectLayerInfos.TryGetValue(codeInfo.Key, out columnLayerInfo))
+                    continue;
+
+                sw.Write(columnLayerInfo.ToString());
+
+            }
+
+            sw.Flush();
+            sw.Close();
+            fs.Close();
+
+        }
+
+        private static void OutputResult(string fileName, ColumnLayerInfoArray columnInfos)
+        {
+            if (null == columnInfos.m_layers)
+                return;
+
+            FileStream fs = new FileStream(fileName, FileMode.Create);
+            StreamWriter sw = new StreamWriter(fs);
+
+            foreach (ColumnLayerInfo columnInfo in columnInfos.m_layers)
+            {
+                sw.Write(columnInfo.ToString());
+            }
+
+            sw.Flush();
+            sw.Close();
+            fs.Close();
+
+        }
+
     }
 }

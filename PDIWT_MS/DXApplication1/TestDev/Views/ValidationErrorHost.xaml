@@ -1,0 +1,55 @@
+﻿<UserControl
+    x:Class="TestDev.Views.ValidationErrorHost"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Common="clr-namespace:TestDev.Converter"
+    xmlns:ViewModels="clr-namespace:TestDev.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    DataContext="{dxmvvm:ViewModelSource Type=ViewModels:ValidationErrorHostViewModel}"
+    mc:Ignorable="d">
+    <dxmvvm:Interaction.Behaviors>
+        <dxmvvm:EventToCommand Command="{Binding InitializeCommand}" EventName="Loaded" />
+        <dx:DXMessageBoxService />
+    </dxmvvm:Interaction.Behaviors>
+
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Press Ctrl and click an item or select an item and press the Ctrl+Enter key combination." />
+        <ListBox
+            x:Name="list"
+            Grid.Row="1"
+            ItemsSource="{Binding Persons}">
+            <dxmvvm:Interaction.Behaviors>
+                <dxmvvm:EventToCommand
+                    Command="{Binding EditCommand}"
+                    EventName="MouseLeftButtonUp"
+                    ModifierKeys="Ctrl">
+                    <dxmvvm:EventToCommand.EventArgsConverter>
+                        <Common:ListBoxEventArgsConverter />
+                    </dxmvvm:EventToCommand.EventArgsConverter>
+                </dxmvvm:EventToCommand>
+                <dxmvvm:KeyToCommand
+                    Command="{Binding EditCommand}"
+                    CommandParameter="{Binding ElementName=list, Path=SelectedItem}"
+                    KeyGesture="Ctrl+Enter" />
+            </dxmvvm:Interaction.Behaviors>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <Run Text="{Binding FirstName}" /> <Run Text="{Binding LastName}" />
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+
+
+</UserControl>

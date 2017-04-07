@@ -15,6 +15,9 @@
       <Keyword SubtableRef="Tools" CommandClass="MacroCommand" CommandWord="Tools">
         <Options Required="true"/>
       </Keyword>
+      <Keyword SubtableRef="ZJCZL" CommandClass="MacroCommand" CommandWord="ZJCZL">
+        <Options Required="true"/>
+      </Keyword>
     </KeyinTable>
   </SubKeyinTables>
 
@@ -33,12 +36,19 @@
     </KeyinTable>
   </SubKeyinTables>
 
+  <SubKeyinTables>
+    <KeyinTable ID="ZJCZL">
+      <Keyword CommandWord="calculate"></Keyword>
+    </KeyinTable>
+  </SubKeyinTables>
+
   <KeyinHandlers>
     <KeyinHandler Keyin="PDIWT_MS Test TestKeyin" Function="PDIWT_MS.KeyinCommands.Test"/>
     <KeyinHandler Keyin="PDIWT_MS Test TestWPF" Function="PDIWT_MS.KeyinCommands.TestWPF"/>
     <KeyinHandler Keyin="PDIWT_MS Test TestWindowWPF" Function="PDIWT_MS.KeyinCommands.TestWindowWPF"/>
     <KeyinHandler Keyin="PDIWT_MS Tools QuickInsert" Function="PDIWT_MS.KeyinCommands.QuickInsert"/>
     <KeyinHandler Keyin="PDIWT_MS Tools GetQuantities" Function ="PDIWT_MS.KeyinCommands.GetQuantities"/>
+    <KeyinHandler Keyin="PDIWT_MS ZJCZL calculate" Function="PDIWT_MS.KeyinCommands.ZJCZLCalcu"/>
   </KeyinHandlers>
 
 </KeyinTree>

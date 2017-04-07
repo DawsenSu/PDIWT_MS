@@ -16,11 +16,12 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\</OutputPath>
+    <OutputPath>C:\Program Files\Bentley\MicroStation CONNECT Edition Update 3\MicroStation\Mdlapps\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>3</WarningLevel>
     <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -71,17 +72,14 @@
       <HintPath>..\packages\BentleyCore.1.0.0\lib\Bentley.GeometryNET.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Bentley.GeometryNET.FB">
-      <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Bentley.GeometryNET.FB.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Bentley.GeometryNET.Structs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=MSIL">
       <HintPath>..\packages\BentleyCore.1.0.0\lib\Bentley.GeometryNET.Structs.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.Interop.MicroStationDGN">
-      <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Assemblies\Bentley.Interop.MicroStationDGN.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition Update 3\MicroStation\Assemblies\Bentley.Interop.MicroStationDGN.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.MicroStation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
       <HintPath>..\packages\BentleyCore.1.0.0\lib\Bentley.MicroStation.dll</HintPath>
@@ -89,7 +87,7 @@
     </Reference>
     <Reference Include="Bentley.MicroStation.General, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Assemblies\Bentley.MicroStation.General.dll</HintPath>
+      <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition Update 3\MicroStation\Assemblies\Bentley.MicroStation.General.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.MicroStation.Interfaces.1.0, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
@@ -127,6 +125,9 @@
     <Reference Include="EPPlus, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="HCHXCodeQueryLib">
+      <HintPath>..\..\..\..\..\..\..\..\项目\科技开发中心\桩基承载力计算\桩基承载力计算所需材料\HCHXCodeQueryLib(Connect)\HCHXCodeQueryLib.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore">
       <Private>False</Private>
@@ -169,7 +170,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="UIControls">
-      <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Assemblies\UIControls.dll</HintPath>
+      <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition Update 3\MicroStation\Assemblies\UIControls.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ustation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9bfed12b64a9b7df, processorArchitecture=AMD64">
@@ -200,7 +201,7 @@
     <Compile Include="Test\wpfUC.xaml.cs">
       <DependentUpon>wpfUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\BentleyMarshal.cs" />
+    <Compile Include="BentleyMarshal.cs" />
     <Compile Include="Tools\GetQuantitiesUC.xaml.cs">
       <DependentUpon>GetQuantitiesUC.xaml</DependentUpon>
     </Compile>
@@ -210,6 +211,13 @@
       <DependentUpon>QuickInsertView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\View\WindowHost.xaml.cs">
+      <DependentUpon>WindowHost.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ZJCZL\View\ViewZJCZL.xaml.cs">
+      <DependentUpon>ViewZJCZL.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ZJCZL\ViewModel\ViewZJCZLViewModel.cs" />
+    <Compile Include="ZJCZL\WindowHost.xaml.cs">
       <DependentUpon>WindowHost.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -252,8 +260,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="ZJCZL\View\ViewZJCZL.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ZJCZL\WindowHost.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ZJCZL\Model\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
