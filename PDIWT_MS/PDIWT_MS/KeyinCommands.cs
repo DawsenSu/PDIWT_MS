@@ -48,5 +48,12 @@ namespace PDIWT_MS
             PDIWT_MS.ZJCZL.WindowHost.ShowWindow();
         }
         #endregion
+
+        #region (PDIWT_MS CZ) command
+        public static void CZDraw(string unparsed)
+        {
+            PDIWT_MS.CZ.WindowHost.ShowWindow();
+        }
+        #endregion
     }
 }

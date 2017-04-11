@@ -4,11 +4,131 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ViewModels="clr-namespace:PDIWT_MS.ZJCZL.ViewModel"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="300"
-    d:DesignWidth="300"
+    d:DesignHeight="500"
+    d:DesignWidth="350"
     mc:Ignorable="d">
-    <!--  DataContext="{dxmvvm:ViewModelSource Type=ViewModels:ViewZJCZLViewModel}"  -->
-    <Grid />
+    <!--<UserControl.DataContext>
+        <ViewModels:ViewZJCZLViewModel />
+    </UserControl.DataContext>-->
+    <dxlc:LayoutControl>
+        <dxlc:LayoutGroup
+            Width="110"
+            Margin="2"
+            VerticalAlignment="Top"
+            Orientation="Vertical">
+            <Label Content="桩信息:" />
+            <ListBox x:Name="listbox_pile" ItemsSource="{Binding PilesInfo}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="1" Orientation="Horizontal">
+                            <TextBlock Text="ID:" />
+                            <TextBlock Text="{Binding PileID}" />
+                            <TextBlock Text="  |  " />
+                            <TextBlock Text="编号:" />
+                            <TextBlock Text="{Binding PileCode}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <!--<dxg:GridControl
+                x:Name="gridControl"
+                AutoGenerateColumns="AddNew"
+                EnableSmartColumnsGeneration="True">
+                <dxg:GridControl.View>
+                    <dxg:TableView AllowPerPixelScrolling="True" ShowGroupPanel="False" />
+                </dxg:GridControl.View>
+                <dxg:GridColumn
+                    Width="30*"
+                    Binding="{Binding PileID, Mode=TwoWay}"
+                    Header="桩ID"
+                    HorizontalHeaderContentAlignment="Center" />
+                <dxg:GridColumn
+                    Width="50*"
+                    Binding="{Binding PileCode, Mode=TwoWay}"
+                    Header="桩编号"
+                    HorizontalHeaderContentAlignment="Center" />
+                <dxg:GridColumn
+                    Width="50*"
+                    Binding="{Binding PileAttri, Mode=TwoWay}"
+                    Header="桩特性"
+                    HorizontalHeaderContentAlignment="Center">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:MemoEditSettings />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+            </dxg:GridControl>-->
+        </dxlc:LayoutGroup>
+        <!--<dxlc:LayoutGroup Margin="2">
+            <dxg:GridControl
+                x:Name="soilgridcontrol"
+                AutoGenerateColumns="AddNew"
+                EnableSmartColumnsGeneration="True">
+                <dxg:GridControl.View>
+                    <dxg:TableView AllowPerPixelScrolling="True" ShowGroupPanel="False" />
+                </dxg:GridControl.View>
+                <dxg:GridColumn
+                    Width="30*"
+                    Binding="{Binding SoilLayerNum, Mode=TwoWay}"
+                    Header="土层号"
+                    HorizontalHeaderContentAlignment="Center" />
+                <dxg:GridColumn
+                    Width="30*"
+                    Binding="{Binding SoilLayer, Mode=TwoWay}"
+                    Header="土层"
+                    HorizontalHeaderContentAlignment="Center" />
+                <dxg:GridColumn
+                    Width="30*"
+                    Binding="{Binding SoilLayerUpElevation, Mode=TwoWay}"
+                    Header="层顶高程"
+                    HorizontalHeaderContentAlignment="Center" />
+                <dxg:GridColumn
+                    Width="30*"
+                    Binding="{Binding SoilThickness, Mode=TwoWay}"
+                    Header="土层厚度"
+                    HorizontalHeaderContentAlignment="Center" />
+                <dxg:GridColumn
+                    Width="30*"
+                    Binding="{Binding SoilQfi, Mode=TwoWay}"
+                    Header="qfi"
+                    HorizontalHeaderContentAlignment="Center" />
+                <dxg:GridColumn
+                    Width="30*"
+                    Binding="{Binding SoilQri, Mode=TwoWay}"
+                    Header="qr"
+                    HorizontalHeaderContentAlignment="Center" />
+                <dxg:GridColumn
+                    Width="30*"
+                    Binding="{Binding SoilReductionFactor, Mode=TwoWay}"
+                    Header="折减系数"
+                    HorizontalHeaderContentAlignment="Center" />
+            </dxg:GridControl>
+        </dxlc:LayoutGroup>-->
+
+        <dxlc:LayoutGroup
+            Margin="2"
+            VerticalAlignment="Top"
+            Orientation="Vertical">
+            <dxprg:PropertyGridControl
+                ExpandCategoriesWhenSelectedObjectChanged="True"
+                SelectedObject="{Binding ElementName=listbox_pile, Path=SelectedItem, Mode=OneWay}"
+
+                ShowEditorButtons="False"
+                ShowProperties="WithPropertyDefinitions"
+                ShowToolPanel="False"
+                UseCollectionEditor="False">
+                <dxprg:CategoryDefinition Path="PileInfo" />
+                <dxprg:CategoryDefinition Path="SoilInfo" />
+                <dxprg:CategoryDefinition Path="CalculatedInfo" />
+
+                <dxprg:CollectionDefinition Path="SoilInfo" />
+                <dxprg:PropertyDefinition Path="*" />
+            </dxprg:PropertyGridControl>
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
 </UserControl>
