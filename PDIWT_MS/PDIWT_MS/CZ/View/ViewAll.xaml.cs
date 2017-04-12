@@ -28,5 +28,15 @@ namespace PDIWT_MS.CZ.View
         {
 
         }
+
+        private void TableView_InitNewRow(object sender, DevExpress.Xpf.Grid.InitNewRowEventArgs e)
+        {
+            hole_gc.SetCellValue(e.RowHandle, "HoleLength", 0);
+            hole_gc.SetCellValue(e.RowHandle, "HoleWidth", 0);
+            hole_gc.SetCellValue(e.RowHandle, "HoleHeight", 0);
+            hole_gc.SetCellValue(e.RowHandle, "XDis", 0);
+            hole_gc.SetCellValue(e.RowHandle, "YDis", 0);
+            hole_gc.SetCellValue(e.RowHandle, "ZDis", 0);
+        }
     }
 }

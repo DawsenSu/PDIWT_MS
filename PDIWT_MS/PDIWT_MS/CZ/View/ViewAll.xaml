@@ -28,7 +28,7 @@
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
         <Style TargetType="dxe:TextEdit">
-            <Setter Property="MaxHeight" Value="20" />
+            <Setter Property="MaxHeight" Value="22" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="MaskType" Value="Numeric" />
             <Setter Property="Margin" Value="0,2" />
@@ -451,40 +451,62 @@
                         Text="各空箱控制参数：(各距离均相对于边墩左下角点坐标)"
                         TextWrapping="Wrap" />
                     <dxg:GridControl
+                        x:Name="hole_gc"
                         Grid.Row="1"
-                        Width="380"
+                        Width="450"
                         Height="200"
                         AutoGenerateColumns="AddNew"
                         ItemsSource="{Binding HoleParamList, Mode=TwoWay}">
                         <dxg:GridControl.View>
-                            <dxg:TableView NewItemRowPosition="Bottom" ShowGroupPanel="False" />
+                            <dxg:TableView
+                                InitNewRow="TableView_InitNewRow"
+                                NewItemRowPosition="Bottom"
+                                ShowGroupPanel="False" />
                         </dxg:GridControl.View>
-                        <dxg:GridColumn Binding="{Binding HoleLength}" Header="长度">
+                        <dxg:GridColumn
+                            Width="*"
+                            Binding="{Binding HoleLength}"
+                            Header="长度">
                             <dxg:GridColumn.EditSettings>
                                 <dxe:TextEditSettings MaskType="Numeric" />
                             </dxg:GridColumn.EditSettings>
                         </dxg:GridColumn>
-                        <dxg:GridColumn Binding="{Binding HoleWidth}" Header="宽度">
+                        <dxg:GridColumn
+                            Width="*"
+                            Binding="{Binding HoleWidth}"
+                            Header="宽度">
                             <dxg:GridColumn.EditSettings>
                                 <dxe:TextEditSettings MaskType="Numeric" />
                             </dxg:GridColumn.EditSettings>
                         </dxg:GridColumn>
-                        <dxg:GridColumn Binding="{Binding HoleHeight}" Header="高度">
+                        <dxg:GridColumn
+                            Width="*"
+                            Binding="{Binding HoleHeight}"
+                            Header="高度">
                             <dxg:GridColumn.EditSettings>
                                 <dxe:TextEditSettings MaskType="Numeric" />
                             </dxg:GridColumn.EditSettings>
                         </dxg:GridColumn>
-                        <dxg:GridColumn Binding="{Binding XDis}" Header="X轴距离">
+                        <dxg:GridColumn
+                            Width="*"
+                            Binding="{Binding XDis}"
+                            Header="X轴距离">
                             <dxg:GridColumn.EditSettings>
                                 <dxe:TextEditSettings MaskType="Numeric" />
                             </dxg:GridColumn.EditSettings>
                         </dxg:GridColumn>
-                        <dxg:GridColumn Binding="{Binding YDis}" Header="Y轴距离">
+                        <dxg:GridColumn
+                            Width="*"
+                            Binding="{Binding YDis}"
+                            Header="Y轴距离">
                             <dxg:GridColumn.EditSettings>
                                 <dxe:TextEditSettings MaskType="Numeric" />
                             </dxg:GridColumn.EditSettings>
                         </dxg:GridColumn>
-                        <dxg:GridColumn Binding="{Binding ZDis}" Header="Z轴距离">
+                        <dxg:GridColumn
+                            Width="*"
+                            Binding="{Binding ZDis}"
+                            Header="Z轴距离">
                             <dxg:GridColumn.EditSettings>
                                 <dxe:TextEditSettings MaskType="Numeric" />
                             </dxg:GridColumn.EditSettings>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+
+  <RootKeyinTable ID="root">
+    <Keyword SubtableRef="PDIWT_MS_CZ" CommandClass="MacroCommand" CommandWord="PDIWT_MS_CZ">
+      <Options Required="true" />
+    </Keyword>
+  </RootKeyinTable>
+
+  <SubKeyinTables>
+    <KeyinTable ID="PDIWT_MS_CZ">
+      <Keyword CommandWord="DrawAll"></Keyword>
+    </KeyinTable>
+  </SubKeyinTables>
+
+  <KeyinHandlers>
+    <KeyinHandler Keyin="PDIWT_MS_CZ DrawAll" Function="PDIWT_MS_CZ.KeyinCommands.DrawAll"/>
+  </KeyinHandlers>
+</KeyinTree>

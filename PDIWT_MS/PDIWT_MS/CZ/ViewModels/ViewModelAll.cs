@@ -38,6 +38,14 @@ namespace PDIWT_MS.CZ.ViewModels
             SSLD_Thickness = 3500; SSLD_YDis = 1500;
             SSLD_A = 6300; SSLD_B = 18200; SSLD_C = 2600; SSLD_D = 24500; SSLD_E = 4700; SSLD_F = 4600;
             SSLD_R1 = 0; SSLD_R2 = 0; SSLD_R3 = 1800; SSLD_R4 = 6400;
+
+            HoleParamList = new ObservableCollection<HoleProperty>()
+            {
+                new HoleProperty { HoleHeight=100,  HoleLength =100, HoleWidth =200, XDis=1000, YDis=1000, ZDis=100 },
+                new HoleProperty { HoleHeight=100,  HoleLength =100, HoleWidth =200, XDis=1000, YDis=1000, ZDis=100 },
+                new HoleProperty { HoleHeight=100,  HoleLength =100, HoleWidth =200, XDis=1000, YDis=1000, ZDis=100 },
+                new HoleProperty { HoleHeight=100,  HoleLength =100, HoleWidth =200, XDis=1000, YDis=1000, ZDis=100 }
+            };
         }
 
         #region DB Property
@@ -197,6 +205,15 @@ namespace PDIWT_MS.CZ.ViewModels
         }
         #endregion
 
+        #region Hole Property
+        public ObservableCollection<HoleProperty> HoleParamList
+        {
+            get { return GetProperty(() => HoleParamList); }
+            set { SetProperty(() => HoleParamList, value); }
+        }
+
+        #endregion
+
         SmartSolidElement GetCylinderCorner(Point3d Cornerorigin, double r, double height, double rotdegree = 0)
         {
             SmartSolidElement cl = app.SmartSolid.CreateCylinder(null, r, height);
@@ -256,35 +273,45 @@ namespace PDIWT_MS.CZ.ViewModels
             //app.ActiveModelReference.AddElement(ele_mk);
             //#endregion
 
-            #region DrawSSLD
-            Point3d[] ssld_shapeppoints =
-            {
-                app.Point3dFromXY(0,0),
-                app.Point3dFromXY(-SSLD_B,0), //[1], R4
-                app.Point3dFromXY(-SSLD_B,SSLD_D),//[2], R2
-                app.Point3dFromXY(-SSLD_B + SSLD_F,SSLD_D),
-                app.Point3dFromXY(-SSLD_B + SSLD_F,SSLD_D - SSLD_E),
-                app.Point3dFromXY(-SSLD_B + SSLD_C,SSLD_D - SSLD_E),//[5], R1
-                app.Point3dFromXY(-SSLD_B + SSLD_C,SSLD_A),//[6], R3
-                app.Point3dFromXY(0, SSLD_A)
-            };
-            ShapeElement ssld_shape = app.CreateShapeElement1(null, ref ssld_shapeppoints, MsdFillMode.Filled);
-            SmartSolidElement ele_ssld = app.SmartSolid.ExtrudeClosedPlanarCurve(ssld_shape, -SSLD_Thickness, 0, true);
+            //#region DrawSSLD
+            //Point3d[] ssld_shapeppoints =
+            //{
+            //    app.Point3dFromXY(0,0),
+            //    app.Point3dFromXY(-SSLD_B,0), //[1], R4
+            //    app.Point3dFromXY(-SSLD_B,SSLD_D),//[2], R2
+            //    app.Point3dFromXY(-SSLD_B + SSLD_F,SSLD_D),
+            //    app.Point3dFromXY(-SSLD_B + SSLD_F,SSLD_D - SSLD_E),
+            //    app.Point3dFromXY(-SSLD_B + SSLD_C,SSLD_D - SSLD_E),//[5], R1
+            //    app.Point3dFromXY(-SSLD_B + SSLD_C,SSLD_A),//[6], R3
+            //    app.Point3dFromXY(0, SSLD_A)
+            //};
+            //ShapeElement ssld_shape = app.CreateShapeElement1(null, ref ssld_shapeppoints, MsdFillMode.Filled);
+            //SmartSolidElement ele_ssld = app.SmartSolid.ExtrudeClosedPlanarCurve(ssld_shape, -SSLD_Thickness, 0, true);
 
-            if (SSLD_R4 > 0)
-                ele_ssld = app.SmartSolid.SolidSubtract(ele_ssld, GetCylinderCorner(ssld_shapeppoints[1], SSLD_R4, SSLD_Thickness));
-            if (SSLD_R3 > 0)
-                ele_ssld = app.SmartSolid.SolidUnion(ele_ssld, GetCylinderCorner(ssld_shapeppoints[6], SSLD_R3, SSLD_Thickness));
-            if (SSLD_R2 > 0)
-                ele_ssld = app.SmartSolid.SolidSubtract(ele_ssld, GetCylinderCorner(ssld_shapeppoints[2], SSLD_R2, SSLD_Thickness, -90));
-            if (SSLD_R1 > 0)
-                ele_ssld = app.SmartSolid.SolidUnion(ele_ssld, GetCylinderCorner(ssld_shapeppoints[5], SSLD_R1, SSLD_Thickness, -90));
-            Point3d ssld_shape_offset = app.Point3dFromXYZ(0, SSLD_YDis, DB_Thickness);
-            ele_ssld.Move(ref ssld_shape_offset);
-            app.ActiveModelReference.AddElement(ele_ssld);
-            #endregion
+            //if (SSLD_R4 > 0)
+            //    ele_ssld = app.SmartSolid.SolidSubtract(ele_ssld, GetCylinderCorner(ssld_shapeppoints[1], SSLD_R4, SSLD_Thickness));
+            //if (SSLD_R3 > 0)
+            //    ele_ssld = app.SmartSolid.SolidUnion(ele_ssld, GetCylinderCorner(ssld_shapeppoints[6], SSLD_R3, SSLD_Thickness));
+            //if (SSLD_R2 > 0)
+            //    ele_ssld = app.SmartSolid.SolidSubtract(ele_ssld, GetCylinderCorner(ssld_shapeppoints[2], SSLD_R2, SSLD_Thickness, -90));
+            //if (SSLD_R1 > 0)
+            //    ele_ssld = app.SmartSolid.SolidUnion(ele_ssld, GetCylinderCorner(ssld_shapeppoints[5], SSLD_R1, SSLD_Thickness, -90));
+            //Point3d ssld_shape_offset = app.Point3dFromXYZ(0, SSLD_YDis, DB_Thickness);
+            //ele_ssld.Move(ref ssld_shape_offset);
+            //app.ActiveModelReference.AddElement(ele_ssld);
+            //#endregion
 
             MessageBox.Show("参数化船闸绘制完成！", "绘制完成", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+    }
+
+    public class HoleProperty
+    {
+        public double HoleLength { get; set; }
+        public double HoleWidth { get; set; }
+        public double HoleHeight { get; set; }
+        public double XDis { get; set; }
+        public double YDis { get; set; }
+        public double ZDis { get; set; }
     }
 }

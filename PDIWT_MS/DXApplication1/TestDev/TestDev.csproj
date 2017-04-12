@@ -113,6 +113,9 @@
     <Compile Include="Views\View4.xaml.cs">
       <DependentUpon>View4.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\View5.xaml.cs">
+      <DependentUpon>View5.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ViewChart.xaml.cs">
       <DependentUpon>ViewChart.xaml</DependentUpon>
     </Compile>
@@ -157,6 +160,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\View4.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\View5.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

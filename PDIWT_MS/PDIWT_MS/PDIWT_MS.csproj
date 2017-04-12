@@ -250,9 +250,6 @@
       <DependentUpon>ViewZJCZL.xaml</DependentUpon>
     </Compile>
     <Compile Include="ZJCZL\ViewModel\ViewZJCZLViewModel.cs" />
-    <Compile Include="ZJCZL\View\ViewZJCZL_Test.xaml.cs">
-      <DependentUpon>ViewZJCZL_Test.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ZJCZL\WindowHost.xaml.cs">
       <DependentUpon>WindowHost.xaml</DependentUpon>
     </Compile>
@@ -305,10 +302,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ZJCZL\View\ViewZJCZL.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ZJCZL\View\ViewZJCZL_Test.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
