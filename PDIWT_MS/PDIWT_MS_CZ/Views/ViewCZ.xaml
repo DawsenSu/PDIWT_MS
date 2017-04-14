@@ -21,6 +21,15 @@
             <Setter Property="FontSize" Value="14" />
             <Setter Property="Margin" Value="2" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsExpanded" Value="false" />
+                        <Condition Property="IsMouseOver" Value="true" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Foreground" Value="Red" />
+                </MultiTrigger>
+            </Style.Triggers>
         </Style>
         <Style TargetType="Grid">
             <Setter Property="Margin" Value="3" />
@@ -452,18 +461,18 @@
                         x:Name="hole_gc"
                         Grid.Row="1"
                         Width="400"
-                        Height="200" 
+                        Height="200"
                         AllowLiveDataShaping="True"
                         AutoGenerateColumns="AddNew"
                         ItemsSource="{Binding HoleParamList, Mode=TwoWay}"
                         SelectionMode="Cell">
                         <dxg:GridControl.View>
                             <dxg:TableView
+                                AllowColumnMoving="False"
                                 AllowPerPixelScrolling="True"
+                                AllowSorting="False"
                                 AutoWidth="True"
                                 NewItemRowPosition="Bottom"
-                                AllowSorting="False"
-                                AllowColumnMoving="False"
                                 ShowGroupPanel="False" />
                         </dxg:GridControl.View>
                         <dxg:GridColumn FieldName="HoleLength" Header="长度" />

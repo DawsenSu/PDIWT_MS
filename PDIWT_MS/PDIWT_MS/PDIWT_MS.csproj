@@ -207,14 +207,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CZ\Model\CZDB.cs" />
-    <Compile Include="CZ\ViewModels\ViewModelAll.cs" />
-    <Compile Include="CZ\View\ViewAll.xaml.cs">
-      <DependentUpon>ViewAll.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CZ\WindowHost.xaml.cs">
-      <DependentUpon>WindowHost.xaml</DependentUpon>
-    </Compile>
     <Compile Include="KeyinCommands.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -269,14 +261,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="CZ\View\ViewAll.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CZ\WindowHost.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Test\WPFTestToolSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -312,15 +296,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ZJCZL\Model\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="CZ\Image\bdun.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="CZ\Image\ssld.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="CZ\Image\mk.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

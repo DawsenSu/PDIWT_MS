@@ -1,0 +1,88 @@
+﻿<UserControl
+    x:Class="PDIWT_MS_ZJCZL.Views.ViewZJCZL"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ViewModels="clr-namespace:PDIWT_MS_ZJCZL.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    mc:Ignorable="d">
+    <UserControl.DataContext>
+        <ViewModels:ViewZJCZLViewModel />
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <dx:EnumToVisibilityConverter x:Key="enumToVisibilityConverter" />
+        <Style x:Key="comboBoxItemStyle" TargetType="ComboBoxItem">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+
+    <DockPanel>
+        <dxlc:LayoutGroup MinWidth="130" Orientation="Vertical">
+            <dxlc:LayoutItem Label="选择查找方式:" LabelPosition="Top">
+                <ComboBox
+                    x:Name="cob"
+                    MaxHeight="30"
+                    DisplayMemberPath="Name"
+                    ItemsSource="{Binding SPanel}"
+                    SelectedItem="{Binding SPanel[0]}"
+                    SelectedValuePath="Type" />
+            </dxlc:LayoutItem>
+            <dx:GroupFrame Header="按桩编号查询" Visibility="{Binding ElementName=cob, Path=SelectedItem.Type, Converter={StaticResource enumToVisibilityConverter}, ConverterParameter=ById}">
+                <dxlc:LayoutGroup Orientation="Vertical">
+                    <dxlc:LayoutItem Label="桩ID:">
+                        <dxe:TextEdit
+                            Mask="\d+"
+                            MaskType="RegEx"
+                            Text="{Binding SearchId}" />
+                    </dxlc:LayoutItem>
+                    <Button
+                        VerticalAlignment="Top"
+                        Command="{Binding SearchByIdCommand}"
+                        Content="查找" />
+                </dxlc:LayoutGroup>
+            </dx:GroupFrame>
+            <dx:GroupFrame Header="按虚拟射线查询" Visibility="{Binding ElementName=cob, Path=SelectedItem.Type, Converter={StaticResource enumToVisibilityConverter}, ConverterParameter=ByRay}">
+                <dxlc:LayoutGroup Orientation="Vertical">
+                    <dxlc:LayoutItem Label="起点:">
+                        <dxe:TextEdit
+                            Mask="\((-?\d+)(\.\d+)?,(-?\d+)(\.\d+)?,(-?\d+)(\.\d+)?\)"
+                            MaskType="RegEx"
+                            Text="{Binding StartPoint}" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="终点:">
+                        <dxe:TextEdit
+                            Mask="\((-?\d+)(\.\d+)?,(-?\d+)(\.\d+)?,(-?\d+)(\.\d+)?\)"
+                            MaskType="RegEx"
+                            Text="{Binding EndPoint}" />
+                    </dxlc:LayoutItem>
+                    <Button
+                        VerticalAlignment="Top"
+                        Command="{Binding SearchByRayCommand}"
+                        Content="查找" />
+                </dxlc:LayoutGroup>
+            </dx:GroupFrame>
+            <TextBlock
+                MaxHeight="30"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Foreground="Red"
+                Text="{Binding Info}"
+                TextWrapping="Wrap" />
+        </dxlc:LayoutGroup>
+        <dxprg:PropertyGridControl
+            AllowInstanceInitializer="False"
+            AllowListItemInitializer="False"
+            SelectedObject="{Binding Pile}"
+            ShowMenuButtonInRows="False"
+            ShowSearchBox="False"
+            ShowToolPanel="False" />
+    </DockPanel>
+</UserControl>

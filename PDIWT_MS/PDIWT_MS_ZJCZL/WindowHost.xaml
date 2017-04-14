@@ -1,0 +1,11 @@
+﻿<Window
+    x:Class="PDIWT_MS_ZJCZL.WindowHost"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Views="clr-namespace:PDIWT_MS_ZJCZL.Views"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    Title="桩基承载力"
+    Width="525"
+    Height="350">
+    <Views:ViewZJCZL />
+</Window>
