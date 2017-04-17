@@ -13,9 +13,10 @@
     d:DesignHeight="300"
     d:DesignWidth="300"
     mc:Ignorable="d">
-    <UserControl.DataContext>
+    <!--  将viewmodels的绑定挪至后台代码中，前端的图形端就可以显示  -->
+    <!--<UserControl.DataContext>
         <ViewModels:ViewZJCZLViewModel />
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
 
     <UserControl.Resources>
         <dx:EnumToVisibilityConverter x:Key="enumToVisibilityConverter" />
@@ -38,10 +39,23 @@
             <dx:GroupFrame Header="按桩编号查询" Visibility="{Binding ElementName=cob, Path=SelectedItem.Type, Converter={StaticResource enumToVisibilityConverter}, ConverterParameter=ById}">
                 <dxlc:LayoutGroup Orientation="Vertical">
                     <dxlc:LayoutItem Label="桩ID:">
-                        <dxe:TextEdit
-                            Mask="\d+"
-                            MaskType="RegEx"
-                            Text="{Binding SearchId}" />
+                        <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
+                            <dxe:TextEdit
+                                MinWidth="50"
+                                Mask="\d+"
+                                MaskType="RegEx"
+                                Text="{Binding SearchId}" />
+                            <Button
+                                Margin="2"
+                                Command="{Binding SelectPileCommand}"
+                                ToolTip="从图中选取桩">
+                                <Image
+                                    Width="15"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="/PDIWT_MS_ZJCZL;component/Image/Center Direction.ico" />
+                            </Button>
+                        </StackPanel>
                     </dxlc:LayoutItem>
                     <Button
                         VerticalAlignment="Top"

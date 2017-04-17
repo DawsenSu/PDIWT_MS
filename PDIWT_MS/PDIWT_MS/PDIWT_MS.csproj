@@ -238,13 +238,6 @@
     <Compile Include="Tools\View\WindowHost.xaml.cs">
       <DependentUpon>WindowHost.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ZJCZL\View\ViewZJCZL.xaml.cs">
-      <DependentUpon>ViewZJCZL.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ZJCZL\ViewModel\ViewZJCZLViewModel.cs" />
-    <Compile Include="ZJCZL\WindowHost.xaml.cs">
-      <DependentUpon>WindowHost.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -285,18 +278,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ZJCZL\View\ViewZJCZL.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ZJCZL\WindowHost.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ZJCZL\Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

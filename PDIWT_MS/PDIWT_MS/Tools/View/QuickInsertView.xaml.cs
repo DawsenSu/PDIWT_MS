@@ -25,11 +25,6 @@ namespace PDIWT_MS.Tools.View
             DataContext = new PDIWT_MS.Tools.ViewModels.QuickInsertViewModel();
         }
 
-        private void TableView_InitNewRow(object sender, DevExpress.Xpf.Grid.InitNewRowEventArgs e)
-        {
-
-        }
-
         private void TableView_ValidateRow(object sender, DevExpress.Xpf.Grid.GridRowValidationEventArgs e)
         {
             if (e.Row == null) return;

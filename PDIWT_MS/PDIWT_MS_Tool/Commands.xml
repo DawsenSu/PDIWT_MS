@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+
+  <RootKeyinTable ID="root">
+    <Keyword SubtableRef="PDIWT_MS_Tool" CommandClass="MacroCommand" CommandWord="PDIWT_MS_Tool">
+      <Options Required="true" />
+    </Keyword>
+  </RootKeyinTable>
+
+  <SubKeyinTables>
+    <KeyinTable ID="PDIWT_MS_Tool">
+      <Keyword SubtableRef="Armor" CommandClass="MacroCommand" CommandWord="Armor">
+        <Options Required="true" />
+      </Keyword>
+    </KeyinTable>
+  </SubKeyinTables>
+
+
+  <SubKeyinTables>
+    <KeyinTable ID="Armor">
+      <Keyword CommandWord="Command"></Keyword>
+    </KeyinTable>
+  </SubKeyinTables>
+
+  <KeyinHandlers>
+    <KeyinHandler Keyin="PDIWT_MS_Tool Armor Command" Function="PDIWT_MS_Tool.KeyinCommands.SetArmorCommand"/>
+  </KeyinHandlers>
+</KeyinTree>

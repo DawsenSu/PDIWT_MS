@@ -113,9 +113,16 @@ namespace PDIWT_MS_ZJCZL.ViewModels
         {
             return !(string.IsNullOrEmpty(StartPoint) || string.IsNullOrEmpty(EndPoint));
         }
+        [Command]
+        public void SelectPile()
+        {
+            tool.InstallNewInstance();
+            SearchId = tool.SelectedEleID;
+        }
 
         #region Field
         HCHXCodeQuery PileQuery = new HCHXCodeQuery();
+        SelectPileTool tool = new SelectPileTool(0,0);
         #endregion
 
         protected override void OnInitializeInRuntime()

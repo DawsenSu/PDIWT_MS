@@ -113,6 +113,7 @@
     <Reference Include="DevExpress.Xpf.Core.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Grid.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Xpf.Grid.v16.1.Core, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Xpf.LayoutControl.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -127,6 +128,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="ustation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9bfed12b64a9b7df, processorArchitecture=AMD64">
       <HintPath>..\packages\BentleyCore.1.0.0\lib\ustation.dll</HintPath>
       <Private>False</Private>
@@ -143,6 +146,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ViewCZViewModel.cs" />
+    <Compile Include="Views\PathView.xaml.cs">
+      <DependentUpon>PathView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ViewCZ.xaml.cs">
       <DependentUpon>ViewCZ.xaml</DependentUpon>
     </Compile>
@@ -165,6 +171,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\PathView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ViewCZ.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

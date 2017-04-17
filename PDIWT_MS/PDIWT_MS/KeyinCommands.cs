@@ -41,19 +41,5 @@ namespace PDIWT_MS
             Tools.GetQuantitiesUC.ShowWindow(Program.Addin);
         }
         #endregion
-
-        #region (PDIWT_MS ZJCZL) command
-        public static void ZJCZLCalcu(string unparsed)
-        {
-            PDIWT_MS.ZJCZL.WindowHost.ShowWindow();
-        }
-        #endregion
-
-        #region (PDIWT_MS CZ) command
-        public static void CZDraw(string unparsed)
-        {
-            PDIWT_MS.CZ.WindowHost.ShowWindow();
-        }
-        #endregion
     }
 }

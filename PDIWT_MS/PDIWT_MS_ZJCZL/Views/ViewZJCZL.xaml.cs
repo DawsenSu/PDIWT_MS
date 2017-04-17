@@ -22,6 +22,7 @@ namespace PDIWT_MS_ZJCZL.Views
         public ViewZJCZL()
         {
             InitializeComponent();
+            DataContext = new ViewModels.ViewZJCZLViewModel();
         }
     }
 }

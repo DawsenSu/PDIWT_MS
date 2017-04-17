@@ -22,11 +22,7 @@ namespace PDIWT_MS_CZ.Views
         public ViewCZ()
         {
             InitializeComponent();
-        }
-
-        private void Expander_Expanded(object sender, RoutedEventArgs e)
-        {
-
+            DataContext = new ViewModels.ViewCZViewModel();
         }
     }
 }

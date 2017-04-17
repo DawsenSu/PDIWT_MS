@@ -7,14 +7,12 @@
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="500"
     d:DesignWidth="400"
     mc:Ignorable="d">
-    <UserControl.DataContext>
-        <ViewModels:ViewCZViewModel />
-    </UserControl.DataContext>
     <UserControl.Resources>
         <Style TargetType="Expander">
             <Setter Property="Foreground" Value="#FF4D6082" />
@@ -44,17 +42,34 @@
             <Setter Property="Margin" Value="0,2" />
 
         </Style>
+        <Style TargetType="dxlc:LayoutGroup">
+            <Setter Property="View" Value="GroupBox" />
+            <Setter Property="IsCollapsible" Value="True" />
+            <Setter Property="IsCollapsed" Value="True" />
+            <Setter Property="Background" Value="#FFD8EDFF" />
+        </Style>
         <!--<Style TargetType="dxg:GridColumn">
             <Setter Property="Width" Value="*" />
         </Style>-->
     </UserControl.Resources>
     <ScrollViewer>
         <StackPanel>
-            <Expander
-                x:Name="epd_db"
-                Expanded="Expander_Expanded"
-                Header="底板参数(mm)"
-                IsExpanded="True">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="5,0" />
+                        <Setter Property="MinWidth" Value="80" />
+                        <Setter Property="MaxWidth" Value="100" />
+                    </Style>
+                </StackPanel.Resources>
+                <Button Command="{Binding VertifyParamCommand}" Content="验证参数" />
+                <Button Command="{Binding DrawAllCommand}" Content="绘制" />
+            </StackPanel>
+            <TextBlock
+                Foreground="Red"
+                Text="{Binding ErrorInfo}"
+                TextWrapping="Wrap" />
+            <dxlc:LayoutGroup Header="底板参数(mm)" IsCollapsed="False">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="15*" />
@@ -90,11 +105,8 @@
                         Grid.Column="1"
                         Text="{Binding DB_Thickness}" />
                 </Grid>
-            </Expander>
-            <Expander
-                x:Name="epd_bdun"
-                Expanded="Expander_Expanded"
-                Header="边墩参数(mm)">
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutGroup Header="边墩参数(mm)">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="15*" />
@@ -186,11 +198,8 @@
                             Text="{Binding BDun_F, Mode=TwoWay}" />
                     </Grid>
                 </Grid>
-            </Expander>
-            <Expander
-                x:Name="epd_mk"
-                Expanded="Expander_Expanded"
-                Header="门槛参数(mm)">
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutGroup Header="门槛参数(mm)">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="15*" />
@@ -281,11 +290,8 @@
                             Text="{Binding MK_F, Mode=TwoWay}" />
                     </Grid>
                 </Grid>
-            </Expander>
-            <Expander
-                x:Name="epd_ssld"
-                Expanded="Expander_Expanded"
-                Header="输水孔参数(mm)">
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutGroup Header="输水孔参数(mm)">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="15*" />
@@ -443,11 +449,8 @@
                         </Grid>
                     </GroupBox>
                 </Grid>
-            </Expander>
-            <Expander
-                x:Name="epd_hole"
-                Expanded="Expander_Expanded"
-                Header="空箱参数(mm)">
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutGroup Header="空箱参数(mm)">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="15*" />
@@ -483,22 +486,8 @@
                         <dxg:GridColumn FieldName="ZDis" Header="Z轴距离" />
                     </dxg:GridControl>
                 </Grid>
-            </Expander>
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <StackPanel.Resources>
-                    <Style TargetType="Button">
-                        <Setter Property="Margin" Value="5,0" />
-                        <Setter Property="MinWidth" Value="80" />
-                        <Setter Property="MaxWidth" Value="100" />
-                    </Style>
-                </StackPanel.Resources>
-                <Button Command="{Binding VertifyParamCommand}" Content="验证参数" />
-                <Button Command="{Binding DrawAllCommand}" Content="绘制" />
-            </StackPanel>
-            <TextBlock
-                Foreground="Red"
-                Text="{Binding ErrorInfo}"
-                TextWrapping="Wrap" />
+            </dxlc:LayoutGroup>
+
         </StackPanel>
     </ScrollViewer>
 </UserControl>

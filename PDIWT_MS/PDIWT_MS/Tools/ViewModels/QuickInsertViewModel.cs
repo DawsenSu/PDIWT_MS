@@ -37,6 +37,12 @@ namespace PDIWT_MS.Tools.ViewModels
             set { SetProperty(() => ProcessNum, value); }
         }
 
+        public int ProcessMaximun
+        {
+            get { return GetProperty(() => ProcessMaximun); }
+            set { SetProperty(() => ProcessMaximun, value); }
+        }
+
         protected override void OnInitializeInDesignMode()
         {
             base.OnInitializeInDesignMode();
@@ -94,15 +100,15 @@ namespace PDIWT_MS.Tools.ViewModels
                 {
                     MessageBoxService.ShowMessage($"在加载{fileInfo.FullName}时出现错误！\n" + e.Message, "加载时出现错误");
                 }
-
             }
-
+            ProcessNum = 0; //进度条为0
         }
 
         [Command]
         public void FastPut()
         {
             ProcessNum = 0;
+            ProcessMaximun = ElementPropList.Count;
             //MessageBoxService.ShowMessage($"The Number of ElementPropList is {ElementPropList.Count}", "Element number test");
             BCOM.Application app = PDIWT_MS.Program.COM_App;
             BCOM.Point3d scale = app.Point3dOne();

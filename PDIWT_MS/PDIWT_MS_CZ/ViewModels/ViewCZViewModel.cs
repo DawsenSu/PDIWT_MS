@@ -346,8 +346,9 @@ namespace PDIWT_MS_CZ.ViewModels
             cz = app.SmartSolid.SolidUnion(czLeft, czRigth);
             app.ActiveModelReference.AddElement(cz);
             #endregion
-
+            
             MessageBox.Show("参数化船闸绘制完成！\n放置在原点（0,0,0,）", "绘制完成", MessageBoxButton.OK, MessageBoxImage.Information);
+            ErrorInfo = "参数化船闸绘制完成！";
         }
         public bool CanDrawAll ()
         {

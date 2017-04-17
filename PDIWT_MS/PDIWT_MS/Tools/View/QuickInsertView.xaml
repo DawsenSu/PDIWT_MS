@@ -78,7 +78,6 @@
                 <dxg:TableView
                     AllowPerPixelScrolling="True"
                     AutoWidth="True"
-                    InitNewRow="TableView_InitNewRow"
                     InvalidRowException="TableView_InvalidRowException"
                     NewItemRowPosition="Bottom"
                     ShowGroupPanel="False"
@@ -129,7 +128,7 @@
         <dxe:ProgressBarEdit
             Name="pgb"
             Margin="10,10,10,0"
-            Maximum="{Binding ElementPropList.Count}"
+            Maximum="{Binding ProcessMaximun}"
             Minimum="0"
             Value="{Binding ProcessNum}" />
         <Button
