@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DevExpress.Xpf.Grid;
 
 namespace PDIWT_MS_CZ.Views
 {
@@ -23,6 +24,14 @@ namespace PDIWT_MS_CZ.Views
         {
             InitializeComponent();
             DataContext = new ViewModels.ViewCZViewModel();
+        }
+
+        private void TableView_InitNewRow(object sender, InitNewRowEventArgs e)
+        {
+            if(gridcontrol_gs.VisibleRowCount%2 == 0)
+                gridcontrol_gs.SetCellValue(e.RowHandle, "IntervalType", "格栅间距");
+            else
+                gridcontrol_gs.SetCellValue(e.RowHandle, "IntervalType", "格栅宽度");
         }
     }
 }

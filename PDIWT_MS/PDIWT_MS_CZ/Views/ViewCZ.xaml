@@ -10,8 +10,7 @@
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="500"
-    d:DesignWidth="400"
+    d:DesignHeight="800"
     mc:Ignorable="d">
     <UserControl.Resources>
         <Style TargetType="Expander">
@@ -51,26 +50,116 @@
         <!--<Style TargetType="dxg:GridColumn">
             <Setter Property="Width" Value="*" />
         </Style>-->
+        <dxmvvm:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConvertor" />
     </UserControl.Resources>
-    <ScrollViewer>
-        <StackPanel>
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <StackPanel.Resources>
-                    <Style TargetType="Button">
-                        <Setter Property="Margin" Value="5,0" />
-                        <Setter Property="MinWidth" Value="80" />
-                        <Setter Property="MaxWidth" Value="100" />
-                    </Style>
-                </StackPanel.Resources>
-                <Button Command="{Binding VertifyParamCommand}" Content="验证参数" />
-                <Button Command="{Binding DrawAllCommand}" Content="绘制" />
-            </StackPanel>
-            <TextBlock
-                Foreground="Red"
-                Text="{Binding ErrorInfo}"
-                TextWrapping="Wrap" />
-            <dxlc:LayoutGroup Header="底板参数(mm)" IsCollapsed="False">
-                <Grid>
+    <StackPanel>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="5,0" />
+                    <Setter Property="MinWidth" Value="80" />
+                    <Setter Property="MaxWidth" Value="100" />
+                </Style>
+            </StackPanel.Resources>
+            <Button Command="{Binding VertifyParamCommand}" Content="验证参数" />
+            <Button Command="{Binding DrawAllCommand}" Content="绘制" />
+            <Button Command="{Binding TestCommand}" Content="Test" />
+        </StackPanel>
+        <TextBlock
+            Foreground="Red"
+            Text="{Binding ErrorInfo}"
+            TextWrapping="Wrap" />
+        <ScrollViewer Height="430">
+            <StackPanel>
+                <dxlc:LayoutGroup Header="底板参数(mm)">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="15*" />
+                            <RowDefinition Height="15*" />
+                            <RowDefinition Height="15*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Text="长度：" />
+                        <dxe:TextEdit
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Text="{Binding DB_Length}" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Text="宽度：" />
+                        <dxe:TextEdit
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Text="{Binding DB_Width}" />
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Text="厚度：" />
+                        <dxe:TextEdit
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Text="{Binding DB_Thickness}" />
+                    </Grid>
+                </dxlc:LayoutGroup>
+                <dxlc:LayoutGroup Header="边墩参数(mm)" Orientation="Vertical">
+                    <dxlc:LayoutItem Label="高度：">
+                        <dxe:TextEdit Text="{Binding BDun_Thickness}" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="XY平面形状参数：" LabelPosition="Top">
+                        <dxlc:LayoutGroup View="Group">
+                            <Image Width="150" Source="/PDIWT_MS_CZ;component/Image/bdun.png" />
+                            <dxlc:LayoutGroup Orientation="Vertical" View="Group">
+                                <GroupBox Header="外形轮廓参数">
+                                    <StackPanel>
+                                        <dxlc:LayoutItem Label="a=">
+                                            <dxe:TextEdit Text="{Binding BDun_A, Mode=TwoWay}" />
+                                        </dxlc:LayoutItem>
+                                        <dxlc:LayoutItem Label="b=">
+                                            <dxe:TextEdit Text="{Binding BDun_B, Mode=TwoWay}" />
+                                        </dxlc:LayoutItem>
+                                        <dxlc:LayoutItem Label="c=">
+                                            <dxe:TextEdit Text="{Binding BDun_C, Mode=TwoWay}" />
+                                        </dxlc:LayoutItem>
+                                        <dxlc:LayoutItem Label="d=">
+                                            <dxe:TextEdit Text="{Binding BDun_D, Mode=TwoWay}" />
+                                        </dxlc:LayoutItem>
+                                        <dxlc:LayoutItem Label="e=">
+                                            <dxe:TextEdit Text="{Binding BDun_E, Mode=TwoWay}" />
+                                        </dxlc:LayoutItem>
+                                        <dxlc:LayoutItem Label="f=">
+                                            <dxe:TextEdit Text="{Binding BDun_F, Mode=TwoWay}" />
+                                        </dxlc:LayoutItem>
+                                    </StackPanel>
+                                </GroupBox>
+                                <CheckBox
+                                    x:Name="checkbox_bdun"
+                                    Content="包含倒角"
+                                    IsChecked="{Binding IsIncludeBDunChamfer}" />
+                                <GroupBox Header="倒角尺寸参数" Visibility="{Binding ElementName=checkbox_bdun, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConvertor}}">
+                                    <StackPanel>
+                                        <dxlc:LayoutItem Label="Tx=">
+                                            <dxe:TextEdit Text="{Binding BDun_Tx, Mode=TwoWay}" />
+                                        </dxlc:LayoutItem>
+                                        <dxlc:LayoutItem Label="Ty=">
+                                            <dxe:TextEdit Text="{Binding BDun_Ty, Mode=TwoWay}" />
+                                        </dxlc:LayoutItem>
+                                        <dxlc:LayoutItem Label="R1=">
+                                            <dxe:TextEdit Text="{Binding BDun_R1, Mode=TwoWay}" />
+                                        </dxlc:LayoutItem>
+                                    </StackPanel>
+
+                                </GroupBox>
+                            </dxlc:LayoutGroup>
+                        </dxlc:LayoutGroup>
+                    </dxlc:LayoutItem>
+                    <!--<Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="15*" />
                         <RowDefinition Height="15*" />
@@ -80,51 +169,7 @@
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Text="长度：" />
-                    <dxe:TextEdit
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Text="{Binding DB_Length}" />
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Text="宽度：" />
-                    <dxe:TextEdit
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Text="{Binding DB_Width}" />
-                    <TextBlock
-                        Grid.Row="2"
-                        Grid.Column="0"
-                        Text="厚度：" />
-                    <dxe:TextEdit
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        Text="{Binding DB_Thickness}" />
-                </Grid>
-            </dxlc:LayoutGroup>
-            <dxlc:LayoutGroup Header="边墩参数(mm)">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="15*" />
-                        <RowDefinition Height="15*" />
-                        <RowDefinition Height="15*" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Text="高度：" />
-                    <dxe:TextEdit
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Text="{Binding BDun_Thickness}" />
+
                     <TextBlock
                         Grid.Row="1"
                         Grid.Column="0"
@@ -152,10 +197,7 @@
                             Grid.Row="0"
                             Grid.Column="0"
                             Text="a = " />
-                        <dxe:TextEdit
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            Text="{Binding BDun_A, Mode=TwoWay}" />
+
                         <TextBlock
                             Grid.Row="1"
                             Grid.Column="0"
@@ -197,44 +239,14 @@
                             Grid.Column="1"
                             Text="{Binding BDun_F, Mode=TwoWay}" />
                     </Grid>
-                </Grid>
-            </dxlc:LayoutGroup>
-            <dxlc:LayoutGroup Header="门槛参数(mm)">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="15*" />
-                        <RowDefinition Height="15*" />
-                        <RowDefinition Height="20*" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Text="厚度:" />
-                    <dxe:TextEdit
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Text="{Binding MK_Thickness}" />
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Text="XY平面形参数:" />
-                    <Image
-                        Grid.Row="2"
-                        Width="300"
-                        Source="/PDIWT_MS_CZ;component/Image/mk.png" />
-                    <Grid Grid.Row="2" Grid.Column="1">
+                </Grid>-->
+                </dxlc:LayoutGroup>
+                <dxlc:LayoutGroup Header="门槛参数(mm)">
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="15*" />
                             <RowDefinition Height="15*" />
-                            <RowDefinition Height="15*" />
-                            <RowDefinition Height="15*" />
-                            <RowDefinition Height="15*" />
-                            <RowDefinition Height="15*" />
-
+                            <RowDefinition Height="20*" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto" />
@@ -243,99 +255,20 @@
                         <TextBlock
                             Grid.Row="0"
                             Grid.Column="0"
-                            Text="a = " />
+                            Text="厚度:" />
                         <dxe:TextEdit
                             Grid.Row="0"
                             Grid.Column="1"
-                            Text="{Binding MK_A, Mode=TwoWay}" />
+                            Text="{Binding MK_Thickness}" />
                         <TextBlock
                             Grid.Row="1"
                             Grid.Column="0"
-                            Text="b = " />
-                        <dxe:TextEdit
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            Text="{Binding MK_B, Mode=TwoWay}" />
-                        <TextBlock
+                            Text="XY平面形参数:" />
+                        <Image
                             Grid.Row="2"
-                            Grid.Column="0"
-                            Text="c = " />
-                        <dxe:TextEdit
-                            Grid.Row="2"
-                            Grid.Column="1"
-                            Text="{Binding MK_C, Mode=TwoWay}" />
-                        <TextBlock
-                            Grid.Row="3"
-                            Grid.Column="0"
-                            Text="d = " />
-                        <dxe:TextEdit
-                            Grid.Row="3"
-                            Grid.Column="1"
-                            Text="{Binding MK_D, Mode=TwoWay}" />
-                        <TextBlock
-                            Grid.Row="4"
-                            Grid.Column="0"
-                            Text="e = " />
-                        <dxe:TextEdit
-                            Grid.Row="4"
-                            Grid.Column="1"
-                            Text="{Binding MK_E, Mode=TwoWay}" />
-                        <TextBlock
-                            Grid.Row="5"
-                            Grid.Column="0"
-                            Text="f = " />
-                        <dxe:TextEdit
-                            Grid.Row="5"
-                            Grid.Column="1"
-                            Text="{Binding MK_F, Mode=TwoWay}" />
-                    </Grid>
-                </Grid>
-            </dxlc:LayoutGroup>
-            <dxlc:LayoutGroup Header="输水孔参数(mm)">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="15*" />
-                        <RowDefinition Height="15*" />
-                        <RowDefinition Height="15*" />
-                        <RowDefinition Height="15*" />
-                        <RowDefinition Height="15*" />
-                        <RowDefinition Height="15*" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Text="厚度：" />
-                    <dxe:TextEdit
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Text="{Binding SSLD_Thickness, Mode=TwoWay}" />
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Text="Y轴距离：" />
-                    <dxe:TextEdit
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Text="{Binding SSLD_YDis, Mode=TwoWay}" />
-                    <TextBlock
-                        Grid.Row="2"
-                        Grid.Column="0"
-                        Text="输水空XY平面轮廓参数：" />
-                    <Image
-                        Grid.Row="3"
-                        Grid.RowSpan="2"
-                        Grid.Column="0"
-                        Source="/PDIWT_MS_CZ;component/Image/ssld.png" />
-                    <GroupBox
-                        Grid.Row="3"
-                        Grid.Column="1"
-                        Margin="2"
-                        Header="长度参数">
-                        <Grid>
+                            Width="300"
+                            Source="/PDIWT_MS_CZ;component/Image/mk.png" />
+                        <Grid Grid.Row="2" Grid.Column="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="15*" />
                                 <RowDefinition Height="15*" />
@@ -343,6 +276,7 @@
                                 <RowDefinition Height="15*" />
                                 <RowDefinition Height="15*" />
                                 <RowDefinition Height="15*" />
+
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" />
@@ -355,7 +289,7 @@
                             <dxe:TextEdit
                                 Grid.Row="0"
                                 Grid.Column="1"
-                                Text="{Binding SSLD_A, Mode=TwoWay}" />
+                                Text="{Binding MK_A, Mode=TwoWay}" />
                             <TextBlock
                                 Grid.Row="1"
                                 Grid.Column="0"
@@ -363,7 +297,7 @@
                             <dxe:TextEdit
                                 Grid.Row="1"
                                 Grid.Column="1"
-                                Text="{Binding SSLD_B, Mode=TwoWay}" />
+                                Text="{Binding MK_B, Mode=TwoWay}" />
                             <TextBlock
                                 Grid.Row="2"
                                 Grid.Column="0"
@@ -371,7 +305,7 @@
                             <dxe:TextEdit
                                 Grid.Row="2"
                                 Grid.Column="1"
-                                Text="{Binding SSLD_C, Mode=TwoWay}" />
+                                Text="{Binding MK_C, Mode=TwoWay}" />
                             <TextBlock
                                 Grid.Row="3"
                                 Grid.Column="0"
@@ -379,7 +313,7 @@
                             <dxe:TextEdit
                                 Grid.Row="3"
                                 Grid.Column="1"
-                                Text="{Binding SSLD_D, Mode=TwoWay}" />
+                                Text="{Binding MK_D, Mode=TwoWay}" />
                             <TextBlock
                                 Grid.Row="4"
                                 Grid.Column="0"
@@ -387,7 +321,7 @@
                             <dxe:TextEdit
                                 Grid.Row="4"
                                 Grid.Column="1"
-                                Text="{Binding SSLD_E, Mode=TwoWay}" />
+                                Text="{Binding MK_E, Mode=TwoWay}" />
                             <TextBlock
                                 Grid.Row="5"
                                 Grid.Column="0"
@@ -395,99 +329,293 @@
                             <dxe:TextEdit
                                 Grid.Row="5"
                                 Grid.Column="1"
-                                Text="{Binding SSLD_F, Mode=TwoWay}" />
+                                Text="{Binding MK_F, Mode=TwoWay}" />
                         </Grid>
-                    </GroupBox>
-                    <GroupBox
-                        Grid.Row="4"
-                        Grid.Column="1"
-                        Margin="2"
-                        Header="倒角参数">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="15*" />
-                                <RowDefinition Height="15*" />
-                                <RowDefinition Height="15*" />
-                                <RowDefinition Height="15*" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock
-                                Grid.Row="0"
-                                Grid.Column="0"
-                                Text="R1 = " />
-                            <dxe:TextEdit
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                Text="{Binding SSLD_R1, Mode=TwoWay}" />
-                            <TextBlock
-                                Grid.Row="1"
-                                Grid.Column="0"
-                                Text="R2 = " />
-                            <dxe:TextEdit
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                Text="{Binding SSLD_R2, Mode=TwoWay}" />
-                            <TextBlock
-                                Grid.Row="2"
-                                Grid.Column="0"
-                                Text="R3 = " />
-                            <dxe:TextEdit
-                                Grid.Row="2"
-                                Grid.Column="1"
-                                Text="{Binding SSLD_R3, Mode=TwoWay}" />
-                            <TextBlock
-                                Grid.Row="3"
-                                Grid.Column="0"
-                                Text="R4 = " />
-                            <dxe:TextEdit
-                                Grid.Row="3"
-                                Grid.Column="1"
-                                Text="{Binding SSLD_R4, Mode=TwoWay}" />
-                        </Grid>
-                    </GroupBox>
-                </Grid>
-            </dxlc:LayoutGroup>
-            <dxlc:LayoutGroup Header="空箱参数(mm)">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="15*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <TextBlock
-                        Grid.Row="0"
-                        Text="各空箱控制参数：(各距离均相对于边墩左下角点坐标)"
-                        TextWrapping="Wrap" />
-                    <dxg:GridControl
-                        x:Name="hole_gc"
-                        Grid.Row="1"
-                        Width="400"
-                        Height="200"
-                        AllowLiveDataShaping="True"
-                        AutoGenerateColumns="AddNew"
-                        ItemsSource="{Binding HoleParamList, Mode=TwoWay}"
-                        SelectionMode="Cell">
-                        <dxg:GridControl.View>
-                            <dxg:TableView
-                                AllowColumnMoving="False"
-                                AllowPerPixelScrolling="True"
-                                AllowSorting="False"
-                                AutoWidth="True"
-                                NewItemRowPosition="Bottom"
-                                ShowGroupPanel="False" />
-                        </dxg:GridControl.View>
-                        <dxg:GridColumn FieldName="HoleLength" Header="长度" />
-                        <dxg:GridColumn FieldName="HoleWidth" Header="宽度" />
-                        <dxg:GridColumn FieldName="HoleHeight" Header="高度" />
-                        <dxg:GridColumn FieldName="XDis" Header="X轴距离" />
-                        <dxg:GridColumn FieldName="YDis" Header="Y轴距离" />
-                        <dxg:GridColumn FieldName="ZDis" Header="Z轴距离" />
-                    </dxg:GridControl>
-                </Grid>
-            </dxlc:LayoutGroup>
+                    </Grid>
+                </dxlc:LayoutGroup>
+                <dxlc:LayoutGroup Header="输水孔参数(mm)">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="15*" />
+                            <RowDefinition Height="15*" />
+                            <RowDefinition Height="15*" />
+                            <RowDefinition Height="15*" />
+                            <RowDefinition Height="15*" />
+                            <RowDefinition Height="15*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Text="厚度：" />
+                        <dxe:TextEdit
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Text="{Binding SSLD_Thickness, Mode=TwoWay}" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Text="Y轴距离：" />
+                        <dxe:TextEdit
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Text="{Binding SSLD_YDis, Mode=TwoWay}" />
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Text="输水空XY平面轮廓参数：" />
+                        <Image
+                            Grid.Row="3"
+                            Grid.RowSpan="2"
+                            Grid.Column="0"
+                            Source="/PDIWT_MS_CZ;component/Image/ssld.png" />
+                        <GroupBox
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Margin="2"
+                            Header="长度参数">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="15*" />
+                                    <RowDefinition Height="15*" />
+                                    <RowDefinition Height="15*" />
+                                    <RowDefinition Height="15*" />
+                                    <RowDefinition Height="15*" />
+                                    <RowDefinition Height="15*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Text="a = " />
+                                <dxe:TextEdit
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Text="{Binding SSLD_A, Mode=TwoWay}" />
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Text="b = " />
+                                <dxe:TextEdit
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Text="{Binding SSLD_B, Mode=TwoWay}" />
+                                <TextBlock
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    Text="c = " />
+                                <dxe:TextEdit
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    Text="{Binding SSLD_C, Mode=TwoWay}" />
+                                <TextBlock
+                                    Grid.Row="3"
+                                    Grid.Column="0"
+                                    Text="d = " />
+                                <dxe:TextEdit
+                                    Grid.Row="3"
+                                    Grid.Column="1"
+                                    Text="{Binding SSLD_D, Mode=TwoWay}" />
+                                <TextBlock
+                                    Grid.Row="4"
+                                    Grid.Column="0"
+                                    Text="e = " />
+                                <dxe:TextEdit
+                                    Grid.Row="4"
+                                    Grid.Column="1"
+                                    Text="{Binding SSLD_E, Mode=TwoWay}" />
+                                <TextBlock
+                                    Grid.Row="5"
+                                    Grid.Column="0"
+                                    Text="f = " />
+                                <dxe:TextEdit
+                                    Grid.Row="5"
+                                    Grid.Column="1"
+                                    Text="{Binding SSLD_F, Mode=TwoWay}" />
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Margin="2"
+                            Header="倒角参数">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="15*" />
+                                    <RowDefinition Height="15*" />
+                                    <RowDefinition Height="15*" />
+                                    <RowDefinition Height="15*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Text="R1 = " />
+                                <dxe:TextEdit
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Text="{Binding SSLD_R1, Mode=TwoWay}" />
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Text="R2 = " />
+                                <dxe:TextEdit
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Text="{Binding SSLD_R2, Mode=TwoWay}" />
+                                <TextBlock
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    Text="R3 = " />
+                                <dxe:TextEdit
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    Text="{Binding SSLD_R3, Mode=TwoWay}" />
+                                <TextBlock
+                                    Grid.Row="3"
+                                    Grid.Column="0"
+                                    Text="R4 = " />
+                                <dxe:TextEdit
+                                    Grid.Row="3"
+                                    Grid.Column="1"
+                                    Text="{Binding SSLD_R4, Mode=TwoWay}" />
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+                </dxlc:LayoutGroup>
+                <dxlc:LayoutGroup Header="空箱参数(mm)" Orientation="Vertical">
+                    <dxlc:LayoutItem Label="各空箱控制参数：(各距离均相对于边墩左下角点坐标)" LabelPosition="Top">
+                        <dxg:GridControl
+                            x:Name="hole_gc"
+                            Grid.Row="1"
+                            Width="440"
+                            Height="150"
+                            AllowLiveDataShaping="True"
+                            AutoGenerateColumns="AddNew"
+                            ItemsSource="{Binding HoleParamList, Mode=TwoWay}"
+                            SelectionMode="Cell">
+                            <dxg:GridControl.View>
+                                <dxg:TableView
+                                    AllowColumnMoving="False"
+                                    AllowPerPixelScrolling="True"
+                                    AllowSorting="False"
+                                    AutoWidth="True"
+                                    NewItemRowPosition="Bottom"
+                                    ShowGroupPanel="False" />
+                            </dxg:GridControl.View>
+                            <dxg:GridColumn FieldName="HoleLength" Header="长度" />
+                            <dxg:GridColumn FieldName="HoleWidth" Header="宽度" />
+                            <dxg:GridColumn FieldName="HoleHeight" Header="高度" />
+                            <dxg:GridColumn FieldName="ChamferLength" Header="倒角尺寸" />
+                            <dxg:GridColumn FieldName="XDis" Header="X轴距离" />
+                            <dxg:GridColumn FieldName="YDis" Header="Y轴距离" />
+                            <dxg:GridColumn FieldName="ZDis" Header="Z轴距离" />
+                        </dxg:GridControl>
+                    </dxlc:LayoutItem>
 
-        </StackPanel>
-    </ScrollViewer>
+                    <StackPanel Orientation="Vertical">
+                        <CheckBox
+                            x:Name="checkbox_trapezoid"
+                            Content="包含切角空箱"
+                            IsChecked="{Binding IsIncludeTrapHole}" />
+                        <dxlc:LayoutGroup
+                            Orientation="Vertical"
+                            View="Group"
+                            Visibility="{Binding ElementName=checkbox_trapezoid, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConvertor}}">
+                            <dxlc:LayoutItem Label="空箱Z轴方向拉升高度：">
+                                <dxe:TextEdit Text="{Binding TrapHoleThickness}" />
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutGroup View="Group">
+                                <GroupBox Header="切角空箱XY平面尺寸">
+                                    <StackPanel>
+                                        <dxlc:LayoutItem Label="X方向长度：">
+                                            <dxe:TextEdit Text="{Binding TrapHoleXLength}" />
+                                        </dxlc:LayoutItem>
+                                        <dxlc:LayoutItem Label="Y方向长度：">
+                                            <dxe:TextEdit Text="{Binding TrapHoleYLength}" />
+                                        </dxlc:LayoutItem>
+                                        <dxlc:LayoutItem Label="X方向切角长度：">
+                                            <dxe:TextEdit Text="{Binding TrapHoleXLengthCorner}" />
+                                        </dxlc:LayoutItem>
+                                        <dxlc:LayoutItem Label="Y方向切角长度：">
+                                            <dxe:TextEdit Text="{Binding TrapHoleYLengthCorner}" />
+                                        </dxlc:LayoutItem>
+                                    </StackPanel>
+                                </GroupBox>
+                                <GroupBox Header="梯形空箱位置">
+                                    <StackPanel>
+                                        <dxlc:LayoutItem Label="X轴距离：">
+                                            <dxe:TextEdit Text="{Binding TrapHoleXDis}" />
+                                        </dxlc:LayoutItem>
+                                        <dxlc:LayoutItem Label="Y轴距离：">
+                                            <dxe:TextEdit Text="{Binding TrapHoleYDis}" />
+                                        </dxlc:LayoutItem>
+                                        <dxlc:LayoutItem Label="Z轴距离：">
+                                            <dxe:TextEdit Text="{Binding TrapHoleZDis}" />
+                                        </dxlc:LayoutItem>
+                                    </StackPanel>
+                                </GroupBox>
+                            </dxlc:LayoutGroup>
+                        </dxlc:LayoutGroup>
+                    </StackPanel>
+                </dxlc:LayoutGroup>
+                <dxlc:LayoutGroup
+                    Header="出水格栅参数(mm)"
+                    IsCollapsed="False"
+                    Orientation="Vertical">
+                    <CheckBox
+                        x:Name="checkbox_gs"
+                        Content="包含出水格栅"
+                        IsChecked="{Binding IsIncludeGs}" />
+                    <dxlc:LayoutGroup
+                        Orientation="Vertical"
+                        View="Group"
+                        Visibility="{Binding ElementName=checkbox_gs, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConvertor}}">
+                        <dxlc:LayoutItem Label="格栅间隔宽度：">
+                            <dxe:TextEdit Text="{Binding GS_MidWidth}" />
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="格栅宽度及间隔：" LabelPosition="Top">
+                            <dxg:GridControl
+                                x:Name="gridcontrol_gs"
+                                Height="180"
+                                AutoGenerateColumns="AddNew"
+                                ItemsSource="{Binding GS_Intervals, Mode=TwoWay}"
+                                SelectionMode="Cell">
+                                <dxg:GridControl.View>
+                                    <dxg:TableView
+                                        AllowSorting="False"
+                                        AutoWidth="True"
+                                        InitNewRow="TableView_InitNewRow"
+                                        NewItemRowPosition="Bottom"
+                                        ShowGroupPanel="False" />
+                                </dxg:GridControl.View>
+                                <dxg:GridColumn
+                                    AllowAutoFilter="False"
+                                    AllowEditing="False"
+                                    AllowFocus="False"
+                                    FieldName="IntervalType"
+                                    Header="类型"
+                                    TabStop="False" />
+                                <dxg:GridColumn
+                                    AllowAutoFilter="False"
+                                    FieldName="Interval"
+                                    Header="间隔" />
+                            </dxg:GridControl>
+                        </dxlc:LayoutItem>
+                    </dxlc:LayoutGroup>
+
+                </dxlc:LayoutGroup>
+            </StackPanel>
+        </ScrollViewer>
+    </StackPanel>
+
 </UserControl>
