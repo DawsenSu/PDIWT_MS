@@ -18,7 +18,7 @@ using DevExpress.Mvvm.DataAnnotations;
 using BM = Bentley.MstnPlatformNET;
 using BD = Bentley.DgnPlatformNET;
 using Bentley.Interop.MicroStationDGN;
-
+using System.Windows.Forms;
 
 namespace PDIWT_MS_CZ.ViewModels
 {
@@ -32,11 +32,11 @@ namespace PDIWT_MS_CZ.ViewModels
             DB_Length = 28000; DB_Width = 40000; DB_Thickness = 3000;
 
             BDun_Thickness = 17200;
-            BDun_A = 8500; BDun_B = 10000; BDun_C = 2100; BDun_D = 16000; BDun_E = 2100; BDun_F = 2000;
+            BDun_A = 8500; BDun_B = 10000; BDun_C = 2100;/* BDun_D = 16000;*/ BDun_E = 2100; BDun_F = 2000;
             IsIncludeBDunChamfer = true; BDun_Tx = 1387; BDun_Ty = 1387; BDun_R1 = 1000;
 
             MK_Thickness = 4300;
-            MK_A = 11500; MK_B = 2260; MK_C = 6650; MK_D = 10000; MK_E = 2248.2215; MK_F = 2754.7785;
+            /*MK_A = 11500;*/ MK_B = 2260; MK_C = 6650; /*MK_D = 10000;*/ MK_E = 2248.2215; MK_F = 2754.7785;
 
             SSLD_Thickness = 3500; SSLD_YDis = 1500;
             SSLD_A = 6300; SSLD_B = 18200; SSLD_C = 2600; SSLD_D = 24500; SSLD_E = 4700; SSLD_F = 4600;
@@ -52,7 +52,7 @@ namespace PDIWT_MS_CZ.ViewModels
             };
             TrapHoleThickness = 8400; IsIncludeTrapHole = true;
             TrapHoleXLength = 6400; TrapHoleYLength = 4300; TrapHoleXLengthCorner = 3300; TrapHoleYLengthCorner = 3300;
-            TrapHoleXDis = 800;TrapHoleYDis = 5800; TrapHoleZDis = 300;
+            TrapHoleXDis = 800; TrapHoleYDis = 5800; TrapHoleZDis = 300;
 
             IsIncludeGs = true;
             GS_MidWidth = 1000;
@@ -127,11 +127,11 @@ namespace PDIWT_MS_CZ.ViewModels
             get { return GetProperty(() => BDun_C); }
             set { SetProperty(() => BDun_C, value); }
         }
-        public double BDun_D
-        {
-            get { return GetProperty(() => BDun_D); }
-            set { SetProperty(() => BDun_D, value); }
-        }
+        //public double BDun_D
+        //{
+        //    get { return GetProperty(() => BDun_D); }
+        //    set { SetProperty(() => BDun_D, value); }
+        //}
         public double BDun_E
         {
             get { return GetProperty(() => BDun_E); }
@@ -172,11 +172,11 @@ namespace PDIWT_MS_CZ.ViewModels
             get { return GetProperty(() => MK_Thickness); }
             set { SetProperty(() => MK_Thickness, value); }
         }
-        public double MK_A
-        {
-            get { return GetProperty(() => MK_A); }
-            set { SetProperty(() => MK_A, value); }
-        }
+        //public double MK_A
+        //{
+        //    get { return GetProperty(() => MK_A); }
+        //    set { SetProperty(() => MK_A, value); }
+        //}
         public double MK_B
         {
             get { return GetProperty(() => MK_B); }
@@ -187,11 +187,11 @@ namespace PDIWT_MS_CZ.ViewModels
             get { return GetProperty(() => MK_C); }
             set { SetProperty(() => MK_C, value); }
         }
-        public double MK_D
-        {
-            get { return GetProperty(() => MK_D); }
-            set { SetProperty(() => MK_D, value); }
-        }
+        //public double MK_D
+        //{
+        //    get { return GetProperty(() => MK_D); }
+        //    set { SetProperty(() => MK_D, value); }
+        //}
         public double MK_E
         {
             get { return GetProperty(() => MK_E); }
@@ -347,6 +347,8 @@ namespace PDIWT_MS_CZ.ViewModels
             set { SetProperty(() => GS_Intervals, value); }
         }
         #endregion
+
+        #region Methods
         //可以使用SmartSoild.Blend命令来创建圆角
         SmartSolidElement GetCylinderCorner(Point3d Cornerorigin, double r, double height, double rotdegree = 0)
         {
@@ -381,95 +383,56 @@ namespace PDIWT_MS_CZ.ViewModels
         //通过测试
         SmartSolidElement GetChamferedBox(double width, double length, double height, double chamferLength = 0)
         {
-            SmartSolidElement boxele = app.SmartSolid.CreateSlab(null, width, length, height);
-            if (chamferLength > 0)
-            {
-                double halfwidth = width / 2, halflenth = length / 2, halfheight = height / 2;
-                Point3d[] edgePoints =
-                {
-                    app.Point3dFromXYZ(halfwidth,-halflenth,0),
-                    app.Point3dFromXYZ(halfwidth,halflenth,0),
-                    app.Point3dFromXYZ(-halfwidth,halflenth,0),
-                    app.Point3dFromXYZ(-halfwidth,-halflenth,0),
-                    app.Point3dFromXYZ(0,-halflenth,-halfheight),
-                    app.Point3dFromXYZ(0,-halflenth,halfheight),
-                    app.Point3dFromXYZ(0,halflenth,halfheight),
-                    app.Point3dFromXYZ(0,halflenth,-halfheight),
-                    app.Point3dFromXYZ(halfwidth,0,-halfheight),
-                    app.Point3dFromXYZ(halfwidth,0,halfheight),
-                    app.Point3dFromXYZ(-halfwidth,0,halfheight),
-                    app.Point3dFromXYZ(-halfwidth,0,-halfheight)
-                };
-                for (int i = 0; i < edgePoints.Length; i++)
-                {
-                    boxele = app.SmartSolid.ChamferEdge(boxele, ref edgePoints[i], chamferLength, chamferLength, true);
-                }
-                double halfwidth_wcham = halfwidth - chamferLength, halflength_wcham = halflenth - chamferLength, halfheight_wcham = halfheight - chamferLength;
-                Point3d[] champlusPoints =
-                {
-                    app.Point3dFromXYZ(halfwidth_wcham,-halflength_wcham,halfheight),
-                    app.Point3dFromXYZ(halfwidth_wcham,-halflenth,halfheight_wcham),
-                    app.Point3dFromXYZ(halfwidth,-halflength_wcham,halfheight_wcham)
-                };
-                ShapeElement champlus_shape = app.CreateShapeElement1(null, ref champlusPoints, MsdFillMode.Filled);
-                SmartSolidElement champlus_ele_template = app.SmartSolid.ExtrudeClosedPlanarCurve(champlus_shape, 2 * chamferLength,0,true);
-                SmartSolidElement[] champlus_eleList = new SmartSolidElement[8];
-                champlus_eleList[0] = champlus_ele_template.Clone().AsSmartSolidElement;
-                champlus_eleList[1] = champlus_eleList[0].Clone().AsSmartSolidElement;
-                champlus_eleList[1].Mirror(ref edgePoints[10], ref edgePoints[9]);
-                champlus_eleList[2] = champlus_eleList[1].Clone().AsSmartSolidElement;
-                champlus_eleList[2].Mirror(ref edgePoints[5], ref edgePoints[6]);
-                champlus_eleList[3] = champlus_eleList[0].Clone().AsSmartSolidElement;
-                champlus_eleList[3].Mirror(ref edgePoints[5], ref edgePoints[6]);
-                champlus_eleList[4] = champlus_eleList[0].Clone().AsSmartSolidElement;
-                champlus_eleList[4].Mirror3d(ref edgePoints[0], ref edgePoints[1],ref edgePoints[2]);
-                champlus_eleList[5] = champlus_eleList[4].Clone().AsSmartSolidElement;
-                champlus_eleList[5].Mirror(ref edgePoints[11], ref edgePoints[8]);
-                champlus_eleList[6] = champlus_eleList[5].Clone().AsSmartSolidElement;
-                champlus_eleList[6].Mirror(ref edgePoints[4], ref edgePoints[7]);
-                champlus_eleList[7] = champlus_eleList[4].Clone().AsSmartSolidElement;
-                champlus_eleList[7].Mirror(ref edgePoints[4], ref edgePoints[7]);
-                foreach (var ele in champlus_eleList)
-                {
-                    boxele = app.SmartSolid.SolidSubtract(boxele, ele);
-                }
-            }
+            SmartSolidElement boxele = app.SmartSolid.CreateChameferedBox(width, length, height, ChameferFace.Top, chamferLength);
             Point3d boxele_offset = app.Point3dFromXYZ(width / 2, length / 2, -height / 2);
             boxele.Move(ref boxele_offset);
             return boxele;
         }
 
-        void ComDrawAll()
+        double GetBDun_D()
         {
-            #region DrawDB
+            return DB_Length - BDun_B - BDun_F;
+        }
+        double GetMK_A()
+        {
+            return DB_Width / 2.0 - BDun_A;
+        }
+        double GetMK_D()
+        {
+            return BDun_B;
+        }
+
+        SmartSolidElement GetDB()
+        {
             SmartSolidElement ele_db = app.SmartSolid.CreateSlab(null, DB_Width / 2, DB_Length, DB_Thickness);
             Point3d eledboffset = app.Point3dFromXYZ(-DB_Width / 4, DB_Length / 2, DB_Thickness / 2);
             ele_db.Move(ref eledboffset);
-            //app.ActiveModelReference.AddElement(ele_db);
-            #endregion
-
-            #region DrawBDun
+            return ele_db;
+        }
+        SmartSolidElement GetBDun()
+        {
+            double bdun_d = GetBDun_D();
             Point3d[] bdun_shapepoints =
                 {
                     app.Point3dFromXY(0,0),
                     app.Point3dFromXY(BDun_A,0),
                     app.Point3dFromXY(BDun_A,BDun_B),
                     app.Point3dFromXY(BDun_A - BDun_C,BDun_B),
-                    app.Point3dFromXY(BDun_A - BDun_C,BDun_B + BDun_D),
-                    app.Point3dFromXY(BDun_A - BDun_C + BDun_E,BDun_B + BDun_D),
-                    app.Point3dFromXY(BDun_A - BDun_C + BDun_E,BDun_B + BDun_D + BDun_F),
-                    app.Point3dFromXY(0,BDun_B + BDun_D + BDun_F)
+                    app.Point3dFromXY(BDun_A - BDun_C,BDun_B + bdun_d),
+                    app.Point3dFromXY(BDun_A - BDun_C + BDun_E,BDun_B + bdun_d),
+                    app.Point3dFromXY(BDun_A - BDun_C + BDun_E,BDun_B + bdun_d + BDun_F),
+                    app.Point3dFromXY(0,BDun_B + bdun_d + BDun_F)
                 };
             ShapeElement bdun_shape = app.CreateShapeElement1(null, ref bdun_shapepoints, MsdFillMode.Filled);
             SmartSolidElement ele_bdun = app.SmartSolid.ExtrudeClosedPlanarCurve(bdun_shape, BDun_Thickness, 0, true);
             if (IsIncludeBDunChamfer)
             {
                 Point3d bdun_Thickness_2 = app.Point3dFromXYZ(0, 0, BDun_Thickness / 2);
-                if(BDun_Tx >0 && BDun_Ty >0)
+                if (BDun_Tx > 0 && BDun_Ty > 0)
                 {
                     Point3d bdun_chamferpoint = app.Point3dAdd(ref bdun_shapepoints[3], ref bdun_Thickness_2);
                     ele_bdun = app.SmartSolid.ChamferEdge(ele_bdun, ref bdun_chamferpoint, BDun_Ty, BDun_Tx, true);
-                }                    
+                }
                 if (BDun_R1 > 0)
                 {
                     Point3d bdun_blendpoint = app.Point3dAdd(ref bdun_Thickness_2, ref bdun_shapepoints[5]);
@@ -478,27 +441,29 @@ namespace PDIWT_MS_CZ.ViewModels
             }
             Point3d ele_bdun_offset = app.Point3dFromXY(-DB_Width / 2, 0);
             ele_bdun.Move(ref ele_bdun_offset);
-            //app.ActiveModelReference.AddElement(ele_bdun);
-            #endregion
-
-            #region DrawMK
+            return ele_bdun;
+        }
+        SmartSolidElement GetMK()
+        {
+            double mk_a = GetMK_A();
+            double mk_d = GetMK_D();
             Point3d[] mk_shapepoints =
             {
                 app.Point3dFromXY(0,0),
-                app.Point3dFromXY(-MK_A,0),
-                app.Point3dFromXY(-MK_A,MK_D),
-                app.Point3dFromXY(-MK_A + MK_B,MK_D + MK_E),
-                app.Point3dFromXY(-MK_A + MK_B +MK_C , MK_D + MK_E +MK_F),
-                app.Point3dFromXY(0, MK_D + MK_E +MK_F)
+                app.Point3dFromXY(-mk_a,0),
+                app.Point3dFromXY(-mk_a,mk_d),
+                app.Point3dFromXY(-mk_a + MK_B,mk_d + MK_E),
+                app.Point3dFromXY(-mk_a + MK_B +MK_C , mk_d + MK_E +MK_F),
+                app.Point3dFromXY(0, mk_d + MK_E +MK_F)
             };
             ShapeElement mk_shape = app.CreateShapeElement1(null, ref mk_shapepoints, MsdFillMode.Filled);
             Point3d mk_shape_offset = app.Point3dFromXYZ(0, 0, DB_Thickness);
             mk_shape.Move(ref mk_shape_offset);
             SmartSolidElement ele_mk = app.SmartSolid.ExtrudeClosedPlanarCurve(mk_shape, 0, -MK_Thickness, true);
-            //app.ActiveModelReference.AddElement(ele_mk);
-            #endregion
-
-            #region DrawSSLD
+            return ele_mk;
+        }
+        SmartSolidElement GetSSLD()
+        {
             Point3d[] ssld_shapeppoints =
             {
                 app.Point3dFromXY(0,0),
@@ -523,10 +488,10 @@ namespace PDIWT_MS_CZ.ViewModels
                 ele_ssld = app.SmartSolid.SolidUnion(ele_ssld, GetCylinderCorner(ssld_shapeppoints[5], SSLD_R1, SSLD_Thickness, -90));
             Point3d ssld_shape_offset = app.Point3dFromXYZ(0, SSLD_YDis, DB_Thickness);
             ele_ssld.Move(ref ssld_shape_offset);
-            //app.ActiveModelReference.AddElement(ele_ssld);
-            #endregion
-
-            #region DrawHole
+            return ele_ssld;
+        }
+        List<SmartSolidElement> GetHoleList()
+        {
             var ele_holeList = new List<SmartSolidElement>();
             SmartSolidElement ele_hole_temp;
             Point3d hole_offset_temp;
@@ -535,7 +500,7 @@ namespace PDIWT_MS_CZ.ViewModels
             {
                 //ele_hole_temp = app.SmartSolid.CreateSlab(null, holeinfo.HoleWidth, holeinfo.HoleLength, holeinfo.HoleHeight);
                 ele_hole_temp = GetChamferedBox(holeinfo.HoleWidth, holeinfo.HoleLength, holeinfo.HoleHeight, holeinfo.ChamferLength);
-                hole_offset_temp = app.Point3dFromXYZ(-DB_Width/2 + holeinfo.XDis,holeinfo.YDis,BDun_Thickness - holeinfo.ZDis);
+                hole_offset_temp = app.Point3dFromXYZ(-DB_Width / 2 + holeinfo.XDis, holeinfo.YDis, BDun_Thickness - holeinfo.ZDis);
                 ele_hole_temp.Move(ref hole_offset_temp);
                 ele_holeList.Add(ele_hole_temp);
             }
@@ -548,11 +513,10 @@ namespace PDIWT_MS_CZ.ViewModels
                 ele_traphole.Move(ref ele_traphole_offset);
                 ele_holeList.Add(ele_traphole);
             }
-            //Element[] allElements = ele_holeList.ToArray();
-            //app.ActiveModelReference.AddElements(ref allElements);
-            #endregion
-
-            #region DrawGS
+            return ele_holeList;
+        }
+        List<SmartSolidElement> GetGSList()
+        {
             double gs_length = (SSLD_A - GS_MidWidth) / 2;
             double gs_heigth = MK_Thickness - SSLD_Thickness;
             double gs_zcoordinate = DB_Thickness + MK_Thickness;
@@ -562,7 +526,7 @@ namespace PDIWT_MS_CZ.ViewModels
                 gs_XCoordinate.Add(-gs_prop.Interval);
             }
             var ele_gs_list = new List<SmartSolidElement>();
-            if (gs_XCoordinate.Count > 1)
+            if (gs_XCoordinate.Count > 1 && IsIncludeGs)
             {
                 for (int i = 1; i < gs_XCoordinate.Count; i++)
                     gs_XCoordinate[i] = gs_XCoordinate[i] + gs_XCoordinate[i - 1];
@@ -571,7 +535,7 @@ namespace PDIWT_MS_CZ.ViewModels
                 Point3d temp_offset;
                 for (int i = 0; i < GS_Intervals.Count; i++)
                 {
-                    if (i%2==1)
+                    if (i % 2 == 1)
                     {
                         ele_gs_temp = GetChamferedBox(GS_Intervals[i].Interval, gs_length, gs_heigth);
                         temp_offset = app.Point3dFromXYZ(gs_XCoordinate[i], SSLD_YDis, gs_zcoordinate);
@@ -590,7 +554,17 @@ namespace PDIWT_MS_CZ.ViewModels
                     ele_gs_list.Add(ele_gs_temp);
                 }
             }
-            #endregion
+            return ele_gs_list;
+        }
+
+        void ComDrawAll()
+        {
+            SmartSolidElement ele_db = GetDB();
+            SmartSolidElement ele_bdun = GetBDun();
+            SmartSolidElement ele_mk = GetMK();
+            SmartSolidElement ele_ssld = GetSSLD();
+            List<SmartSolidElement> ele_holeList = GetHoleList();
+            List<SmartSolidElement> ele_gsList = GetGSList();
 
             #region Sub\Union action
             SmartSolidElement cz, czLeft, czRigth;
@@ -602,7 +576,7 @@ namespace PDIWT_MS_CZ.ViewModels
                 czLeft = app.SmartSolid.SolidSubtract(czLeft, ele_hole);
             }
 
-            foreach (var ele_gs in ele_gs_list)
+            foreach (var ele_gs in ele_gsList)
             {
                 czLeft = app.SmartSolid.SolidSubtract(czLeft, ele_gs);
             }
@@ -614,6 +588,88 @@ namespace PDIWT_MS_CZ.ViewModels
             cz = app.SmartSolid.SolidUnion(czLeft, czRigth);
             app.ActiveModelReference.AddElement(cz);
             #endregion
+        }
+        #endregion
+
+
+
+        private List<QuantityRowDef> CreateContent()
+        {
+            #region ModifyTheResult
+            QuantityResult result = new QuantityResult();
+
+            result.Item1 = (DB_Length + 2) * (DB_Width + 2) * 0.15 * 1e-9;
+
+            double mkvol = GetMK().ComputeVolume()*2;
+            double mkssldvol = 0;// SSLD_A * SSLD_Thickness * MK_A * 2; //存在问题
+            SmartSolidElement ssld_insectbox = app.SmartSolid.CreateSlab(null, GetMK_A(), SSLD_A + SSLD_R3, SSLD_Thickness);
+            Point3d point_offset = app.Point3dFromXYZ(-GetMK_A() / 2, SSLD_YDis + (SSLD_A + SSLD_R3) / 2, SSLD_Thickness / 2 + DB_Thickness);
+            ssld_insectbox.Move(ref point_offset);
+            SmartSolidElement tempssld = GetSSLD();
+            //app.ActiveModelReference.AddElement(app.SmartSolid.SolidIntersect(ssld_insectbox, tempssld));
+            mkssldvol = app.SmartSolid.SolidIntersect(ssld_insectbox, tempssld).ComputeVolume() * 2;
+            double gsallvol = 0;
+            foreach (var gs in GetGSList())
+            {
+                gsallvol += gs.ComputeVolume();
+            }
+            gsallvol *= 2;
+            result.Item2 = (DB_Length * DB_Width * DB_Thickness + mkvol - mkssldvol - gsallvol) * 1e-9;
+
+            result.Item3 = result.Item2 * 0.05;
+
+            SmartSolidElement tempbdun = GetBDun();
+            double bdunshapearea = tempbdun.ComputeVolume() / BDun_Thickness;
+            double bdun_ssldvol = tempssld.ComputeVolume() * 2 - mkssldvol;
+            result.Item7 = (bdunshapearea * MK_Thickness * 2 - bdun_ssldvol) * 1e-9;
+
+            double holelistvol = 0;
+            var holelist = GetHoleList();
+            foreach (var holeele in holelist)
+            {
+                holelistvol += holeele.ComputeVolume();
+            }
+            holelistvol *= 2e-9;
+            result.Item5 = bdunshapearea * (BDun_Thickness - DB_Thickness - MK_Thickness) * 2 * 1e-9 - result.Item7  -holelistvol;
+            result.Item12 = (BDun_Thickness - DB_Thickness) * 0.313 * 2;
+            double dbunedgelength = 0;
+            dbunedgelength += 2 * (BDun_A + BDun_B + GetBDun_D() + BDun_E + BDun_F);
+            if (IsIncludeBDunChamfer)
+            {
+                dbunedgelength -= (2 * BDun_R1 + BDun_Tx + BDun_Ty);
+                dbunedgelength += (Math.Sqrt(BDun_Tx * BDun_Tx + BDun_Ty * BDun_Ty) + 1 / 2.0 * Math.PI * BDun_R1);
+            }
+            result.Item14 = dbunedgelength * 2;
+            result.Item18 = (BDun_Thickness + DB_Width / 2) * 2 * 1e-3;
+            result.Item19 = DB_Length * 2 * 1e-3;
+
+            #endregion
+
+            var content = new List<QuantityRowDef>
+            {
+                new QuantityRowDef { ItemOrder=1, ItemName= "素混凝土垫层", Unit="m^3", QuantityFormula ="(闸首长+2)*（闸首宽+2）*0.15", Quantity = result.Item1, EnlargeFactor = 1.1, Memo ="C15，厚150mm" },
+                new QuantityRowDef { ItemOrder=2, ItemName= "现浇钢筋混凝土底板", Unit="m^3", QuantityFormula ="闸首长x闸首宽x底板厚+门槛-门槛部分廊道-出水格栅", Quantity = result.Item2, EnlargeFactor = 1.1, Memo ="C25（含廊道、门龛），底板最厚处7.6m" },
+                new QuantityRowDef { ItemOrder=3, ItemName= "底板钢筋", Unit="t", QuantityFormula ="底板量*0.05", Quantity = result.Item3, EnlargeFactor = 1.1, Memo ="HRB400" },
+                new QuantityRowDef { ItemOrder=4, ItemName= "底板二期混凝土", Unit="m^3", QuantityFormula ="450", Quantity = 450, EnlargeFactor = 1.1, Memo ="C30微膨胀混凝土，施工宽缝" },
+                new QuantityRowDef { ItemOrder=5, ItemName= "现浇钢筋砼边墩（上部）", Unit="m^3", QuantityFormula ="边墩面积x（边墩高度-底板厚度-门槛厚度）-下部边墩-空箱", Quantity =result.Item5, EnlargeFactor = 1.1, Memo ="C25" },
+                new QuantityRowDef { ItemOrder=6, ItemName= "边墩钢筋（上部）", Unit="t", QuantityFormula ="", EnlargeFactor = 1.1, Memo ="HRB400" },
+                new QuantityRowDef { ItemOrder=7, ItemName= "现浇钢筋砼边墩（下部）", Unit="m^3", QuantityFormula ="边墩面积x门槛高度-廊道体积（不含门槛段）",Quantity=result.Item7, EnlargeFactor = 1.1, Memo ="HRB400" },
+                new QuantityRowDef { ItemOrder=8, ItemName= "边墩钢筋（下部）", Unit="t", QuantityFormula ="", EnlargeFactor = 1.1, Memo ="HRB400" },
+                new QuantityRowDef { ItemOrder=9, ItemName= "边墩二期混凝土", Unit="m^3", QuantityFormula ="176.12", Quantity=176.12, EnlargeFactor = 1.1, Memo ="C30微膨胀混凝土" },
+                new QuantityRowDef { ItemOrder=10, ItemName= "钢护板、护角", Unit="t", QuantityFormula ="65", Quantity= 65, EnlargeFactor = 1.1, Memo ="Q235喷锌防腐，不含检修门槽处护角" },
+                new QuantityRowDef { ItemOrder=11, ItemName= "钢护板锚筋", Unit="t", QuantityFormula ="65*0.021", Quantity =1.365,  EnlargeFactor = 1.1, Memo ="HPB300级Φ12" },
+                new QuantityRowDef { ItemOrder=12, ItemName= "甲种爬梯", Unit="t", QuantityFormula ="（边墩高度-3）x0.313x2", Quantity=result.Item12, EnlargeFactor = 1.1, Memo ="18.3m/座，每个闸首2座" },
+                new QuantityRowDef { ItemOrder=13, ItemName= "乙种爬梯", Unit="t", QuantityFormula ="", EnlargeFactor = 1.1, Memo ="12.3m/座，每个闸首2座" },
+                new QuantityRowDef { ItemOrder=14, ItemName= "栏杆", Unit="t", QuantityFormula ="边墩边长之和x2", Quantity = result.Item14, EnlargeFactor = 1.1, Memo ="钢管及扁钢加工，每个闸首栏杆长度154m" },
+                new QuantityRowDef { ItemOrder=15, ItemName= "铸铁水尺", Unit="m", QuantityFormula ="", EnlargeFactor = 1.1, Memo ="" },
+                new QuantityRowDef { ItemOrder=16, ItemName= "SC镀锌钢管", Unit="m", QuantityFormula ="16", Quantity=16, EnlargeFactor = 1.1, Memo ="Φ219x6" },
+                new QuantityRowDef { ItemOrder=17, ItemName= "SC镀锌钢管", Unit="m", QuantityFormula ="39.6", Quantity=39.6, EnlargeFactor = 1.1, Memo ="Φ102x5" },
+                new QuantityRowDef { ItemOrder=18, ItemName= "紫铜止水", Unit="m", QuantityFormula ="（边墩高度+船闸宽度/2）x2", Quantity = result.Item18, EnlargeFactor = 1.1, Memo ="闸首与导航墙、闸室连接处" },
+                new QuantityRowDef { ItemOrder=19, ItemName= "镀锌铁皮止水", Unit="m", QuantityFormula ="闸首长度*2", Quantity= result.Item19, EnlargeFactor = 1.1, Memo ="" },
+                new QuantityRowDef { ItemOrder=20, ItemName= "观测点", Unit="个", QuantityFormula ="16", Quantity =16, EnlargeFactor = 1.0, Memo ="每闸首永久:8个，临时：8个，预埋铜钉" },
+                new QuantityRowDef { ItemOrder=21, ItemName="帷幕灌浆", Unit="m", QuantityFormula="（闸室总长+5x2+船闸宽度）x2", Quantity = result.Item21, EnlargeFactor=1.0, Memo="深度8m" }
+            };
+            return content;
         }
 
         [Command]
@@ -629,19 +685,20 @@ namespace PDIWT_MS_CZ.ViewModels
                 sb.Append("当前文件的工作单位不为mm\n请到|设置->文件->设计文件设置->工作单位->主单位（子单位）|中设置\n");
             }
 
-            if (DB_Length != (BDun_B + BDun_D + BDun_F))
-                sb.Append("底板长度 != 边墩参数（b+d+f）\n");
-            if (DB_Width / 2 != (BDun_A + MK_A))
-                sb.Append("底板宽度 / 2 != 边墩 a + 门槛 a \n");
-            if (MK_D != BDun_B)
-                sb.Append("门槛参数 d != 边墩参数 b\n");
+            //if (DB_Length != (BDun_B + BDun_D + BDun_F))
+            //    sb.Append("底板长度 != 边墩参数（b+d+f）\n");
+            //if (DB_Width / 2 != (BDun_A + MK_A))
+            //    sb.Append("底板宽度 / 2 != 边墩 a + 门槛 a \n");
+            //if (MK_D != BDun_B)
+            //    sb.Append("门槛参数 d != 边墩参数 b\n");
+
             if (SSLD_Thickness > MK_Thickness)
                 sb.Append("疏水孔厚度 > 门槛厚度\n");
-            if ((SSLD_YDis + SSLD_A) > MK_D)
+            if ((SSLD_YDis + SSLD_A) > GetMK_D())
                 sb.Append("疏水孔Y轴距离 + 疏水孔 a > 门槛 d\n");
             if (SSLD_B > DB_Width / 2)
                 sb.Append("疏水孔 b > 底板宽度 / 2\n");
-            if ((SSLD_B - SSLD_C) < (MK_A + BDun_C))
+            if ((SSLD_B - SSLD_C) < (GetMK_A() + BDun_C))
                 sb.Append("疏水孔 b-c < 门槛a + 边墩c\n");
             if ((SSLD_YDis + SSLD_D) > DB_Width)
                 sb.Append("疏水孔Y轴距离 + 疏水孔 d < 底板宽\n");
@@ -652,7 +709,7 @@ namespace PDIWT_MS_CZ.ViewModels
                 if ((HoleParamList[i].YDis + HoleParamList[i].HoleLength) > DB_Length)
                     sb.Append($"第{i}号空箱Y轴距离 + 长度 >  底板长度\n");
             }
-            if (GS_Intervals.Count%2!=0)
+            if (GS_Intervals.Count % 2 != 0)
             {
                 sb.Append($"出水格栅的数组个数为{GS_Intervals.Count}，应为偶数\n");
             }
@@ -669,12 +726,12 @@ namespace PDIWT_MS_CZ.ViewModels
             try
             {
                 ComDrawAll();
-                MessageBox.Show("参数化船闸绘制完成！\n放置在原点（0,0,0,）", "绘制完成", MessageBoxButton.OK, MessageBoxImage.Information);
+                System.Windows.MessageBox.Show("参数化船闸绘制完成！\n放置在原点（0,0,0,）", "绘制完成", MessageBoxButton.OK, MessageBoxImage.Information);
                 ErrorInfo = "参数化船闸绘制完成！";
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.ToString() + "\n\n" + e.InnerException);
+                System.Windows.MessageBox.Show(e.ToString() + "\n\n" + e.InnerException);
                 return;
             }
 
@@ -685,10 +742,35 @@ namespace PDIWT_MS_CZ.ViewModels
         }
 
         [Command]
+        public void OutputQuantity()
+        {
+            try
+            {
+                var outputwindow = new Views.ExcelOutputWindow();
+                ExcelOutputViewModel excelviewmodel = outputwindow.DataContext as ExcelOutputViewModel;
+                if (excelviewmodel != null)
+                {
+                    excelviewmodel.Quantity = CreateContent();
+                }
+                outputwindow.ShowDialog();
+                ErrorInfo = "闸首工程量统计完成！";
+            }
+            catch (Exception e)
+            {
+                ErrorInfo += "统计工程量出错，请检查当前的种子文件是否为3d，单位为mm\n";
+                ErrorInfo += e.ToString() +"\n";
+            }
+
+        }
+        public bool CanOutputQuantity()
+        {
+            return CanDrawAll();
+        }
+
+        [Command]
         public void Test()
         {
-            SmartSolidElement smele = GetChamferedBox(100, 200, 300, 10);
-            app.ActiveModelReference.AddElement(smele);
+            app.ActiveModelReference.AddElement(app.SmartSolid.CreateChameferedBox(100, 100, 100, ChameferFace.XAxis,10));
         }
     }
 

@@ -1,0 +1,96 @@
+﻿<Window
+    x:Class="PDIWT_MS_CZ.Views.ExcelOutputWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ViewModels="clr-namespace:PDIWT_MS_CZ.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="输出船闸工程量"
+    Width="700"
+    Height="400"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="MaxHeight" Value="20" />
+            <Setter Property="MinWidth" Value="80" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+        <Style TargetType="dxg:GridColumn">
+            <Setter Property="AllowEditing" Value="False" />
+            <Setter Property="AllowBestFit" Value="True" />
+        </Style>
+    </Window.Resources>
+    <dxlc:LayoutControl Orientation="Vertical">
+        <dxlc:LayoutGroup>
+            <dxlc:LayoutItem Label="工程名称：">
+                <dxe:TextEdit Text="{Binding ProjectName}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="工程阶段：">
+                <dxe:TextEdit Text="{Binding ProjectPhase}" />
+            </dxlc:LayoutItem>
+        </dxlc:LayoutGroup>
+        <dxlc:LayoutGroup>
+            <dxlc:LayoutItem Label="设计人员：">
+                <dxe:TextEdit Text="{Binding DesignPerson}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="校核人员：">
+                <dxe:TextEdit Text="{Binding CheckPerson}" />
+            </dxlc:LayoutItem>
+        </dxlc:LayoutGroup>
+        <dxlc:LayoutGroup>
+            <dxg:GridControl
+                AutoGenerateColumns="AddNew"
+                ItemsSource="{Binding Quantity}"
+                SelectionMode="Cell">
+                <dxg:GridControl.View>
+                    <dxg:TableView
+                        AutoWidth="True"
+                        BestFitArea="Header"
+                        BestFitMode="VisibleRows"
+                        ShowGroupPanel="False" />
+                </dxg:GridControl.View>
+                <dxg:GridColumn
+                    FieldName="ItemOrder"
+                    Fixed="Left"
+                    Header="序号" />
+                <dxg:GridColumn FieldName="ItemName" Header="分部分项工程名称" />
+                <dxg:GridColumn FieldName="Unit" Header="单位" />
+                <dxg:GridColumn FieldName="QuantityFormula" Header="工程量计算公式" />
+                <dxg:GridColumn FieldName="Quantity" Header="计算工程量">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings
+                            Mask="f1"
+                            MaskType="Numeric"
+                            MaskUseAsDisplayFormat="True" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="EnlargeFactor" Header="扩大系数">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings
+                            Mask="f1"
+                            MaskType="Numeric"
+                            MaskUseAsDisplayFormat="True" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn
+                    FieldName="CalcuQunatity"
+                    Header="提交工程量"
+                    UnboundExpression="[Quantity] * [EnlargeFactor]"
+                    UnboundType="string">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="n1" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Memo" Header="备注" />
+            </dxg:GridControl>
+        </dxlc:LayoutGroup>
+        <dxlc:LayoutGroup>
+            <Button Command="{Binding OutputCommand}" Content="输出至Excel" />
+            <Button Click="Button_Click" Content="关闭" />
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+</Window>
