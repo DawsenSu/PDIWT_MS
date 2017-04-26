@@ -177,6 +177,7 @@
     <Compile Include="Models\GSProperty.cs" />
     <Compile Include="Models\HoleProperty.cs" />
     <Compile Include="Models\SmartSoildExtentsions.cs" />
+    <Compile Include="Models\XmlSerializerHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="KeyinCommands.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -76,9 +76,9 @@ namespace PDIWT_MS_CZ.Models
                     boxele = ss.ChamferEdge(boxele, ref middleedgePoints[chameferededge[i]], chameferLength, chameferLength, true);
                 }
 
-                if ((ExcludeChameferFace != ChameferFace.XAxis) && 
-                    (ExcludeChameferFace != ChameferFace.YAxis) && 
-                    (ExcludeChameferFace != ChameferFace.ZAxis))
+                if (((ExcludeChameferFace & ChameferFace.XAxis) == 0) && 
+                    ((ExcludeChameferFace & ChameferFace.YAxis) == 0) && 
+                    ((ExcludeChameferFace & ChameferFace.ZAxis) == 0))
                 {
                     double halfwidth_wcham = halfwidth - chameferLength, halflength_wcham = halflength - chameferLength, halfheight_wcham = halfheight - chameferLength;
                     Point3d[] champlusPoints =

@@ -48,21 +48,23 @@
             <Setter Property="Background" Value="#FFD8EDFF" />
             <Setter Property="GroupBoxDisplayMode" Value="Light" />
         </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5,3" />
+            <Setter Property="MinWidth" Value="80" />
+            <Setter Property="MaxWidth" Value="100" />
+        </Style>
         <dxmvvm:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConvertor" />
     </UserControl.Resources>
     <StackPanel>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-            <StackPanel.Resources>
-                <Style TargetType="Button">
-                    <Setter Property="Margin" Value="5,0" />
-                    <Setter Property="MinWidth" Value="80" />
-                    <Setter Property="MaxWidth" Value="100" />
-                </Style>
-            </StackPanel.Resources>
             <Button Command="{Binding VertifyParamCommand}" Content="验证参数" />
             <Button Command="{Binding DrawAllCommand}" Content="绘制" />
             <Button Command="{Binding OutputQuantityCommand}" Content="输出工程量" />
             <!--<Button Command="{Binding TestCommand}" Content="Test" />-->
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Command="{Binding ImportTemplateCommand}" Content="导入参数模板" />
+            <Button Command="{Binding ExportTemplateCommand}" Content="输出参数模板" />
         </StackPanel>
         <TextBlock
             Foreground="Red"
@@ -170,7 +172,7 @@
                     </dxlc:LayoutItem>
                     <Label Content="XY平面形参数：" />
                     <dxlc:LayoutGroup View="Group">
-                        <Image MaxWidth="300" Source="/PDIWT_MS_CZ;component/Image/mk.png" />
+                        <Image MaxWidth="250" Source="/PDIWT_MS_CZ;component/Image/mk.png" />
                         <dxlc:LayoutGroup Orientation="Vertical" View="Group">
                             <dxlc:LayoutItem Label="a=">
                                 <dxe:TextEdit

@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.ObjectModel;
 using System.Collections;
 using System.IO;
+using System.Xml.Serialization;
 
 using PDIWT_MS_CZ.Models;
 
@@ -18,10 +19,11 @@ using DevExpress.Mvvm.DataAnnotations;
 using BM = Bentley.MstnPlatformNET;
 using BD = Bentley.DgnPlatformNET;
 using Bentley.Interop.MicroStationDGN;
-using System.Windows.Forms;
+
 
 namespace PDIWT_MS_CZ.ViewModels
 {
+    [XmlRoot(ElementName ="参数模板")]
     public class ViewCZViewModel : ViewModelBase
     {
         Bentley.Interop.MicroStationDGN.Application app = Program.COM_App;
@@ -80,6 +82,7 @@ namespace PDIWT_MS_CZ.ViewModels
         }
 
         #region VertifyProperty
+        [XmlIgnore]
         public string ErrorInfo
         {
             get { return GetProperty(() => ErrorInfo); }
@@ -89,16 +92,19 @@ namespace PDIWT_MS_CZ.ViewModels
         #endregion
 
         #region DB Property
+        [XmlElement(ElementName = "底板长")]
         public double DB_Length
         {
             get { return GetProperty(() => DB_Length); }
             set { SetProperty(() => DB_Length, value); }
         }
+        [XmlElement(ElementName = "底板宽")]
         public double DB_Width
         {
             get { return GetProperty(() => DB_Width); }
             set { SetProperty(() => DB_Width, value); }
         }
+        [XmlElement(ElementName = "底板高")]
         public double DB_Thickness
         {
             get { return GetProperty(() => DB_Thickness); }
@@ -107,21 +113,25 @@ namespace PDIWT_MS_CZ.ViewModels
         #endregion
 
         #region BDun Property
+        [XmlElement(ElementName = "边墩高")]
         public double BDun_Thickness
         {
             get { return GetProperty(() => BDun_Thickness); }
             set { SetProperty(() => BDun_Thickness, value); }
         }
+        [XmlElement(ElementName = "边墩参数A")]
         public double BDun_A
         {
             get { return GetProperty(() => BDun_A); }
             set { SetProperty(() => BDun_A, value); }
         }
+        [XmlElement(ElementName = "边墩参数B")]
         public double BDun_B
         {
             get { return GetProperty(() => BDun_B); }
             set { SetProperty(() => BDun_B, value); }
         }
+        [XmlElement(ElementName = "边墩参数C")]
         public double BDun_C
         {
             get { return GetProperty(() => BDun_C); }
@@ -132,32 +142,37 @@ namespace PDIWT_MS_CZ.ViewModels
         //    get { return GetProperty(() => BDun_D); }
         //    set { SetProperty(() => BDun_D, value); }
         //}
+        [XmlElement(ElementName = "边墩参数E")]
         public double BDun_E
         {
             get { return GetProperty(() => BDun_E); }
             set { SetProperty(() => BDun_E, value); }
         }
+        [XmlElement(ElementName = "边墩参数F")]
         public double BDun_F
         {
             get { return GetProperty(() => BDun_F); }
             set { SetProperty(() => BDun_F, value); }
         }
-
+        [XmlElement(ElementName = "边墩参数Tx")]
         public double BDun_Tx
         {
             get { return GetProperty(() => BDun_Tx); }
             set { SetProperty(() => BDun_Tx, value); }
         }
+        [XmlElement(ElementName = "边墩参数Ty")]
         public double BDun_Ty
         {
             get { return GetProperty(() => BDun_Ty); }
             set { SetProperty(() => BDun_Ty, value); }
         }
+        [XmlElement(ElementName = "边墩参数R1")]
         public double BDun_R1
         {
             get { return GetProperty(() => BDun_R1); }
             set { SetProperty(() => BDun_R1, value); }
         }
+        [XmlElement(ElementName = "边墩是否包含倒角")]
         public bool IsIncludeBDunChamfer
         {
             get { return GetProperty(() => IsIncludeBDunChamfer); }
@@ -167,6 +182,7 @@ namespace PDIWT_MS_CZ.ViewModels
         #endregion
 
         #region MK Property
+        [XmlElement(ElementName = "门槛高")]
         public double MK_Thickness
         {
             get { return GetProperty(() => MK_Thickness); }
@@ -177,11 +193,13 @@ namespace PDIWT_MS_CZ.ViewModels
         //    get { return GetProperty(() => MK_A); }
         //    set { SetProperty(() => MK_A, value); }
         //}
+        [XmlElement(ElementName = "门槛参数B")]
         public double MK_B
         {
             get { return GetProperty(() => MK_B); }
             set { SetProperty(() => MK_B, value); }
         }
+        [XmlElement(ElementName = "门槛参数C")]
         public double MK_C
         {
             get { return GetProperty(() => MK_C); }
@@ -192,11 +210,13 @@ namespace PDIWT_MS_CZ.ViewModels
         //    get { return GetProperty(() => MK_D); }
         //    set { SetProperty(() => MK_D, value); }
         //}
+        [XmlElement(ElementName = "门槛参数E")]
         public double MK_E
         {
             get { return GetProperty(() => MK_E); }
             set { SetProperty(() => MK_E, value); }
         }
+        [XmlElement(ElementName = "门槛参数F")]
         public double MK_F
         {
             get { return GetProperty(() => MK_F); }
@@ -205,61 +225,73 @@ namespace PDIWT_MS_CZ.ViewModels
         #endregion
 
         #region SSLD Property
+        [XmlElement(ElementName = "输水廊道高")]
         public double SSLD_Thickness
         {
             get { return GetProperty(() => SSLD_Thickness); }
             set { SetProperty(() => SSLD_Thickness, value); }
         }
+        [XmlElement(ElementName = "输水廊道边距的Y坐标")]
         public double SSLD_YDis
         {
             get { return GetProperty(() => SSLD_YDis); }
             set { SetProperty(() => SSLD_YDis, value); }
         }
+        [XmlElement(ElementName = "输水廊道参数A")]
         public double SSLD_A
         {
             get { return GetProperty(() => SSLD_A); }
             set { SetProperty(() => SSLD_A, value); }
         }
+        [XmlElement(ElementName = "输水廊道参数B")]
         public double SSLD_B
         {
             get { return GetProperty(() => SSLD_B); }
             set { SetProperty(() => SSLD_B, value); }
         }
+        [XmlElement(ElementName = "输水廊道参数C")]
         public double SSLD_C
         {
             get { return GetProperty(() => SSLD_C); }
             set { SetProperty(() => SSLD_C, value); }
         }
+        [XmlElement(ElementName = "输水廊道参数D")]
         public double SSLD_D
         {
             get { return GetProperty(() => SSLD_D); }
             set { SetProperty(() => SSLD_D, value); }
         }
+        [XmlElement(ElementName = "输水廊道参数E")]
         public double SSLD_E
         {
             get { return GetProperty(() => SSLD_E); }
             set { SetProperty(() => SSLD_E, value); }
         }
+        [XmlElement(ElementName = "输水廊道参数F")]
         public double SSLD_F
         {
             get { return GetProperty(() => SSLD_F); }
             set { SetProperty(() => SSLD_F, value); }
         }
+        [XmlElement(ElementName = "输水廊道参数R1")]
         public double SSLD_R1
         {
             get { return GetProperty(() => SSLD_R1); }
             set { SetProperty(() => SSLD_R1, value); }
         }
+        [XmlElement(ElementName = "输水廊道参数R2")]
         public double SSLD_R2
         {
             get { return GetProperty(() => SSLD_R2); }
             set { SetProperty(() => SSLD_R2, value); }
         }
+        [XmlElement(ElementName = "输水廊道参数R3")]
         public double SSLD_R3
         {
             get { return GetProperty(() => SSLD_R3); }
             set { SetProperty(() => SSLD_R3, value); }
         }
+        [XmlElement(ElementName = "输水廊道参数R4")]
         public double SSLD_R4
         {
             get { return GetProperty(() => SSLD_R4); }
@@ -268,60 +300,61 @@ namespace PDIWT_MS_CZ.ViewModels
         #endregion
 
         #region Hole Property
+        [XmlArray(ElementName = "空箱参数集合")]
         public ObservableCollection<HoleProperty> HoleParamList
         {
             get { return GetProperty(() => HoleParamList); }
             set { SetProperty(() => HoleParamList, value); }
         }
-
+        [XmlElement(ElementName = "是否包含切角空箱")]
         public bool IsIncludeTrapHole
         {
             get { return GetProperty(() => IsIncludeTrapHole); }
             set { SetProperty(() => IsIncludeTrapHole, value); }
         }
-
+        [XmlElement(ElementName = "切角空箱X方向长度")]
         public double TrapHoleXLength
         {
             get { return GetProperty(() => TrapHoleXLength); }
             set { SetProperty(() => TrapHoleXLength, value); }
         }
-
+        [XmlElement(ElementName = "切角空箱Y方向长度")]
         public double TrapHoleYLength
         {
             get { return GetProperty(() => TrapHoleYLength); }
             set { SetProperty(() => TrapHoleYLength, value); }
         }
-
+        [XmlElement(ElementName = "切角空箱X方向切角长度")]
         public double TrapHoleXLengthCorner
         {
             get { return GetProperty(() => TrapHoleXLengthCorner); }
             set { SetProperty(() => TrapHoleXLengthCorner, value); }
         }
-
+        [XmlElement(ElementName = "切角空箱Y方向切角长度")]
         public double TrapHoleYLengthCorner
         {
             get { return GetProperty(() => TrapHoleYLengthCorner); }
             set { SetProperty(() => TrapHoleYLengthCorner, value); }
         }
-
+        [XmlElement(ElementName = "切角空箱距边墩角的X距离")]
         public double TrapHoleXDis
         {
             get { return GetProperty(() => TrapHoleXDis); }
             set { SetProperty(() => TrapHoleXDis, value); }
         }
-
+        [XmlElement(ElementName = "切角空箱距边墩角的Y距离")]
         public double TrapHoleYDis
         {
             get { return GetProperty(() => TrapHoleYDis); }
             set { SetProperty(() => TrapHoleYDis, value); }
         }
-
+        [XmlElement(ElementName = "切角空箱距边墩角的Z距离")]
         public double TrapHoleZDis
         {
             get { return GetProperty(() => TrapHoleZDis); }
             set { SetProperty(() => TrapHoleZDis, value); }
         }
-
+        [XmlElement(ElementName = "切角空箱高度")]
         public double TrapHoleThickness
         {
             get { return GetProperty(() => TrapHoleThickness); }
@@ -331,16 +364,19 @@ namespace PDIWT_MS_CZ.ViewModels
 
         #region GS Property
 
+        [XmlElement(ElementName = "是否包含出水格栅")]
         public bool IsIncludeGs
         {
             get { return GetProperty(() => IsIncludeGs); }
             set { SetProperty(() => IsIncludeGs, value); }
         }
+        [XmlElement(ElementName = "出水格栅中间肋板宽度")]
         public double GS_MidWidth
         {
             get { return GetProperty(() => GS_MidWidth); }
             set { SetProperty(() => GS_MidWidth, value); }
         }
+        [XmlArray(ElementName = "出水格栅尺寸集合")]
         public ObservableCollection<GSProperty> GS_Intervals
         {
             get { return GetProperty(() => GS_Intervals); }
@@ -693,15 +729,15 @@ namespace PDIWT_MS_CZ.ViewModels
             //    sb.Append("门槛参数 d != 边墩参数 b\n");
 
             if (SSLD_Thickness > MK_Thickness)
-                sb.Append("疏水孔厚度 > 门槛厚度\n");
+                sb.Append("输水廊道厚度 > 门槛厚度\n");
             if ((SSLD_YDis + SSLD_A) > GetMK_D())
-                sb.Append("疏水孔Y轴距离 + 疏水孔 a > 门槛 d\n");
+                sb.Append("输水廊道Y轴距离 + 输水廊道 a > 门槛 d\n");
             if (SSLD_B > DB_Width / 2)
-                sb.Append("疏水孔 b > 底板宽度 / 2\n");
+                sb.Append("输水廊道 b > 底板宽度 / 2\n");
             if ((SSLD_B - SSLD_C) < (GetMK_A() + BDun_C))
-                sb.Append("疏水孔 b-c < 门槛a + 边墩c\n");
+                sb.Append("输水廊道 b-c < 门槛a + 边墩c\n");
             if ((SSLD_YDis + SSLD_D) > DB_Width)
-                sb.Append("疏水孔Y轴距离 + 疏水孔 d < 底板宽\n");
+                sb.Append("输水廊道Y轴距离 + 输水廊道孔 d < 底板宽\n");
             for (int i = 0; i < HoleParamList.Count; i++)
             {
                 if ((HoleParamList[i].ZDis + HoleParamList[i].HoleHeight) > BDun_Thickness)
@@ -771,6 +807,80 @@ namespace PDIWT_MS_CZ.ViewModels
         public void Test()
         {
             app.ActiveModelReference.AddElement(app.SmartSolid.CreateChameferedBox(100, 100, 100, ChameferFace.XAxis,10));
+        }
+
+        [Command]
+        public void ExportTemplate()
+        {
+            try
+            {
+                System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
+                sfd.Title = "输入人字门闸首参数模板的保存文件名称";
+                sfd.Filter = "XML文件|*.xml";
+                sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    string fileName = sfd.FileName;
+                    if (File.Exists(fileName))
+                        File.Delete(fileName);
+                    XmlSerializerHelper.SaveToXml(fileName, this, null, null);
+                    ErrorInfo = "模板参数保存至" + fileName + "\n参数模板导出成功!";
+                    //MessageBox.Show("模板参数保存至"+fileName, "参数模板导出成功", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString(), "参数模板输出错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        public bool CanExportTemplate()
+        {
+            return CanDrawAll();
+        }
+        [Command]
+        public void ImportTemplate()
+        {
+            try
+            {
+                System.Windows.Forms.OpenFileDialog ofd = new System.Windows.Forms.OpenFileDialog();
+                ofd.Title = "选择人字门闸首参数模板的导入文件名称";
+                ofd.Filter = "XML文件|*.xml";
+                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    ViewCZViewModel readedViewModel = XmlSerializerHelper.LoadFromXml<ViewCZViewModel>(ofd.FileName);
+                    if (readedViewModel != null)
+                    {
+                        DB_Length = readedViewModel.DB_Length; DB_Width = readedViewModel.DB_Width; DB_Thickness = readedViewModel.DB_Thickness;
+
+                        BDun_Thickness = readedViewModel.BDun_Thickness;
+                        BDun_A = readedViewModel.BDun_A; BDun_B = readedViewModel.BDun_B; BDun_C = readedViewModel.BDun_C; BDun_E = readedViewModel.BDun_E; BDun_F = readedViewModel.BDun_F;
+                        IsIncludeBDunChamfer = readedViewModel.IsIncludeBDunChamfer; BDun_Tx = readedViewModel.BDun_Tx; BDun_Ty = readedViewModel.BDun_Ty; BDun_R1 = readedViewModel.BDun_R1;
+
+                        MK_Thickness = readedViewModel.MK_Thickness;
+                        MK_B = readedViewModel.MK_B; MK_C = readedViewModel.MK_C; MK_E = readedViewModel.MK_E; MK_F = readedViewModel.MK_F;
+
+                        SSLD_Thickness = readedViewModel.SSLD_Thickness; SSLD_YDis = readedViewModel.SSLD_YDis;
+                        SSLD_A = readedViewModel.SSLD_A; SSLD_B = readedViewModel.SSLD_B; SSLD_C = readedViewModel.SSLD_C; SSLD_D = readedViewModel.SSLD_D; SSLD_E = readedViewModel.SSLD_E; SSLD_F = readedViewModel.SSLD_F;
+                        SSLD_R1 = readedViewModel.SSLD_R1; SSLD_R2 = readedViewModel.SSLD_R2; SSLD_R3 = readedViewModel.SSLD_R3; SSLD_R4 = readedViewModel.SSLD_R4;
+                        HoleParamList = readedViewModel.HoleParamList;
+
+                        TrapHoleThickness = readedViewModel.TrapHoleThickness; IsIncludeTrapHole = readedViewModel.IsIncludeTrapHole;
+                        TrapHoleXLength = readedViewModel.TrapHoleXLength; TrapHoleYLength = readedViewModel.TrapHoleYLength; TrapHoleXLengthCorner = readedViewModel.TrapHoleXLengthCorner; TrapHoleYLengthCorner = readedViewModel.TrapHoleYLengthCorner;
+                        TrapHoleXDis = readedViewModel.TrapHoleXDis; TrapHoleYDis = readedViewModel.TrapHoleYDis; TrapHoleZDis = readedViewModel.TrapHoleZDis;
+
+                        IsIncludeGs = readedViewModel.IsIncludeGs;
+                        GS_MidWidth = readedViewModel.GS_MidWidth;
+                        GS_Intervals = readedViewModel.GS_Intervals;
+                    }
+                    ErrorInfo = ofd.FileName + "参数模板导入成功!";
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString(), "参数模板导入错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 
