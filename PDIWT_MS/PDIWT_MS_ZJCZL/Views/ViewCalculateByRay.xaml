@@ -1,0 +1,110 @@
+﻿<UserControl
+    x:Class="PDIWT_MS_ZJCZL.Views.ViewCalculateByRay"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="pilelistInfoHeadForground" Color="#FFF74848" />
+        <dxmvvm:ObjectToObjectConverter x:Key="PileTypeToStringConvertor">
+            <dxmvvm:MapItem Source="Solid" Target="实心桩或桩端封闭" />
+            <dxmvvm:MapItem Source="SteelAndPercastConcrete" Target="管桩" />
+            <dxmvvm:MapItem Source="Filling" Target="灌注桩" />
+            <dxmvvm:MapItem Source="Socketed" Target="嵌岩桩" />
+            <dxmvvm:MapItem Source="PostgroutingFilling" Target="后注浆灌注桩" />
+        </dxmvvm:ObjectToObjectConverter>
+        <DataTemplate x:Key="pileListItemViewTemplate">
+            <BulletDecorator>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="{StaticResource pilelistInfoHeadForground}" Text="桩编号:" />
+                        <TextBlock Text="{Binding PileCode}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="{StaticResource pilelistInfoHeadForground}" Text="桩类型:" />
+                        <TextBlock Text="{Binding PileTypeInfo, Converter={StaticResource PileTypeToStringConvertor}}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="{StaticResource pilelistInfoHeadForground}" Text="桩半径:" />
+                        <TextBlock Text="{Binding PileDiameter}" />
+                        <TextBlock
+                            Margin="3,0,0,0"
+                            Foreground="{StaticResource pilelistInfoHeadForground}"
+                            Text="桩长:" />
+                        <TextBlock Text="{Binding PileLength}" />
+                    </StackPanel>
+                </StackPanel>
+            </BulletDecorator>
+        </DataTemplate>
+    </UserControl.Resources>
+    <dxlc:LayoutControl Orientation="Vertical">
+        <dxlc:LayoutGroup Orientation="Horizontal">
+            <dxlc:LayoutGroup
+                HorizontalAlignment="Left"
+                Header="桩信息"
+                Orientation="Vertical"
+                View="GroupBox">
+                <ListBox
+                    x:Name="listboxPile"
+                    ItemTemplate="{StaticResource pileListItemViewTemplate}"
+                    ItemsSource="{Binding Piles}" />
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+                    <Button
+                        Margin="10,0"
+                        Command="{Binding AddPileCommand}"
+                        Content="增加" />
+                    <Button
+                        Margin="10,0"
+                        Command="{Binding RemovePileCommand}"
+                        CommandParameter="{Binding ElementName=listboxPile, Path=SelectedItem}"
+                        Content="删除" />
+                </StackPanel>
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutGroup Header="土层信息" View="GroupBox">
+                <dxg:GridControl
+                    AutoGenerateColumns="AddNew"
+                    ItemsSource="{Binding ElementName=listboxPile, Path=SelectedItem.SoilInfo}"
+                    SelectionMode="Row">
+                    <dxg:GridControl.View>
+                        <dxg:TableView
+                            AllowEditing="True"
+                            AutoWidth="True"
+                            ShowGroupPanel="False" />
+                    </dxg:GridControl.View>
+                </dxg:GridControl>
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutGroup
+                HorizontalAlignment="Right"
+                Header="计算参数"
+                Orientation="Vertical"
+                View="GroupBox">
+                <dxlc:LayoutItem VerticalAlignment="Top" Label="γR=">
+                    <dxe:TextEdit Text="{Binding ElementName=listboxPile, Path=SelectedItem.CalParameter.GammaR}" />
+                </dxlc:LayoutItem>
+                <Button
+                    VerticalAlignment="Bottom"
+                    Command="{Binding CalculateCommand}"
+                    Content="计算桩基承载力" />
+            </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>
+        <dxlc:LayoutGroup Header="计算结果" Orientation="Vertical">
+            <dxlc:LayoutItem Label="单桩垂直极限承载力设计值（kN）：">
+                <dxe:TextEdit Text="{Binding ElementName=listboxPile, Path=SelectedItem.Result.UltimateBearingCapacity}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="单桩抗拔极限承载力设计值（kN）：">
+                <dxe:TextEdit Text="{Binding ElementName=listboxPile, Path=SelectedItem.Result.UltimatePullingCapacity}" />
+            </dxlc:LayoutItem>
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+</UserControl>

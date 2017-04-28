@@ -31,10 +31,10 @@ namespace PDIWT_MS_CZ.ViewModels
         {
             base.OnInitializeInRuntime();
 
-            DB_Length = 28000; DB_Width = 40000; DB_Thickness = 3000;
+            DB_Length = 28000; DB_Width = 40000; DB_Thickness = 3000; DB_DoorWidth = 23000;
 
             BDun_Thickness = 17200;
-            BDun_A = 8500; BDun_B = 10000; BDun_C = 2100;/* BDun_D = 16000;*/ BDun_E = 2100; BDun_F = 2000;
+            /*BDun_A = 8500;*/ BDun_B = 10000; BDun_C = 2100;/* BDun_D = 16000;*/ BDun_E = 2100; BDun_F = 2000;
             IsIncludeBDunChamfer = true; BDun_Tx = 1387; BDun_Ty = 1387; BDun_R1 = 1000;
 
             MK_Thickness = 4300;
@@ -43,6 +43,9 @@ namespace PDIWT_MS_CZ.ViewModels
             SSLD_Thickness = 3500; SSLD_YDis = 1500;
             SSLD_A = 6300; SSLD_B = 18200; SSLD_C = 2600; SSLD_D = 24500; SSLD_E = 4700; SSLD_F = 4600;
             SSLD_R1 = 0; SSLD_R2 = 0; SSLD_R3 = 1800; SSLD_R4 = 6400;
+
+            IsIncludeDivisionPier = true;
+            DivisionPier_R1 = 4400; DivisionPier_R2 = 4700; DivisionPier_R3 = 250; DivisionPier_A = 650; DivisionPier_B = 0;
 
             HoleParamList = new ObservableCollection<HoleProperty>()
             {
@@ -57,15 +60,15 @@ namespace PDIWT_MS_CZ.ViewModels
             TrapHoleXDis = 800; TrapHoleYDis = 5800; TrapHoleZDis = 300;
 
             IsIncludeGs = true;
-            GS_MidWidth = 1000;
-            GS_Intervals = new ObservableCollection<GSProperty>
+            GS_MidWidth = 500;
+            GS_IntervalList = new ObservableCollection<GSProperty>
             {
                 new GSProperty { Interval=250,IntervalType="格栅间距" },
-                new GSProperty { Interval=500,IntervalType="格栅宽度" },
+                new GSProperty { Interval=300,IntervalType="格栅宽度" },
                 new GSProperty { Interval=500,IntervalType="格栅间距" },
-                new GSProperty { Interval=500,IntervalType="格栅宽度" },
+                new GSProperty { Interval=300,IntervalType="格栅宽度" },
                 new GSProperty { Interval=500,IntervalType="格栅间距" },
-                new GSProperty { Interval=500,IntervalType="格栅宽度" },
+                new GSProperty { Interval=300,IntervalType="格栅宽度" },
                 new GSProperty { Interval=500,IntervalType="格栅间距" },
                 new GSProperty { Interval=500,IntervalType="格栅宽度" },
                 new GSProperty { Interval=500,IntervalType="格栅间距" },
@@ -78,6 +81,15 @@ namespace PDIWT_MS_CZ.ViewModels
                 new GSProperty { Interval=800,IntervalType="格栅宽度" },
                 new GSProperty { Interval=800,IntervalType="格栅间距" },
                 new GSProperty { Interval=1000,IntervalType="格栅宽度" }
+            };
+
+            IsIncludeBaffle = true;
+            BaffleList = new ObservableCollection<BaffleProperty>
+            {
+                new BaffleProperty { XDis = 0, Width = 250, Height =2000 },
+                new BaffleProperty { XDis = 4500, Width = 500, Height =1500 },
+                new BaffleProperty { XDis = 9000, Width = 500, Height =1000 }
+
             };
         }
 
@@ -110,6 +122,12 @@ namespace PDIWT_MS_CZ.ViewModels
             get { return GetProperty(() => DB_Thickness); }
             set { SetProperty(() => DB_Thickness, value); }
         }
+        [XmlElement(ElementName ="口门宽度")]
+        public double DB_DoorWidth
+        {
+            get { return GetProperty(() => DB_DoorWidth); }
+            set { SetProperty(() => DB_DoorWidth, value); }
+        }
         #endregion
 
         #region BDun Property
@@ -119,12 +137,12 @@ namespace PDIWT_MS_CZ.ViewModels
             get { return GetProperty(() => BDun_Thickness); }
             set { SetProperty(() => BDun_Thickness, value); }
         }
-        [XmlElement(ElementName = "边墩参数A")]
-        public double BDun_A
-        {
-            get { return GetProperty(() => BDun_A); }
-            set { SetProperty(() => BDun_A, value); }
-        }
+        //[XmlElement(ElementName = "边墩参数A")]
+        //public double BDun_A
+        //{
+        //    get { return GetProperty(() => BDun_A); }
+        //    set { SetProperty(() => BDun_A, value); }
+        //}
         [XmlElement(ElementName = "边墩参数B")]
         public double BDun_B
         {
@@ -377,10 +395,64 @@ namespace PDIWT_MS_CZ.ViewModels
             set { SetProperty(() => GS_MidWidth, value); }
         }
         [XmlArray(ElementName = "出水格栅尺寸集合")]
-        public ObservableCollection<GSProperty> GS_Intervals
+        public ObservableCollection<GSProperty> GS_IntervalList
         {
-            get { return GetProperty(() => GS_Intervals); }
-            set { SetProperty(() => GS_Intervals, value); }
+            get { return GetProperty(() => GS_IntervalList); }
+            set { SetProperty(() => GS_IntervalList, value); }
+        }
+        #endregion
+
+        #region Baffle Property
+        [XmlElement(ElementName = "是否包含消力坎")]
+        public bool IsIncludeBaffle
+        {
+            get { return GetProperty(() => IsIncludeBaffle); }
+            set { SetProperty(() => IsIncludeBaffle, value); }
+        }
+        [XmlArray(ElementName = "消力坎参数集合")]
+        public ObservableCollection<BaffleProperty> BaffleList
+        {
+            get { return GetProperty(() => BaffleList); }
+            set { SetProperty(() => BaffleList, value); }
+        }
+        #endregion
+
+        #region DivisionPier
+        [XmlElement(ElementName = "是否包含分水墩")]
+        public bool IsIncludeDivisionPier
+        {
+            get { return GetProperty(() => IsIncludeDivisionPier); }
+            set { SetProperty(() => IsIncludeDivisionPier, value); }
+        }
+        [XmlElement(ElementName = "分水墩参数R1")]
+        public double DivisionPier_R1
+        {
+            get { return GetProperty(() => DivisionPier_R1); }
+            set { SetProperty(() => DivisionPier_R1, value); }
+        }
+        [XmlElement(ElementName = "分水墩参数R2")]
+        public double DivisionPier_R2
+        {
+            get { return GetProperty(() => DivisionPier_R2); }
+            set { SetProperty(() => DivisionPier_R2, value); }
+        }
+        [XmlElement(ElementName = "分水墩参数R3")]
+        public double DivisionPier_R3
+        {
+            get { return GetProperty(() => DivisionPier_R3); }
+            set { SetProperty(() => DivisionPier_R3, value); }
+        }
+        [XmlElement(ElementName = "分水墩参数A")]
+        public double DivisionPier_A
+        {
+            get { return GetProperty(() => DivisionPier_A); }
+            set { SetProperty(() => DivisionPier_A, value); }
+        }
+        [XmlElement(ElementName = "分水墩参数B")]
+        public double DivisionPier_B
+        {
+            get { return GetProperty(() => DivisionPier_B); }
+            set { SetProperty(() => DivisionPier_B, value); }
         }
         #endregion
 
@@ -425,15 +497,19 @@ namespace PDIWT_MS_CZ.ViewModels
             return boxele;
         }
 
-        double GetBDun_D()
+        public double GetBDun_A()
+        {
+            return (DB_Width - DB_DoorWidth) / 2.0;
+        }
+        public double GetBDun_D()
         {
             return DB_Length - BDun_B - BDun_F;
         }
-        double GetMK_A()
+        public double GetMK_A()
         {
-            return DB_Width / 2.0 - BDun_A;
+            return DB_DoorWidth/2;
         }
-        double GetMK_D()
+        public double GetMK_D()
         {
             return BDun_B;
         }
@@ -447,16 +523,17 @@ namespace PDIWT_MS_CZ.ViewModels
         }
         SmartSolidElement GetBDun()
         {
+            double bdun_a = GetBDun_A();
             double bdun_d = GetBDun_D();
             Point3d[] bdun_shapepoints =
                 {
                     app.Point3dFromXY(0,0),
-                    app.Point3dFromXY(BDun_A,0),
-                    app.Point3dFromXY(BDun_A,BDun_B),
-                    app.Point3dFromXY(BDun_A - BDun_C,BDun_B),
-                    app.Point3dFromXY(BDun_A - BDun_C,BDun_B + bdun_d),
-                    app.Point3dFromXY(BDun_A - BDun_C + BDun_E,BDun_B + bdun_d),
-                    app.Point3dFromXY(BDun_A - BDun_C + BDun_E,BDun_B + bdun_d + BDun_F),
+                    app.Point3dFromXY(bdun_a,0),
+                    app.Point3dFromXY(bdun_a,BDun_B),
+                    app.Point3dFromXY(bdun_a - BDun_C,BDun_B),
+                    app.Point3dFromXY(bdun_a - BDun_C,BDun_B + bdun_d),
+                    app.Point3dFromXY(bdun_a - BDun_C + BDun_E,BDun_B + bdun_d),
+                    app.Point3dFromXY(bdun_a - BDun_C + BDun_E,BDun_B + bdun_d + BDun_F),
                     app.Point3dFromXY(0,BDun_B + bdun_d + BDun_F)
                 };
             ShapeElement bdun_shape = app.CreateShapeElement1(null, ref bdun_shapepoints, MsdFillMode.Filled);
@@ -526,6 +603,47 @@ namespace PDIWT_MS_CZ.ViewModels
             ele_ssld.Move(ref ssld_shape_offset);
             return ele_ssld;
         }
+        SmartSolidElement GetDivisionPier()
+        {
+            var elemList = new List<ChainableElement>();
+            Point3d[] pntArray =
+            {
+                app.Point3dFromXY(0,0),
+                app.Point3dFromXY(0,2*DivisionPier_R3),
+                app.Point3dFromXY(-DivisionPier_A, 2*DivisionPier_R3),
+                app.Point3dFromXY(-DivisionPier_A - DivisionPier_R1, 2*DivisionPier_R3 + DivisionPier_R1),
+                app.Point3dFromXY(-DivisionPier_A - DivisionPier_R1, 2*DivisionPier_R3 + DivisionPier_R1 + DivisionPier_B),
+                app.Point3dFromXY(-DivisionPier_A - DivisionPier_R2, 2*DivisionPier_R3 + DivisionPier_R1 + DivisionPier_B),
+                app.Point3dFromXY(-DivisionPier_A - DivisionPier_R2, DivisionPier_R2),
+                app.Point3dFromXY(-DivisionPier_A,0)
+            };
+            Point3d[] arccenterpntArray =
+            {
+                app.Point3dFromXY(DivisionPier_R3,DivisionPier_R3),
+                app.Point3dFromXY(-DivisionPier_A, 2* DivisionPier_R3 + DivisionPier_R1),
+                app.Point3dFromXY(-(DivisionPier_A+(DivisionPier_R1+DivisionPier_R2)/2.0),2*DivisionPier_R3 + DivisionPier_R1 + DivisionPier_B + Math.Abs(DivisionPier_R2-DivisionPier_R1)/2),
+                app.Point3dFromXY(-DivisionPier_A, DivisionPier_R2)
+            };
+            elemList.Add(app.CreateArcElement3(null, ref pntArray[0], ref arccenterpntArray[0], ref pntArray[1]));
+            elemList.Add(app.CreateLineElement2(null, ref pntArray[1], ref pntArray[2]));
+            var starttangent = new Ray3d();
+            starttangent.Origin = pntArray[2];
+            starttangent.Direction = app.Point3dFromXY(-100, 0);
+            //elemList.Add(app.CreateArcElement4(null, ref pntArray[2], ref arccenterpntArray[1], ref pntArray[3]));
+            elemList.Add(app.CreateArcElement4(null, ref starttangent, ref pntArray[3]));
+            elemList.Add(app.CreateLineElement2(null, ref pntArray[3], ref pntArray[4]));
+            elemList.Add(app.CreateArcElement3(null, ref pntArray[4], ref arccenterpntArray[2], ref pntArray[5]));
+            elemList.Add(app.CreateLineElement2(null, ref pntArray[5], ref pntArray[6]));
+            elemList.Add(app.CreateArcElement1(null, ref pntArray[6], ref arccenterpntArray[3], ref pntArray[7]));
+            elemList.Add(app.CreateLineElement2(null, ref pntArray[7], ref pntArray[0]));
+            ChainableElement[] elemArray = elemList.ToArray();
+            ComplexShapeElement complexshape = app.CreateComplexShapeElement1(ref elemArray, MsdFillMode.Filled);
+            Point3d move_offset = app.Point3dFromXYZ(-GetMK_A() - DivisionPier_R3, SSLD_YDis + SSLD_A / 2 - DivisionPier_R3, DB_Thickness);
+            SmartSolidElement ele = app.SmartSolid.ExtrudeClosedPlanarCurve(complexshape, SSLD_Thickness, 0, true);
+            ele.Move(move_offset);
+            return ele;
+            //return complexshape ;
+        }
         List<SmartSolidElement> GetHoleList()
         {
             var ele_holeList = new List<SmartSolidElement>();
@@ -557,7 +675,7 @@ namespace PDIWT_MS_CZ.ViewModels
             double gs_heigth = MK_Thickness - SSLD_Thickness;
             double gs_zcoordinate = DB_Thickness + MK_Thickness;
             var gs_XCoordinate = new List<double>();
-            foreach (var gs_prop in GS_Intervals)
+            foreach (var gs_prop in GS_IntervalList)
             {
                 gs_XCoordinate.Add(-gs_prop.Interval);
             }
@@ -569,11 +687,11 @@ namespace PDIWT_MS_CZ.ViewModels
                 //绘制下半边
                 SmartSolidElement ele_gs_temp;
                 Point3d temp_offset;
-                for (int i = 0; i < GS_Intervals.Count; i++)
+                for (int i = 0; i < GS_IntervalList.Count; i++)
                 {
                     if (i % 2 == 1)
                     {
-                        ele_gs_temp = GetChamferedBox(GS_Intervals[i].Interval, gs_length, gs_heigth);
+                        ele_gs_temp = GetChamferedBox(GS_IntervalList[i].Interval, gs_length, gs_heigth);
                         temp_offset = app.Point3dFromXYZ(gs_XCoordinate[i], SSLD_YDis, gs_zcoordinate);
                         ele_gs_temp.Move(ref temp_offset);
                         ele_gs_list.Add(ele_gs_temp);
@@ -592,6 +710,22 @@ namespace PDIWT_MS_CZ.ViewModels
             }
             return ele_gs_list;
         }
+        List<SmartSolidElement> GetBaffleList()
+        {
+            var bafflelist = new List<SmartSolidElement>();
+
+            SmartSolidElement tempele = null;
+            Point3d ele_offset;
+            foreach (var baffleprop in BaffleList)
+            {
+                tempele = app.SmartSolid.CreateSlab(null, baffleprop.Width, SSLD_A, baffleprop.Height);
+                ele_offset = app.Point3dFromXYZ(-baffleprop.Width / 2 - baffleprop.XDis, SSLD_YDis + SSLD_A / 2, DB_Thickness + baffleprop.Height / 2);
+                tempele.Move(ref ele_offset);
+                bafflelist.Add(tempele);
+            }
+
+            return bafflelist;
+        }
 
         void ComDrawAll()
         {
@@ -599,14 +733,22 @@ namespace PDIWT_MS_CZ.ViewModels
             SmartSolidElement ele_bdun = GetBDun();
             SmartSolidElement ele_mk = GetMK();
             SmartSolidElement ele_ssld = GetSSLD();
+            SmartSolidElement ele_divisionpier = null;
+            if (IsIncludeDivisionPier)
+                ele_divisionpier = GetDivisionPier();
             List<SmartSolidElement> ele_holeList = GetHoleList();
             List<SmartSolidElement> ele_gsList = GetGSList();
-
+            List<SmartSolidElement> ele_baffleList = new List<SmartSolidElement>();
+            if (IsIncludeBaffle)
+                ele_baffleList = GetBaffleList();
+            
             #region Sub\Union action
             SmartSolidElement cz, czLeft, czRigth;
             czLeft = app.SmartSolid.SolidUnion(ele_db, ele_bdun);
             czLeft = app.SmartSolid.SolidUnion(czLeft, ele_mk);
             czLeft = app.SmartSolid.SolidSubtract(czLeft, ele_ssld);
+            if (ele_divisionpier != null)
+                czLeft = app.SmartSolid.SolidUnion(czLeft, ele_divisionpier);
             foreach (var ele_hole in ele_holeList)
             {
                 czLeft = app.SmartSolid.SolidSubtract(czLeft, ele_hole);
@@ -616,6 +758,11 @@ namespace PDIWT_MS_CZ.ViewModels
             {
                 czLeft = app.SmartSolid.SolidSubtract(czLeft, ele_gs);
             }
+            foreach (var ele_baffle in ele_baffleList)
+            {
+                czLeft = app.SmartSolid.SolidUnion(czLeft, ele_baffle);
+            }
+
             czRigth = czLeft.Clone().AsSmartSolidElement;
             Point3d cz_mirrorStart, cz_mirrorEnd;
             cz_mirrorStart = app.Point3dZero();
@@ -626,8 +773,6 @@ namespace PDIWT_MS_CZ.ViewModels
             #endregion
         }
         #endregion
-
-
 
         private List<QuantityRowDef> CreateContent()
         {
@@ -669,7 +814,7 @@ namespace PDIWT_MS_CZ.ViewModels
             result.Item5 = bdunshapearea * (BDun_Thickness - DB_Thickness - MK_Thickness) * 2 * 1e-9 - result.Item7  -holelistvol;
             result.Item12 = (BDun_Thickness - DB_Thickness) * 0.313 * 2;
             double dbunedgelength = 0;
-            dbunedgelength += 2 * (BDun_A + BDun_B + GetBDun_D() + BDun_E + BDun_F);
+            dbunedgelength += 2 * (GetBDun_A() + BDun_B + GetBDun_D() + BDun_E + BDun_F);
             if (IsIncludeBDunChamfer)
             {
                 dbunedgelength -= (2 * BDun_R1 + BDun_Tx + BDun_Ty);
@@ -738,6 +883,8 @@ namespace PDIWT_MS_CZ.ViewModels
                 sb.Append("输水廊道 b-c < 门槛a + 边墩c\n");
             if ((SSLD_YDis + SSLD_D) > DB_Width)
                 sb.Append("输水廊道Y轴距离 + 输水廊道孔 d < 底板宽\n");
+            if (DivisionPier_R2 < DivisionPier_R1)
+                sb.Append("分流墩参数R1 > R2 \n");
             for (int i = 0; i < HoleParamList.Count; i++)
             {
                 if ((HoleParamList[i].ZDis + HoleParamList[i].HoleHeight) > BDun_Thickness)
@@ -745,15 +892,24 @@ namespace PDIWT_MS_CZ.ViewModels
                 if ((HoleParamList[i].YDis + HoleParamList[i].HoleLength) > DB_Length)
                     sb.Append($"第{i}号空箱Y轴距离 + 长度 >  底板长度\n");
             }
-            if (GS_Intervals.Count % 2 != 0)
+            var intervallist = from gs in GS_IntervalList
+                               select gs.Interval;
+            if (intervallist.Sum() > GetMK_A())
+                sb.Append($"出水格栅数列的总长{intervallist.Sum()}大于{GetMK_A()}\n");
+
+            if (GS_IntervalList.Count % 2 != 0)
+                sb.Append($"出水格栅的数组个数为{GS_IntervalList.Count}，应为偶数\n");
+
+            for (int i = 0; i < BaffleList.Count; i++)
             {
-                sb.Append($"出水格栅的数组个数为{GS_Intervals.Count}，应为偶数\n");
+                if (BaffleList[i].Height > SSLD_Thickness)
+                {
+                    sb.Append($"第{i + 1}号消力坎高度{BaffleList[i].Height}大于输水廊道{SSLD_Thickness}高度\n");
+                }
             }
             ErrorInfo = sb.ToString();
             if (string.IsNullOrEmpty(ErrorInfo))
-            {
                 ErrorInfo = "所有参数均正确";
-            }
         }
 
         [Command]
@@ -806,7 +962,7 @@ namespace PDIWT_MS_CZ.ViewModels
         [Command]
         public void Test()
         {
-            app.ActiveModelReference.AddElement(app.SmartSolid.CreateChameferedBox(100, 100, 100, ChameferFace.XAxis,10));
+            app.ActiveModelReference.AddElement(GetDivisionPier());
         }
 
         [Command]
@@ -848,14 +1004,14 @@ namespace PDIWT_MS_CZ.ViewModels
                 ofd.Filter = "XML文件|*.xml";
                 ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
+                {  
                     ViewCZViewModel readedViewModel = XmlSerializerHelper.LoadFromXml<ViewCZViewModel>(ofd.FileName);
                     if (readedViewModel != null)
                     {
-                        DB_Length = readedViewModel.DB_Length; DB_Width = readedViewModel.DB_Width; DB_Thickness = readedViewModel.DB_Thickness;
+                        DB_Length = readedViewModel.DB_Length; DB_Width = readedViewModel.DB_Width; DB_Thickness = readedViewModel.DB_Thickness;DB_DoorWidth = readedViewModel.DB_DoorWidth;
 
                         BDun_Thickness = readedViewModel.BDun_Thickness;
-                        BDun_A = readedViewModel.BDun_A; BDun_B = readedViewModel.BDun_B; BDun_C = readedViewModel.BDun_C; BDun_E = readedViewModel.BDun_E; BDun_F = readedViewModel.BDun_F;
+                        /*BDun_A = readedViewModel.BDun_A; */BDun_B = readedViewModel.BDun_B; BDun_C = readedViewModel.BDun_C; BDun_E = readedViewModel.BDun_E; BDun_F = readedViewModel.BDun_F;
                         IsIncludeBDunChamfer = readedViewModel.IsIncludeBDunChamfer; BDun_Tx = readedViewModel.BDun_Tx; BDun_Ty = readedViewModel.BDun_Ty; BDun_R1 = readedViewModel.BDun_R1;
 
                         MK_Thickness = readedViewModel.MK_Thickness;
@@ -864,15 +1020,39 @@ namespace PDIWT_MS_CZ.ViewModels
                         SSLD_Thickness = readedViewModel.SSLD_Thickness; SSLD_YDis = readedViewModel.SSLD_YDis;
                         SSLD_A = readedViewModel.SSLD_A; SSLD_B = readedViewModel.SSLD_B; SSLD_C = readedViewModel.SSLD_C; SSLD_D = readedViewModel.SSLD_D; SSLD_E = readedViewModel.SSLD_E; SSLD_F = readedViewModel.SSLD_F;
                         SSLD_R1 = readedViewModel.SSLD_R1; SSLD_R2 = readedViewModel.SSLD_R2; SSLD_R3 = readedViewModel.SSLD_R3; SSLD_R4 = readedViewModel.SSLD_R4;
-                        HoleParamList = readedViewModel.HoleParamList;
 
+                        IsIncludeDivisionPier = readedViewModel.IsIncludeDivisionPier;
+                        DivisionPier_R1 = readedViewModel.DivisionPier_R1; DivisionPier_R2 = readedViewModel.DivisionPier_R2; DivisionPier_R3 = readedViewModel.DivisionPier_R3; DivisionPier_A = readedViewModel.DivisionPier_A ; DivisionPier_B = readedViewModel.DivisionPier_B;
+
+                        //HoleParamList.Clear();
+                        int halfnum = readedViewModel.HoleParamList.Count / 2;
+                        for (int i = 0; i < halfnum; i++)
+                        {
+                            readedViewModel.HoleParamList.RemoveAt(0);
+                        }
+                        HoleParamList = readedViewModel.HoleParamList;
                         TrapHoleThickness = readedViewModel.TrapHoleThickness; IsIncludeTrapHole = readedViewModel.IsIncludeTrapHole;
                         TrapHoleXLength = readedViewModel.TrapHoleXLength; TrapHoleYLength = readedViewModel.TrapHoleYLength; TrapHoleXLengthCorner = readedViewModel.TrapHoleXLengthCorner; TrapHoleYLengthCorner = readedViewModel.TrapHoleYLengthCorner;
                         TrapHoleXDis = readedViewModel.TrapHoleXDis; TrapHoleYDis = readedViewModel.TrapHoleYDis; TrapHoleZDis = readedViewModel.TrapHoleZDis;
 
                         IsIncludeGs = readedViewModel.IsIncludeGs;
                         GS_MidWidth = readedViewModel.GS_MidWidth;
-                        GS_Intervals = readedViewModel.GS_Intervals;
+                        //GS_IntervalList.Clear();
+                        halfnum = readedViewModel.GS_IntervalList.Count / 2;
+                        for (int i = 0; i < halfnum; i++)
+                        {
+                            readedViewModel.GS_IntervalList.RemoveAt(0);
+                        }
+                        GS_IntervalList = readedViewModel.GS_IntervalList;
+
+                        IsIncludeBaffle = readedViewModel.IsIncludeBaffle;
+                        //BaffleList.Clear();
+                        halfnum = readedViewModel.BaffleList.Count / 2;
+                        for (int i = 0; i < halfnum; i++)
+                        {
+                            readedViewModel.BaffleList.RemoveAt(0);
+                        }
+                        BaffleList = readedViewModel.BaffleList;
                     }
                     ErrorInfo = ofd.FileName + "参数模板导入成功!";
                 }

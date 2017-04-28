@@ -15,7 +15,7 @@ namespace PDIWT_MS
         #region (PDIWT_MS Test) command
         public static void Test(string unparsed)
         {
-            PDIWT_MS.Test.KeyinTest.TestHCHXQueryLib();
+            PDIWT_MS.Test.KeyinTest.TestPileQuery();
         }
 
         public static void TestWPF(string unparsed)

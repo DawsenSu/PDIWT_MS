@@ -8,6 +8,7 @@ using DevExpress.Mvvm;
 
 using HCHXCodeQueryLib;
 using PDIWT_MS_ZJCZL.Models;
+using System.Linq;
 
 namespace PDIWT_MS_ZJCZL.ViewModels
 {
@@ -53,33 +54,32 @@ namespace PDIWT_MS_ZJCZL.ViewModels
         [Command]
         public void SearchById()
         {
-            Info = string.Empty;
-            AllLayerInfo idInfo = new AllLayerInfo();
-            HCHXCodeQueryErrorCode status = PileQuery.QueryById(ref idInfo, SearchId);
-            if (status != HCHXCodeQueryErrorCode.Success)
-            {
-                System.Windows.MessageBox.Show($"查找出现错误!\n{status}", "查找出现错误", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
-                return;
-            }
-            if (idInfo.BaseInfo.Count == 0)
-                return;
-            Pile = new PileInfoClass();
-            Pile.SoilInfo = new ObservableCollection<SoilInfoClass>();
-            foreach (KeyValuePair<string,CodeInfo> codeInfo in idInfo.BaseInfo)
-            {
-                Pile.PileId = double.Parse(codeInfo.Value.ID);
-                Pile.PileCode = codeInfo.Value.ToString();
+            //Info = string.Empty;
+            //AllLayerInfo idInfo = new AllLayerInfo();
+            //HCHXCodeQueryErrorCode status = PileQuery.QueryById(ref idInfo, SearchId);
+            //if (status != HCHXCodeQueryErrorCode.Success)
+            //{
+            //    System.Windows.MessageBox.Show($"查找出现错误!\n{status}", "查找出现错误", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            //    return;
+            //}
+            //if (idInfo.BaseInfo.Count == 0)
+            //    return;
+            //Pile = new PileInfoClass();
+            //Pile.SoilInfo = new ObservableCollection<SoilInfoClass>();
+            //foreach (KeyValuePair<string,CodeInfo> codeInfo in idInfo.BaseInfo)
+            //{
+            //    Pile.PileId = double.Parse(codeInfo.Value.ID);
+            //    Pile.PileCode = codeInfo.Value.ToString();
 
-                ColumnLayerInfoArray columnLayerInfo;
-                if (!idInfo.IntersectLayerInfos.TryGetValue(codeInfo.Key, out columnLayerInfo))
-                    continue;
-                foreach (var layerInfo in columnLayerInfo.m_layers)
-                {
-                    
-                    Pile.SoilInfo.Add(new SoilInfoClass( layerInfo.IntersectLayerInfo.Category,layerInfo.IntersectLayerInfo.UserCode,layerInfo.TopPosition, layerInfo.BasePosition));
-                }
-            }
-            Info = "查找完成";
+            //    ColumnLayerInfoArray columnLayerInfo;
+            //    if (!idInfo.IntersectLayerInfos.TryGetValue(codeInfo.Key, out columnLayerInfo))
+            //        continue;
+            //    foreach (var layerInfo in columnLayerInfo.m_layers)
+            //    {                    
+            //        Pile.SoilInfo.Add(new SoilInfoClass( layerInfo.IntersectLayerInfo.Category,layerInfo.IntersectLayerInfo.UserCode,layerInfo.TopPosition, GetLengthByVertex(layerInfo.TopPosition,layerInfo.BasePosition)));
+            //    }
+            //}
+            //Info = "查找完成";
         }
         public bool CanSearchById()
         {
@@ -99,14 +99,30 @@ namespace PDIWT_MS_ZJCZL.ViewModels
                 System.Windows.MessageBox.Show($"查找出现错误!\n{status}", "查找出现错误", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                 return;
             }
+            var columnLayerList = columnLayerInfo.GetSortedColumnLayerList(); 
             Pile = new PileInfoClass();
             Pile.SoilInfo = new ObservableCollection<SoilInfoClass>();
             Pile.PileId = -1;
             Pile.PileCode = $"此为虚拟桩\n顶部坐标为:{StartPoint}\r\n底部坐标为:{EndPoint}\n";
-            foreach (var columnInfo in columnLayerInfo.m_layers)
+            Pile.PileDiameter = 1000;
+            Pile.PileLength = GetLengthByVertex(startPoint, endPoint);
+            Pile.CalParameter = new CalculateParameter { GammaR = 1.2 };
+
+            var random = new Random(); //测试
+            for (int i = 0; i < columnLayerList.Count; i++)
             {
-                Pile.SoilInfo.Add(new SoilInfoClass(columnInfo.IntersectLayerInfo.Category, columnInfo.IntersectLayerInfo.UserCode, columnInfo.TopPosition, columnInfo.BasePosition));
+                double pileinsoilLenght;
+                if (i == columnLayerList.Count -1)
+                    pileinsoilLenght = GetLengthByVertex(columnLayerList[i].TopPosition, ParseStringToPoint3d(EndPoint));
+                else
+                    pileinsoilLenght = GetLengthByVertex(columnLayerList[i].TopPosition, columnLayerList[i + 1].TopPosition);
+
+                Pile.SoilInfo.Add(new SoilInfoClass(columnLayerList[i].IntersectLayerInfo.Category, columnLayerList[i].IntersectLayerInfo.UserCode,  pileinsoilLenght*1e-4,random.NextDouble()*10+100, random.NextDouble()*10*+100));
             }
+            //foreach (var columnInfo in columnLayerInfo.m_layers)
+            //{
+            //    Pile.SoilInfo.Add(new SoilInfoClass(columnInfo.IntersectLayerInfo.Category, columnInfo.IntersectLayerInfo.UserCode, columnInfo.TopPosition, columnInfo.BasePosition));
+            //}
             Info = "查找完成";
         }
         public bool CanSearchByRay()
@@ -120,6 +136,25 @@ namespace PDIWT_MS_ZJCZL.ViewModels
             SearchId = tool.SelectedEleID;
         }
 
+        [Command]
+        public void Calculate()
+        {
+            double pilearea = Math.PI * Math.Pow(Pile.PileDiameter / 2, 2);
+            double pileperimeter = Math.PI * Pile.PileDiameter;
+            double accumlatenum = 0;
+            foreach (var pileeachlength in Pile.SoilInfo)
+            {
+                accumlatenum += pileeachlength.Length * pileeachlength.Qfi;
+            }
+            double result = (pileperimeter * accumlatenum + Pile.SoilInfo.Last().Qr * pilearea) / Pile.CalParameter.GammaR;
+            Info = "承载力为: " + result.ToString();
+        }
+        public bool CanCalculate()
+        {
+            return Info == "查找完成";
+        }
+
+
         #region Field
         HCHXCodeQuery PileQuery = new HCHXCodeQuery();
         SelectPileTool tool = new SelectPileTool(0,0);
@@ -132,11 +167,14 @@ namespace PDIWT_MS_ZJCZL.ViewModels
             {
                 PileId = 924,
                 PileCode = "Test",
+                PileDiameter = 10,
+                PileTypeInfo = PileType.Filling,
                 SoilInfo = new ObservableCollection<SoilInfoClass>()
                 {
                     new SoilInfoClass() { SoilLayerName="layer1", SoilLayerNum="0-0" },
                     new SoilInfoClass() { SoilLayerName="layer2", SoilLayerNum="0-1" }
-                }
+                },
+                CalParameter = new CalculateParameter {  GammaR =1.2 }
             };
             SPanel = new List<SearchPanel>()
             {
@@ -158,14 +196,9 @@ namespace PDIWT_MS_ZJCZL.ViewModels
             point.Z = double.Parse(xyz[2]);
             return point;
         }
-        //protected override void OnInitializeInDesignMode()
-        //{
-        //    base.OnInitializeInDesignMode();
-        //    SoilInfo = new ObservableCollection<SoilInfoClass>
-        //            {
-        //                new SoilInfoClass() { SoilLayerName="layer1", SoilLayerNum="0-0" },
-        //                new SoilInfoClass() { SoilLayerName="layer2", SoilLayerNum="0-1" }
-        //            };
-        //}
+        double GetLengthByVertex(Point3d startPoint, Point3d endPoint)
+        {
+            return Math.Sqrt(Math.Pow(startPoint.X - endPoint.X, 2) + Math.Pow(startPoint.Y - endPoint.Y, 2) + Math.Pow(startPoint.Z - endPoint.Z, 2));
+        }
     }
 }

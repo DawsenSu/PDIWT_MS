@@ -23,15 +23,21 @@ namespace PDIWT_MS_CZ.Models
             }
         }
 
-        public static T LoadFromXml<T>(string filePath) where T :class
+        public static T LoadFromXml<T>(string filePath)
         {
-            T result = null;
+            T result = default(T);
             if (File.Exists(filePath))
             {
-                using (StreamReader reader = new StreamReader(filePath))
+                try
                 {
+                    StreamReader reader = new StreamReader(filePath);
                     XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
-                    result =(T)xmlSerializer.Deserialize(reader);
+                    result = (T)xmlSerializer.Deserialize(reader);
+                    reader.Close();
+                }
+                catch (Exception e)
+                {
+                    throw new FileFormatException(e.ToString());
                 }
             }
             return result;

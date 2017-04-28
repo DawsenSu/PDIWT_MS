@@ -168,8 +168,9 @@
       <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="HCHXCodeQueryLib">
-      <HintPath>..\..\..\..\..\..\..\..\项目\科技开发中心\桩基承载力计算\桩基承载力计算所需材料\HCHXCodeQueryLib(Connect)\HCHXCodeQueryLib.dll</HintPath>
+    <Reference Include="HCHXCodeQueryLib, Version=1.0.6304.30163, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\项目\科技开发中心\工具开发\桩基承载力\桩基承载力计算所需材料\HCHXCodeQueryLib20170427更新样条曲面\HCHXCodeQueryLib.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore">
       <Private>False</Private>

@@ -126,15 +126,21 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="DevExpress.Data.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Images.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DevExpress.Mvvm.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
     <Reference Include="DevExpress.Printing.v16.1.Core, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Core.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Grid.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Grid.v16.1.Core, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.LayoutControl.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.PropertyGrid.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="HCHXCodeQueryLib">
-      <HintPath>..\..\..\..\..\..\..\..\项目\科技开发中心\桩基承载力计算\桩基承载力计算所需材料\HCHXCodeQueryLib(Connect)\HCHXCodeQueryLib.dll</HintPath>
+    <Reference Include="HCHXCodeQueryLib, Version=1.0.6326.17226, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\项目\科技开发中心\工具开发\桩基承载力\桩基承载力计算所需材料\HCHXCodeQueryLib20170427更新样条曲面\HCHXCodeQueryLib.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -159,7 +165,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converter\Point3dToStringConvertor.cs" />
     <Compile Include="KeyinCommands.cs" />
+    <Compile Include="Models\ColumnLayerInfoArrayExtentsion.cs" />
     <Compile Include="Models\InfoClass.cs" />
     <Compile Include="Models\SelectPileTool.cs" />
     <Compile Include="Program.cs" />
@@ -169,7 +177,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ViewAddPileViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelCalculateByRay.cs" />
     <Compile Include="ViewModels\ViewZJCZLViewModel.cs" />
+    <Compile Include="Views\ViewAddPile.xaml.cs">
+      <DependentUpon>ViewAddPile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewCalculateByRay.xaml.cs">
+      <DependentUpon>ViewCalculateByRay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ViewZJCZL.xaml.cs">
       <DependentUpon>ViewZJCZL.xaml</DependentUpon>
     </Compile>
@@ -194,6 +210,14 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\ViewAddPile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ViewCalculateByRay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ViewZJCZL.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -206,6 +230,7 @@
   <ItemGroup>
     <Resource Include="Image\Center Direction.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
 		Other similar extension points exist, see Microsoft.Common.targets.

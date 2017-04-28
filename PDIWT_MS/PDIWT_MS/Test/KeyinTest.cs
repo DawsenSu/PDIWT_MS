@@ -13,6 +13,7 @@ using BG = Bentley.GeometryNET;
 
 using HCHXCodeQueryLib;
 
+
 namespace PDIWT_MS.Test
 {
     public static class KeyinTest
@@ -132,6 +133,7 @@ namespace PDIWT_MS.Test
         
         public static void TestHCHXQueryLib()
         {
+            
             HCHXCodeQuery clr1 = new HCHXCodeQuery();
 
             AllLayerInfo idInfo = new AllLayerInfo();
@@ -157,6 +159,41 @@ namespace PDIWT_MS.Test
             OutputResult("D:\\QueryAllResultRay.txt", columnLayerInfo);
 
             System.Windows.MessageBox.Show("Finished");
+        }
+
+        public static void TestPileQuery()
+        {
+            HCHXCodeQuery clr1 = new HCHXCodeQuery();
+
+            ColumnLayerInfoArray columnLayerInfo = new ColumnLayerInfoArray();
+            Point3d startPoint = new Point3d();
+            Point3d endPoint = new Point3d();
+            startPoint.X = -1342015;
+            startPoint.Y = 681099;
+            startPoint.Z = 789160;
+
+            endPoint.X = -1342015;
+            endPoint.Y = 681099;
+            endPoint.Z = -1264281;
+            HCHXCodeQueryErrorCode status = clr1.QueryByRay(ref columnLayerInfo, startPoint, endPoint);
+
+            OutputResult("D:\\Longe.txt", columnLayerInfo);
+
+
+            ColumnLayerInfoArray columnLayerInfo1 = new ColumnLayerInfoArray();
+            Point3d startPoint1 = new Point3d();
+            Point3d endPoint1 = new Point3d();
+            startPoint1.X = -942187;
+            startPoint1.Y = 681099;
+            startPoint1.Z = 789160;
+
+            endPoint1.X = -942187;
+            endPoint1.Y = 681099;
+            endPoint1.Z = -588254;
+            status = clr1.QueryByRay(ref columnLayerInfo1, startPoint1, endPoint1);
+
+            OutputResult("D:\\Small.txt", columnLayerInfo1);
+
         }
         private static void OutputResult(string fileName, AllLayerInfo allInfo)
         {

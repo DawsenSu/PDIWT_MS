@@ -8,7 +8,6 @@ using System.Xml.Serialization;
 
 namespace PDIWT_MS_CZ.Models
 {
-
     public class HoleProperty
     {
         [XmlElement(ElementName = "空箱Y方向长度")]

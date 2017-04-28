@@ -173,6 +173,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\BaffleProperty.cs" />
     <Compile Include="Models\GetCZQuantityTable.cs" />
     <Compile Include="Models\GSProperty.cs" />
     <Compile Include="Models\HoleProperty.cs" />
@@ -232,6 +233,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\bdun.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\fld.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
