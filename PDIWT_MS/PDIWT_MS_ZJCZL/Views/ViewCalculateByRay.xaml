@@ -22,7 +22,7 @@
             <dxmvvm:MapItem Source="PostgroutingFilling" Target="后注浆灌注桩" />
         </dxmvvm:ObjectToObjectConverter>
         <DataTemplate x:Key="pileListItemViewTemplate">
-            <BulletDecorator>
+            <Border BorderThickness="1" BorderBrush="#FF007ACC">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Foreground="{StaticResource pilelistInfoHeadForground}" Text="桩编号:" />
@@ -42,7 +42,7 @@
                         <TextBlock Text="{Binding PileLength}" />
                     </StackPanel>
                 </StackPanel>
-            </BulletDecorator>
+            </Border>
         </DataTemplate>
     </UserControl.Resources>
     <dxlc:LayoutControl Orientation="Vertical">
@@ -55,7 +55,8 @@
                 <ListBox
                     x:Name="listboxPile"
                     ItemTemplate="{StaticResource pileListItemViewTemplate}"
-                    ItemsSource="{Binding Piles}" />
+                    ItemsSource="{Binding Piles}"
+                    SelectedItem="{Binding CurrentPile}" />
                 <StackPanel
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
@@ -92,18 +93,28 @@
                 <dxlc:LayoutItem VerticalAlignment="Top" Label="γR=">
                     <dxe:TextEdit Text="{Binding ElementName=listboxPile, Path=SelectedItem.CalParameter.GammaR}" />
                 </dxlc:LayoutItem>
-                <Button
+                <!--<Button
                     VerticalAlignment="Bottom"
                     Command="{Binding CalculateCommand}"
-                    Content="计算桩基承载力" />
+                    Content="计算桩基承载力" />-->
             </dxlc:LayoutGroup>
         </dxlc:LayoutGroup>
         <dxlc:LayoutGroup Header="计算结果" Orientation="Vertical">
             <dxlc:LayoutItem Label="单桩垂直极限承载力设计值（kN）：">
-                <dxe:TextEdit Text="{Binding ElementName=listboxPile, Path=SelectedItem.Result.UltimateBearingCapacity}" />
+                <dxe:TextEdit
+                    IsReadOnly="True"
+                    Mask="f3"
+                    MaskType="Numeric"
+                    MaskUseAsDisplayFormat="True"
+                    Text="{Binding ElementName=listboxPile, Path=SelectedItem.Result.UltimateBearingCapacity}" />
             </dxlc:LayoutItem>
             <dxlc:LayoutItem Label="单桩抗拔极限承载力设计值（kN）：">
-                <dxe:TextEdit Text="{Binding ElementName=listboxPile, Path=SelectedItem.Result.UltimatePullingCapacity}" />
+                <dxe:TextEdit
+                    IsReadOnly="True"
+                    Mask="f3"
+                    MaskType="Numeric"
+                    MaskUseAsDisplayFormat="True"
+                    Text="{Binding ElementName=listboxPile, Path=SelectedItem.Result.UltimatePullingCapacity}" />
             </dxlc:LayoutItem>
         </dxlc:LayoutGroup>
     </dxlc:LayoutControl>

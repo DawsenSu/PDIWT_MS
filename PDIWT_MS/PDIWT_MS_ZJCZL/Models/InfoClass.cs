@@ -46,11 +46,11 @@ namespace PDIWT_MS_ZJCZL.Models
         public string SoilLayerNum { get; set; }
         [DisplayName("土层名称"), ReadOnly(true)]
         public string SoilLayerName { get; set; }
-        [DisplayName("桩在此土层内的长度"),ReadOnly(true)]
+        [DisplayName("桩在此土层内的长度m"),ReadOnly(true)]
         public double Length { get; set; }
-        [DisplayName("极限侧摩阻力标准值qfi")]
+        [DisplayName("极限侧摩阻力标准值qfi(kN)")]
         public double Qfi { get; set; }
-        [DisplayName("桩端摩阻力标准值qR")]
+        [DisplayName("桩端摩阻力标准值qR(kN)")]
         public double Qr { get; set; }
 
         public SoilInfoClass() { }

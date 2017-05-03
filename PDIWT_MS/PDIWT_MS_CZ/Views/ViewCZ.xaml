@@ -5,14 +5,16 @@
     xmlns:ViewModels="clr-namespace:PDIWT_MS_CZ.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:dxnav="http://schemas.devexpress.com/winfx/2008/xaml/navigation"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <Style TargetType="Expander">
+        <Style TargetType="{x:Type Expander}">
             <Setter Property="Foreground" Value="#FF4D6082" />
             <Setter Property="FontSize" Value="14" />
             <Setter Property="Margin" Value="2" />
@@ -27,39 +29,91 @@
                 </MultiTrigger>
             </Style.Triggers>
         </Style>
-        <Style TargetType="Grid">
+        <Style TargetType="{x:Type Grid}">
             <Setter Property="Margin" Value="3" />
         </Style>
-        <Style TargetType="TextBlock">
+        <Style TargetType="{x:Type TextBlock}">
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
-        <Style TargetType="dxe:TextEdit">
+        <Style TargetType="{x:Type dxe:TextEdit}">
             <Setter Property="MaxHeight" Value="22" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="MaskType" Value="Numeric" />
             <Setter Property="Margin" Value="0,2" />
 
         </Style>
-        <Style TargetType="dxlc:LayoutGroup">
+        <Style TargetType="{x:Type dxlc:LayoutGroup}">
             <Setter Property="View" Value="GroupBox" />
             <Setter Property="IsCollapsible" Value="True" />
             <Setter Property="IsCollapsed" Value="True" />
             <Setter Property="Background" Value="#FFD8EDFF" />
             <Setter Property="GroupBoxDisplayMode" Value="Light" />
         </Style>
-        <Style TargetType="Button">
+        <Style TargetType="{x:Type Button}">
             <Setter Property="Margin" Value="5,3" />
             <Setter Property="MinWidth" Value="80" />
             <Setter Property="MaxWidth" Value="100" />
         </Style>
         <dxmvvm:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConvertor" />
+        <dx:EnumToVisibilityConverter x:Key="enumToVisiblityConverter" />
+        <dx:EnumToBoolConverter x:Key="enumToBoolConverter" />
     </UserControl.Resources>
     <StackPanel>
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+        <dxb:BarContainerControl ContainerType="Top">
+            <dxb:ToolBarControl
+                AllowCustomizationMenu="False"
+                AllowHide="False"
+                AllowQuickCustomization="False"
+                BarItemDisplayMode="ContentAndGlyph"
+                BarItemHorizontalIndent="10"
+                UseWholeRow="True">
+                <dxb:BarButtonItem
+                    Command="{Binding VertifyParamCommand}"
+                    Content="验证参数"
+                    Glyph="/PDIWT_MS_CZ;component/Image/Icons/Check File.ico" />
+                <dxb:BarItemSeparator />
+                <dxb:BarButtonItem
+                    Command="{Binding DrawAllCommand}"
+                    Content="绘制"
+                    Glyph="/PDIWT_MS_CZ;component/Image/Icons/Create New.ico" />
+                <dxb:BarButtonItem
+                    Command="{Binding OutputQuantityCommand}"
+                    Content="输出工程量"
+                    Glyph="/PDIWT_MS_CZ;component/Image/Icons/Microsoft Excel.ico" />
+                <dxb:BarItemSeparator />
+                <dxb:BarButtonItem
+                    Command="{Binding ImportTemplateCommand}"
+                    Content="导入参数模板"
+                    Glyph="/PDIWT_MS_CZ;component/Image/Icons/Import.ico" />
+                <dxb:BarButtonItem
+                    Command="{Binding ExportTemplateCommand}"
+                    Content="输出参数模板"
+                    Glyph="/PDIWT_MS_CZ;component/Image/Icons/Export.ico" />
+            </dxb:ToolBarControl>
+        </dxb:BarContainerControl>
+        <BulletDecorator Background="#FFD6DBE9">
+            <BulletDecorator.Bullet>
+                <Ellipse
+                    Width="8"
+                    Height="8"
+                    Margin="5,0"
+                    Fill="#FFD7F019"
+                    Stroke="Bisque"
+                    StrokeThickness="2" />
+            </BulletDecorator.Bullet>
+            <TextBlock
+                Margin="10,0"
+                Foreground="Black"
+                Text="{Binding ErrorInfo}"
+                TextWrapping="Wrap" />
+        </BulletDecorator>
+        <!--<StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
             <Button Command="{Binding VertifyParamCommand}" Content="验证参数" />
             <Button Command="{Binding DrawAllCommand}" Content="绘制" />
             <Button Command="{Binding OutputQuantityCommand}" Content="输出工程量" />
-            <!--<Button Command="{Binding TestCommand}" Content="Test" />-->
+        -->
+        <!--<Button Command="{Binding TestCommand}" Content="Test" />-->
+        <!--
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
             <Button Command="{Binding ImportTemplateCommand}" Content="导入参数模板" />
@@ -68,13 +122,10 @@
         <TextBlock
             Foreground="Red"
             Text="{Binding ErrorInfo}"
-            TextWrapping="Wrap" />
-        <ScrollViewer MaxHeight="600">
+            TextWrapping="Wrap" />-->
+        <ScrollViewer MaxHeight="600" Margin="5">
             <StackPanel>
-                <dxlc:LayoutGroup
-                    Header="底板参数(mm)"
-                    IsCollapsed="False"
-                    Orientation="Vertical">
+                <dxlc:LayoutGroup Header="底板参数(mm)" Orientation="Vertical">
                     <dxlc:LayoutControl Orientation="Vertical">
                         <dxlc:LayoutItem Label="船闸长(顺河向)=">
                             <dxe:TextEdit Text="{Binding DB_Length}" />
@@ -88,6 +139,34 @@
                         <dxlc:LayoutItem Label="口门宽度=">
                             <dxe:TextEdit Text="{Binding DB_DoorWidth}" />
                         </dxlc:LayoutItem>
+                        <CheckBox
+                            x:Name="checkbox_dbremoved"
+                            Content="底板切槽"
+                            IsChecked="{Binding IsIncludeDBRemoved}" />
+
+                        <dxlc:LayoutGroup View="Group" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConvertor}, ElementName=checkbox_dbremoved}">
+                            <Image MaxWidth="300" Source="/PDIWT_MS_CZ;component/Image/dbremoved.png" />
+                            <GroupBox Header="底板切槽参数">
+                                <dxlc:LayoutGroup Orientation="Vertical" View="Group">
+                                    <dxlc:LayoutItem Label="切槽厚度：">
+                                        <dxe:TextEdit Text="{Binding DB_Removed_Thinckness}" />
+                                    </dxlc:LayoutItem>
+                                    <dxlc:LayoutItem Label="a=">
+                                        <dxe:TextEdit Text="{Binding DB_Removed_A}" />
+                                    </dxlc:LayoutItem>
+                                    <dxlc:LayoutItem Label="b=">
+                                        <dxe:TextEdit Text="{Binding DB_Removed_B}" />
+                                    </dxlc:LayoutItem>
+                                    <dxlc:LayoutItem Label="c=">
+                                        <dxe:TextEdit Text="{Binding DB_Removed_C}" />
+                                    </dxlc:LayoutItem>
+                                    <dxlc:LayoutItem Label="坡度n=">
+                                        <dxe:TextEdit Text="{Binding DB_Removed_N}" />
+                                    </dxlc:LayoutItem>
+                                </dxlc:LayoutGroup>
+                            </GroupBox>
+                        </dxlc:LayoutGroup>
+
                     </dxlc:LayoutControl>
                 </dxlc:LayoutGroup>
                 <dxlc:LayoutGroup Header="边墩参数(mm)" Orientation="Vertical">
@@ -104,7 +183,7 @@
                                             <dxe:TextEdit
                                                 Background="LightGray"
                                                 IsReadOnly="True"
-                                                Text="{DXBinding 'GetBDun_A()',
+                                                Text="{DXBinding GetBDun_A(),
                                                                  Mode=OneWay}" />
                                         </dxlc:LayoutItem>
                                         <dxlc:LayoutItem Label="b=">
@@ -117,7 +196,7 @@
                                             <dxe:TextEdit
                                                 Background="LightGray"
                                                 IsReadOnly="True"
-                                                Text="{DXBinding 'GetBDun_D()',
+                                                Text="{DXBinding GetBDun_D(),
                                                                  Mode=OneWay}" />
                                         </dxlc:LayoutItem>
                                         <dxlc:LayoutItem Label="e=">
@@ -133,7 +212,7 @@
                                     VerticalAlignment="Top"
                                     Content="倒角"
                                     IsChecked="{Binding IsIncludeBDunChamfer}" />
-                                <GroupBox Header="倒角尺寸参数" Visibility="{Binding ElementName=checkbox_bdun, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConvertor}}">
+                                <GroupBox Header="倒角尺寸参数" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConvertor}, ElementName=checkbox_bdun}">
                                     <StackPanel>
                                         <dxlc:LayoutItem Label="Tx=">
                                             <dxe:TextEdit Text="{Binding BDun_Tx, Mode=TwoWay}" />
@@ -162,7 +241,7 @@
                                 <dxe:TextEdit
                                     Background="LightGray"
                                     IsReadOnly="True"
-                                    Text="{DXBinding 'GetMK_A()',
+                                    Text="{DXBinding GetMK_A(),
                                                      Mode=OneWay}" />
                             </dxlc:LayoutItem>
                             <dxlc:LayoutItem Label="b=">
@@ -175,7 +254,7 @@
                                 <dxe:TextEdit
                                     Background="LightGray"
                                     IsReadOnly="True"
-                                    Text="{DXBinding 'GetMK_D()',
+                                    Text="{DXBinding GetMK_D(),
                                                      Mode=OneWay}" />
                             </dxlc:LayoutItem>
                             <dxlc:LayoutItem Label="e=">
@@ -188,83 +267,132 @@
                     </dxlc:LayoutGroup>
                 </dxlc:LayoutGroup>
                 <dxlc:LayoutGroup Header="输水廊道参数(mm)" Orientation="Vertical">
-                    <dxlc:LayoutItem Label="厚度：">
-                        <dxe:TextEdit Text="{Binding SSLD_Thickness, Mode=TwoWay}" />
+                    <dxlc:LayoutItem Label="输水廊道形式：">
+                        <ComboBox
+                            x:Name="combox_ssldtype"
+                            DisplayMemberPath="Value"
+                            ItemsSource="{Binding CurrentSSLDType}"
+                            SelectedItem="{Binding SelectedSSLDType}"
+                            SelectedValuePath="Key" />
                     </dxlc:LayoutItem>
-                    <dxlc:LayoutItem Label="Y轴距离：">
-                        <dxe:TextEdit Text="{Binding SSLD_YDis, Mode=TwoWay}" />
-                    </dxlc:LayoutItem>
-                    <Label Content="XY平面轮廓参数：" />
-                    <dxlc:LayoutGroup View="Group">
-                        <Image MaxWidth="250" Source="/PDIWT_MS_CZ;component/Image/ssld.png" />
-                        <dxlc:LayoutGroup Orientation="Vertical" View="Group">
-                            <GroupBox Margin="2" Header="长度参数">
-                                <dxlc:LayoutGroup Orientation="Vertical" View="Group">
-                                    <dxlc:LayoutItem Label="a=">
-                                        <dxe:TextEdit Text="{Binding SSLD_A, Mode=TwoWay}" />
+                    <Separator />
+                    <dxlc:LayoutGroup
+                        Header="输水廊道1"
+                        Orientation="Vertical"
+                        View="Group"
+                        Visibility="{Binding SelectedItem.Key, ConverterParameter=Dispersed, Converter={StaticResource enumToVisiblityConverter}, ElementName=combox_ssldtype}">
+                        <dxlc:LayoutItem Label="高度：">
+                            <dxe:TextEdit Text="{Binding SSLD_Thickness, Mode=TwoWay}" />
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Y轴距离：">
+                            <dxe:TextEdit Text="{Binding SSLD_YDis, Mode=TwoWay}" />
+                        </dxlc:LayoutItem>
+                        <Label Content="XY平面轮廓参数：" />
+                        <dxlc:LayoutGroup View="Group">
+                            <Image MaxWidth="250" Source="/PDIWT_MS_CZ;component/Image/ssld.png" />
+                            <dxlc:LayoutGroup Orientation="Vertical" View="Group">
+                                <GroupBox Margin="2" Header="长度参数">
+                                    <dxlc:LayoutGroup Orientation="Vertical" View="Group">
+                                        <dxlc:LayoutItem Label="a=">
+                                            <dxe:TextEdit Text="{Binding SSLD_A, Mode=TwoWay}" />
+                                        </dxlc:LayoutItem>
+                                        <dxlc:LayoutItem Label="b=">
+                                            <dxe:TextEdit Text="{Binding SSLD_B, Mode=TwoWay}" />
+                                        </dxlc:LayoutItem>
+                                        <dxlc:LayoutItem Label="c=">
+                                            <dxe:TextEdit Text="{Binding SSLD_C, Mode=TwoWay}" />
+                                        </dxlc:LayoutItem>
+                                        <dxlc:LayoutItem Label="d=">
+                                            <dxe:TextEdit Text="{Binding SSLD_D, Mode=TwoWay}" />
+                                        </dxlc:LayoutItem>
+                                        <dxlc:LayoutItem Label="e=">
+                                            <dxe:TextEdit Text="{Binding SSLD_E, Mode=TwoWay}" />
+                                        </dxlc:LayoutItem>
+                                        <dxlc:LayoutItem Label="f=">
+                                            <dxe:TextEdit Text="{Binding SSLD_F, Mode=TwoWay}" />
+                                        </dxlc:LayoutItem>
+                                    </dxlc:LayoutGroup>
+                                </GroupBox>
+                                <GroupBox Margin="2" Header="倒角参数：">
+                                    <dxlc:LayoutGroup Orientation="Vertical" View="Group">
+                                        <dxlc:LayoutItem Label="R1=">
+                                            <dxe:TextEdit Text="{Binding SSLD_R1, Mode=TwoWay}" />
+                                        </dxlc:LayoutItem>
+                                        <dxlc:LayoutItem Label="R2=">
+                                            <dxe:TextEdit Text="{Binding SSLD_R2, Mode=TwoWay}" />
+                                        </dxlc:LayoutItem>
+                                        <dxlc:LayoutItem Label="R3=">
+                                            <dxe:TextEdit Text="{Binding SSLD_R3, Mode=TwoWay}" />
+                                        </dxlc:LayoutItem>
+                                        <dxlc:LayoutItem Label="R4=">
+                                            <dxe:TextEdit Text="{Binding SSLD_R4, Mode=TwoWay}" />
+                                        </dxlc:LayoutItem>
+                                    </dxlc:LayoutGroup>
+                                </GroupBox>
+                            </dxlc:LayoutGroup>
+                        </dxlc:LayoutGroup>
+                        <CheckBox
+                            x:Name="checkbox_fld"
+                            Content="分流墩"
+                            IsChecked="{Binding IsIncludeDivisionPier}" />
+                        <dxlc:LayoutGroup View="Group" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConvertor}, ElementName=checkbox_fld}">
+                            <dxlc:LayoutItem Label="分流墩XY平面形状" LabelPosition="Top">
+                                <Image Width="250" Source="/PDIWT_MS_CZ;component/Image/fld.png" />
+                            </dxlc:LayoutItem>
+                            <GroupBox Header="分流墩参数">
+                                <StackPanel>
+                                    <dxlc:LayoutItem Label="R1=">
+                                        <dxe:TextEdit Text="{Binding DivisionPier_R1}" />
                                     </dxlc:LayoutItem>
-                                    <dxlc:LayoutItem Label="b=">
-                                        <dxe:TextEdit Text="{Binding SSLD_B, Mode=TwoWay}" />
+                                    <dxlc:LayoutItem Label="R2=">
+                                        <dxe:TextEdit Text="{Binding DivisionPier_R2}" />
                                     </dxlc:LayoutItem>
-                                    <dxlc:LayoutItem Label="c=">
-                                        <dxe:TextEdit Text="{Binding SSLD_C, Mode=TwoWay}" />
+                                    <dxlc:LayoutItem Label="R3=">
+                                        <dxe:TextEdit Text="{Binding DivisionPier_R3}" />
                                     </dxlc:LayoutItem>
-                                    <dxlc:LayoutItem Label="d=">
-                                        <dxe:TextEdit Text="{Binding SSLD_D, Mode=TwoWay}" />
+                                    <dxlc:LayoutItem Label="A=">
+                                        <dxe:TextEdit Text="{Binding DivisionPier_A}" />
                                     </dxlc:LayoutItem>
-                                    <dxlc:LayoutItem Label="e=">
-                                        <dxe:TextEdit Text="{Binding SSLD_E, Mode=TwoWay}" />
+                                    <dxlc:LayoutItem Label="B=">
+                                        <dxe:TextEdit Text="{Binding DivisionPier_B}" />
                                     </dxlc:LayoutItem>
-                                    <dxlc:LayoutItem Label="f=">
-                                        <dxe:TextEdit Text="{Binding SSLD_F, Mode=TwoWay}" />
-                                    </dxlc:LayoutItem>
-                                </dxlc:LayoutGroup>
-                            </GroupBox>
-                            <GroupBox Margin="2" Header="倒角参数：">
-                                <dxlc:LayoutGroup Orientation="Vertical" View="Group">
-                                    <dxlc:LayoutItem Label="R1">
-                                        <dxe:TextEdit Text="{Binding SSLD_R1, Mode=TwoWay}" />
-                                    </dxlc:LayoutItem>
-                                    <dxlc:LayoutItem Label="R2">
-                                        <dxe:TextEdit Text="{Binding SSLD_R2, Mode=TwoWay}" />
-                                    </dxlc:LayoutItem>
-                                    <dxlc:LayoutItem Label="R3">
-                                        <dxe:TextEdit Text="{Binding SSLD_R3, Mode=TwoWay}" />
-                                    </dxlc:LayoutItem>
-                                    <dxlc:LayoutItem Label="R4">
-                                        <dxe:TextEdit Text="{Binding SSLD_R4, Mode=TwoWay}" />
-                                    </dxlc:LayoutItem>
-                                </dxlc:LayoutGroup>
+                                </StackPanel>
                             </GroupBox>
                         </dxlc:LayoutGroup>
                     </dxlc:LayoutGroup>
-                    <CheckBox
-                        x:Name="checkbox_fld"
-                        Content="分流墩"
-                        IsChecked="{Binding IsIncludeDivisionPier}" />
-                    <dxlc:LayoutGroup View="Group" Visibility="{Binding ElementName=checkbox_fld, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConvertor}}">
-                        <dxlc:LayoutItem Label="分流墩XY平面形状" LabelPosition="Top">
-                            <Image Width="250" Source="/PDIWT_MS_CZ;component/Image/fld.png" />
+                    <dxlc:LayoutGroup
+                        Orientation="Vertical"
+                        View="Group"
+                        Visibility="{Binding SelectedItem.Key, ConverterParameter=Endfiling, Converter={StaticResource enumToVisiblityConverter}, ElementName=combox_ssldtype}">
+                        <dxlc:LayoutItem Label="距离边墩左侧面的X轴距离：">
+                            <dxe:TextEdit Text="{Binding SSLD_Endfilling_XDis}" />
                         </dxlc:LayoutItem>
-                        <GroupBox Header="分流墩参数">
-                            <StackPanel>
-                                <dxlc:LayoutItem Label="R1=">
-                                    <dxe:TextEdit Text="{Binding DivisionPier_R1}" />
-                                </dxlc:LayoutItem>
-                                <dxlc:LayoutItem Label="R2=">
-                                    <dxe:TextEdit Text="{Binding DivisionPier_R2}" />
-                                </dxlc:LayoutItem>
-                                <dxlc:LayoutItem Label="R3=">
-                                    <dxe:TextEdit Text="{Binding DivisionPier_R3}" />
-                                </dxlc:LayoutItem>
-                                <dxlc:LayoutItem Label="A=">
-                                    <dxe:TextEdit Text="{Binding DivisionPier_A}" />
-                                </dxlc:LayoutItem>
-                                <dxlc:LayoutItem Label="B=">
-                                    <dxe:TextEdit Text="{Binding DivisionPier_B}" />
-                                </dxlc:LayoutItem>
-                            </StackPanel>
-                        </GroupBox>
+                        <dxlc:LayoutGroup View="Group">
+                            <Image MaxWidth="300" Source="/PDIWT_MS_CZ;component/Image/ssld2.png" />
+                            <GroupBox Header="输水廊道参数">
+                                <StackPanel>
+                                    <!--<dxlc:LayoutItem Label="高度=">
+                                        <dxe:TextEdit Text="{Binding SSLD_Endfilling_Thickness}" />
+                                    </dxlc:LayoutItem>-->
+                                    <dxlc:LayoutItem Label="宽度=">
+                                        <dxe:TextEdit Text="{Binding SSLD_Endfilling_Width}" />
+                                    </dxlc:LayoutItem>
+                                    <dxlc:LayoutItem Label="a=">
+                                        <dxe:TextEdit Text="{Binding SSLD_Endfilling_A}" />
+                                    </dxlc:LayoutItem>
+                                    <dxlc:LayoutItem Label="b=">
+                                        <dxe:TextEdit Text="{Binding SSLD_Endfilling_B}" />
+                                    </dxlc:LayoutItem>
+                                    <dxlc:LayoutItem Label="c=">
+                                        <dxe:TextEdit Text="{Binding SSLD_Endfilling_C}" />
+                                    </dxlc:LayoutItem>
+                                    <dxlc:LayoutItem Label="d=">
+                                        <dxe:TextEdit Text="{Binding SSLD_Endfilling_D}" />
+                                    </dxlc:LayoutItem>
+                                </StackPanel>
+                            </GroupBox>
+                        </dxlc:LayoutGroup>
+
                     </dxlc:LayoutGroup>
                 </dxlc:LayoutGroup>
                 <dxlc:LayoutGroup Header="空箱参数(mm)" Orientation="Vertical">
@@ -285,7 +413,14 @@
                                     AllowSorting="False"
                                     AutoWidth="True"
                                     NewItemRowPosition="Bottom"
-                                    ShowGroupPanel="False" />
+                                    ShowGroupPanel="False">
+                                    <dxg:TableView.RowCellMenuCustomizations>
+                                        <dxb:BarButtonItem
+                                            Command="{x:Static dxg:GridCommands.DeleteFocusedRow}"
+                                            Content="删除所选行"
+                                            Glyph="/PDIWT_MS_CZ;component/Image/Icons/Delete.ico" />
+                                    </dxg:TableView.RowCellMenuCustomizations>
+                                </dxg:TableView>
                             </dxg:GridControl.View>
                             <dxg:GridColumn FieldName="HoleLength" Header="长度" />
                             <dxg:GridColumn FieldName="HoleWidth" Header="宽度" />
@@ -305,7 +440,7 @@
                         <dxlc:LayoutGroup
                             Orientation="Vertical"
                             View="Group"
-                            Visibility="{Binding ElementName=checkbox_trapezoid, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConvertor}}">
+                            Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConvertor}, ElementName=checkbox_trapezoid}">
                             <dxlc:LayoutItem Label="空箱Z轴方向拉升高度：">
                                 <dxe:TextEdit Text="{Binding TrapHoleThickness}" />
                             </dxlc:LayoutItem>
@@ -343,7 +478,10 @@
                         </dxlc:LayoutGroup>
                     </StackPanel>
                 </dxlc:LayoutGroup>
-                <dxlc:LayoutGroup Header="消能工参数(mm)" Orientation="Vertical">
+                <dxlc:LayoutGroup
+                    Header="消能工参数(mm)"
+                    Orientation="Vertical"
+                    Visibility="{Binding SelectedItem.Key, ConverterParameter=Dispersed, Converter={StaticResource enumToVisiblityConverter}, ElementName=combox_ssldtype}">
                     <CheckBox
                         x:Name="checkbox_gs"
                         Content="出水格栅"
@@ -351,7 +489,7 @@
                     <dxlc:LayoutGroup
                         Orientation="Vertical"
                         View="Group"
-                        Visibility="{Binding ElementName=checkbox_gs, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConvertor}}">
+                        Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConvertor}, ElementName=checkbox_gs}">
                         <dxlc:LayoutItem Label="格栅间隔宽度：">
                             <dxe:TextEdit Text="{Binding GS_MidWidth}" />
                         </dxlc:LayoutItem>
@@ -368,7 +506,14 @@
                                         AutoWidth="True"
                                         InitNewRow="TableView_InitNewRow"
                                         NewItemRowPosition="Bottom"
-                                        ShowGroupPanel="False" />
+                                        ShowGroupPanel="False">
+                                        <dxg:TableView.RowCellMenuCustomizations>
+                                            <dxb:BarButtonItem
+                                                Command="{x:Static dxg:GridCommands.DeleteFocusedRow}"
+                                                Content="删除所选行"
+                                                Glyph="/PDIWT_MS_CZ;component/Image/Icons/Delete.ico" />
+                                        </dxg:TableView.RowCellMenuCustomizations>
+                                    </dxg:TableView>
                                 </dxg:GridControl.View>
                                 <dxg:GridColumn
                                     AllowAutoFilter="False"
@@ -388,7 +533,7 @@
                         x:Name="checkbox_xlk"
                         Content="消力坎"
                         IsChecked="{Binding IsIncludeBaffle}" />
-                    <dxlc:LayoutGroup View="Group" Visibility="{Binding ElementName=checkbox_xlk, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConvertor}}">
+                    <dxlc:LayoutGroup View="Group" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConvertor}, ElementName=checkbox_xlk}">
                         <dxlc:LayoutItem Label="消力坎参数" LabelPosition="Top">
                             <dxg:GridControl
                                 Height="180"
@@ -400,12 +545,16 @@
                                         AllowSorting="True"
                                         AutoWidth="True"
                                         NewItemRowPosition="Bottom"
-                                        ShowGroupPanel="False" />
+                                        ShowGroupPanel="False">
+                                        <dxg:TableView.RowCellMenuCustomizations>
+                                            <dxb:BarButtonItem
+                                                Command="{x:Static dxg:GridCommands.DeleteFocusedRow}"
+                                                Content="删除所选行"
+                                                Glyph="/PDIWT_MS_CZ;component/Image/Icons/Delete.ico" />
+                                        </dxg:TableView.RowCellMenuCustomizations>
+                                    </dxg:TableView>
                                 </dxg:GridControl.View>
-                                <dxg:GridColumn
-                                    FieldName="XDis"
-                                    Header="距闸首中轴线的距离"
-                                    ToolTip="此距离指离消力坎离中轴线最近面的距离" />
+                                <dxg:GridColumn FieldName="XDis" Header="距闸首中轴线的距离" />
                                 <dxg:GridColumn FieldName="Width" Header="宽度" />
                                 <dxg:GridColumn FieldName="Height" Header="高度" />
                             </dxg:GridControl>

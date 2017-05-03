@@ -165,9 +165,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converter\DescriptionToEnumConvertor.cs" />
     <Compile Include="Converter\Point3dToStringConvertor.cs" />
     <Compile Include="KeyinCommands.cs" />
+    <Compile Include="Models\CalculatePileCapacity.cs" />
     <Compile Include="Models\ColumnLayerInfoArrayExtentsion.cs" />
+    <Compile Include="Models\EnumBindingToCHSHelper.cs" />
     <Compile Include="Models\InfoClass.cs" />
     <Compile Include="Models\SelectPileTool.cs" />
     <Compile Include="Program.cs" />
@@ -230,7 +233,9 @@
   <ItemGroup>
     <Resource Include="Image\Center Direction.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Image\Bobbin.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
 		Other similar extension points exist, see Microsoft.Common.targets.

@@ -31,7 +31,16 @@ namespace PDIWT_MS_CZ.ViewModels
         {
             base.OnInitializeInRuntime();
 
+            CurrentSSLDType = new Dictionary<SSLDType, string>
+            {
+                {SSLDType.Dispersed,"分散输水"},
+                {SSLDType.Endfiling,"集中输水"}
+            };
+            SelectedSSLDType = CurrentSSLDType.First();
+
             DB_Length = 28000; DB_Width = 40000; DB_Thickness = 3000; DB_DoorWidth = 23000;
+            IsIncludeDBRemoved = true;
+            DB_Removed_Thinckness = 2000; DB_Removed_A = 8000; DB_Removed_B = 8000; DB_Removed_C = 11000; DB_Removed_N = 1;
 
             BDun_Thickness = 17200;
             /*BDun_A = 8500;*/ BDun_B = 10000; BDun_C = 2100;/* BDun_D = 16000;*/ BDun_E = 2100; BDun_F = 2000;
@@ -43,6 +52,9 @@ namespace PDIWT_MS_CZ.ViewModels
             SSLD_Thickness = 3500; SSLD_YDis = 1500;
             SSLD_A = 6300; SSLD_B = 18200; SSLD_C = 2600; SSLD_D = 24500; SSLD_E = 4700; SSLD_F = 4600;
             SSLD_R1 = 0; SSLD_R2 = 0; SSLD_R3 = 1800; SSLD_R4 = 6400;
+
+            SSLD_Endfilling_XDis = 1800; SSLD_Endfilling_Width = 3500;
+            SSLD_Endfilling_A = 2600; SSLD_Endfilling_B = 2000; SSLD_Endfilling_C = 16000; SSLD_Endfilling_D = 7000;
 
             IsIncludeDivisionPier = true;
             DivisionPier_R1 = 4400; DivisionPier_R2 = 4700; DivisionPier_R3 = 250; DivisionPier_A = 650; DivisionPier_B = 0;
@@ -92,6 +104,20 @@ namespace PDIWT_MS_CZ.ViewModels
 
             };
         }
+        #region SLLDType
+        [XmlIgnore]
+        public Dictionary<SSLDType,string> CurrentSSLDType
+        {
+            get { return GetProperty(() => CurrentSSLDType); }
+            set { SetProperty(() => CurrentSSLDType, value); }
+        }
+        public KeyValuePair<SSLDType,string> SelectedSSLDType
+        {
+            get { return GetProperty(() => SelectedSSLDType); }
+            set { SetProperty(() => SelectedSSLDType, value); }
+        }
+        
+        #endregion
 
         #region VertifyProperty
         [XmlIgnore]
@@ -127,6 +153,44 @@ namespace PDIWT_MS_CZ.ViewModels
         {
             get { return GetProperty(() => DB_DoorWidth); }
             set { SetProperty(() => DB_DoorWidth, value); }
+        }
+
+        [XmlElement(ElementName ="底板是否有切槽")]
+
+        public bool IsIncludeDBRemoved
+        {
+            get { return GetProperty(() => IsIncludeDBRemoved); }
+            set { SetProperty(() => IsIncludeDBRemoved, value); }
+        }
+        [XmlElement(ElementName ="切槽高度")]
+        public double DB_Removed_Thinckness
+        {
+            get { return GetProperty(() => DB_Removed_Thinckness); }
+            set { SetProperty(() => DB_Removed_Thinckness, value); }
+        }
+        [XmlElement(ElementName ="切槽参数A")]
+        public double DB_Removed_A
+        {
+            get { return GetProperty(() => DB_Removed_A); }
+            set { SetProperty(() => DB_Removed_A, value); }
+        }
+        [XmlElement(ElementName ="切槽参数B")]
+        public double DB_Removed_B
+        {
+            get { return GetProperty(() => DB_Removed_B); }
+            set { SetProperty(() => DB_Removed_B, value); }
+        }
+        [XmlElement(ElementName ="切槽参数C")]
+        public double DB_Removed_C
+        {
+            get { return GetProperty(() => DB_Removed_C); }
+            set { SetProperty(() => DB_Removed_C, value); }
+        }
+        [XmlElement(ElementName ="切槽坡度N")]
+        public double DB_Removed_N
+        {
+            get { return GetProperty(() => DB_Removed_N); }
+            set { SetProperty(() => DB_Removed_N, value); }
         }
         #endregion
 
@@ -242,7 +306,7 @@ namespace PDIWT_MS_CZ.ViewModels
         }
         #endregion
 
-        #region SSLD Property
+        #region SSLD_dispersed Property
         [XmlElement(ElementName = "输水廊道高")]
         public double SSLD_Thickness
         {
@@ -314,6 +378,84 @@ namespace PDIWT_MS_CZ.ViewModels
         {
             get { return GetProperty(() => SSLD_R4); }
             set { SetProperty(() => SSLD_R4, value); }
+        }
+        #endregion
+
+        #region DivisionPier
+        [XmlElement(ElementName = "是否包含分水墩")]
+        public bool IsIncludeDivisionPier
+        {
+            get { return GetProperty(() => IsIncludeDivisionPier); }
+            set { SetProperty(() => IsIncludeDivisionPier, value); }
+        }
+        [XmlElement(ElementName = "分水墩参数R1")]
+        public double DivisionPier_R1
+        {
+            get { return GetProperty(() => DivisionPier_R1); }
+            set { SetProperty(() => DivisionPier_R1, value); }
+        }
+        [XmlElement(ElementName = "分水墩参数R2")]
+        public double DivisionPier_R2
+        {
+            get { return GetProperty(() => DivisionPier_R2); }
+            set { SetProperty(() => DivisionPier_R2, value); }
+        }
+        [XmlElement(ElementName = "分水墩参数R3")]
+        public double DivisionPier_R3
+        {
+            get { return GetProperty(() => DivisionPier_R3); }
+            set { SetProperty(() => DivisionPier_R3, value); }
+        }
+        [XmlElement(ElementName = "分水墩参数A")]
+        public double DivisionPier_A
+        {
+            get { return GetProperty(() => DivisionPier_A); }
+            set { SetProperty(() => DivisionPier_A, value); }
+        }
+        [XmlElement(ElementName = "分水墩参数B")]
+        public double DivisionPier_B
+        {
+            get { return GetProperty(() => DivisionPier_B); }
+            set { SetProperty(() => DivisionPier_B, value); }
+        }
+        #endregion
+
+        #region SSLD_Endfilling Property
+
+        public double SSLD_Endfilling_XDis
+        {
+            get { return GetProperty(() => SSLD_Endfilling_XDis); }
+            set { SetProperty(() => SSLD_Endfilling_XDis, value); }
+        }
+        //public double SSLD_Endfilling_Thickness
+        //{
+        //    get { return GetProperty(() => SSLD_Endfilling_Thickness); }
+        //    set { SetProperty(() => SSLD_Endfilling_Thickness, value); }
+        //}
+        public double SSLD_Endfilling_Width
+        {
+            get { return GetProperty(() => SSLD_Endfilling_Width); }
+            set { SetProperty(() => SSLD_Endfilling_Width, value); }
+        }
+        public double SSLD_Endfilling_A
+        {
+            get { return GetProperty(() => SSLD_Endfilling_A); }
+            set { SetProperty(() => SSLD_Endfilling_A, value); }
+        }
+        public double SSLD_Endfilling_B
+        {
+            get { return GetProperty(() => SSLD_Endfilling_B); }
+            set { SetProperty(() => SSLD_Endfilling_B, value); }
+        }
+        public double SSLD_Endfilling_C
+        {
+            get { return GetProperty(() => SSLD_Endfilling_C); }
+            set { SetProperty(() => SSLD_Endfilling_C, value); }
+        }
+        public double SSLD_Endfilling_D
+        {
+            get { return GetProperty(() => SSLD_Endfilling_D); }
+            set { SetProperty(() => SSLD_Endfilling_D, value); }
         }
         #endregion
 
@@ -416,46 +558,7 @@ namespace PDIWT_MS_CZ.ViewModels
             set { SetProperty(() => BaffleList, value); }
         }
         #endregion
-
-        #region DivisionPier
-        [XmlElement(ElementName = "是否包含分水墩")]
-        public bool IsIncludeDivisionPier
-        {
-            get { return GetProperty(() => IsIncludeDivisionPier); }
-            set { SetProperty(() => IsIncludeDivisionPier, value); }
-        }
-        [XmlElement(ElementName = "分水墩参数R1")]
-        public double DivisionPier_R1
-        {
-            get { return GetProperty(() => DivisionPier_R1); }
-            set { SetProperty(() => DivisionPier_R1, value); }
-        }
-        [XmlElement(ElementName = "分水墩参数R2")]
-        public double DivisionPier_R2
-        {
-            get { return GetProperty(() => DivisionPier_R2); }
-            set { SetProperty(() => DivisionPier_R2, value); }
-        }
-        [XmlElement(ElementName = "分水墩参数R3")]
-        public double DivisionPier_R3
-        {
-            get { return GetProperty(() => DivisionPier_R3); }
-            set { SetProperty(() => DivisionPier_R3, value); }
-        }
-        [XmlElement(ElementName = "分水墩参数A")]
-        public double DivisionPier_A
-        {
-            get { return GetProperty(() => DivisionPier_A); }
-            set { SetProperty(() => DivisionPier_A, value); }
-        }
-        [XmlElement(ElementName = "分水墩参数B")]
-        public double DivisionPier_B
-        {
-            get { return GetProperty(() => DivisionPier_B); }
-            set { SetProperty(() => DivisionPier_B, value); }
-        }
-        #endregion
-
+        
         #region Methods
         //可以使用SmartSoild.Blend命令来创建圆角
         SmartSolidElement GetCylinderCorner(Point3d Cornerorigin, double r, double height, double rotdegree = 0)
@@ -519,7 +622,59 @@ namespace PDIWT_MS_CZ.ViewModels
             SmartSolidElement ele_db = app.SmartSolid.CreateSlab(null, DB_Width / 2, DB_Length, DB_Thickness);
             Point3d eledboffset = app.Point3dFromXYZ(-DB_Width / 4, DB_Length / 2, DB_Thickness / 2);
             ele_db.Move(ref eledboffset);
+            //if (IsIncludeDBRemoved)
+            //{
+            //    Point3d[] bdremovedpoints =
+            //    {
+            //        app.Point3dFromXY(0,0),
+            //        app.Point3dFromXY(0,DB_Removed_A+DB_Removed_B),
+            //        app.Point3dFromXY(-DB_Width/2,DB_Removed_A+DB_Removed_B),
+            //        app.Point3dFromXY(-DB_Width/2,DB_Removed_B),
+            //        app.Point3dFromXY(-DB_Removed_C,DB_Removed_B),
+            //        app.Point3dFromXY(-DB_Removed_C,0)
+            //    };
+            //    ShapeElement db_removed_shape = app.CreateShapeElement1(null, ref bdremovedpoints, MsdFillMode.Filled);
+            //    SmartSolidElement ele_db_removed = app.SmartSolid.ExtrudeClosedPlanarCurve(db_removed_shape, DB_Removed_Thinckness, 0, true);
+            //    Point3d[] dbremovededgemidpoints =
+            //    {
+            //        app.Point3dFromXYZ(-DB_Removed_C/2,0,DB_Removed_Thinckness),
+            //        app.Point3dFromXYZ(-DB_Removed_C,(DB_Removed_B+DB_Removed_Thinckness/DB_Removed_N)/2,DB_Removed_Thinckness),
+            //        app.Point3dFromXYZ(-(DB_Width/2+DB_Removed_C)/2,DB_Removed_B,DB_Removed_Thinckness)
+            //    };
+            //    for (int i = 0; i < dbremovededgemidpoints.Length; i++)
+            //        ele_db_removed = app.SmartSolid.ChamferEdge(ele_db_removed, ref dbremovededgemidpoints[i], DB_Removed_Thinckness, DB_Removed_Thinckness / DB_Removed_N, true);
+
+            //    Point3d db_removed_offset = app.Point3dFromXY(0, DB_Length - DB_Removed_A - DB_Removed_B);
+            //    ele_db_removed.Move(ref db_removed_offset);
+            //    ele_db = app.SmartSolid.SolidSubtract(ele_db, ele_db_removed);
+            //}
             return ele_db;
+        }
+        SmartSolidElement GetDBRemoved()
+        {
+            Point3d[] bdremovedpoints =
+                {
+                    app.Point3dFromXY(0,0),
+                    app.Point3dFromXY(0,DB_Removed_A+DB_Removed_B),
+                    app.Point3dFromXY(-DB_Width/2,DB_Removed_A+DB_Removed_B),
+                    app.Point3dFromXY(-DB_Width/2,DB_Removed_B),
+                    app.Point3dFromXY(-DB_Removed_C,DB_Removed_B),
+                    app.Point3dFromXY(-DB_Removed_C,0)
+                };
+            ShapeElement db_removed_shape = app.CreateShapeElement1(null, ref bdremovedpoints, MsdFillMode.Filled);
+            SmartSolidElement ele_db_removed = app.SmartSolid.ExtrudeClosedPlanarCurve(db_removed_shape, DB_Removed_Thinckness, 0, true);
+            Point3d[] dbremovededgemidpoints =
+            {
+                    app.Point3dFromXYZ(-DB_Removed_C/2,0,DB_Removed_Thinckness),
+                    app.Point3dFromXYZ(-DB_Removed_C,(DB_Removed_B+DB_Removed_Thinckness/DB_Removed_N)/2,DB_Removed_Thinckness),
+                    app.Point3dFromXYZ(-(DB_Width/2+DB_Removed_C)/2,DB_Removed_B,DB_Removed_Thinckness)
+            };
+            for (int i = 0; i < dbremovededgemidpoints.Length; i++)
+                ele_db_removed = app.SmartSolid.ChamferEdge(ele_db_removed, ref dbremovededgemidpoints[i], DB_Removed_Thinckness, DB_Removed_Thinckness / DB_Removed_N, true);
+
+            Point3d db_removed_offset = app.Point3dFromXY(0, DB_Length - DB_Removed_A - DB_Removed_B);
+            ele_db_removed.Move(ref db_removed_offset);
+            return ele_db_removed;
         }
         SmartSolidElement GetBDun()
         {
@@ -602,6 +757,58 @@ namespace PDIWT_MS_CZ.ViewModels
             Point3d ssld_shape_offset = app.Point3dFromXYZ(0, SSLD_YDis, DB_Thickness);
             ele_ssld.Move(ref ssld_shape_offset);
             return ele_ssld;
+        }
+        SmartSolidElement GetSSLD_Endfilling()
+        {
+            Point3d[] slld2points =
+            {
+                app.Point3dFromXYZ(0,0,0),
+                app.Point3dFromXYZ(0,SSLD_Endfilling_C,0),
+                app.Point3dFromXYZ(0,DB_Length-SSLD_Endfilling_D,SSLD_Endfilling_B),
+                app.Point3dFromXYZ(0,DB_Length,SSLD_Endfilling_B)
+            };
+            ChainableElement[] linestringele = new ChainableElement[4];
+            Point3d[] pointline1 =
+            {
+                app.Point3dFromXYZ(0,SSLD_Endfilling_C,SSLD_Endfilling_A),
+                app.Point3dFromXYZ(0,0,SSLD_Endfilling_A),
+                slld2points[0],
+                slld2points[1]
+            };
+            linestringele[0] = app.CreateLineElement1(null, ref pointline1);
+            BsplineCurve bscurve = new BsplineCurveClass(); //利用bsplinecurveclass获得bsplinecurve的实例引用
+            Point3d[] bscurvepolepoints = 
+            {
+                slld2points[1],
+                app.Point3dFromXYZ(0, SSLD_Endfilling_C+SSLD_Endfilling_B/2, 0),
+                app.Point3dFromXYZ(0, DB_Length - SSLD_Endfilling_D-SSLD_Endfilling_B/2, SSLD_Endfilling_B),
+                slld2points[2]
+            };
+            bscurve.SetPoles(ref bscurvepolepoints);
+            linestringele[1] = app.CreateBsplineCurveElement1(null, bscurve);
+            Point3d[] pointline2 =
+            {
+                slld2points[2],
+                slld2points[3],
+                app.Point3dFromXYZ(0,DB_Length,SSLD_Endfilling_B+SSLD_Endfilling_A),
+                app.Point3dFromXYZ(0,DB_Length-SSLD_Endfilling_D,SSLD_Endfilling_B+SSLD_Endfilling_A)
+            };
+            linestringele[2] = app.CreateLineElement1(null, ref pointline2);
+            Point3d[] reversebscurvepoints =
+            {
+                app.Point3dFromXYZ(0,DB_Length-SSLD_Endfilling_D,SSLD_Endfilling_B+SSLD_Endfilling_A),
+                app.Point3dFromXYZ(0, DB_Length - SSLD_Endfilling_D-SSLD_Endfilling_B/2, SSLD_Endfilling_B+SSLD_Endfilling_A),
+                app.Point3dFromXYZ(0, SSLD_Endfilling_C+SSLD_Endfilling_B/2, SSLD_Endfilling_A),
+                app.Point3dFromXYZ(0,SSLD_Endfilling_C,SSLD_Endfilling_A),
+            };
+            BsplineCurve rebscurve = new BsplineCurveClass();
+            rebscurve.SetPoles(ref reversebscurvepoints);
+            linestringele[3] = app.CreateBsplineCurveElement1(null, rebscurve);
+            ComplexShapeElement complexshapeele = app.CreateComplexShapeElement1(ref linestringele, MsdFillMode.Filled);
+            SmartSolidElement ele = app.SmartSolid.ExtrudeClosedPlanarCurve(complexshapeele, SSLD_Endfilling_Width, 0, true);
+            Point3d ele_offset = app.Point3dFromXYZ(-DB_Width / 2 + SSLD_Endfilling_XDis, 0, DB_Thickness);
+            ele.Move(ref ele_offset);
+            return ele;
         }
         SmartSolidElement GetDivisionPier()
         {
@@ -730,9 +937,21 @@ namespace PDIWT_MS_CZ.ViewModels
         void ComDrawAll()
         {
             SmartSolidElement ele_db = GetDB();
+            SmartSolidElement ele_db_removed = null;
+            if(IsIncludeDBRemoved)
+                ele_db_removed = GetDBRemoved();
             SmartSolidElement ele_bdun = GetBDun();
             SmartSolidElement ele_mk = GetMK();
-            SmartSolidElement ele_ssld = GetSSLD();
+            SmartSolidElement ele_ssld = null;
+            switch (SelectedSSLDType.Key)
+            {
+                case SSLDType.Dispersed:
+                    ele_ssld = GetSSLD();
+                    break;
+                case SSLDType.Endfiling:
+                    ele_ssld = GetSSLD_Endfilling();
+                    break;
+            }
             SmartSolidElement ele_divisionpier = null;
             if (IsIncludeDivisionPier)
                 ele_divisionpier = GetDivisionPier();
@@ -746,22 +965,25 @@ namespace PDIWT_MS_CZ.ViewModels
             SmartSolidElement cz, czLeft, czRigth;
             czLeft = app.SmartSolid.SolidUnion(ele_db, ele_bdun);
             czLeft = app.SmartSolid.SolidUnion(czLeft, ele_mk);
-            czLeft = app.SmartSolid.SolidSubtract(czLeft, ele_ssld);
-            if (ele_divisionpier != null)
+            if(ele_ssld!=null)
+                czLeft = app.SmartSolid.SolidSubtract(czLeft, ele_ssld);
+            if ((ele_divisionpier != null) && (SelectedSSLDType.Key == SSLDType.Dispersed))
                 czLeft = app.SmartSolid.SolidUnion(czLeft, ele_divisionpier);
             foreach (var ele_hole in ele_holeList)
-            {
                 czLeft = app.SmartSolid.SolidSubtract(czLeft, ele_hole);
+            //分散输水才会有格栅和消力坎
+            if (SelectedSSLDType.Key == SSLDType.Dispersed)
+            {
+                foreach (var ele_gs in ele_gsList)
+                    czLeft = app.SmartSolid.SolidSubtract(czLeft, ele_gs);
+                foreach (var ele_baffle in ele_baffleList)
+                    czLeft = app.SmartSolid.SolidUnion(czLeft, ele_baffle);
             }
 
-            foreach (var ele_gs in ele_gsList)
-            {
-                czLeft = app.SmartSolid.SolidSubtract(czLeft, ele_gs);
-            }
-            foreach (var ele_baffle in ele_baffleList)
-            {
-                czLeft = app.SmartSolid.SolidUnion(czLeft, ele_baffle);
-            }
+            if (ele_db_removed!= null)
+                czLeft = app.SmartSolid.SolidSubtract(czLeft, ele_db_removed);
+
+                
 
             czRigth = czLeft.Clone().AsSmartSolidElement;
             Point3d cz_mirrorStart, cz_mirrorEnd;
@@ -872,6 +1094,12 @@ namespace PDIWT_MS_CZ.ViewModels
             //    sb.Append("底板宽度 / 2 != 边墩 a + 门槛 a \n");
             //if (MK_D != BDun_B)
             //    sb.Append("门槛参数 d != 边墩参数 b\n");
+            if (DB_Removed_A + DB_Removed_B > DB_Length)
+                sb.Append("底板切槽参数a+b大于底板长度");
+            if (DB_Removed_C > DB_Width / 2)
+                sb.Append("底板切槽参数c大于1/2底板宽度");
+            if (DB_Removed_Thinckness > DB_Thickness)
+                sb.Append("底板切槽厚度大于底板厚度");
 
             if (SSLD_Thickness > MK_Thickness)
                 sb.Append("输水廊道厚度 > 门槛厚度\n");
@@ -883,6 +1111,13 @@ namespace PDIWT_MS_CZ.ViewModels
                 sb.Append("输水廊道 b-c < 门槛a + 边墩c\n");
             if ((SSLD_YDis + SSLD_D) > DB_Width)
                 sb.Append("输水廊道Y轴距离 + 输水廊道孔 d < 底板宽\n");
+
+            if ((SSLD_Endfilling_C + SSLD_Endfilling_D) > DB_Length)
+                sb.Append("输水廊道参数C+D大于底板长度");
+            if ((SSLD_Endfilling_A + SSLD_Endfilling_B) > (BDun_Thickness - DB_Thickness))
+                sb.Append("输水廊道参数A+B大于（边墩高度-底板高度）");
+            if ((SSLD_Endfilling_Width + SSLD_Endfilling_XDis) > (GetBDun_A() - BDun_C))
+                sb.Append("输水廊道（宽+XDis）>边墩（A-C）");
             if (DivisionPier_R2 < DivisionPier_R1)
                 sb.Append("分流墩参数R1 > R2 \n");
             for (int i = 0; i < HoleParamList.Count; i++)
@@ -962,7 +1197,7 @@ namespace PDIWT_MS_CZ.ViewModels
         [Command]
         public void Test()
         {
-            app.ActiveModelReference.AddElement(GetDivisionPier());
+            app.ActiveModelReference.AddElement(GetSSLD_Endfilling());
         }
 
         [Command]
@@ -1008,7 +1243,10 @@ namespace PDIWT_MS_CZ.ViewModels
                     ViewCZViewModel readedViewModel = XmlSerializerHelper.LoadFromXml<ViewCZViewModel>(ofd.FileName);
                     if (readedViewModel != null)
                     {
+                        SelectedSSLDType = readedViewModel.SelectedSSLDType;
+
                         DB_Length = readedViewModel.DB_Length; DB_Width = readedViewModel.DB_Width; DB_Thickness = readedViewModel.DB_Thickness;DB_DoorWidth = readedViewModel.DB_DoorWidth;
+                        IsIncludeDBRemoved = readedViewModel.IsIncludeDBRemoved; DB_Removed_Thinckness = readedViewModel.DB_Removed_Thinckness; DB_Removed_A = readedViewModel.DB_Removed_A; DB_Removed_B = readedViewModel.DB_Removed_B; DB_Removed_C = readedViewModel.DB_Removed_C; DB_Removed_N = readedViewModel.DB_Removed_N;
 
                         BDun_Thickness = readedViewModel.BDun_Thickness;
                         /*BDun_A = readedViewModel.BDun_A; */BDun_B = readedViewModel.BDun_B; BDun_C = readedViewModel.BDun_C; BDun_E = readedViewModel.BDun_E; BDun_F = readedViewModel.BDun_F;
@@ -1020,6 +1258,9 @@ namespace PDIWT_MS_CZ.ViewModels
                         SSLD_Thickness = readedViewModel.SSLD_Thickness; SSLD_YDis = readedViewModel.SSLD_YDis;
                         SSLD_A = readedViewModel.SSLD_A; SSLD_B = readedViewModel.SSLD_B; SSLD_C = readedViewModel.SSLD_C; SSLD_D = readedViewModel.SSLD_D; SSLD_E = readedViewModel.SSLD_E; SSLD_F = readedViewModel.SSLD_F;
                         SSLD_R1 = readedViewModel.SSLD_R1; SSLD_R2 = readedViewModel.SSLD_R2; SSLD_R3 = readedViewModel.SSLD_R3; SSLD_R4 = readedViewModel.SSLD_R4;
+
+                        SSLD_Endfilling_XDis = readedViewModel.SSLD_Endfilling_XDis; SSLD_Endfilling_Width = readedViewModel.SSLD_Endfilling_Width;
+                        SSLD_Endfilling_A = readedViewModel.SSLD_Endfilling_A; SSLD_Endfilling_B = readedViewModel.SSLD_Endfilling_B;SSLD_Endfilling_C = readedViewModel.SSLD_Endfilling_C;SSLD_Endfilling_D = readedViewModel.SSLD_Endfilling_D;
 
                         IsIncludeDivisionPier = readedViewModel.IsIncludeDivisionPier;
                         DivisionPier_R1 = readedViewModel.DivisionPier_R1; DivisionPier_R2 = readedViewModel.DivisionPier_R2; DivisionPier_R3 = readedViewModel.DivisionPier_R3; DivisionPier_A = readedViewModel.DivisionPier_A ; DivisionPier_B = readedViewModel.DivisionPier_B;
@@ -1062,6 +1303,12 @@ namespace PDIWT_MS_CZ.ViewModels
                 MessageBox.Show(e.ToString(), "参数模板导入错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+    }
+
+    public enum SSLDType
+    {
+        Dispersed,
+        Endfiling
     }
 
 }

@@ -20,17 +20,23 @@ namespace PDIWT_MS_ZJCZL.ViewModels
             set { SetProperty(() => Piles, value); }
         }
 
-        public ViewAddPileViewModel AddPileViewModel { get; private set; }
-
-
-        [Command]
-        public void Calculate()
+        public PileInfoClass CurrentPile
         {
+            get { return GetProperty(() => CurrentPile); }
+            set { SetProperty(() => CurrentPile, value); }
         }
+
+
+        //[Command]
+        //public void Calculate()
+        //{
+        //    CurrentPile.Result = CalculatePileCapacity.Calculate(CurrentPile.PileDiameter, CurrentPile.SoilInfo, CurrentPile.CalParameter);
+        //    RaisePropertiesChanged("CurrentPile");
+        //}
         [Command]
         public void AddPile()
         {
-            AddPileViewModel = new ViewAddPileViewModel();
+            var AddPileViewModel = new ViewAddPileViewModel();
             AddPileViewModel.Piles = Piles;
             var addpileview = new Views.ViewAddPile();
             addpileview.DataContext = AddPileViewModel;
@@ -46,31 +52,7 @@ namespace PDIWT_MS_ZJCZL.ViewModels
         {
             return Piles.Count > 0;
         }
-
-        //public string GetPileTypeString(PileType pt)
-        //{
-        //    string piletypestring = string.Empty;
-        //    switch (pt)
-        //    {
-        //        case PileType.Solid:
-        //            piletypestring = "实心桩或桩端封闭";
-        //            break;
-        //        case PileType.SteelAndPercastConcrete:
-        //            piletypestring = "管桩";
-        //            break;
-        //        case PileType.Filling:
-        //            piletypestring = "灌注桩";
-        //            break;
-        //        case PileType.Socketed:
-        //            piletypestring = "嵌岩桩";
-        //            break;
-        //        case PileType.PostgroutingFilling:
-        //            piletypestring = "后注浆灌注桩";
-        //            break;
-        //    }
-        //    return piletypestring;
-        //}
-
+                
         protected override void OnInitializeInRuntime()
         {
             base.OnInitializeInRuntime();
@@ -105,6 +87,7 @@ namespace PDIWT_MS_ZJCZL.ViewModels
                     Result = new CalculateResult { UltimateBearingCapacity = 200, UltimatePullingCapacity = 200 }
                 }
             };
+            CurrentPile = Piles[0];
             //AddPileViewModel = new ViewAddPileViewModel();
             //((ISupportParameter)AddPileViewModel).Parameter = Piles;
         }

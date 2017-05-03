@@ -33,5 +33,6 @@ namespace PDIWT_MS_CZ.Views
             else
                 gridcontrol_gs.SetCellValue(e.RowHandle, "IntervalType", "格栅宽度");
         }
+
     }
 }

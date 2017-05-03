@@ -134,6 +134,7 @@
     <Reference Include="DevExpress.Printing.v16.1.Core, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevExpress.Xpf.Controls.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Core.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -236,6 +237,22 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\fld.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\dbremoved.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\ssld2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Icons\Delete.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Icons\Check File.ico" />
+    <Resource Include="Image\Icons\Create New.ico" />
+    <Resource Include="Image\Icons\Export.ico" />
+    <Resource Include="Image\Icons\Import.ico" />
+    <Resource Include="Image\Icons\Microsoft Excel.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
