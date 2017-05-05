@@ -132,8 +132,8 @@ namespace PDIWT_MS_ZJCZL.ViewModels
         [Command]
         public void SelectPile()
         {
-            tool.InstallNewInstance();
-            SearchId = tool.SelectedEleID;
+            //tool.InstallNewInstance();
+            //SearchId = tool.SelectedEleID;
         }
 
         [Command]

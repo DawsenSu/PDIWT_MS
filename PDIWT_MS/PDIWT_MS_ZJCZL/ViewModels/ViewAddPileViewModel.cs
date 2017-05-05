@@ -13,13 +13,14 @@ using BG = Bentley.GeometryNET;
 using HCHXCodeQueryLib;
 
 using PDIWT_MS_ZJCZL.Models;
+using PDIWT_MS_ZJCZL.Models.Piles;
 
 namespace PDIWT_MS_ZJCZL.ViewModels
 {
     public class ViewAddPileViewModel : ViewModelBase
     {
 
-        public ObservableCollection<PileInfoClass> Piles
+        public ObservableCollection<PileBase> Piles
         {
             get { return GetProperty(() => Piles); }
             set { SetProperty(() => Piles, value); }
@@ -44,17 +45,6 @@ namespace PDIWT_MS_ZJCZL.ViewModels
             get { return GetProperty(() => PileTypeInfo); }
             set { SetProperty(() => PileTypeInfo, value); }
         }
-        //public Dictionary<PileType,string> PileTypeDic
-        //{
-        //    get
-        //    {
-        //        var r = new Dictionary<PileType, string>();
-        //        foreach (var item in Enum.GetValues(typeof(PileType)))
-        //        {
-        //            r.Add(item,EnumSourceHelper)
-        //        }
-        //    }
-        //}
         public string PileCode
         {
             get { return GetProperty(() => PileCode); }
@@ -68,43 +58,43 @@ namespace PDIWT_MS_ZJCZL.ViewModels
 
 
         [Command]
-        public void AddPile()
-        {
-            var temppileinfo = new PileInfoClass() { PileId = -1, PileDiameter = this.PileDiameter, PileTypeInfo = this.PileTypeInfo, PileCode = this.PileCode };
-            temppileinfo.PileLength = GetLengthByVertex(StartPoint, EndPoint);
+        //public void AddPile()
+        //{
+        //    var temppileinfo = new PileInfoClass() { PileId = -1, PileDiameter = this.PileDiameter, PileTypeInfo = this.PileTypeInfo, PileCode = this.PileCode };
+        //    temppileinfo.PileLength = GetLengthByVertex(StartPoint, EndPoint);
 
-            //查找桩基所在土层
-            ColumnLayerInfoArray columnLayerInfoArray = new ColumnLayerInfoArray();
-            double pointscale = 1e4;
-            Point3d calculatestartpoint = Point3dScale(StartPoint, pointscale), calculateendpoint = Point3dScale(EndPoint, pointscale);
-            HCHXCodeQueryErrorCode status = m_pileQuery.QueryByRay(ref columnLayerInfoArray, calculatestartpoint, calculateendpoint);
+        //    //查找桩基所在土层
+        //    ColumnLayerInfoArray columnLayerInfoArray = new ColumnLayerInfoArray();
+        //    double pointscale = 1e4;
+        //    Point3d calculatestartpoint = Point3dScale(StartPoint, pointscale), calculateendpoint = Point3dScale(EndPoint, pointscale);
+        //    HCHXCodeQueryErrorCode status = m_pileQuery.QueryByRay(ref columnLayerInfoArray, calculatestartpoint, calculateendpoint);
 
-            if (status != HCHXCodeQueryErrorCode.Success)
-            {
-                System.Windows.MessageBox.Show($"查找出现错误!\n{status}", "查找出现错误", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
-                return;
-            }
-            var columnLayerList = columnLayerInfoArray.GetSortedColumnLayerList();
+        //    if (status != HCHXCodeQueryErrorCode.Success)
+        //    {
+        //        System.Windows.MessageBox.Show($"查找出现错误!\n{status}", "查找出现错误", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+        //        return;
+        //    }
+        //    var columnLayerList = columnLayerInfoArray.GetSortedColumnLayerList();
 
-            temppileinfo.SoilInfo = new ObservableCollection<SoilInfoClass>();
-            var random = new Random();
-            for (int i = 0; i < columnLayerList.Count; i++)
-            {
-                double pileinsoilLenght;
-                if (i == columnLayerList.Count - 1)
-                    pileinsoilLenght = GetLengthByVertex(columnLayerList[i].TopPosition, calculateendpoint) / pointscale;
-                else
-                    pileinsoilLenght = GetLengthByVertex(columnLayerList[i].TopPosition, columnLayerList[i + 1].TopPosition) / pointscale;
-                temppileinfo.SoilInfo.Add(new SoilInfoClass(columnLayerList[i].IntersectLayerInfo.Category, columnLayerList[i].IntersectLayerInfo.UserCode, pileinsoilLenght, Math.Round(random.NextDouble() * 10 + 100, 2), Math.Round(random.NextDouble() * 10 * +100, 2)));
-            }
+        //    temppileinfo.SoilInfo = new ObservableCollection<SoilInfoClass>();
+        //    var random = new Random();
+        //    for (int i = 0; i < columnLayerList.Count; i++)
+        //    {
+        //        double pileinsoilLenght;
+        //        if (i == columnLayerList.Count - 1)
+        //            pileinsoilLenght = GetLengthByVertex(columnLayerList[i].TopPosition, calculateendpoint) / pointscale;
+        //        else
+        //            pileinsoilLenght = GetLengthByVertex(columnLayerList[i].TopPosition, columnLayerList[i + 1].TopPosition) / pointscale;
+        //        temppileinfo.SoilInfo.Add(new SoilInfoClass(columnLayerList[i].IntersectLayerInfo.Category, columnLayerList[i].IntersectLayerInfo.UserCode, pileinsoilLenght, Math.Round(random.NextDouble() * 10 + 100, 2), Math.Round(random.NextDouble() * 10 * +100, 2)));
+        //    }
 
-            //计算桩基承载力
-            temppileinfo.CalParameter = new CalculateParameter { GammaR = this.GammaR };
+        //    //计算桩基承载力
+        //    temppileinfo.CalParameter = new CalculateParameter { GammaR = this.GammaR };
 
-            temppileinfo.Result = CalculatePileCapacity.Calculate(PileDiameter, temppileinfo.SoilInfo, temppileinfo.CalParameter);
+        //    temppileinfo.Result = CalculatePileCapacity.Calculate(PileDiameter, temppileinfo.SoilInfo, temppileinfo.CalParameter);
 
-            Piles.Add(temppileinfo);
-        }
+        //    Piles.Add(temppileinfo);
+        //}
 
         double GetLengthByVertex(Point3d startPoint, Point3d endPoint)
         {
@@ -129,6 +119,18 @@ namespace PDIWT_MS_ZJCZL.ViewModels
         //    return new CalculateResult { UltimateBearingCapacity = result, UltimatePullingCapacity = -1 };
 
         //}
+
+        [Command]
+        public void SelectPileAxes()
+        {
+            SelectPileTool.InstallNewInstance();
+        }
+
+        Point3d DPoint3dToPoint3d(BG.DPoint3d p)
+        {
+            return new Point3d() { X = p.X, Y = p.Y, Z = p.Z };
+        }
+
 
         protected override void OnInitializeInRuntime()
         {

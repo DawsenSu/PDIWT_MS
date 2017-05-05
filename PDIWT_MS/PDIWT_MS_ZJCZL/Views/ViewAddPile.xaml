@@ -18,13 +18,6 @@
             <Setter Property="MaxWidth" Value="100" />
             <Setter Property="Margin" Value="5,5" />
         </Style>
-        <!--<dxmvvm:ObjectToObjectConverter x:Key="PileTypeToStringConvertor">
-            <dxmvvm:MapItem Source="PileType.Solid" Target="实心桩或桩端封闭" />
-            <dxmvvm:MapItem Source="PileType.SteelAndPercastConcrete" Target="管桩" />
-            <dxmvvm:MapItem Source="PileType.Filling" Target="灌注桩" />
-            <dxmvvm:MapItem Source="PileType.Socketed" Target="嵌岩桩" />
-            <dxmvvm:MapItem Source="PileType.PostgroutingFilling" Target="后注浆灌注桩" />
-        </dxmvvm:ObjectToObjectConverter>-->
         <Convertor:Point3dToStringConvertor x:Key="Point3dToStringConvertor" />
         <Convertor:DescriptionToEnumConvertor x:Key="DecriptionToEnumConvertor" />
     </Window.Resources>
@@ -44,20 +37,27 @@
                         </dxlc:LayoutItem>
                     </dxlc:LayoutGroup>
                     <dxlc:LayoutGroup>
-                        <dxlc:LayoutItem Label="桩起点：">
+                        <dxlc:LayoutItem VerticalAlignment="Center" Label="桩起点：">
                             <dxe:TextEdit
                                 DisplayFormatString="f4"
                                 Mask="(-?\d+)(\.\d+)?,(-?\d+)(\.\d+)?,(-?\d+)(\.\d+)?"
                                 MaskType="RegEx"
                                 Text="{Binding StartPoint, Converter={StaticResource Point3dToStringConvertor}}" />
                         </dxlc:LayoutItem>
-                        <dxlc:LayoutItem Label="桩终点：">
+                        <dxlc:LayoutItem VerticalAlignment="Center" Label="桩终点：">
                             <dxe:TextEdit
                                 DisplayFormatString="f4"
                                 Mask="(-?\d+)(\.\d+)?,(-?\d+)(\.\d+)?,(-?\d+)(\.\d+)?"
                                 MaskType="RegEx"
                                 Text="{Binding EndPoint, Converter={StaticResource Point3dToStringConvertor}}" />
                         </dxlc:LayoutItem>
+                        <Button
+                            Width="40"
+                            Background="{x:Null}"
+                            Command="{Binding SelectPileAxesCommand}"
+                            ToolTip="从图中选取桩轴线">
+                            <Image Source="/PDIWT_MS_ZJCZL;component/Resources/Image/Center Direction.ico" />
+                        </Button>
                     </dxlc:LayoutGroup>
                 </dxlc:LayoutGroup>
             </GroupBox>
@@ -74,7 +74,7 @@
                 VerticalAlignment="Top"
                 Orientation="Horizontal">
                 <Button Command="{Binding AddPileCommand}" Content="添加桩信息" />
-                <Button Content="关闭窗口" Click="Button_Click"/>
+                <Button Click="Button_Click" Content="关闭窗口" />
             </dxlc:LayoutGroup>
 
         </dxlc:LayoutControl>

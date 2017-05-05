@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="file:///D:/PROGRAM FILES (X86)/MICROSOFT VISUAL STUDIO 14.0/COMMON7/IDE/EXTENSIONS/MICROSOFT/ARCHITECTURE TOOLS/EXTENSIBILITY/Logging/CodeGenLog.xslt"?>
+<Log xmlns="http://schemas.microsoft.com/VisualStudio/2010/CodeGen.RE.Log" Label="代码生成/文本转换记录">
+  <MessageClass Name="Message" Label="消息" Option="显示提供相关信息的消息" />
+  <MessageClass Name="Warning" Label="警告" Option="显示警告" />
+  <MessageClass Name="Error" Label="错误" Option="显示错误" />
+  <MessageClass Name="Property" Label="属性" Option="显示元数据" />
+  <MessageClass Name="Diagnostic" Label="消息" Option="显示诊断消息" />
+  <Message Timestamp="2017-05-04T14:03:39" Importance="High" Text="已启动代码生成或文本转换。" />
+  <Message Timestamp="2017-05-04T14:03:39" Importance="Diagnostic" Text="名称 = InterfaceTemplate" />
+  <Message Timestamp="2017-05-04T14:03:39" Importance="Diagnostic" Text="覆盖 = True" />
+  <Message Timestamp="2017-05-04T14:03:39" Importance="Diagnostic" Text="ProjectPath = ..\PDIWT_MS_ZJCZL_DiagramLib\PDIWT_MS_ZJCZL_DiagramLib.csproj" />
+  <Message Timestamp="2017-05-04T14:03:39" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
+  <Message Timestamp="2017-05-04T14:03:39" Importance="Diagnostic" Text="TargetName = {Name}" />
+  <Message Timestamp="2017-05-04T14:03:39" Importance="Diagnostic" Text="TemplateFilePath = D:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 14.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\InterfaceTemplate.t4" />
+  <Message Timestamp="2017-05-04T14:03:39" Importance="Diagnostic" Text="ResolvedTemplateFilePath = D:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 14.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\InterfaceTemplate.t4" />
+  <Message Timestamp="2017-05-04T14:03:39" Importance="Medium" Text="PDIWT_MS_ZJCZL_Diagram 的文本模板绑定: “InterfaceTemplate”会将 InterfaceTemplate.t4 应用于: “PDIWT_MS_ZJCZL_Diagram::IPileProperty”- (Interface) " />
+  <Message Timestamp="2017-05-04T14:04:01" Importance="Medium" Text="新增项目: D:\Programma\Source\C#\MDL\PDIWT_MS\PDIWT_MS\PDIWT_MS\PDIWT_MS_ZJCZL_DiagramLib\PDIWT_MS_ZJCZL_DiagramLib.csproj" />
+  <Message Timestamp="2017-05-04T14:04:01" Importance="Medium" Text="“PDIWT_MS_ZJCZL_Diagram::IPileProperty”- (Interface) : 成功(已创建文件) - D:\Programma\Source\C#\MDL\PDIWT_MS\PDIWT_MS\PDIWT_MS\PDIWT_MS_ZJCZL_DiagramLib\GeneratedCode\IPileProperty.cs" />
+  <Message Timestamp="2017-05-04T14:04:01" Importance="High" Text="代码生成完成。错误: 0。警告: 0。" />
+</Log>

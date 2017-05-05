@@ -1,0 +1,15 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors">
+    <Style x:Key="RedFont" TargetType="dxe:TextEdit">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Text}" Value="-1">
+                <Setter Property="FontStyle" Value="Italic" />
+                <Setter Property="Foreground" Value="Red" />
+                <Setter Property="FontWeight" Value="DemiBold" />
+                <Setter Property="ToolTip" Value="请点击&lt;计算桩基承载力&gt;按钮获得计算值" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

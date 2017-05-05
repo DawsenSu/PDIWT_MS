@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Bentley.DgnPlatformNET.Elements;
 using BD = Bentley.DgnPlatformNET;
+using BG = Bentley.GeometryNET;
 
 namespace PDIWT_MS_ZJCZL.Models
 {
@@ -23,7 +24,7 @@ namespace PDIWT_MS_ZJCZL.Models
             InstallNewInstance();
         }
         
-        public void InstallNewInstance()
+        public static void InstallNewInstance()
         {
             SelectPileTool tool = new SelectPileTool(0, 0);
             tool.InstallTool();
@@ -31,10 +32,17 @@ namespace PDIWT_MS_ZJCZL.Models
         protected override bool OnDataButton(BD.DgnButtonEvent ev)
         {
             BD.HitPath hitPath = DoLocate(ev, true, 0);
+            
             if (null != hitPath)
             {
                 Element ele = hitPath.GetHeadElement();
-                SelectedEleID = ele.ElementId.ToString();
+                if (ele.ElementType != BD.MSElementType.Line)
+                    return false;
+                BG.DRange3d linerange;
+                if ((ele as LineElement).CalcElementRange(out linerange) != BD.StatusInt.Success)
+                    return false;
+                TopPoint = linerange.High;
+                BottomPoint = linerange.Low;
                 return true;
             }
             else
@@ -51,7 +59,10 @@ namespace PDIWT_MS_ZJCZL.Models
         //{
         //    return false;
         //}
-        public string SelectedEleID { get; private set; }
+                
+        //public string SelectedEleID { get; private set; }
+        public static BG.DPoint3d TopPoint { get; private set; }
+        public static BG.DPoint3d BottomPoint { get; private set; }
 
     }
 }
