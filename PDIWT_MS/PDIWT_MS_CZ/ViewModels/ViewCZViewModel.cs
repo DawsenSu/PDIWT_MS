@@ -19,7 +19,9 @@ using DevExpress.Mvvm.DataAnnotations;
 using BM = Bentley.MstnPlatformNET;
 using BD = Bentley.DgnPlatformNET;
 using Bentley.Interop.MicroStationDGN;
-
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Drawing;
 
 namespace PDIWT_MS_CZ.ViewModels
 {
@@ -934,7 +936,7 @@ namespace PDIWT_MS_CZ.ViewModels
             return bafflelist;
         }
 
-        void ComDrawAll()
+        SmartSolidElement ComDrawAll()
         {
             SmartSolidElement ele_db = GetDB();
             SmartSolidElement ele_db_removed = null;
@@ -991,7 +993,7 @@ namespace PDIWT_MS_CZ.ViewModels
             cz_mirrorEnd = app.Point3dFromXY(0, 1);
             czRigth.Mirror(ref cz_mirrorStart, ref cz_mirrorEnd);
             cz = app.SmartSolid.SolidUnion(czLeft, czRigth);
-            app.ActiveModelReference.AddElement(cz);
+            return cz;
             #endregion
         }
         #endregion
@@ -1148,11 +1150,26 @@ namespace PDIWT_MS_CZ.ViewModels
         }
 
         [Command]
+        public void PreviewDraw()
+        {
+            var previewview = new Views.Preview();
+            var previewmodel = new PreviewViewModel();
+            previewmodel.CZ = ComDrawAll();
+            previewview.DataContext = previewmodel;
+            previewview.ShowDialog();
+        }
+        public bool CanPreviewDraw()
+        {
+            return CanDrawAll();
+        }
+
+        [Command]
         public void DrawAll()
         {
             try
             {
-                ComDrawAll();
+                SmartSolidElement czele = ComDrawAll();
+                app.ActiveModelReference.AddElement(czele);
                 System.Windows.MessageBox.Show("参数化船闸绘制完成！\n放置在原点（0,0,0,）", "绘制完成", MessageBoxButton.OK, MessageBoxImage.Information);
                 ErrorInfo = "参数化船闸绘制完成！";
             }
@@ -1194,10 +1211,20 @@ namespace PDIWT_MS_CZ.ViewModels
             return CanDrawAll();
         }
 
+        public ImageSource TestImage
+        {
+            get { return GetProperty(() => TestImage); }
+            set { SetProperty(() => TestImage, value); }
+        }
         [Command]
         public void Test()
         {
-            app.ActiveModelReference.AddElement(GetSSLD_Endfilling());
+            SmartSolidElement testele = GetDivisionPier();
+            Point3d origin = app.Point3dZero();
+            testele.Rotate(ref origin, Math.PI / 4, Math.PI / 4, Math.PI / 4);
+            IntPtr metafilehandle = new IntPtr(testele.DrawToEnhancedMetafile(200, 200, true));
+            Bitmap bitmap = new Bitmap(new System.Drawing.Imaging.Metafile(metafilehandle, true));
+            TestImage = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(bitmap.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
         }
 
         [Command]

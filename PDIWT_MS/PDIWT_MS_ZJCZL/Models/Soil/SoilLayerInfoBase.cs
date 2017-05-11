@@ -25,7 +25,7 @@ namespace PDIWT_MS_ZJCZL.Models.Soil
             set { SetProperty(() => SoilLayerNum, value); }
         }
         [DisplayName("桩在此土层内的长度m"), ReadOnly(true), Display(Order = 2)]
-        public double PileInSoilLayerLength
+        public double PileInSoilLayerLength // unit :m
         {
             get { return GetProperty(() => PileInSoilLayerLength); }
             set { SetProperty(() => PileInSoilLayerLength, value); }

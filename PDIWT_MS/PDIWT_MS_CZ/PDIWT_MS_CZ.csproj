@@ -193,6 +193,10 @@
     <Compile Include="Views\ExcelOutputWindow.xaml.cs">
       <DependentUpon>ExcelOutputWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Preview.xaml.cs">
+      <DependentUpon>Preview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\PreviewViewModel.cs" />
     <Compile Include="Views\ViewCZ.xaml.cs">
       <DependentUpon>ViewCZ.xaml</DependentUpon>
     </Compile>
@@ -216,6 +220,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\ExcelOutputWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Preview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -253,6 +261,9 @@
     <Resource Include="Image\Icons\Export.ico" />
     <Resource Include="Image\Icons\Import.ico" />
     <Resource Include="Image\Icons\Microsoft Excel.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Icons\Preview Pane.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
   dslVersion="1.0.0.0"
   Id="77bee44e-18dd-4526-bb50-e8f026b22986"
   name="PDIWT_MS_ZJCZL_Diagram" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -12,6 +12,20 @@
         <classMoniker
           Id="ccb28de1-3f73-48b2-a389-93192ae44125"
           LastKnownName="BindableBase"
+          LastKnownLocation="PDIWT_MS_ZJCZL_Diagram.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="41e4d0bf-101c-439c-b317-5d85790966b8">
+      <body>HXCHCodeQueryLib
+
+ColumnLayerInfoArray
+QueryByRay(ref ColumnLayerInfoArray , startpoint, endpoint)
+</body>
+      <annotatedElements>
+        <classMoniker
+          Id="08d5db79-2885-4582-92d0-a53c463f9b35"
+          LastKnownName=" PileFactory"
           LastKnownLocation="PDIWT_MS_ZJCZL_Diagram.uml" />
       </annotatedElements>
     </comment>
@@ -238,16 +252,6 @@
                 LastKnownLocation="PDIWT_MS_ZJCZL_Diagram.uml" />
             </type_NamedElement>
           </property>
-          <property
-            Id="52fc3277-fa41-43a3-bf1f-5470d9b538e4"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false" />
         </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation
@@ -489,21 +493,6 @@
             name="Square" />
         </ownedLiterals>
       </enumeration>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <enumeration
-        Id="d1f0abac-2b6b-4fd8-abb6-fe21aeb9f029"
-        name="Enumeration1"
-        isAbstract="false"
-        isLeaf="false" />
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <class
-        Id="deeb78aa-e346-4f08-bfe5-90f0cb0cb5db"
-        name="Class1"
-        isAbstract="false"
-        isLeaf="false"
-        isActiveClass="false" />
     </packageHasNamedElement>
     <packageHasNamedElement>
       <undefinedType
@@ -1172,7 +1161,7 @@
         </suppliersInternal>
         <generalsInternal>
           <generalization
-            Id="a18af360-4de4-4dd0-a743-cf57517c5bcb"
+            Id="e87f9dbc-2d88-49e8-8b1f-542da7fe7399"
             isSubstitutable="false">
             <classMoniker
               Id="3785b9ad-62dd-42ba-95d8-9389b8305a99"
@@ -2246,6 +2235,37 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
+          <operation
+            Id="16cf8ca5-6d85-4202-ad98-a85454bf3f0b"
+            name="SetPileLength"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="366efc09-4fe0-4a73-b15f-1de48663f495"
+                  name="double pileLength"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="93109796-de34-4f03-9172-8b6b677b6f75"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="5d2c09a8-7ff0-4613-9a0c-ceb280b987f0"
+                      LastKnownName="void"
+                      LastKnownLocation="PDIWT_MS_ZJCZL_Diagram.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperations>
       </Interface>
     </packageHasNamedElement>
@@ -2395,6 +2415,37 @@
                     <undefinedTypeMoniker
                       Id="c53ea759-7bc2-46ef-85a0-89166612dcc8"
                       LastKnownName="double"
+                      LastKnownLocation="PDIWT_MS_ZJCZL_Diagram.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="fbc34438-7de4-4b13-952f-99dd0191286d"
+            name="SetPileLength"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="4641c6ef-f735-43db-8870-53d4a2bb0447"
+                  name="double pileLength"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="b3430ce9-b342-4c95-a636-206f833300b6"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="5d2c09a8-7ff0-4613-9a0c-ceb280b987f0"
+                      LastKnownName="void"
                       LastKnownLocation="PDIWT_MS_ZJCZL_Diagram.uml" />
                   </type_NamedElement>
                 </parameter>
@@ -2551,6 +2602,37 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
+          <operation
+            Id="b583861d-424e-469d-8ee5-179d8e851a92"
+            name="SetPileLength"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="95410cea-5da0-4d8d-b5b9-1eb0c463c6b5"
+                  name="double pileLength"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="b0371355-ee5e-49b0-9f8f-d944ce79f4f3"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="5d2c09a8-7ff0-4613-9a0c-ceb280b987f0"
+                      LastKnownName="void"
+                      LastKnownLocation="PDIWT_MS_ZJCZL_Diagram.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
@@ -2695,6 +2777,37 @@
                     <undefinedTypeMoniker
                       Id="c53ea759-7bc2-46ef-85a0-89166612dcc8"
                       LastKnownName="double"
+                      LastKnownLocation="PDIWT_MS_ZJCZL_Diagram.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="bad671fd-8c44-4662-8b2b-a816a8a90adb"
+            name="SetPileLength"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="b269d6af-1571-4e72-9729-83539b33c205"
+                  name="double pileLength"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="649047c9-d222-4739-b6ef-847ffc23a053"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="5d2c09a8-7ff0-4613-9a0c-ceb280b987f0"
+                      LastKnownName="void"
                       LastKnownLocation="PDIWT_MS_ZJCZL_Diagram.uml" />
                   </type_NamedElement>
                 </parameter>
@@ -3003,6 +3116,282 @@
           </operation>
         </ownedOperations>
       </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="08d5db79-2885-4582-92d0-a53c463f9b35"
+        name=" PileFactory"
+        isAbstract="true"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="33e6f45c-d939-4e8b-84cd-a76a097b715a">
+            <packageMoniker
+              Id="652a36a7-c163-4760-a7bf-1bf2185dc002"
+              LastKnownName="HXCHCodeQueryLib"
+              LastKnownLocation="Package_1351.uml" />
+          </dependency>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="dc5b2f31-5c97-400f-9a63-f2b2b2808612"
+            name="pileQuery"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="af700699-46a3-4c0f-aef3-7d451be53e37"
+                LastKnownName="HXCHCodeQuery"
+                LastKnownLocation="PDIWT_MS_ZJCZL_Diagram.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="46ba94cd-7969-4432-b95d-f95c013512c6"
+            name="columnLayerInfoArray"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <lowerValueInternal>
+              <literalString
+                Id="86601d25-f1e3-40f8-8692-f6049242d3eb"
+                name="Lower"
+                value="1" />
+            </lowerValueInternal>
+            <upperValueInternal>
+              <literalString
+                Id="cb0f08a6-5482-4f04-8404-3bb5d03c7788"
+                name="Upper"
+                value="1" />
+            </upperValueInternal>
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="fb4e3e49-fd81-4aed-825a-be1e86f19917"
+                LastKnownName="ColumnLayerInfoArray"
+                LastKnownLocation="PDIWT_MS_ZJCZL_Diagram.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="e2864c6f-8bff-402b-92d8-a978e1eda710"
+            name="CreateNewPile"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="39cce2a7-255c-4d9c-b846-59e0570c94e4"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="3785b9ad-62dd-42ba-95d8-9389b8305a99"
+                      LastKnownName="PileBase"
+                      LastKnownLocation="PDIWT_MS_ZJCZL_Diagram.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="962fb00e-aa78-4ae5-aac4-03f58ed51609"
+                  name="IPileProperty pileType"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="1a069625-64ba-413b-bb26-35081087c1f9"
+                  name="String pileCode"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="36b2c743-0491-49a9-9643-503335abba2c"
+                  name="double pileId"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="74c87698-0e7d-4c46-913e-fb165be1a339"
+            name="CreateNewPileArray"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="efb85366-f311-4c55-b789-d11c466ade42"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="2c35046e-bf1f-4f39-8dc2-cdaa80bac439"
+                      LastKnownName="PileBase[]"
+                      LastKnownLocation="PDIWT_MS_ZJCZL_Diagram.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="461d32cf-0b3e-4348-b50d-66f6e4dfc063"
+                  name="IPileProperty[] pileTypeArray"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="6cd6600e-17ab-4bbf-91ee-5b5112d42dce"
+                  name="String[] pileCodeArray"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="742545f3-241a-41f4-92b0-4204d6cb99b0"
+                  name="double[] pileIdArray"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="2c35046e-bf1f-4f39-8dc2-cdaa80bac439"
+        name="PileBase[]" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="dacbbd1b-8a6b-4a04-b39e-96bc471a6bf5"
+        name="SolidPileFactory"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="e50403e1-3523-4e9e-859b-27e62da51347"
+            isSubstitutable="false">
+            <classMoniker
+              Id="08d5db79-2885-4582-92d0-a53c463f9b35"
+              LastKnownName=" PileFactory"
+              LastKnownLocation="PDIWT_MS_ZJCZL_Diagram.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="0a8201c0-b313-4772-9dbf-6634cc39227d"
+        name="FillingPileFactory"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="0db4df30-a60b-431e-bb1f-6b7eee80a27b"
+            isSubstitutable="false">
+            <classMoniker
+              Id="08d5db79-2885-4582-92d0-a53c463f9b35"
+              LastKnownName=" PileFactory"
+              LastKnownLocation="PDIWT_MS_ZJCZL_Diagram.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="e709a7b7-ef3a-4771-83cb-ccf2a58bcd13"
+        name="PostgroutingFillingPileFactory"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="e21508f1-cdb3-4750-9755-b8cd222e719d"
+            isSubstitutable="false">
+            <classMoniker
+              Id="08d5db79-2885-4582-92d0-a53c463f9b35"
+              LastKnownName=" PileFactory"
+              LastKnownLocation="PDIWT_MS_ZJCZL_Diagram.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="57856861-4fe3-48a1-9daf-02195d9686cc"
+        name="SocketedPileFactory"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="f8c08113-38e7-4a09-8a63-39242f80f932"
+            isSubstitutable="false">
+            <classMoniker
+              Id="08d5db79-2885-4582-92d0-a53c463f9b35"
+              LastKnownName=" PileFactory"
+              LastKnownLocation="PDIWT_MS_ZJCZL_Diagram.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="3defe9b2-7401-4a4a-92c9-152e70be63a8"
+        name="SteelAndPercastConcretePileFactory"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="82ae8a24-bfa6-4b5d-ae22-f74ce5dc4a39"
+            isSubstitutable="false">
+            <classMoniker
+              Id="08d5db79-2885-4582-92d0-a53c463f9b35"
+              LastKnownName=" PileFactory"
+              LastKnownLocation="PDIWT_MS_ZJCZL_Diagram.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="af700699-46a3-4c0f-aef3-7d451be53e37"
+        name="HXCHCodeQuery" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="652a36a7-c163-4760-a7bf-1bf2185dc002"
+        LastKnownName="HXCHCodeQueryLib"
+        LastKnownLocation="Package_1351.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="fb4e3e49-fd81-4aed-825a-be1e86f19917"
+        name="ColumnLayerInfoArray" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

@@ -1,0 +1,115 @@
+﻿<Window
+    x:Class="PDIWT_MS_ZJCZL.Views.GetPilesFromLines"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ViewModels="clr-namespace:PDIWT_MS_ZJCZL.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="从模型图层中添加桩"
+    Width="300"
+    Height="400"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <dx:EnumToVisibilityConverter x:Key="etovconvertor" />
+    </Window.Resources>
+    <Grid>
+        <dxlc:LayoutControl Orientation="Vertical">
+            <dxlc:LayoutGroup Orientation="Vertical">
+                <dxlc:LayoutItem Label="代表桩的线条所在图层：">
+                    <ComboBox
+                        DisplayMemberPath="DisplayName"
+                        ItemsSource="{Binding AllDgnLevels}"
+                        SelectedItem="{Binding SelectedDgnLevel}" />
+                </dxlc:LayoutItem>
+                <GroupBox Header="桩的信息">
+                    <ScrollViewer BorderBrush="{x:Null}" VerticalScrollBarVisibility="Auto">
+                        <dxlc:LayoutGroup Orientation="Vertical">
+                            <dxlc:LayoutItem Label="桩类型">
+                                <dxe:ComboBoxEdit EditValue="{Binding SelectedPileType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsTextEditable="False">
+                                    <dxmvvm:Interaction.Behaviors>
+                                        <dxmvvm:EnumItemsSourceBehavior EnumType="{x:Type ViewModels:PileType}" />
+                                    </dxmvvm:Interaction.Behaviors>
+                                </dxe:ComboBoxEdit>
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutItem Label="桩截面类型">
+                                <dxe:ComboBoxEdit EditValue="{Binding SelectedPileCrossSectionType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsTextEditable="False">
+                                    <dxmvvm:Interaction.Behaviors>
+                                        <dxmvvm:EnumItemsSourceBehavior EnumType="{x:Type ViewModels:PileCrossSectionType}" />
+                                    </dxmvvm:Interaction.Behaviors>
+                                </dxe:ComboBoxEdit>
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutItem Label="桩名称前缀：">
+                                <dxe:TextEdit Text="{Binding PileName}" />
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutGroup Orientation="Vertical" Visibility="{Binding SelectedPileCrossSectionType, Converter={StaticResource etovconvertor}, ConverterParameter=Roundness}">
+                                <dxlc:LayoutItem Label="桩直径(m)：">
+                                    <dxe:TextEdit Text="{Binding PileDiameter}" />
+                                </dxlc:LayoutItem>
+                            </dxlc:LayoutGroup>
+                            <dxlc:LayoutGroup Orientation="Vertical" Visibility="{Binding SelectedPileCrossSectionType, Converter={StaticResource etovconvertor}, ConverterParameter=Square}">
+                                <dxlc:LayoutItem Label="桩边长(m)：">
+                                    <dxe:TextEdit Text="{Binding PileDiameter}" />
+                                </dxlc:LayoutItem>
+                            </dxlc:LayoutGroup>
+                            <dxlc:LayoutGroup Orientation="Vertical" Visibility="{Binding SelectedPileCrossSectionType, Converter={StaticResource etovconvertor}, ConverterParameter=Annular}">
+                                <dxlc:LayoutItem Label="桩直径(m)：">
+                                    <dxe:TextEdit Text="{Binding PileDiameter}" />
+                                </dxlc:LayoutItem>
+                                <dxlc:LayoutItem Label="桩孔直径(m)：">
+                                    <dxe:TextEdit Text="{Binding PileInnerDiameter}" />
+                                </dxlc:LayoutItem>
+                            </dxlc:LayoutGroup>
+                            <dxlc:LayoutItem Label="桩的水上重度(KN/m)：">
+                                <dxe:TextEdit Text="{Binding PileWeight}" />
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutItem Label="桩的水下重度(KN/m)：">
+                                <dxe:TextEdit Text="{Binding PileUnderwaterWeight}" />
+                            </dxlc:LayoutItem>
+                        </dxlc:LayoutGroup>
+                    </ScrollViewer>
+                </GroupBox>
+                <GroupBox VerticalAlignment="Bottom" Header="桩的计算参数">
+                    <dxlc:LayoutGroup Orientation="Vertical">
+                        <dxlc:LayoutItem Label="水位(m):">
+                            <dxe:TextEdit Text="{Binding WaterLevel}" />
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutGroup View="Group">
+                            <dxlc:LayoutItem Label="γR:">
+                                <dxe:TextEdit Text="{Binding GammaR}" />
+                            </dxlc:LayoutItem>
+                        </dxlc:LayoutGroup>
+                        <dxlc:LayoutGroup
+                            Orientation="Vertical"
+                            View="Group"
+                            Visibility="{Binding SelectedPileType, Converter={StaticResource etovconvertor}, ConverterParameter=Socketed}">
+                            <dxlc:LayoutItem Label="γs:">
+                                <dxe:TextEdit Text="{Binding Gammas}" />
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutItem Label="Hr:">
+                                <dxe:TextEdit Text="{Binding Hr}" />
+                            </dxlc:LayoutItem>
+                        </dxlc:LayoutGroup>
+                    </dxlc:LayoutGroup>
+
+                </GroupBox>
+                <StackPanel
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+                    <StackPanel.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Margin" Value="5,0" />
+                        </Style>
+                    </StackPanel.Resources>
+                    <Button Command="{Binding AddCommand}" Content="确定" />
+                    <Button Command="{Binding CloseCommand}" Content="取消" />
+                </StackPanel>
+            </dxlc:LayoutGroup>
+        </dxlc:LayoutControl>
+    </Grid>
+</Window>

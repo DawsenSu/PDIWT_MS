@@ -6,18 +6,20 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:datatepselector="clr-namespace:PDIWT_MS_ZJCZL.DateTemplateSelector"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:templateselector="clr-namespace:PDIWT_MS_ZJCZL.DateTemplateSelector"
     d:DesignHeight="300"
     d:DesignWidth="500"
     mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary x:Name="LocalResDict">
+                <ResourceDictionary>
                     <dxmvvm:ObjectToObjectConverter x:Key="PileTypeToStringConvertor">
                         <dxmvvm:MapItem Source="Solid" Target="实心桩或桩端封闭" />
                         <dxmvvm:MapItem Source="SteelAndPercastConcrete" Target="管桩" />
@@ -25,209 +27,467 @@
                         <dxmvvm:MapItem Source="Socketed" Target="嵌岩桩" />
                         <dxmvvm:MapItem Source="PostgroutingFilling" Target="后注浆灌注桩" />
                     </dxmvvm:ObjectToObjectConverter>
-                    <datatepselector:PileListTemplateSelector x:Key="pilelistTepSelector" />
-                    <datatepselector:PileDetailTemplateSelector x:Key="pileDetailTepSelector" />
+                    <templateselector:PileListTemplateSelector x:Key="pilelistTepSelector" />
+                    <templateselector:PileDetailTemplateSelector x:Key="pileDetailTepSelector" />
+                    <templateselector:PileCrossSectionTemplateSelector
+                        x:Key="crosssectiontempselector"
+                        AnnualrTempKey="Annular"
+                        RoumdnessTempKey="Roundness"
+                        SquareTempKey="Square" />
+                    <Style TargetType="Separator">
+                        <Setter Property="Margin" Value="5" />
+                        <Setter Property="BorderThickness" Value="2" />
+                        <Setter Property="LayoutTransform">
+                            <Setter.Value>
+                                <RotateTransform Angle="-90" />
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
                 </ResourceDictionary>
                 <ResourceDictionary Source="/PDIWT_MS_ZJCZL;component/Resources/Xaml/OtherResourceDictionary.xaml" />
-                <ResourceDictionary Source="/PDIWT_MS_ZJCZL;component/Resources/Xaml/PileListResourceDictionary.xaml" />
+                <!--<ResourceDictionary Source="/PDIWT_MS_ZJCZL;component/Resources/Xaml/PileListResourceDictionary.xaml" />-->
                 <!--<ResourceDictionary Source="/PDIWT_MS_ZJCZL;component/Resources/Xaml/PileDetailInfoResourceDictionary.xaml" />-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <dxlc:LayoutControl Orientation="Vertical">
-        <dxlc:LayoutGroup Orientation="Horizontal">
-            <dxlc:LayoutGroup
-                HorizontalAlignment="Left"
-                Header="桩信息"
-                Orientation="Vertical"
-                View="GroupBox">
-                <ListBox
-                    x:Name="listboxPile"
-                    ItemTemplateSelector="{StaticResource pilelistTepSelector}"
-                    ItemsSource="{Binding Piles}"
-                    SelectedItem="{Binding CurrentPile}" />
-                <StackPanel
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom"
-                    Orientation="Horizontal">
-                    <Button
-                        Margin="10,0"
-                        Command="{Binding AddPileCommand}"
-                        Content="增加" />
-                    <Button
-                        Margin="10,0"
-                        Command="{Binding RemovePileCommand}"
-                        Content="删除" />
-                </StackPanel>
-            </dxlc:LayoutGroup>
-            <UserControl Content="{Binding CurrentPile}" ContentTemplateSelector="{StaticResource pileDetailTepSelector}">
-                <UserControl.Resources>
-                    <DataTemplate x:Key="SoildPileDetailTemplate">
-                        <dxlc:LayoutGroup View="Group">
-                            <dxlc:LayoutGroup
-                                Header="土层信息"
-                                Orientation="Vertical"
-                                View="GroupBox">
-                                <dxg:GridControl
-                                    AutoGenerateColumns="AddNew"
-                                    ItemsSource="{Binding SolidPileSoilLayerInfoProp}"
-                                    SelectionMode="Row">
-                                    <dxg:GridControl.View>
-                                        <dxg:TableView
-                                            AllowEditing="True"
-                                            AutoWidth="True"
-                                            ShowGroupPanel="False" />
-                                    </dxg:GridControl.View>
-                                </dxg:GridControl>
-                                <GroupBox VerticalAlignment="Bottom" Header="桩端参数">
-                                    <dxlc:LayoutGroup Orientation="Vertical" View="Group">
-                                        <dxlc:LayoutItem>
-                                            <dxlc:LayoutItem.Label>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="q">
-                                                        <Run
-                                                            BaselineAlignment="Subscript"
-                                                            FontSize="8"
-                                                            Text="R" />
-                                                    </TextBlock>
-                                                    <TextBlock Text="=" />
-                                                </StackPanel>
-                                            </dxlc:LayoutItem.Label>
-                                            <dxe:TextEdit Text="{Binding Qr}" />
-                                        </dxlc:LayoutItem>
-                                    </dxlc:LayoutGroup>
-                                </GroupBox>
-                            </dxlc:LayoutGroup>
-                            <dxlc:LayoutGroup
-                                HorizontalAlignment="Right"
-                                Header="计算参数"
-                                Orientation="Vertical"
-                                View="GroupBox">
-                                <dxlc:LayoutItem VerticalAlignment="Top">
-                                    <dxlc:LayoutItem.Label>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="γ">
-                                                <Run
-                                                    BaselineAlignment="Subscript"
-                                                    FontSize="8"
-                                                    Text="R" />
-                                            </TextBlock>
-                                            <TextBlock Text="=" />
-                                        </StackPanel>
-                                    </dxlc:LayoutItem.Label>
-                                    <dxe:TextEdit Text="{Binding GammaR}" />
-                                </dxlc:LayoutItem>
-                            </dxlc:LayoutGroup>
-                        </dxlc:LayoutGroup>
-                    </DataTemplate>
+    <DockPanel>
+        <dxb:BarContainerControl DockPanel.Dock="Top">
+            <dxb:ToolBarControl
+                AllowCollapse="True"
+                AllowCustomizationMenu="False"
+                AllowHide="False"
+                AllowQuickCustomization="False"
+                BarItemDisplayMode="ContentAndGlyph">
+                <dxb:BarButtonItem
+                    Command="{Binding DrawPileLineFromFileCommand}"
+                    Content="根据Excel文件绘制桩中心线"
+                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/Microsoft Excel_black.ico" />
+                <dxb:BarButtonItem
+                    Command="{Binding GetPilesFromLinesCommand}"
+                    Content="从模型中提取设计桩列表"
+                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/External Link.ico" />
+                <dxb:BarButtonItem
+                    Command="{Binding AnalysisCommand}"
+                    Content="统计分析"
+                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/Rebalance Portfolio.ico" />
+            </dxb:ToolBarControl>
+        </dxb:BarContainerControl>
+        <dxlc:LayoutControl VerticalAlignment="Stretch" Orientation="Vertical">
+            <dxlc:LayoutGroup Orientation="Horizontal">
+                <dxlc:LayoutGroup
+                    HorizontalAlignment="Left"
+                    Header="桩信息"
+                    Orientation="Vertical"
+                    View="GroupBox">
+                    <ListBox
+                        x:Name="listboxPile"
+                        MinWidth="120"
+                        ItemTemplateSelector="{StaticResource pilelistTepSelector}"
+                        ItemsSource="{Binding Piles}"
+                        SelectedItem="{Binding CurrentPile}">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="true">
+                                        <Setter Property="BorderThickness" Value="2" />
+                                        <Setter Property="Foreground" Value="White" />
+                                        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.Resources>
+                            <SolidColorBrush x:Key="pilelistInfoHeadForground" Color="#FFF74848" />
 
-                    <DataTemplate x:Key="FillingPileDetailTemplate">
-                        <dxlc:LayoutGroup View="Group">
-                            <dxlc:LayoutGroup
-                                Header="土层信息"
-                                Orientation="Vertical"
-                                View="GroupBox">
-                                <dxg:GridControl
-                                    AutoGenerateColumns="AddNew"
-                                    ItemsSource="{Binding FillingPileSoilLayerInfoProp}"
-                                    SelectionMode="Row">
-                                    <dxg:GridControl.View>
-                                        <dxg:TableView
-                                            AllowEditing="True"
-                                            AutoWidth="True"
-                                            ShowGroupPanel="False" />
-                                    </dxg:GridControl.View>
-                                    <!--<dxg:GridColumn FieldName="SoilLayerName" Header="土层名称" />
-                                    <dxg:GridColumn FieldName="SoilLayerName" Header="土层名称" />
-                                    <dxg:GridColumn FieldName="SoilLayerName" Header="土层名称" />
-                                    <dxg:GridColumn FieldName="SoilLayerName" Header="土层名称" />
-                                    <dxg:GridColumn FieldName="SoilLayerName" Header="土层名称" />
-                                    <dxg:GridColumn FieldName="SoilLayerName" Header="土层名称" />-->
-                                </dxg:GridControl>
-                                <GroupBox VerticalAlignment="Bottom" Header="桩端参数">
-                                    <dxlc:LayoutGroup Orientation="Vertical" View="Group">
-                                        <dxlc:LayoutItem>
-                                            <dxlc:LayoutItem.Label>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="q">
-                                                        <Run
-                                                            BaselineAlignment="Subscript"
-                                                            FontSize="8"
-                                                            Text="R" />
-                                                    </TextBlock>
-                                                    <TextBlock Text="=" />
-                                                </StackPanel>
-                                            </dxlc:LayoutItem.Label>
-                                            <dxe:TextEdit Text="{Binding Qr}" />
-                                        </dxlc:LayoutItem>
-                                        <dxlc:LayoutItem>
-                                            <dxlc:LayoutItem.Label>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="ψ">
-                                                        <Run
-                                                            BaselineAlignment="Subscript"
-                                                            FontSize="8"
-                                                            Text="p" />
-                                                    </TextBlock>
-                                                    <TextBlock Text="=" />
-                                                </StackPanel>
-                                            </dxlc:LayoutItem.Label>
-                                            <dxe:TextEdit Text="{Binding PsiP}" />
-                                        </dxlc:LayoutItem>
-                                    </dxlc:LayoutGroup>
-                                </GroupBox>
-                            </dxlc:LayoutGroup>
-                            <dxlc:LayoutGroup
-                                HorizontalAlignment="Right"
-                                Header="计算参数"
-                                Orientation="Vertical"
-                                View="GroupBox">
-                                <dxlc:LayoutItem VerticalAlignment="Top">
-                                    <dxlc:LayoutItem.Label>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="γ">
-                                                <Run
-                                                    BaselineAlignment="Subscript"
-                                                    FontSize="8"
-                                                    Text="R" />
-                                            </TextBlock>
-                                            <TextBlock Text="=" />
+                            <DataTemplate x:Key="Roundness">
+                                <StackPanel>
+                                    <TextBlock Text="截面形式:圆形" />
+                                    <TextBlock Text="{Binding PileDiameter, StringFormat=桩径:{0}m}" />
+                                </StackPanel>
+                            </DataTemplate>
+
+                            <DataTemplate x:Key="Square">
+                                <StackPanel>
+                                    <TextBlock Text="截面形式:方型" />
+                                    <TextBlock Text="{Binding PileDiameter, StringFormat=桩边长:{0}m}" />
+                                </StackPanel>
+                            </DataTemplate>
+
+                            <DataTemplate x:Key="Annular">
+                                <StackPanel>
+                                    <TextBlock Text="截面形式:环形" />
+                                    <TextBlock Text="{Binding PileDiameter, StringFormat=桩外径:{0}m}" />
+                                    <TextBlock Text="{Binding PileInnerDiameter, StringFormat=桩内径:{0}m}" />
+                                </StackPanel>
+                            </DataTemplate>
+
+                            <DataTemplate x:Key="SoildPileTemplate">
+                                <Border
+                                    Width="150"
+                                    Padding="4"
+                                    HorizontalAlignment="Stretch"
+                                    Background="Gold"
+                                    BorderBrush="Black"
+                                    BorderThickness="2"
+                                    CornerRadius="4">
+                                    <StackPanel>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding PileCode, StringFormat=桩编号:{0}}" />
+                                        <StackPanel Margin="3,0,0,0" Orientation="Vertical">
+                                            <StackPanel.Style>
+                                                <Style TargetType="StackPanel">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}}" Value="False">
+                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </StackPanel.Style>
+                                            <Separator />
+                                            <TextBlock Text="桩类型:实心桩" />
+                                            <ContentPresenter
+                                                HorizontalAlignment="Stretch"
+                                                Content="{Binding PilePropertyInfo}"
+                                                ContentTemplateSelector="{StaticResource crosssectiontempselector}" />
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="截面积:" />
+                                                <TextBlock Text="{DXBinding 'PilePropertyInfo.GetPileCrossSectionArea().ToString(`n2`)', Mode=OneWay}" />
+                                                <TextBlock Text="m2" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="周长:" />
+                                                <TextBlock Text="{DXBinding 'PilePropertyInfo.GetPilePerimeter().ToString(`n2`)', Mode=OneWay}" />
+                                                <TextBlock Text="m" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="桩长:" />
+                                                <TextBlock Text="{DXBinding 'PilePropertyInfo.GetPileLength().ToString(`n2`)', Mode=OneWay}" />
+                                                <TextBlock Text="m" />
+                                            </StackPanel>
                                         </StackPanel>
-                                    </dxlc:LayoutItem.Label>
-                                    <dxe:TextEdit Text="{Binding GammaR}" />
-                                </dxlc:LayoutItem>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+
+                            <DataTemplate x:Key="FillingPileTemplate">
+                                <Border
+                                    Width="150"
+                                    Padding="4"
+                                    HorizontalAlignment="Stretch"
+                                    Background="LightPink"
+                                    BorderBrush="Black"
+                                    BorderThickness="2"
+                                    CornerRadius="4">
+                                    <StackPanel HorizontalAlignment="Stretch">
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding PileCode, StringFormat=桩编号:{0}}" />
+                                        <StackPanel Margin="3,0,0,0" Orientation="Vertical">
+                                            <StackPanel.Style>
+                                                <Style TargetType="StackPanel">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}}" Value="False">
+                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </StackPanel.Style>
+                                            <Separator />
+                                            <TextBlock Text="桩类型:灌注桩" />
+                                            <ContentPresenter
+                                                HorizontalAlignment="Stretch"
+                                                Content="{Binding PilePropertyInfo}"
+                                                ContentTemplateSelector="{StaticResource crosssectiontempselector}" />
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="截面积:" />
+                                                <TextBlock Text="{DXBinding 'PilePropertyInfo.GetPileCrossSectionArea().ToString(`n2`)', Mode=OneWay}" />
+                                                <TextBlock Text="m2" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="周长:" />
+                                                <TextBlock Text="{DXBinding 'PilePropertyInfo.GetPilePerimeter().ToString(`n2`)', Mode=OneWay}" />
+                                                <TextBlock Text="m" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="桩长:" />
+                                                <TextBlock Text="{DXBinding 'PilePropertyInfo.GetPileLength().ToString(`n2`)', Mode=OneWay}" />
+                                                <TextBlock Text="m" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+
+                            <DataTemplate x:Key="PostgroutingFillingPileTemplate">
+                                <Border Background="LightSalmon" CornerRadius="3">
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Foreground="{StaticResource pilelistInfoHeadForground}" Text="桩编号:" />
+                                            <TextBlock Text="{Binding PileCode}" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Foreground="{StaticResource pilelistInfoHeadForground}" Text="桩径:" />
+                                            <TextBlock Text="{Binding PilePropertyInfo.PileDiameter, StringFormat={}{0}m}" />
+                                            <TextBlock
+                                                Margin="3,0,0,0"
+                                                Foreground="{StaticResource pilelistInfoHeadForground}"
+                                                Text="桩长:" />
+                                            <TextBlock Text="{DXBinding 'PilePropertyInfo.GetPileLength().ToString(`n2`)', Mode=OneWay}" />
+                                            <TextBlock Text="m" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Foreground="{StaticResource pilelistInfoHeadForground}" Text="桩类型:" />
+                                            <TextBlock Text="后注浆灌注桩" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+
+                            <DataTemplate x:Key="SocketedPileTemplate">
+                                <Border Background="LightGray" CornerRadius="3">
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Foreground="{StaticResource pilelistInfoHeadForground}" Text="桩编号:" />
+                                            <TextBlock Text="{Binding PileCode}" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Foreground="{StaticResource pilelistInfoHeadForground}" Text="桩径:" />
+                                            <TextBlock Text="{Binding PilePropertyInfo.PileDiameter, StringFormat={}{0}m}" />
+                                            <TextBlock
+                                                Margin="3,0,0,0"
+                                                Foreground="{StaticResource pilelistInfoHeadForground}"
+                                                Text="桩长:" />
+                                            <TextBlock Text="{DXBinding 'PilePropertyInfo.GetPileLength().ToString(`n2`)', Mode=OneWay}" />
+                                            <TextBlock Text="m" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Foreground="{StaticResource pilelistInfoHeadForground}" Text="桩类型:" />
+                                            <TextBlock Text="嵌岩桩" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+
+                            <DataTemplate x:Key="SteelAndPercastConcretePileTemplate">
+                                <Border Background="LightGreen" CornerRadius="3">
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Foreground="{StaticResource pilelistInfoHeadForground}" Text="桩编号:" />
+                                            <TextBlock Text="{Binding PileCode}" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Foreground="{StaticResource pilelistInfoHeadForground}" Text="桩径:" />
+                                            <TextBlock Text="{Binding PilePropertyInfo.PileDiameter, StringFormat={}{0}m}" />
+                                            <TextBlock
+                                                Margin="3,0,0,0"
+                                                Foreground="{StaticResource pilelistInfoHeadForground}"
+                                                Text="桩长:" />
+                                            <TextBlock Text="{DXBinding 'PilePropertyInfo.GetPileLength().ToString(`n2`)', Mode=OneWay}" />
+                                            <TextBlock Text="m" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Foreground="{StaticResource pilelistInfoHeadForground}" Text="桩类型:" />
+                                            <TextBlock Text="管桩" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.Resources>
+                    </ListBox>
+                    <StackPanel
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Orientation="Horizontal">
+                        <!--<Button
+                            Margin="10,0"
+                            Command="{Binding AddPileCommand}"
+                            Content="增加" />-->
+                        <Button
+                            Margin="10,0"
+                            Command="{Binding RemovePileCommand}"
+                            Content="删除" />
+                    </StackPanel>
+                </dxlc:LayoutGroup>
+                <UserControl Content="{Binding CurrentPile}" ContentTemplateSelector="{StaticResource pileDetailTepSelector}">
+                    <UserControl.Resources>
+                        <!--  未选择任何桩时的模板  -->
+                        <DataTemplate x:Key="nullPileDetailTemplate">
+                            <Grid>
+                                <Grid.Background>
+                                    <ImageBrush
+                                        ImageSource="/PDIWT_MS_ZJCZL;component/Resources/Image/nullbackground.jpg"
+                                        Opacity="0.5"
+                                        TileMode="FlipXY" />
+                                </Grid.Background>
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="30"
+                                    Opacity="0.8"
+                                    Text="未选中任何桩，请在左侧面板中选择！"
+                                    TextWrapping="Wrap" />
+                            </Grid>
+                        </DataTemplate>
+                        <!--  实心桩的细节布局模板  -->
+                        <DataTemplate x:Key="SoildPileDetailTemplate">
+                            <dxlc:LayoutGroup View="Group">
+                                <dxlc:LayoutGroup
+                                    Header="土层信息"
+                                    Orientation="Vertical"
+                                    View="GroupBox">
+                                    <dxg:GridControl
+                                        AutoGenerateColumns="AddNew"
+                                        ItemsSource="{Binding SolidPileSoilLayerInfoProp}"
+                                        SelectionMode="Row">
+                                        <dxg:GridControl.View>
+                                            <dxg:TableView
+                                                AllowEditing="True"
+                                                AutoWidth="True"
+                                                ShowGroupPanel="False" />
+                                        </dxg:GridControl.View>
+                                    </dxg:GridControl>
+                                    <GroupBox VerticalAlignment="Bottom" Header="桩端参数">
+                                        <dxlc:LayoutGroup Orientation="Vertical" View="Group">
+                                            <dxlc:LayoutItem>
+                                                <dxlc:LayoutItem.Label>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="q">
+                                                            <Run
+                                                                BaselineAlignment="Subscript"
+                                                                FontSize="8"
+                                                                Text="R" />
+                                                        </TextBlock>
+                                                        <TextBlock Text="=" />
+                                                    </StackPanel>
+                                                </dxlc:LayoutItem.Label>
+                                                <dxe:TextEdit Text="{Binding Qr}" />
+                                            </dxlc:LayoutItem>
+                                        </dxlc:LayoutGroup>
+                                    </GroupBox>
+                                </dxlc:LayoutGroup>
+                                <dxlc:LayoutGroup
+                                    HorizontalAlignment="Right"
+                                    Header="计算参数"
+                                    Orientation="Vertical"
+                                    View="GroupBox">
+                                    <dxlc:LayoutItem VerticalAlignment="Top">
+                                        <dxlc:LayoutItem.Label>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="γ">
+                                                    <Run
+                                                        BaselineAlignment="Subscript"
+                                                        FontSize="8"
+                                                        Text="R" />
+                                                </TextBlock>
+                                                <TextBlock Text="=" />
+                                            </StackPanel>
+                                        </dxlc:LayoutItem.Label>
+                                        <dxe:TextEdit Text="{Binding GammaR}" />
+                                    </dxlc:LayoutItem>
+                                </dxlc:LayoutGroup>
                             </dxlc:LayoutGroup>
-                        </dxlc:LayoutGroup>
-                    </DataTemplate>
-                </UserControl.Resources>
-            </UserControl>
-        </dxlc:LayoutGroup>
-        <dxlc:LayoutGroup Header="计算结果" Orientation="Horizontal">
-            <dxlc:LayoutGroup Orientation="Vertical">
-                <dxlc:LayoutItem Label="单桩垂直极限承载力设计值（kN）：">
-                    <dxe:TextEdit
-                        IsReadOnly="True"
-                        Mask="f3"
-                        MaskType="Numeric"
-                        MaskUseAsDisplayFormat="True"
-                        Style="{StaticResource RedFont}"
-                        Text="{Binding Qd}" />
-                </dxlc:LayoutItem>
-                <dxlc:LayoutItem Label="单桩抗拔极限承载力设计值（kN）：">
-                    <dxe:TextEdit
-                        IsReadOnly="True"
-                        Mask="f3"
-                        MaskType="Numeric"
-                        MaskUseAsDisplayFormat="True"
-                        Style="{StaticResource RedFont}"
-                        Text="{Binding Qt}" />
-                </dxlc:LayoutItem>
+                        </DataTemplate>
+                        <!--  灌注桩的细节布局模板  -->
+                        <DataTemplate x:Key="FillingPileDetailTemplate">
+                            <dxlc:LayoutGroup View="Group">
+                                <dxlc:LayoutGroup
+                                    Header="土层信息"
+                                    Orientation="Vertical"
+                                    View="GroupBox">
+                                    <dxg:GridControl
+                                        AutoGenerateColumns="AddNew"
+                                        ItemsSource="{Binding FillingPileSoilLayerInfoProp}"
+                                        SelectionMode="Row">
+                                        <dxg:GridControl.View>
+                                            <dxg:TableView
+                                                AllowEditing="True"
+                                                AutoWidth="True"
+                                                ShowGroupPanel="False" />
+                                        </dxg:GridControl.View>
+                                    </dxg:GridControl>
+                                    <GroupBox VerticalAlignment="Bottom" Header="桩端参数">
+                                        <dxlc:LayoutGroup Orientation="Vertical" View="Group">
+                                            <dxlc:LayoutItem>
+                                                <dxlc:LayoutItem.Label>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="q">
+                                                            <Run
+                                                                BaselineAlignment="Subscript"
+                                                                FontSize="8"
+                                                                Text="R" />
+                                                        </TextBlock>
+                                                        <TextBlock Text="=" />
+                                                    </StackPanel>
+                                                </dxlc:LayoutItem.Label>
+                                                <dxe:TextEdit Text="{Binding Qr}" />
+                                            </dxlc:LayoutItem>
+                                            <dxlc:LayoutItem>
+                                                <dxlc:LayoutItem.Label>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="ψ">
+                                                            <Run
+                                                                BaselineAlignment="Subscript"
+                                                                FontSize="8"
+                                                                Text="p" />
+                                                        </TextBlock>
+                                                        <TextBlock Text="=" />
+                                                    </StackPanel>
+                                                </dxlc:LayoutItem.Label>
+                                                <dxe:TextEdit Text="{Binding PsiP}" />
+                                            </dxlc:LayoutItem>
+                                        </dxlc:LayoutGroup>
+                                    </GroupBox>
+                                </dxlc:LayoutGroup>
+                                <dxlc:LayoutGroup
+                                    HorizontalAlignment="Right"
+                                    Header="计算参数"
+                                    Orientation="Vertical"
+                                    View="GroupBox">
+                                    <dxlc:LayoutItem VerticalAlignment="Top">
+                                        <dxlc:LayoutItem.Label>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="γ">
+                                                    <Run
+                                                        BaselineAlignment="Subscript"
+                                                        FontSize="8"
+                                                        Text="R" />
+                                                </TextBlock>
+                                                <TextBlock Text="=" />
+                                            </StackPanel>
+                                        </dxlc:LayoutItem.Label>
+                                        <dxe:TextEdit Text="{Binding GammaR}" />
+                                    </dxlc:LayoutItem>
+                                </dxlc:LayoutGroup>
+                            </dxlc:LayoutGroup>
+                        </DataTemplate>
+                    </UserControl.Resources>
+                </UserControl>
             </dxlc:LayoutGroup>
-            <Button
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Command="{Binding CalculateCommand}"
-                Content="计算桩基承载力" />
-        </dxlc:LayoutGroup>
-    </dxlc:LayoutControl>
+            <dxlc:LayoutGroup Header="计算结果" Orientation="Horizontal">
+                <dxlc:LayoutGroup Orientation="Vertical">
+                    <dxlc:LayoutItem Label="单桩垂直极限承载力设计值（kN）：">
+                        <dxe:TextEdit
+                            IsReadOnly="True"
+                            Mask="f2"
+                            MaskType="Numeric"
+                            MaskUseAsDisplayFormat="True"
+                            Style="{StaticResource RedFont}"
+                            Text="{Binding Qd}" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="单桩抗拔极限承载力设计值（kN）：">
+                        <dxe:TextEdit
+                            IsReadOnly="True"
+                            Mask="f2"
+                            MaskType="Numeric"
+                            MaskUseAsDisplayFormat="True"
+                            Style="{StaticResource RedFont}"
+                            Text="{Binding Qt}" />
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutGroup>
+                <Button
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Command="{Binding CalculateCommand}"
+                    Content="计算桩基承载力" />
+            </dxlc:LayoutGroup>
+        </dxlc:LayoutControl>
+    </DockPanel>
+
 </UserControl>

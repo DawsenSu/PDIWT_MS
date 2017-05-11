@@ -29,7 +29,7 @@ namespace PDIWT_MS_ZJCZL.Models.Piles
             get { return GetProperty(() => PileCode); }
             set { SetProperty(() => PileCode, value); }
         }
-        public double PileId
+        public long PileId
         {
             get { return GetProperty(() => PileId); }
             set { SetProperty(() => PileId, value); }

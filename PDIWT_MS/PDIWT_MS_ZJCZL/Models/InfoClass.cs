@@ -105,5 +105,28 @@ namespace PDIWT_MS_ZJCZL.Models
         Socketed,                   //嵌岩桩
         [Description("后注浆灌注桩")]
         PostgroutingFilling         //后注浆灌注桩
-    }   
+    }
+
+    public static class CalculatePileCapacity
+    {
+        public static CalculateResult Calculate(double diameter, ObservableCollection<SoilInfoClass> soilinfo, CalculateParameter calparmeter)
+        {
+            double pilearea = Math.PI * Math.Pow(diameter / 2, 2);
+            double pileperimeter = Math.PI * diameter;
+            double accumlatenum = 0;
+            double result;
+            if (soilinfo != null && soilinfo.Count > 0)
+            {
+                foreach (var pileeachlength in soilinfo)
+                {
+                    accumlatenum += pileeachlength.Length * pileeachlength.Qfi;
+                }
+                result = (pileperimeter * accumlatenum + soilinfo.Last().Qr * pilearea) / calparmeter.GammaR;
+            }
+            else
+                result = -1;
+
+            return new CalculateResult { UltimateBearingCapacity = result, UltimatePullingCapacity = -1 };
+        }
+    }
 }

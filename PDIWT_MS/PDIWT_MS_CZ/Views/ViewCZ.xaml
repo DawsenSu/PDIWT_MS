@@ -73,6 +73,10 @@
                     Glyph="/PDIWT_MS_CZ;component/Image/Icons/Check File.ico" />
                 <dxb:BarItemSeparator />
                 <dxb:BarButtonItem
+                    Command="{Binding PreviewDrawCommand}"
+                    Content="预览图形"
+                    Glyph="/PDIWT_MS_CZ;component/Image/Icons/Preview Pane.ico" />
+                <dxb:BarButtonItem
                     Command="{Binding DrawAllCommand}"
                     Content="绘制"
                     Glyph="/PDIWT_MS_CZ;component/Image/Icons/Create New.ico" />
@@ -89,6 +93,8 @@
                     Command="{Binding ExportTemplateCommand}"
                     Content="输出参数模板"
                     Glyph="/PDIWT_MS_CZ;component/Image/Icons/Export.ico" />
+                <dxb:BarItemSeparator />
+                <!--<dxb:BarButtonItem Command="{Binding TestCommand}" Content="Test" />-->
             </dxb:ToolBarControl>
         </dxb:BarContainerControl>
         <BulletDecorator Background="#FFD6DBE9">
@@ -107,6 +113,7 @@
                 Text="{Binding ErrorInfo}"
                 TextWrapping="Wrap" />
         </BulletDecorator>
+        <!--<Image Name="testiamge" Source="{Binding TestImage}" />-->
         <!--<StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
             <Button Command="{Binding VertifyParamCommand}" Content="验证参数" />
             <Button Command="{Binding DrawAllCommand}" Content="绘制" />

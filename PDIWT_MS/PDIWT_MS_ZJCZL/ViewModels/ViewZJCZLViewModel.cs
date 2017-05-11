@@ -168,7 +168,7 @@ namespace PDIWT_MS_ZJCZL.ViewModels
                 PileId = 924,
                 PileCode = "Test",
                 PileDiameter = 10,
-                PileTypeInfo = PileType.Filling,
+                PileTypeInfo = Models.PileType.Filling,
                 SoilInfo = new ObservableCollection<SoilInfoClass>()
                 {
                     new SoilInfoClass() { SoilLayerName="layer1", SoilLayerNum="0-0" },

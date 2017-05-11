@@ -21,7 +21,7 @@ namespace PDIWT_MS_ZJCZL.DateTemplateSelector
                 if (pile is FillingPile)
                     return (container as FrameworkElement).FindResource("FillingPileDetailTemplate") as DataTemplate;
             }
-            return null;
+            return (container as FrameworkElement).FindResource("nullPileDetailTemplate") as DataTemplate;
         }
     }
 }

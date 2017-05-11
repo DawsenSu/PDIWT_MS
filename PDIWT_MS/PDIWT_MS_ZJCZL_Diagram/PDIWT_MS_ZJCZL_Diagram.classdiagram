@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="182e333f-b204-44ce-986b-95e9e6e2ff10" name="PDIWT_MS_ZJCZL_Diagram" linkedPackageId="f5fb1362-d14f-43e6-ac51-db25e53233b4" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="182e333f-b204-44ce-986b-95e9e6e2ff10" name="PDIWT_MS_ZJCZL_Diagram" linkedPackageId="f5fb1362-d14f-43e6-ac51-db25e53233b4" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
   <ownedCommentsInternal>
     <comment Id="963dde4f-f824-4645-bafd-fbe998dde3e3">
       <elementDefinition Id="2780f8c5-38b8-468b-8890-b41b35a0d323" />
@@ -7,6 +7,17 @@
 </body>
       <annotatedElements>
         <classMoniker Id="98e30b82-7f95-42b1-b1dd-915ace05e6ec" LastKnownName="BindableBase" />
+      </annotatedElements>
+    </comment>
+    <comment Id="4774e42b-9008-447f-81bb-58ebdba3f7fd">
+      <elementDefinition Id="41e4d0bf-101c-439c-b317-5d85790966b8" />
+      <body>HXCHCodeQueryLib
+
+ColumnLayerInfoArray
+QueryByRay(ref ColumnLayerInfoArray , startpoint, endpoint)
+</body>
+      <annotatedElements>
+        <classMoniker Id="198ba732-dbc3-4da7-863c-215011fc640c" LastKnownName=" PileFactory" />
       </annotatedElements>
     </comment>
   </ownedCommentsInternal>
@@ -128,9 +139,6 @@
             <type_NamedElement>
               <referencedTypeMoniker Id="8012746c-2e3c-448f-8499-d1cb31e7db9d" LastKnownName="IPileProperty" />
             </type_NamedElement>
-          </property>
-          <property Id="b7881a7a-fc38-4b4f-bdfa-210224e04913" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-            <elementDefinition Id="52fc3277-fa41-43a3-bf1f-5470d9b538e4" />
           </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
@@ -538,9 +546,9 @@
           </interfaceRealization>
         </suppliersInternal>
         <generalsInternal>
-          <generalization Id="b0e42093-62be-4a6e-a22a-32b8cf976882" isSubstitutable="false">
+          <generalization Id="aec20198-e414-4e75-bb48-6cdd92555ff1" isSubstitutable="false">
             <classMoniker Id="e6752fad-b4bc-479f-8586-2a70d00ddc5e" LastKnownName="PileBase" />
-            <elementDefinition Id="a18af360-4de4-4dd0-a743-cf57517c5bcb" />
+            <elementDefinition Id="e87f9dbc-2d88-49e8-8b1f-542da7fe7399" />
           </generalization>
         </generalsInternal>
         <ownedAttributesInternal>
@@ -1301,6 +1309,24 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
+          <operation Id="e87e089b-6978-4f7f-a2fb-93c274e23e46" name="SetPileLength" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="16cf8ca5-6d85-4202-ad98-a85454bf3f0b" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="bce9d249-3936-4416-8163-8aa5a59f582c" name="double pileLength" direction="In" isUnique="false">
+                  <elementDefinition Id="366efc09-4fe0-4a73-b15f-1de48663f495" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="969ae54d-a47c-4a34-bb57-316351652822" direction="Return" isUnique="false">
+                  <elementDefinition Id="93109796-de34-4f03-9172-8b6b677b6f75" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="590e730d-abba-40c6-a7d8-9aff13afd500" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperations>
       </Interface>
     </logicalClassDesignerModelHasTypes>
@@ -1380,6 +1406,24 @@
                   <elementDefinition Id="50dee21f-c301-4af3-a7bc-49f4d03c056d" />
                   <type_NamedElement>
                     <referencedTypeMoniker Id="f198f42b-7c3d-4efd-b4b6-8579038f1f7e" LastKnownName="double" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="6478480a-c0b9-47e0-8830-46c4a39e2369" name="SetPileLength" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="fbc34438-7de4-4b13-952f-99dd0191286d" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="2f277efc-7879-4589-8371-b71e77adccf3" name="double pileLength" direction="In" isUnique="false">
+                  <elementDefinition Id="4641c6ef-f735-43db-8870-53d4a2bb0447" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="67e92ba3-29e2-40da-924b-f47cbbb4c261" direction="Return" isUnique="false">
+                  <elementDefinition Id="b3430ce9-b342-4c95-a636-206f833300b6" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="590e730d-abba-40c6-a7d8-9aff13afd500" LastKnownName="void" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -1469,6 +1513,24 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
+          <operation Id="9e18c5c3-36ad-43ac-b55c-3e9c9171a063" name="SetPileLength" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="b583861d-424e-469d-8ee5-179d8e851a92" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="f6cd46d5-d754-4ed3-993a-ffc98a152485" name="double pileLength" direction="In" isUnique="false">
+                  <elementDefinition Id="95410cea-5da0-4d8d-b5b9-1eb0c463c6b5" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="b1fa9651-6523-46d5-a125-a341aeac9fa7" direction="Return" isUnique="false">
+                  <elementDefinition Id="b0371355-ee5e-49b0-9f8f-d944ce79f4f3" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="590e730d-abba-40c6-a7d8-9aff13afd500" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
@@ -1548,6 +1610,24 @@
                   <elementDefinition Id="d839c4a1-c90a-46e7-86de-9022de46f379" />
                   <type_NamedElement>
                     <referencedTypeMoniker Id="f198f42b-7c3d-4efd-b4b6-8579038f1f7e" LastKnownName="double" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="f9362790-c152-4473-b8db-f84f9bf80040" name="SetPileLength" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="bad671fd-8c44-4662-8b2b-a816a8a90adb" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="712e2ed2-5639-478a-9e46-040ce8d1de82" name="double pileLength" direction="In" isUnique="false">
+                  <elementDefinition Id="b269d6af-1571-4e72-9729-83539b33c205" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="f7a5710a-1deb-4628-8a18-b1cbb55bd5b7" direction="Return" isUnique="false">
+                  <elementDefinition Id="649047c9-d222-4739-b6ef-847ffc23a053" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="590e730d-abba-40c6-a7d8-9aff13afd500" LastKnownName="void" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -1697,6 +1777,173 @@
         </ownedOperations>
       </Interface>
     </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="198ba732-dbc3-4da7-863c-215011fc640c" name=" PileFactory" isAbstract="true" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="08d5db79-2885-4582-92d0-a53c463f9b35" />
+        <ownedAttributesInternal>
+          <property Id="5ee40b05-cd95-499d-9573-0bace7c739e8" name="pileQuery" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="dc5b2f31-5c97-400f-9a63-f2b2b2808612" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="f79312ec-37e1-4022-ac02-f282a6952d90" LastKnownName="HXCHCodeQuery" />
+            </type_NamedElement>
+          </property>
+          <property Id="ff8f25e4-60b6-4f34-ac15-a51e75aefa41" name="columnLayerInfoArray" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <lowerValueInternal>
+              <literalString Id="e056473c-010c-47ce-a7da-d847d3ad501e" name="Lower" value="1">
+                <elementDefinition Id="86601d25-f1e3-40f8-8692-f6049242d3eb" />
+              </literalString>
+            </lowerValueInternal>
+            <upperValueInternal>
+              <literalString Id="2e04e5f5-9ee5-4721-881a-f48386be9436" name="Upper" value="1">
+                <elementDefinition Id="cb0f08a6-5482-4f04-8404-3bb5d03c7788" />
+              </literalString>
+            </upperValueInternal>
+            <elementDefinition Id="46ba94cd-7969-4432-b95d-f95c013512c6" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="0d4f9db6-eb0c-4d55-ac73-c877e68b94ee" LastKnownName="ColumnLayerInfoArray" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="bf09ece5-7dd2-4a51-a64f-aec1f2e68161" name="CreateNewPile" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="e2864c6f-8bff-402b-92d8-a978e1eda710" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="edad4955-fc18-4d4d-8d3b-31d6727e9670" direction="Return" isUnique="false">
+                  <elementDefinition Id="39cce2a7-255c-4d9c-b846-59e0570c94e4" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5d47c153-0386-40d6-81d7-066137260716" LastKnownName="PileBase" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="8af683e3-4bbb-4132-97c5-3dfdd6781313" name="IPileProperty pileType" direction="In" isUnique="false">
+                  <elementDefinition Id="962fb00e-aa78-4ae5-aac4-03f58ed51609" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="baac62df-22cf-40b6-94d8-07f19bcfe8e2" name="String pileCode" direction="In" isUnique="false">
+                  <elementDefinition Id="1a069625-64ba-413b-bb26-35081087c1f9" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="c41ec821-6341-4b60-9f8e-1a799ab3df1c" name="double pileId" direction="In" isUnique="false">
+                  <elementDefinition Id="36b2c743-0491-49a9-9643-503335abba2c" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="e5c2272a-6cc6-4aee-8d9a-946ea9508365" name="CreateNewPileArray" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="74c87698-0e7d-4c46-913e-fb165be1a339" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="074e628f-fca4-4350-93a7-ee41b57ec240" direction="Return" isUnique="false">
+                  <elementDefinition Id="efb85366-f311-4c55-b789-d11c466ade42" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="8f51832b-0065-4980-93bb-d667249504d9" LastKnownName="PileBase[]" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="532504f1-f98c-4158-98ed-ceabd4e6da30" name="IPileProperty[] pileTypeArray" direction="In" isUnique="false">
+                  <elementDefinition Id="461d32cf-0b3e-4348-b50d-66f6e4dfc063" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="457d5860-0b8d-4473-b00b-d0612ff07ef9" name="String[] pileCodeArray" direction="In" isUnique="false">
+                  <elementDefinition Id="6cd6600e-17ab-4bbf-91ee-5b5112d42dce" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="869f786d-6495-42f1-a56b-2d5c9cbd98af" name="double[] pileIdArray" direction="In" isUnique="false">
+                  <elementDefinition Id="742545f3-241a-41f4-92b0-4204d6cb99b0" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="5d47c153-0386-40d6-81d7-066137260716" name="PileBase" isAbstract="false" isLeaf="false" cachedFullName="PDIWT_MS_ZJCZL_Diagram::PileBase">
+        <elementDefinition Id="3785b9ad-62dd-42ba-95d8-9389b8305a99" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="590e730d-abba-40c6-a7d8-9aff13afd500" name="void" isAbstract="false" isLeaf="false" cachedFullName="void">
+        <elementDefinition Id="5d2c09a8-7ff0-4613-9a0c-ceb280b987f0" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="8f51832b-0065-4980-93bb-d667249504d9" name="PileBase[]" isAbstract="false" isLeaf="false" cachedFullName="PileBase[]">
+        <elementDefinition Id="2c35046e-bf1f-4f39-8dc2-cdaa80bac439" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="bae0fec1-a6d6-474e-9e21-45a55ceed60f" name="SolidPileFactory" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="dacbbd1b-8a6b-4a04-b39e-96bc471a6bf5" />
+        <generalsInternal>
+          <generalization Id="fba0ee47-45f1-40da-9433-3f55f402df36" isSubstitutable="false">
+            <classMoniker Id="198ba732-dbc3-4da7-863c-215011fc640c" LastKnownName=" PileFactory" />
+            <elementDefinition Id="e50403e1-3523-4e9e-859b-27e62da51347" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="2a02a610-9300-41ff-b3fa-35f783a20299" name="FillingPileFactory" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="0a8201c0-b313-4772-9dbf-6634cc39227d" />
+        <generalsInternal>
+          <generalization Id="745b532c-b88a-481c-ac1a-150d674205e4" isSubstitutable="false">
+            <classMoniker Id="198ba732-dbc3-4da7-863c-215011fc640c" LastKnownName=" PileFactory" />
+            <elementDefinition Id="0db4df30-a60b-431e-bb1f-6b7eee80a27b" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="e6f35d9a-330c-4437-af1a-aac7eed8c11e" name="PostgroutingFillingPileFactory" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="e709a7b7-ef3a-4771-83cb-ccf2a58bcd13" />
+        <generalsInternal>
+          <generalization Id="1f13ce17-9026-461d-8b1b-2dfcc279496b" isSubstitutable="false">
+            <classMoniker Id="198ba732-dbc3-4da7-863c-215011fc640c" LastKnownName=" PileFactory" />
+            <elementDefinition Id="e21508f1-cdb3-4750-9755-b8cd222e719d" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="19dce72f-71c2-4a31-8e19-ca0a82c88ab3" name="SocketedPileFactory" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="57856861-4fe3-48a1-9daf-02195d9686cc" />
+        <generalsInternal>
+          <generalization Id="6967852b-11fd-4ba5-91f5-7d5098016ff1" isSubstitutable="false">
+            <classMoniker Id="198ba732-dbc3-4da7-863c-215011fc640c" LastKnownName=" PileFactory" />
+            <elementDefinition Id="f8c08113-38e7-4a09-8a63-39242f80f932" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="613cb030-e722-4641-ad48-1cb1331f93b9" name="SteelAndPercastConcretePileFactory" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="3defe9b2-7401-4a4a-92c9-152e70be63a8" />
+        <generalsInternal>
+          <generalization Id="d7f476cc-e9f4-423a-baa7-9f022986c977" isSubstitutable="false">
+            <classMoniker Id="198ba732-dbc3-4da7-863c-215011fc640c" LastKnownName=" PileFactory" />
+            <elementDefinition Id="82ae8a24-bfa6-4b5d-ae22-f74ce5dc4a39" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="f79312ec-37e1-4022-ac02-f282a6952d90" name="HXCHCodeQuery" isAbstract="false" isLeaf="false" cachedFullName="HXCHCodeQuery">
+        <elementDefinition Id="af700699-46a3-4c0f-aef3-7d451be53e37" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="0d4f9db6-eb0c-4d55-ac73-c877e68b94ee" name="ColumnLayerInfoArray" isAbstract="false" isLeaf="false" cachedFullName="ColumnLayerInfoArray">
+        <elementDefinition Id="fb4e3e49-fd81-4aed-825a-be1e86f19917" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="f5fb1362-d14f-43e6-ac51-db25e53233b4" name="PDIWT_MS_ZJCZL_Diagram">
     <elementDefinition Id="77bee44e-18dd-4526-bb50-e8f026b22986" />
