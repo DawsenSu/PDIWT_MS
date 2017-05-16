@@ -42,6 +42,7 @@ namespace PDIWT_MS_CZ
                 return;
             }
             m_window1 = new WindowHost();
+            m_window1.Icon = new BitmapImage(new Uri("pack://application:,,,/PDIWT_MS_CZ;component/Image/Icons/Wharf.ico"));
             m_window1.Show();
         }
 

@@ -12,16 +12,17 @@
     Title="输出船闸工程量"
     Width="700"
     Height="400"
+    Icon="pack://application:,,,/PDIWT_MS_CZ;component/Image/Icons/Microsoft%20Excel.ico"
     mc:Ignorable="d">
     <Window.Resources>
         <Style TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="MaxHeight" Value="20" />
             <Setter Property="MinWidth" Value="80" />
-            <Setter Property="HorizontalAlignment" Value="Right" />
         </Style>
         <Style TargetType="dxg:GridColumn">
-            <Setter Property="AllowEditing" Value="False" />
             <Setter Property="AllowBestFit" Value="True" />
+            <Setter Property="AllowEditing" Value="False" />
         </Style>
     </Window.Resources>
     <dxlc:LayoutControl Orientation="Vertical">

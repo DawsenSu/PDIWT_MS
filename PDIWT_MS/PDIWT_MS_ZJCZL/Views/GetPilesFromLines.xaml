@@ -13,6 +13,7 @@
     Width="300"
     Height="400"
     WindowStartupLocation="CenterScreen"
+    Icon="/PDIWT_MS_ZJCZL;component/Resources/Image/External Link.ico"
     mc:Ignorable="d">
     <Window.Resources>
         <dx:EnumToVisibilityConverter x:Key="etovconvertor" />
@@ -75,11 +76,11 @@
                 </GroupBox>
                 <GroupBox VerticalAlignment="Bottom" Header="桩的计算参数">
                     <dxlc:LayoutGroup Orientation="Vertical">
-                        <dxlc:LayoutItem Label="水位(m):">
+                        <dxlc:LayoutItem Label="水位(m)：">
                             <dxe:TextEdit Text="{Binding WaterLevel}" />
                         </dxlc:LayoutItem>
                         <dxlc:LayoutGroup View="Group">
-                            <dxlc:LayoutItem Label="γR:">
+                            <dxlc:LayoutItem Label="γCR：">
                                 <dxe:TextEdit Text="{Binding GammaR}" />
                             </dxlc:LayoutItem>
                         </dxlc:LayoutGroup>
@@ -87,10 +88,10 @@
                             Orientation="Vertical"
                             View="Group"
                             Visibility="{Binding SelectedPileType, Converter={StaticResource etovconvertor}, ConverterParameter=Socketed}">
-                            <dxlc:LayoutItem Label="γs:">
+                            <dxlc:LayoutItem Label="γCs:">
                                 <dxe:TextEdit Text="{Binding Gammas}" />
                             </dxlc:LayoutItem>
-                            <dxlc:LayoutItem Label="Hr:">
+                            <dxlc:LayoutItem Label="Hr：">
                                 <dxe:TextEdit Text="{Binding Hr}" />
                             </dxlc:LayoutItem>
                         </dxlc:LayoutGroup>

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using BG = Bentley.GeometryNET;
+
 using HCHXCodeQueryLib;
 
 namespace PDIWT_MS_ZJCZL.Interface

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="182e333f-b204-44ce-986b-95e9e6e2ff10" name="PDIWT_MS_ZJCZL_Diagram" linkedPackageId="f5fb1362-d14f-43e6-ac51-db25e53233b4" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="182e333f-b204-44ce-986b-95e9e6e2ff10" name="PDIWT_MS_ZJCZL_Diagram" linkedPackageId="f5fb1362-d14f-43e6-ac51-db25e53233b4" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
   <ownedCommentsInternal>
     <comment Id="963dde4f-f824-4645-bafd-fbe998dde3e3">
       <elementDefinition Id="2780f8c5-38b8-468b-8890-b41b35a0d323" />
@@ -18,6 +18,14 @@ QueryByRay(ref ColumnLayerInfoArray , startpoint, endpoint)
 </body>
       <annotatedElements>
         <classMoniker Id="198ba732-dbc3-4da7-863c-215011fc640c" LastKnownName=" PileFactory" />
+      </annotatedElements>
+    </comment>
+    <comment Id="bc40e149-070e-4c48-8003-f02b14c631fe">
+      <elementDefinition Id="55b1e9dd-f020-4be5-94d8-fa9e2acff850" />
+      <body>利用Bentley提供的DSegement3d类型简化接口
+</body>
+      <annotatedElements>
+        <interfaceMoniker Id="017238cd-e8b3-4679-9a5f-d05957c534ce" LastKnownName="IPilePropertySimplify" />
       </annotatedElements>
     </comment>
   </ownedCommentsInternal>
@@ -321,10 +329,10 @@ QueryByRay(ref ColumnLayerInfoArray , startpoint, endpoint)
           </generalization>
         </generalsInternal>
         <ownedAttributesInternal>
-          <property Id="50919423-f986-434f-8e6a-cb673395b093" name="BetaR" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="50919423-f986-434f-8e6a-cb673395b093" name="BetaP" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="a076f0a0-d1d9-4af5-b163-fcfa7f2e47bb" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="f198f42b-7c3d-4efd-b4b6-8579038f1f7e" LastKnownName="double" />
+              <referencedTypeMoniker Id="17dba365-60d7-46d4-b7de-c86c4f924471" LastKnownName="double" />
             </type_NamedElement>
           </property>
           <property Id="03bf9a1b-c7a5-48b9-8cbd-9fcae0929794" name="PsiP" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -341,6 +349,12 @@ QueryByRay(ref ColumnLayerInfoArray , startpoint, endpoint)
           </property>
           <property Id="b649d731-c6a7-4780-b160-427c5294e45c" name="GammaR" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="b283a80d-00bc-4b75-922b-60786d9ea4d6" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="f198f42b-7c3d-4efd-b4b6-8579038f1f7e" LastKnownName="double" />
+            </type_NamedElement>
+          </property>
+          <property Id="854a51eb-7f7b-43ab-91ec-46896f4e9786" name="Qr" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="71aa3993-5827-4aec-8ad2-2a257c284050" />
             <type_NamedElement>
               <referencedTypeMoniker Id="f198f42b-7c3d-4efd-b4b6-8579038f1f7e" LastKnownName="double" />
             </type_NamedElement>
@@ -398,16 +412,16 @@ QueryByRay(ref ColumnLayerInfoArray , startpoint, endpoint)
               <referencedTypeMoniker Id="f198f42b-7c3d-4efd-b4b6-8579038f1f7e" LastKnownName="double" />
             </type_NamedElement>
           </property>
-          <property Id="356c3f8e-cef1-47db-a0ea-22c0bf454d17" name="Gammacs" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="356c3f8e-cef1-47db-a0ea-22c0bf454d17" name="GammaCs" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="93f90dea-1548-4894-9d99-d8f594df3e16" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="f198f42b-7c3d-4efd-b4b6-8579038f1f7e" LastKnownName="double" />
+              <referencedTypeMoniker Id="080e19e3-1b1c-49af-90c0-716543ec665e" LastKnownName="double" />
             </type_NamedElement>
           </property>
-          <property Id="d9ade979-0435-425f-ac29-39c850ca4ce5" name="GammacR" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="d9ade979-0435-425f-ac29-39c850ca4ce5" name="GammaCr" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="bb93e83e-2375-473d-838b-0251ebc5cb50" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="f198f42b-7c3d-4efd-b4b6-8579038f1f7e" LastKnownName="double" />
+              <referencedTypeMoniker Id="d122775b-2ae7-4458-993d-c9b5aadd53de" LastKnownName="double" />
             </type_NamedElement>
           </property>
           <property Id="e6451057-f586-4262-bdab-23855b4b11ea" name="Xis" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -1833,7 +1847,7 @@ QueryByRay(ref ColumnLayerInfoArray , startpoint, endpoint)
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
-          <operation Id="e5c2272a-6cc6-4aee-8d9a-946ea9508365" name="CreateNewPileArray" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+          <operation Id="e5c2272a-6cc6-4aee-8d9a-946ea9508365" name="CreateNewPileArray" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="74c87698-0e7d-4c46-913e-fb165be1a339" />
             <ownedParameters>
               <operationHasOwnedParameters>
@@ -1942,6 +1956,109 @@ QueryByRay(ref ColumnLayerInfoArray , startpoint, endpoint)
     <packageHasNamedElement>
       <referencedType Id="0d4f9db6-eb0c-4d55-ac73-c877e68b94ee" name="ColumnLayerInfoArray" isAbstract="false" isLeaf="false" cachedFullName="ColumnLayerInfoArray">
         <elementDefinition Id="fb4e3e49-fd81-4aed-825a-be1e86f19917" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="017238cd-e8b3-4679-9a5f-d05957c534ce" name="IPilePropertySimplify" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="da77444d-e078-45c8-8dcf-122b9246de5b" />
+        <ownedAttributes>
+          <property Id="e15db73c-437a-4d1d-a61d-d54c5917c38a" name="PileDiameter" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="c479d25a-8195-4c50-8959-8008b4dbcf75" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="f198f42b-7c3d-4efd-b4b6-8579038f1f7e" LastKnownName="double" />
+            </type_NamedElement>
+          </property>
+          <property Id="4f884a89-e4c2-432b-a29f-6966b18f52a3" name="PileInnerDiameter" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="2cf38db8-83ba-45f9-b519-72df528fe055" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="f198f42b-7c3d-4efd-b4b6-8579038f1f7e" LastKnownName="double" />
+            </type_NamedElement>
+          </property>
+          <property Id="0144369d-64a5-4d14-877b-9861240f12f5" name="AxisLine" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="08a2836a-4859-454f-b8ce-ffa800766fdd" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="a3522984-9b40-4957-85bd-b99a0e421494" LastKnownName="DSegement3d" />
+            </type_NamedElement>
+          </property>
+          <property Id="c4cc83c0-478a-4129-af85-4dfe61289dff" name="PileWeight" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="07e663e6-969e-4934-b3ae-b375f1909d06" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="f198f42b-7c3d-4efd-b4b6-8579038f1f7e" LastKnownName="double" />
+            </type_NamedElement>
+          </property>
+          <property Id="d0de763d-6679-4060-afef-90625787e58e" name="WaterLevel" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="0b92e204-30b2-4f75-bd29-52a996f1b08f" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="81010cdf-0e53-464b-981a-4a0ba5012824" LastKnownName="double" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributes>
+        <ownedOperations>
+          <operation Id="6b52258b-f081-4144-80b9-078ff5bbe5a1" name="GetPileCrossSectionArea" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="b3731dcc-2fd7-4819-bd1e-57a70d62c741" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="def6e992-dd19-4264-8809-626027c16f14" direction="Return" isUnique="false">
+                  <elementDefinition Id="91f16a3c-b1ff-42e2-ab45-9a8df6eb7d2f" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="f198f42b-7c3d-4efd-b4b6-8579038f1f7e" LastKnownName="double" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="c90fb073-9066-43f9-9b9c-282a417812ec" name="GetPileGravity" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="4a190c2e-b043-4f99-8e8c-6d21474fb504" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="137e6378-49e2-4ff6-bfc4-f4e609866018" direction="Return" isUnique="false">
+                  <elementDefinition Id="3aca0262-9d9c-423f-a326-977d220f8efc" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="f198f42b-7c3d-4efd-b4b6-8579038f1f7e" LastKnownName="double" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="8bb918b9-12f7-41eb-9787-e066a684ea6d" name="GetPilePerimerter" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="c2737253-88b7-49ea-9562-4dd08a4fe88e" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="c21ebd4b-4fee-4e95-a9a7-9087d02e298c" direction="Return" isUnique="false">
+                  <elementDefinition Id="72c37055-bd06-4c7c-a33f-7f81c6635cc7" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="f198f42b-7c3d-4efd-b4b6-8579038f1f7e" LastKnownName="double" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="a3522984-9b40-4957-85bd-b99a0e421494" name="DSegement3d" isAbstract="false" isLeaf="false" cachedFullName="DSegement3d">
+        <elementDefinition Id="bb4d8582-9fd9-4696-87cc-c7710b266a4d" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="81010cdf-0e53-464b-981a-4a0ba5012824" name="double" isAbstract="false" isLeaf="false" cachedFullName="double">
+        <elementDefinition Id="c53ea759-7bc2-46ef-85a0-89166612dcc8" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="17dba365-60d7-46d4-b7de-c86c4f924471" name="double" isAbstract="false" isLeaf="false" cachedFullName="double">
+        <elementDefinition Id="c53ea759-7bc2-46ef-85a0-89166612dcc8" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="080e19e3-1b1c-49af-90c0-716543ec665e" name="double" isAbstract="false" isLeaf="false" cachedFullName="double">
+        <elementDefinition Id="c53ea759-7bc2-46ef-85a0-89166612dcc8" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="d122775b-2ae7-4458-993d-c9b5aadd53de" name="double" isAbstract="false" isLeaf="false" cachedFullName="double">
+        <elementDefinition Id="c53ea759-7bc2-46ef-85a0-89166612dcc8" />
       </referencedType>
     </packageHasNamedElement>
   </packagedElements>

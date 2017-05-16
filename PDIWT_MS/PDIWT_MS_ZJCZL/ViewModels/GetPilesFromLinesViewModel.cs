@@ -161,15 +161,18 @@ namespace PDIWT_MS_ZJCZL.ViewModels
                     case PileType.Solid:
                         pilefactory = new SolidPileFactory();
                         break;
-                    //case PileType.SteelAndPercastConcrete:
-                    //    break;
+                    case PileType.SteelAndPercastConcrete:
+                        pilefactory = new SteelAndPercastConcretePileFactory();
+                        break;
                     case PileType.Filling:
                         pilefactory = new FillingPileFactory();
                         break;
-                    //case PileType.Socketed:
-                    //    break;
-                    //case PileType.PostgroutingFilling:
-                    //    break;
+                    case PileType.Socketed:
+                        pilefactory = new SocketedPileFactory();
+                        break;
+                    case PileType.PostgroutingFilling:
+                        pilefactory = new PostgroutingFillingPileFactory();
+                        break;
                 }
                 var pileproplist = new List<IPileProperty>();
                 var pilenamelist = new List<string>();
@@ -191,7 +194,7 @@ namespace PDIWT_MS_ZJCZL.ViewModels
                             pileproplist.Add(new AnnularPileGeometry() { PileDiameter = this.PileDiameter, PileInnerDiameter = this.PileInnerDiameter, PileWeight = this.PileWeight, PileUnderWaterWeight = this.PileUnderwaterWeight, WaterLevel = WaterLevel, PileTopPoint = range.High.DPoint3dToPoint3d(1e-4), PileBottomPoint = range.Low.DPoint3dToPoint3d(1e-4) });
                             break;
                     }
-                    pilenamelist.Add(PileName + pile.GetLinkage(33000).ReadString());
+                    pilenamelist.Add(PileName + pile.GetLinkage((ushort)BD.ElementLinkageId.String).ReadString());
                     pileIdlist.Add(pile.ElementId);
                 }
                 var templist = pilefactory.CreateNewPileArray(pileproplist.ToArray(), pilenamelist.ToArray(), pileIdlist.ToArray());
@@ -225,7 +228,7 @@ namespace PDIWT_MS_ZJCZL.ViewModels
     {
         [Display(Name = "实心桩或桩端封闭")]
         Solid,                      //桩身实心火桩端封闭
-        [Display(Name = "管桩")]
+        [Display(Name = "钢管桩与预制混凝土管桩")]
         SteelAndPercastConcrete,    //钢管桩与预制混凝土管桩
         [Display( Name = "灌注桩")]
         Filling,                    //灌注桩

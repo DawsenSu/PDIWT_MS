@@ -33,18 +33,5 @@ namespace PDIWT_MS_ZJCZL.Models.Factory
             }
             return new SolidPile() { PileCode = pilecode, PileId = pileId, PilePropertyInfo = pileType, SolidPileSoilLayerInfoProp = tempLayerBase, GammaR = 1.3, Qr = 6000 };
         }
-
-        public override PileBase[] CreateNewPileArray(IPileProperty[] pileTypeArray, string[] pileCodeArray, long[] pileIdArray)
-        {
-            if (pileTypeArray.Length != pileCodeArray.Length || pileTypeArray.Length != pileIdArray.Length)
-                throw new ArgumentException("传入参数pileTypeArray,pileCodeArray,pileIdArray的长度不相等");
-            var pilelist = new List<PileBase>();
-            for (int i = 0; i < pileTypeArray.Length; i++)
-            {
-                pilelist.Add(CreateNewPile(pileTypeArray[i], pileCodeArray[i], pileIdArray[i]));
-            }
-            return pilelist.ToArray();
-        }
-
     }
 }

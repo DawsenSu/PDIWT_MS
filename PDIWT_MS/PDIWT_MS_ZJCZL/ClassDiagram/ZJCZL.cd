@@ -1,0 +1,412 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PDIWT_MS_ZJCZL.Converter.DescriptionToEnumConvertor" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15" Y="1.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converter\DescriptionToEnumConvertor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Converter.DoubleToStringF2Convertor" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="1.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converter\DoubleToStringF2Convertor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Converter.Point3dToStringConvertor" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="3.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converter\Point3dToStringConvertor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.DateTemplateSelector.PileCrossSectionTemplateSelector" Collapsed="true">
+    <Position X="20.25" Y="2.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAgAAAAAAAAAAQAAAAEAAAAAAAAA=</HashCode>
+      <FileName>DateTemplateSelector\PileCrossSectionTemplateSelector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.DateTemplateSelector.PileListTemplateSelector" Collapsed="true">
+    <Position X="16.75" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEAACAAAABAgAAAAAAAAAAAAAAAAQAAAAAAAEEAAAAA=</HashCode>
+      <FileName>DateTemplateSelector\PileListTemplateSelector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.KeyinCommands" Collapsed="true">
+    <Position X="16.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>KeyinCommands.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Program" Collapsed="true">
+    <Position X="20.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAEAAAAAAAAAAIAAAgYAAABABABAAAAAAAAAAAAI=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.WindowHost" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAQAAAAAAAAAAAgAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>WindowHost.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.DgnLineFromExcelFile" Collapsed="true">
+    <Position X="16.75" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAIAAAAAAAAAAgAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Models\DgnLineFromExcelFile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.PileExtractInfomation" Collapsed="true">
+    <Position X="23.75" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAABAAAAAAAgAAAAAAAAAACw=</HashCode>
+      <FileName>Models\DgnLineFromExcelFile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.EnumBindingToCHSHelper" Collapsed="true">
+    <Position X="20.25" Y="1.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAEAAAAAAAAAAAAAAAAAAgAAAAAgAA=</HashCode>
+      <FileName>Models\EnumBindingToCHSHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.HCHXQueryLibExtentsion" Collapsed="true">
+    <Position X="15" Y="2.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAIAAAAAAAAAAABAAAAAAIAAAAg=</HashCode>
+      <FileName>Models\HCHXQueryLibExtentsion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.PileInfoClass" Collapsed="true">
+    <Position X="15" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAQIAAAwAAAAAAAAAgAAAAU=</HashCode>
+      <FileName>Models\InfoClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.SoilInfoClass" Collapsed="true">
+    <Position X="18.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAMAAAAAABAAAAAAAAAgEAAAAAAAAA=</HashCode>
+      <FileName>Models\InfoClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.CalculateParameter" Collapsed="true">
+    <Position X="20.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Models\InfoClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.CalculateResult" Collapsed="true">
+    <Position X="23.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\InfoClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.SearchPanel" Collapsed="true">
+    <Position X="15" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\InfoClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.CalculatePileCapacity" Collapsed="true">
+    <Position X="22" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\InfoClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.SelectPileTool" Collapsed="true">
+    <Position X="16.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAEEAABAAAQCAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Models\SelectPileTool.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.Factory.FillingPileFactory" Collapsed="true">
+    <Position X="12.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Models\Factory\FillingPileFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.Factory.PileFactory" Collapsed="true">
+    <Position X="6.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAIEAAAA=</HashCode>
+      <FileName>Models\Factory\PileFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.Factory.SolidPileFactory" Collapsed="true">
+    <Position X="6.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Models\Factory\SolidPileFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.PileCrossSection.AnnularPileGeometry" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ABAEAIgAAAAAAAAAAAAACYSAAAggAAAAAAAABIAAAAA=</HashCode>
+      <FileName>Models\PileCrossSection\AnnularPileGeometry.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.PileCrossSection.RoundnessPileGeometry" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23.75" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ABAEAIgAAAAAAAAAAAAACYSAAAggAAAAAAAABIAAAAA=</HashCode>
+      <FileName>Models\PileCrossSection\RoundnessPileGeometry.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.PileCrossSection.SquarePileGeometry" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20.25" Y="4.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ABAEAIgAAAAAAAAAAAAACYSAAAggAAAAAAAABIAAAAA=</HashCode>
+      <FileName>Models\PileCrossSection\SquarePileGeometry.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.Piles.FillingPile" Collapsed="true">
+    <Position X="11.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAEBAAAAAAAAAAAAAAAgCAAAAABAAA=</HashCode>
+      <FileName>Models\Piles\FillingPile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.Piles.PileBase" Collapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAEAAgAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Models\Piles\PileBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.Piles.PostgroutingFillingPile" Collapsed="true">
+    <Position X="1" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAEAAAAAAAEAAAAAAIAgCAAAAABAAA=</HashCode>
+      <FileName>Models\Piles\PostgroutingFillingPile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.Piles.SocketedPile" Collapsed="true">
+    <Position X="3.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAEAAAAAgAAAAAAAkAAAQAAAAAAYAA=</HashCode>
+      <FileName>Models\Piles\SocketedPile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.Piles.SolidPile" Collapsed="true">
+    <Position X="6" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAGAEAAAAAAAAAAAAAAAAgAAAAAABAAA=</HashCode>
+      <FileName>Models\Piles\SolidPile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.Piles.SteelAndPercastConcretePile" Collapsed="true">
+    <Position X="8.25" Y="2" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAEAEAAAAAAAAAAAACAAAgAAAAAABAAA=</HashCode>
+      <FileName>Models\Piles\SteelAndPercastConcretePile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.Soil.FillingPileSoilLayerInfo">
+    <Position X="0.75" Y="8" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Soil\FillingPileSoilLayerInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.Soil.PostgroutingFillingPileSoilInfo">
+    <Position X="3.5" Y="8" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Soil\PostgroutingFillingPileSoilInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.Soil.SocketedPileSoilInfo">
+    <Position X="6.75" Y="8" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Soil\SocketedPileSoilInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.Soil.SoilLayerInfoBase" Collapsed="true">
+    <Position X="3.75" Y="6.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAgAIAAAAAgAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Models\Soil\SoilLayerInfoBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Properties.Resources" Collapsed="true">
+    <Position X="22" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.ViewModels.AnalysisViewModel" Collapsed="true">
+    <Position X="16.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAIBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\AnalysisViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.ViewModels.PileAnalysisInfo" Collapsed="true">
+    <Position X="18.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAgCIAEQ=</HashCode>
+      <FileName>ViewModels\AnalysisViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.ViewModels.GetPilesFromLinesViewModel" Collapsed="true">
+    <Position X="23.75" Y="1.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>ASIAAIAIIAAAABAAgAAAAQQAAAggAAAAASAAAACBAAA=</HashCode>
+      <FileName>ViewModels\GetPilesFromLinesViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.ViewModels.ViewAddPileViewModel" Collapsed="true">
+    <Position X="23.75" Y="4.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIIAAAQAAAAAAAAAAIAAAgAAAQCAAAAKABIAw=</HashCode>
+      <FileName>ViewModels\ViewAddPileViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.ViewModels.ViewModelCalculateByRay" Collapsed="true">
+    <Position X="16.75" Y="5.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAACgAIIAAAAAAAAAAAAIAAgCAQAIAAAAMgDAAAEAA=</HashCode>
+      <FileName>ViewModels\ViewModelCalculateByRay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.ViewModels.ViewZJCZLViewModel" Collapsed="true">
+    <Position X="20.25" Y="5.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAACQAIABAAwAAAABQAAAABACAAAAMAAQAAAEAAJAg=</HashCode>
+      <FileName>ViewModels\ViewZJCZLViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Views.AnalysisView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\AnalysisView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Views.GetPilesFromLines" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\GetPilesFromLines.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Views.ViewAddPile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ViewAddPile.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Views.ViewCalculateByRay" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15" Y="5.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ViewCalculateByRay.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Views.ViewZJCZL" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ViewZJCZL.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.Factory.SteelAndPercastConcretePileFactory" Collapsed="true">
+    <Position X="9" Y="4.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Models\Factory\SteelAndPercastConcretePileFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.Factory.PostgroutingFillingPileFactory" Collapsed="true">
+    <Position X="1" Y="4.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Models\Factory\PostgroutingFillingPileFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDIWT_MS_ZJCZL.Models.Factory.SocketedPileFactory" Collapsed="true">
+    <Position X="4.25" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Models\Factory\SocketedPileFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="PDIWT_MS_ZJCZL.Interface.IPileBearingCapacity" Collapsed="true">
+    <Position X="15" Y="6.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interface\IPileBearingCapacity.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PDIWT_MS_ZJCZL.Interface.IPileProperty" Collapsed="true">
+    <Position X="16.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAEAIgAAAAAAAAAAAAACYSAAAggAAAAAAAABIAAAAA=</HashCode>
+      <FileName>Interface\IPileProperty.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="PDIWT_MS_ZJCZL.Models.SearchType" Collapsed="true">
+    <Position X="20.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\InfoClass.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PDIWT_MS_ZJCZL.Models.PileType" Collapsed="true">
+    <Position X="16.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAIAAAAAAAAAAAIAAAAAAAAAgE=</HashCode>
+      <FileName>Models\InfoClass.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PDIWT_MS_ZJCZL.ViewModels.PileCrossSectionType" Collapsed="true">
+    <Position X="15" Y="7.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAAEAAAgAAAAAAA=</HashCode>
+      <FileName>ViewModels\GetPilesFromLinesViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PDIWT_MS_ZJCZL.ViewModels.PileType" Collapsed="true">
+    <Position X="18.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAIAAAAAAAAAAAIAAAAAAAAAgE=</HashCode>
+      <FileName>ViewModels\GetPilesFromLinesViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

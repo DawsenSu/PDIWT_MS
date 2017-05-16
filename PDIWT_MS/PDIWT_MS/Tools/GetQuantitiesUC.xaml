@@ -9,11 +9,22 @@
     d:DesignWidth="150"
     Unloaded="UserControl_Unloaded"
     mc:Ignorable="d">
-    <StackPanel Margin="2">
-        <Label>按图层统计的工程量：</Label>
-        <ListView
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="MaxHeight" Value="50"/>
+            <Setter Property="Margin"   Value="5"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid Margin="2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0">按图层统计的工程量：</Label>
+        <ListView Grid.Row="1"
+            VerticalAlignment="Stretch"
             x:Name="lv_output"
-            Height="150"
             Margin="2">
             <ListView.View>
                 <GridView>
@@ -29,19 +40,18 @@
             </ListView.View>
         </ListView>
         <!--<TextBox x:Name="tb_OutputPath" IsEnabled="False"></TextBox>-->
-        <Button
-            Width="100"
-            Margin="0,3"
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+            <Button
             Click="tb_Calculation_Click">
-            计算工程量
-        </Button>
-        <Button
+                计算工程量
+            </Button>
+            <Button
             x:Name="bt_output"
-            Width="100"
-            Margin="0,3"
             Click="bt_output_Click"
             IsEnabled="{Binding Path=Items.Count, ElementName=lv_output, NotifyOnSourceUpdated=True}">
-            输出至Excel
-        </Button>
-    </StackPanel>
+                输出至Excel
+            </Button>
+        </StackPanel>
+
+    </Grid>
 </UserControl>

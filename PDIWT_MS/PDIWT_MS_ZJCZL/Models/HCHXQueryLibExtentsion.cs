@@ -28,5 +28,10 @@ namespace PDIWT_MS_ZJCZL.Models
         {
             return new Point3d() { X = p.X*scale, Y = p.Y*scale, Z = p.Z*scale };
         }
+        public static HCHXCodeQueryErrorCode QueryByRay(this HCHXCodeQuery pilequery, ref ColumnLayerInfoArray result, BG.DSegment3d linesegement)
+        {
+            return pilequery.QueryByRay(ref result, linesegement.StartPoint.DPoint3dToPoint3d(), linesegement.EndPoint.DPoint3dToPoint3d());
+        }
+
     }
 }

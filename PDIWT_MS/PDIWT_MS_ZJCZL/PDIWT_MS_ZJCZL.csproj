@@ -21,6 +21,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -125,6 +126,7 @@
       <HintPath>..\packages\BentleyWPF.1.0.0\lib\Bentley.Windowing.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="DevExpress.Charts.v16.1.Core, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -135,10 +137,12 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.Printing.v16.1.Core, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Charts.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Core.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Grid.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Grid.v16.1.Core, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.LayoutControl.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Printing.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.PropertyGrid.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Themes.DXStyle.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Xpf.Themes.Office2016White.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -160,6 +164,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -181,7 +186,6 @@
     <Compile Include="Converter\DoubleToStringF2Convertor.cs" />
     <Compile Include="Converter\Point3dToStringConvertor.cs" />
     <Compile Include="DateTemplateSelector\PileCrossSectionTemplateSelector.cs" />
-    <Compile Include="DateTemplateSelector\PileDetailTemplateSelector.cs" />
     <Compile Include="DateTemplateSelector\PileListTemplateSelector.cs" />
     <Compile Include="Interface\IPileBearingCapacity.cs" />
     <Compile Include="Interface\IPileProperty.cs" />
@@ -196,12 +200,18 @@
     <Compile Include="Models\PileCrossSection\AnnularPileGeometry.cs" />
     <Compile Include="Models\Piles\FillingPile.cs" />
     <Compile Include="Models\Piles\PileBase.cs" />
+    <Compile Include="Models\Piles\PostgroutingFillingPile.cs" />
+    <Compile Include="Models\Piles\SocketedPile.cs" />
     <Compile Include="Models\Piles\SolidPile.cs" />
     <Compile Include="Models\PileCrossSection\RoundnessPileGeometry.cs" />
+    <Compile Include="Models\Piles\SteelAndPercastConcretePile.cs" />
     <Compile Include="Models\SelectPileTool.cs" />
     <Compile Include="Models\Soil\FillingPileSoilLayerInfo.cs" />
+    <Compile Include="Models\Soil\PostgroutingFillingPileSoilInfo.cs" />
+    <Compile Include="Models\Soil\SocketedPileSoilInfo.cs" />
     <Compile Include="Models\Soil\SoilLayerInfoBase.cs" />
     <Compile Include="Models\PileCrossSection\SquarePileGeometry.cs" />
+    <Compile Include="Models\Factory\PostgroutingFillingPileFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -209,10 +219,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Factory\SteelAndPercastConcretePileFactory.cs" />
+    <Compile Include="Models\Factory\SocketedPileFactory.cs" />
+    <Compile Include="ViewModels\AnalysisViewModel.cs" />
     <Compile Include="ViewModels\GetPilesFromLinesViewModel.cs" />
     <Compile Include="ViewModels\ViewAddPileViewModel.cs" />
     <Compile Include="ViewModels\ViewModelCalculateByRay.cs" />
     <Compile Include="ViewModels\ViewZJCZLViewModel.cs" />
+    <Compile Include="Views\AnalysisView.xaml.cs">
+      <DependentUpon>AnalysisView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\GetPilesFromLines.xaml.cs">
       <DependentUpon>GetPilesFromLines.xaml</DependentUpon>
     </Compile>
@@ -238,6 +254,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram\ZJCZL.cd" />
+    <None Include="ClassDiagram\dgn_Elements.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +277,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
+    <Page Include="Views\AnalysisView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\GetPilesFromLines.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -290,19 +312,26 @@
     <Resource Include="Resources\Image\nullbackground.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Image\External Link.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Image\Circle_16.png" />
     <Resource Include="Resources\Image\Disk_16.png" />
     <Resource Include="Resources\Image\Square_16.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Image\Microsoft Excel_black.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Image\Rebalance Portfolio.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Image\Nonya Kueh.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Image\Combo Chart.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Image\Microsoft Excel.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Image\External Link.ico" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
 		Other similar extension points exist, see Microsoft.Common.targets.

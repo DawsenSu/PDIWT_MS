@@ -9,6 +9,7 @@ using BD = Bentley.DgnPlatformNET;
 using BCOM = Bentley.Interop.MicroStationDGN;
 using System.Runtime.InteropServices;
 using BM = Bentley.MstnPlatformNET;
+using BDE = Bentley.DgnPlatformNET.Elements;
 using BG = Bentley.GeometryNET;
 
 using HCHXCodeQueryLib;
@@ -242,6 +243,12 @@ namespace PDIWT_MS.Test
             sw.Close();
             fs.Close();
 
+        }
+
+        public static void TestSoild()
+        {
+            BG.DgnSphere sphere = new Bentley.GeometryNET.DgnSphere(BG.DPoint3d.Zero, 1000);
+            
         }
 
     }

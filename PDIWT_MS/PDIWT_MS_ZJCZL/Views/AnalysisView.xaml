@@ -1,0 +1,275 @@
+﻿<Window
+    x:Class="PDIWT_MS_ZJCZL.Views.AnalysisView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    xmlns:ViewModels="clr-namespace:PDIWT_MS_ZJCZL.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="分析结果"
+    Width="600"
+    Height="500"
+    Icon="/PDIWT_MS_ZJCZL;component/Resources/Image/Combo Chart.ico"
+    mc:Ignorable="d">
+    <dx:LoadingDecorator>
+        <dx:LoadingDecorator.SplashScreenTemplate>
+            <DataTemplate>
+                <StackPanel>
+                    <Grid
+                        x:Name="LayoutRoot"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="Transparent">
+                        <Grid.RenderTransform>
+                            <ScaleTransform
+                                x:Name="SpinnerScale"
+                                ScaleX="1.0"
+                                ScaleY="1.0" />
+                        </Grid.RenderTransform>
+                        <Canvas
+                            Width="120"
+                            Height="120"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            RenderTransformOrigin="0.5,0.5">
+                            <Ellipse
+                                Canvas.Left="20.1696"
+                                Canvas.Top="9.76358"
+                                Width="21.835"
+                                Height="21.862"
+                                Fill="Orange"
+                                Opacity="1.0"
+                                Stretch="Fill" />
+                            <Ellipse
+                                Canvas.Left="2.86816"
+                                Canvas.Top="29.9581"
+                                Width="21.835"
+                                Height="21.862"
+                                Fill="Black"
+                                Opacity="0.9"
+                                Stretch="Fill" />
+                            <Ellipse
+                                Canvas.Left="5.03758e-006"
+                                Canvas.Top="57.9341"
+                                Width="21.835"
+                                Height="21.862"
+                                Fill="Black"
+                                Opacity="0.8"
+                                Stretch="Fill" />
+                            <Ellipse
+                                Canvas.Left="12.1203"
+                                Canvas.Top="83.3163"
+                                Width="21.835"
+                                Height="21.862"
+                                Fill="Black"
+                                Opacity="0.7"
+                                Stretch="Fill" />
+                            <Ellipse
+                                Canvas.Left="36.5459"
+                                Canvas.Top="98.138"
+                                Width="21.835"
+                                Height="21.862"
+                                Fill="Black"
+                                Opacity="0.6"
+                                Stretch="Fill" />
+                            <Ellipse
+                                Canvas.Left="64.6723"
+                                Canvas.Top="96.8411"
+                                Width="21.835"
+                                Height="21.862"
+                                Fill="Black"
+                                Opacity="0.5"
+                                Stretch="Fill" />
+                            <Ellipse
+                                Canvas.Left="87.6176"
+                                Canvas.Top="81.2783"
+                                Width="21.835"
+                                Height="21.862"
+                                Fill="Black"
+                                Opacity="0.4"
+                                Stretch="Fill" />
+                            <Ellipse
+                                Canvas.Left="98.165"
+                                Canvas.Top="54.414"
+                                Width="21.835"
+                                Height="21.862"
+                                Fill="Black"
+                                Opacity="0.3"
+                                Stretch="Fill" />
+                            <Ellipse
+                                Canvas.Left="92.9838"
+                                Canvas.Top="26.9938"
+                                Width="21.835"
+                                Height="21.862"
+                                Fill="Black"
+                                Opacity="0.2"
+                                Stretch="Fill" />
+                            <Ellipse
+                                Canvas.Left="47.2783"
+                                Canvas.Top="0.5"
+                                Width="21.835"
+                                Height="21.862"
+                                Fill="Black"
+                                Opacity="0.1"
+                                Stretch="Fill" />
+                            <Canvas.RenderTransform>
+                                <RotateTransform x:Name="SpinnerRotate" Angle="0" />
+                            </Canvas.RenderTransform>
+                            <Canvas.Triggers>
+                                <EventTrigger RoutedEvent="ContentControl.Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                RepeatBehavior="Forever"
+                                                Storyboard.TargetName="SpinnerRotate"
+                                                Storyboard.TargetProperty="(RotateTransform.Angle)"
+                                                From="0"
+                                                To="360"
+                                                Duration="0:0:02" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Canvas.Triggers>
+                        </Canvas>
+                    </Grid>
+                    <TextBlock FontSize="15" Text="正在加载,请稍等" />
+                    <TextBlock FontSize="9" Text="Please Wait..." />
+                </StackPanel>
+            </DataTemplate>
+        </dx:LoadingDecorator.SplashScreenTemplate>
+        <dxlc:LayoutControl Orientation="Vertical">
+            <dxg:GridControl
+                Height="150"
+                VerticalAlignment="Top"
+                AutoGenerateColumns="None"
+                ItemsSource="{DXBinding 'GetPileAnalysisData()'}"
+                SelectionMode="Row">
+                <dxg:GridControl.View>
+                    <dxg:TableView AutoWidth="True" ShowGroupPanel="False" />
+                </dxg:GridControl.View>
+                <dxg:GridColumn
+                    FieldName="PileCode"
+                    Header="编号"
+                    ReadOnly="True" />
+                <dxg:GridColumn FieldName="Force" Header="桩力" />
+                <dxg:GridColumn
+                    FieldName="PileBearingForce"
+                    Header="抗压承载力"
+                    ReadOnly="True" />
+                <dxg:GridColumn
+                    FieldName="PilePullingForce"
+                    Header="抗拔承载力"
+                    ReadOnly="True" />
+                <dxg:GridColumn
+                    FieldName="PileHoldLength"
+                    Header="入持力层深度"
+                    ReadOnly="True" />
+                <dxg:GridColumn
+                    FieldName="PileLength"
+                    Header="总桩长"
+                    ReadOnly="True" />
+            </dxg:GridControl>
+            <dxc:ChartControl DataSource="{DXBinding 'GetPileHoldLengthVsD()'}">
+                <dxc:ChartControl.CrosshairOptions>
+                    <dxc:CrosshairOptions
+                        ShowArgumentLabels="True"
+                        ShowValueLabels="True"
+                        ShowValueLine="True" />
+                </dxc:ChartControl.CrosshairOptions>
+                <dxc:ChartControl.Legends>
+                    <dxc:Legend
+                        x:Name="legend0"
+                        Title="{x:Null}"
+                        HorizontalPosition="Left"
+                        ItemVisibilityMode="Default"
+                        Orientation="Horizontal"
+                        ReverseItems="False"
+                        UseCheckBoxes="True"
+                        Visible="True" />
+                </dxc:ChartControl.Legends>
+                <dxc:XYDiagram2D PaneOrientation="Vertical">
+                    <dxc:XYDiagram2D.SecondaryAxesY>
+                        <dxc:SecondaryAxisY2D x:Name="axisy0">
+                            <dxc:SecondaryAxisY2D.Title>
+                                <dxc:AxisTitle Content="总桩长(m)" Visible="True" />
+                            </dxc:SecondaryAxisY2D.Title>
+                        </dxc:SecondaryAxisY2D>
+                    </dxc:XYDiagram2D.SecondaryAxesY>
+                    <dxc:XYDiagram2D.AxisY>
+                        <dxc:AxisY2D>
+                            <dxc:AxisY2D.Strips>
+                                <dxc:Strip Brush="#3300AEFF" LegendText="合理入土深度范围">
+                                    <dxc:Strip.MinLimit>
+                                        <System:Object>1</System:Object>
+                                    </dxc:Strip.MinLimit>
+                                    <dxc:Strip.MaxLimit>
+                                        <System:Object>3</System:Object>
+                                    </dxc:Strip.MaxLimit>
+                                </dxc:Strip>
+                            </dxc:AxisY2D.Strips>
+                            <dxc:AxisY2D.Title>
+                                <dxc:AxisTitle Content="入土深度与桩径比值" Visible="True" />
+                            </dxc:AxisY2D.Title>
+                        </dxc:AxisY2D>
+                    </dxc:XYDiagram2D.AxisY>
+                    <dxc:XYDiagram2D.AxisX>
+                        <dxc:AxisX2D GridLinesVisible="False">
+                            <dxc:AxisX2D.CrosshairAxisLabelOptions>
+                                <dxc:CrosshairAxisLabelOptions />
+                            </dxc:AxisX2D.CrosshairAxisLabelOptions>
+                            <dxc:AxisX2D.Title>
+                                <dxc:AxisTitle Content="桩编号" Visible="True" />
+                            </dxc:AxisX2D.Title>
+                        </dxc:AxisX2D>
+                    </dxc:XYDiagram2D.AxisX>
+                    <dxc:LineSeries2D
+                        ArgumentDataMember="PileCode"
+                        DisplayName="桩端入持力层深度"
+                        ToolTipSeriesPattern="{}{S:n2}"
+                        ValueDataMember="PileLVSD">
+                        <!--<dxc:LineSeries2D.Colorizer>
+                        <dxc:RangeColorizer RangeStops="0 1 3 10 50">
+                            <dxc:RangeColorizer.Palette>
+                                <dxc:BluePalette/>
+                            </dxc:RangeColorizer.Palette>
+                        </dxc:RangeColorizer>
+                    </dxc:LineSeries2D.Colorizer>-->
+                        <dxc:LineSeries2D.PointAnimation>
+                            <dxc:Marker2DSlideFromLeftCenterAnimation />
+                        </dxc:LineSeries2D.PointAnimation>
+                        <dxc:LineSeries2D.MarkerModel>
+                            <dxc:CircleMarker2DModel />
+                        </dxc:LineSeries2D.MarkerModel>
+                        <dxc:LineSeries2D.LineStyle>
+                            <dxc:LineStyle Thickness="3" />
+                        </dxc:LineSeries2D.LineStyle>
+                    </dxc:LineSeries2D>
+                    <dxc:LineSeries2D
+                        dxc:XYDiagram2D.SeriesAxisY="{Binding ElementName=axisy0}"
+                        ArgumentDataMember="PileCode"
+                        DisplayName="桩长"
+                        ToolTipSeriesPattern="{}{S:n2}"
+                        ValueDataMember="PileLength">
+                        <dxc:LineSeries2D.PointAnimation>
+                            <dxc:Marker2DSlideFromLeftCenterAnimation />
+                        </dxc:LineSeries2D.PointAnimation>
+                        <dxc:LineSeries2D.MarkerModel>
+                            <dxc:CircleMarker2DModel />
+                        </dxc:LineSeries2D.MarkerModel>
+                        <dxc:LineSeries2D.LineStyle>
+                            <dxc:LineStyle Thickness="3" />
+                        </dxc:LineSeries2D.LineStyle>
+                    </dxc:LineSeries2D>
+                </dxc:XYDiagram2D>
+            </dxc:ChartControl>
+        </dxlc:LayoutControl>
+    </dx:LoadingDecorator>
+
+
+</Window>

@@ -61,25 +61,30 @@ namespace PDIWT_MS_ZJCZL.Models
             leveledithandle.Description = "桩的轴中心线";
             BM.SettingsActivator.SetActiveLevel(levelhandle.LevelId);
 
+            BD.ElementPropertiesSetter levelsetter = new BD.ElementPropertiesSetter();
+            levelsetter.SetLevel(levelhandle.LevelId);
+            levelsetter.SetColor(3);
 
-            var drawmodel = Program.GetActiveDgnModel();
             BG.DPoint3d top, bottom;
-            foreach (var pile in ExtractPileInfo())
+            var pilelist = ExtractPileInfo();
+            foreach (var pile in pilelist)
             {
                 top = new BG.DPoint3d(pile.TopX, pile.TopY, pile.TopZ);
-                if (pile.Skewness==0)
+                if (pile.Skewness == 0)
                     bottom = top - BG.DPoint3d.UnitZ * pile.Length;
                 else
                 {
                     double temp = pile.Length / (Math.Sqrt(pile.Skewness * pile.Skewness + 1));
                     bottom = top + new BG.DPoint3d(Math.Cos(pile.RotationDegree * deg2rad), Math.Sin(pile.RotationDegree * deg2rad), -pile.Skewness) * temp;
                 }
-                BG.DSegment3d lineseg = new BG.DSegment3d(top*10,bottom*10);
-                BDE.LineElement line = new BDE.LineElement(drawmodel, null, lineseg);
+                BG.DSegment3d lineseg = new BG.DSegment3d(top * 10, bottom * 10);
+                BDE.LineElement line = new BDE.LineElement(activemodel, null, lineseg);
+                levelsetter.Apply(line);
+
                 var wb = new BDE.WriteDataBlock();
                 wb.WriteString(pile.PileCode);
-                line.AppendLinkage(33000,wb);
-                line.AddToModel();                
+                line.AppendLinkage((ushort)BD.ElementLinkageId.String, wb);
+                line.AddToModel();
             }
         }
     }

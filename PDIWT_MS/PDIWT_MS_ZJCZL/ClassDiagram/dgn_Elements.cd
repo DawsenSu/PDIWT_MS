@@ -1,0 +1,407 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Bentley.DgnPlatformNET.Elements.AnnotationHandler" Collapsed="true">
+    <Position X="18" Y="3.25" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.ArcElement">
+    <Position X="50.25" Y="4.75" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.AreaFillPropertiesEdit" Collapsed="true">
+    <Position X="43" Y="4.75" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.AreaFillPropertiesQuery" Collapsed="true">
+    <Position X="43" Y="3.25" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.AssocRegionCellHeaderElement" Collapsed="true">
+    <Position X="108.75" Y="6" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.AssocRegionQuery" Collapsed="true">
+    <Position X="63" Y="3.25" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.BrepCellHeaderElement" Collapsed="true">
+    <Position X="112" Y="6" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.BRepEdit">
+    <Position X="84.75" Y="3.25" Width="2.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.BSplineCurveElement" Collapsed="true">
+    <Position X="120.25" Y="4.75" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.BsplineSurfaceEdit" Collapsed="true">
+    <Position X="30.25" Y="4.75" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.BSplineSurfaceElement">
+    <Position X="87.25" Y="4.75" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.BsplineSurfaceQuery" Collapsed="true">
+    <Position X="30.25" Y="3.25" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.CellHeaderElement" Collapsed="true">
+    <Position X="106.25" Y="6" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.CellQuery" Collapsed="true">
+    <Position X="45.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.ChainHeaderElement">
+    <Position X="96.5" Y="4.75" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.ChildElementCollection" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="144.5" Y="0.5" Width="2" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.ChildElementEnumerator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="146.5" Y="0.5" Width="2" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.ComplexHeaderElement" Collapsed="true">
+    <Position X="103.75" Y="3.25" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.ComplexShapeElement">
+    <Position X="94.25" Y="7.75" Width="2.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.ComplexStringElement">
+    <Position X="98" Y="7.75" Width="3.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.ConeElement" Collapsed="true">
+    <Position X="20.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.CurveElement" Collapsed="true">
+    <Position X="32.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.CurvePathEdit" Collapsed="true">
+    <Position X="48" Y="4.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.CurvePathQuery" Collapsed="true">
+    <Position X="48" Y="3.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.DgnStoreHdrElement">
+    <Position X="11.5" Y="1.75" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.DimensionCreateData" Collapsed="true">
+    <Position X="148.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.DimensionEdit" Collapsed="true">
+    <Position X="130.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.DimensionElement">
+    <Position X="122.5" Y="3.25" Width="3" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.DimensionQuery" Collapsed="true">
+    <Position X="130.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.DisplayableElement" Collapsed="true">
+    <Position X="80" Y="1.75" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.DraftingElementSchema">
+    <Position X="150.25" Y="0.5" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.Element" Collapsed="true">
+    <Position X="75.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.EllipseElement">
+    <Position X="52.75" Y="4.75" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.EllipticArcBaseElement" Collapsed="true">
+    <Position X="51.5" Y="3.25" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.ExcelDataSource">
+    <Position X="1.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.ExtendedElementElement" Collapsed="true">
+    <Position X="65.5" Y="3.25" Width="2.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.ExtendedNonGraphicsElement" Collapsed="true">
+    <Position X="14.75" Y="1.75" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.FileLinkDataSource" Collapsed="true">
+    <Position X="1.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.GroupedHoleElement" Collapsed="true">
+    <Position X="114.75" Y="6" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.LineElement" Collapsed="true">
+    <Position X="137" Y="3.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.LineStringBaseElement" Collapsed="true">
+    <Position X="24" Y="3.25" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.LineStringElement" Collapsed="true">
+    <Position X="22.75" Y="4.75" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.MaterialPropertiesExtension" Collapsed="true">
+    <Position X="37.75" Y="3.25" Width="2.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.MeshEdit" Collapsed="true">
+    <Position X="68.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.MeshHeaderElement">
+    <Position X="57.75" Y="3.25" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.MeshQuery" Collapsed="true">
+    <Position X="68.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.MultilineEdit" Collapsed="true">
+    <Position X="132.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.MultilineElement" Collapsed="true">
+    <Position X="125.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.MultilineQuery" Collapsed="true">
+    <Position X="132.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.NoteCellHeaderElement" Collapsed="true">
+    <Position X="117.5" Y="6" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.OleCellHeaderElement" Collapsed="true">
+    <Position X="103.5" Y="6" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.ParametricCellDefinitionElement" Collapsed="true">
+    <Position X="8.25" Y="1.75" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.ParametricCellElement" Collapsed="true">
+    <Position X="55.25" Y="3.25" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.PointCloudEdit" Collapsed="true">
+    <Position X="75.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.PointCloudElement" Collapsed="true">
+    <Position X="70.75" Y="3.25" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.PointCloudQuery" Collapsed="true">
+    <Position X="75.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.PointStringElement" Collapsed="true">
+    <Position X="127.75" Y="3.25" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.RasterAttachmentEdit" Collapsed="true">
+    <Position X="139.25" Y="4.75" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.RasterAttachmentQuery" Collapsed="true">
+    <Position X="139.25" Y="3.25" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.RasterFrameElement" Collapsed="true">
+    <Position X="27.75" Y="3.25" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.RasterHeaderElement" Collapsed="true">
+    <Position X="35" Y="3.25" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.ReadDataBlock" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="144.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.ShapeElement" Collapsed="true">
+    <Position X="25.25" Y="4.75" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.SharedCellDefinitionElement">
+    <Position X="100.5" Y="4.75" Width="2.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.SharedCellElement">
+    <Position X="73.25" Y="3.25" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.SharedCellQuery">
+    <Position X="78" Y="3.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.SolidElement" Collapsed="true">
+    <Position X="92.5" Y="6" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.SolidPrimitiveEdit" Collapsed="true">
+    <Position X="142" Y="4.75" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.SolidPrimitiveQuery" Collapsed="true">
+    <Position X="142" Y="3.25" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.SurfaceElement" Collapsed="true">
+    <Position X="90" Y="6" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.SurfaceOrSolidElement" Collapsed="true">
+    <Position X="91" Y="4.75" Width="2.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.TagElement" Collapsed="true">
+    <Position X="40.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.TagSetElement" Collapsed="true">
+    <Position X="12" Y="4.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.TextEdit" Collapsed="true">
+    <Position X="134.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.TextElement" Collapsed="true">
+    <Position X="80.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.TextHandlerBase" Collapsed="true">
+    <Position X="81.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.TextNodeElement" Collapsed="true">
+    <Position X="82.5" Y="4.75" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.TextQuery" Collapsed="true">
+    <Position X="134.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.TextTable" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="146.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.TextTableCell" Collapsed="true">
+    <Position X="148.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.TextTableColumn" Collapsed="true">
+    <Position X="150" Y="2" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.TextTableDataSource" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.TextTableElement" Collapsed="true">
+    <Position X="60.5" Y="3.25" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.TextTableRow" Collapsed="true">
+    <Position X="144.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.Type2Element" Collapsed="true">
+    <Position X="110.75" Y="4.75" Width="1.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bentley.DgnPlatformNET.Elements.WriteDataBlock" BaseTypeListCollapsed="true">
+    <Position X="146.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Struct Name="Bentley.DgnPlatformNET.Elements.TableCellIndex" Collapsed="true">
+    <Position X="144.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier />
+  </Struct>
+  <Struct Name="Bentley.DgnPlatformNET.Elements.TableCellMarginValues" Collapsed="true">
+    <Position X="146.5" Y="3.75" Width="2" />
+    <TypeIdentifier />
+  </Struct>
+  <Struct Name="Bentley.DgnPlatformNET.Elements.TableSymbologyValues" Collapsed="true">
+    <Position X="148.25" Y="3.75" Width="2" />
+    <TypeIdentifier />
+  </Struct>
+  <Enum Name="Bentley.DgnPlatformNET.Elements.ParametricCellDifference" Collapsed="true">
+    <Position X="144.75" Y="5" Width="2" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="Bentley.DgnPlatformNET.Elements.TableBreakPosition" Collapsed="true">
+    <Position X="146.5" Y="5" Width="1.75" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="Bentley.DgnPlatformNET.Elements.TableBreakType" Collapsed="true">
+    <Position X="148.25" Y="5" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="Bentley.DgnPlatformNET.Elements.TableCellAlignment" Collapsed="true">
+    <Position X="150" Y="5" Width="1.75" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="Bentley.DgnPlatformNET.Elements.TableCellListEdges" Collapsed="true">
+    <Position X="144.75" Y="5.75" Width="1.75" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="Bentley.DgnPlatformNET.Elements.TableCellOrientation" Collapsed="true">
+    <Position X="146.5" Y="5.75" Width="1.75" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="Bentley.DgnPlatformNET.Elements.TableHeaderFooterType" Collapsed="true">
+    <Position X="148.25" Y="5.75" Width="2" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="Bentley.DgnPlatformNET.Elements.TableInsertDirection" Collapsed="true">
+    <Position X="150" Y="5.75" Width="1.75" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="Bentley.DgnPlatformNET.Elements.TextReplaceStatus" Collapsed="true">
+    <Position X="144.75" Y="6.5" Width="1.75" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="Bentley.DgnPlatformNET.Elements.TextTableRegion" Collapsed="true">
+    <Position X="146.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
