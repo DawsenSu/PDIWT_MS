@@ -12,9 +12,10 @@ using DevExpress.Mvvm;
 
 namespace PDIWT_MS_ZJCZL.Models.Piles
 {
-    class SteelAndPercastConcretePile : PileBase, IPileBearingCapacity
+    [Serializable]
+    class SteelAndPercastConcretePile : PileBase
     {
-        public double CalculateQd()
+        public override double CalculateQd()
         {
             if (SteelAndPercastConcretPileLayerInfoProp == null || SteelAndPercastConcretPileLayerInfoProp.Count == 0)
                 throw new ArgumentNullException($"{PileCode}的PileLayerInfo属性为null或者为empty");
@@ -24,7 +25,7 @@ namespace PDIWT_MS_ZJCZL.Models.Piles
             return (PilePropertyInfo.GetPilePerimeter() * accumlatenum + Eta* Qr * PilePropertyInfo.GetPileCrossSectionArea()) / GammaR;
         }
 
-        public double CalculateQt()
+        public override double CalculateQt()
         {
             return base.CalculateQt(SteelAndPercastConcretPileLayerInfoProp, GammaR);
         }

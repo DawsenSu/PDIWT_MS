@@ -12,6 +12,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PDIWT_MS_ZJCZL.Models.Piles
 {
+    [Serializable]
     public abstract class PileBase : BindableBase
     {
         protected virtual double CalculateQt<T>(ObservableCollection<T> pileLayerInfoProp, double gammaR) where T : SoilLayerInfoBase
@@ -39,5 +40,8 @@ namespace PDIWT_MS_ZJCZL.Models.Piles
             get { return GetProperty(() => PilePropertyInfo); }
             set { SetProperty(() => PilePropertyInfo, value); }
         }
+
+        public abstract double CalculateQd();
+        public abstract double CalculateQt();
     }
 }

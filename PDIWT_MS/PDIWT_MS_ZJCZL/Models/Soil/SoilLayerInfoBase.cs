@@ -36,7 +36,7 @@ namespace PDIWT_MS_ZJCZL.Models.Soil
             get { return GetProperty(() => Qfi); }
             set { SetProperty(() => Qfi, value); }
         }
-        [DisplayName("阻力计算系数"), Display(Order = 4)]
+        [DisplayName("折减系数ξi"), Display(Order = 4)]
         public double Xii
         {
             get { return GetProperty(() => Xii); }

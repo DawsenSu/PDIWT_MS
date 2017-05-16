@@ -93,12 +93,23 @@ namespace PDIWT_MS_ZJCZL.ViewModels
             get { return GetProperty(() => Hr); }
             set { SetProperty(() => Hr, value); }
         }
-
         public double WaterLevel
         {
             get { return GetProperty(() => WaterLevel); }
             set { SetProperty(() => WaterLevel, value); }
         }
+        public double PolygonCrossSectionArea
+        {
+            get { return GetProperty(() => PolygonCrossSectionArea); }
+            set { SetProperty(() => PolygonCrossSectionArea, value); }
+        }
+        public double PolygonCrossSectionPerimeter
+        {
+            get { return GetProperty(() => PolygonCrossSectionPerimeter); }
+            set { SetProperty(() => PolygonCrossSectionPerimeter, value); }
+        }
+
+
         protected override void OnInitializeInRuntime()
         {
             var alllevel = new ObservableCollection<BD.LevelHandle>();
@@ -116,7 +127,7 @@ namespace PDIWT_MS_ZJCZL.ViewModels
             //    {"方形截面桩", PileCrossSectionType.Square },
             //    {"环形截面桩", PileCrossSectionType.Annular }
             //};
-            SelectedPileCrossSectionType = PileCrossSectionType.Roundness;
+            SelectedPileCrossSectionType = PileCrossSectionType.Square;
             SelectedPileType = PileType.Solid;
             PileWeight = 25;
             PileUnderwaterWeight = 15;
@@ -155,49 +166,81 @@ namespace PDIWT_MS_ZJCZL.ViewModels
                     return;
                 }
 
-                PileFactory pilefactory = new SolidPileFactory();
-                switch (SelectedPileType)
-                {
-                    case PileType.Solid:
-                        pilefactory = new SolidPileFactory();
-                        break;
-                    case PileType.SteelAndPercastConcrete:
-                        pilefactory = new SteelAndPercastConcretePileFactory();
-                        break;
-                    case PileType.Filling:
-                        pilefactory = new FillingPileFactory();
-                        break;
-                    case PileType.Socketed:
-                        pilefactory = new SocketedPileFactory();
-                        break;
-                    case PileType.PostgroutingFilling:
-                        pilefactory = new PostgroutingFillingPileFactory();
-                        break;
-                }
+                PileFactory pilefactory = null;
+
                 var pileproplist = new List<IPileProperty>();
                 var pilenamelist = new List<string>();
                 var pileIdlist = new List<long>();
 
-                foreach (var pile in elelist)
+                switch (SelectedPileType)
                 {
-                    BG.DRange3d range;
-                    ((BDE.LineElement)pile).CalcElementRange(out range);
-                    switch (SelectedPileCrossSectionType)
-                    {
-                        case PileCrossSectionType.Roundness:
-                            pileproplist.Add(new RoundnessPileGeometry() { PileDiameter = this.PileDiameter, PileWeight = this.PileWeight, PileUnderWaterWeight = this.PileUnderwaterWeight, WaterLevel = WaterLevel, PileTopPoint = range.High.DPoint3dToPoint3d(1e-4), PileBottomPoint = range.Low.DPoint3dToPoint3d(1e-4) });
-                            break;
-                        case PileCrossSectionType.Square:
-                            pileproplist.Add(new SquarePileGeometry() { PileDiameter = this.PileDiameter, PileWeight = this.PileWeight, PileUnderWaterWeight = this.PileUnderwaterWeight, WaterLevel = WaterLevel, PileTopPoint = range.High.DPoint3dToPoint3d(1e-4), PileBottomPoint = range.Low.DPoint3dToPoint3d(1e-4) });
-                            break;
-                        case PileCrossSectionType.Annular:
+                    case PileType.Solid:
+                        pilefactory = new SolidPileFactory(GammaR);
+                        foreach (var pile in elelist)
+                        {
+                            BG.DRange3d range;
+                            ((BDE.LineElement)pile).CalcElementRange(out range);
+                            switch (SelectedPileCrossSectionType)
+                            {
+                                case PileCrossSectionType.SuareWithRoundHole:
+                                    pileproplist.Add(new SquareWithRoundHolePileGeometry() { PileDiameter = this.PileDiameter, PileInnerDiameter =this.PileInnerDiameter, PileWeight = this.PileWeight, PileUnderWaterWeight = this.PileUnderwaterWeight, WaterLevel = WaterLevel, PileTopPoint = range.High.DPoint3dToPoint3d(1e-4), PileBottomPoint = range.Low.DPoint3dToPoint3d(1e-4) });
+                                    break;
+                                case PileCrossSectionType.Square:
+                                    pileproplist.Add(new SquarePileGeometry() { PileDiameter = this.PileDiameter, PileWeight = this.PileWeight, PileUnderWaterWeight = this.PileUnderwaterWeight, WaterLevel = WaterLevel, PileTopPoint = range.High.DPoint3dToPoint3d(1e-4), PileBottomPoint = range.Low.DPoint3dToPoint3d(1e-4) });
+                                    break;
+                                case PileCrossSectionType.Polygon:
+                                    pileproplist.Add(new PolygonPileGeometry() { CrossSectionArea= this.PolygonCrossSectionArea, PileCrossSectionPerimeter = this.PolygonCrossSectionPerimeter, PileWeight = this.PileWeight, PileUnderWaterWeight = this.PileUnderwaterWeight, WaterLevel = WaterLevel, PileTopPoint = range.High.DPoint3dToPoint3d(1e-4), PileBottomPoint = range.Low.DPoint3dToPoint3d(1e-4) });
+                                    break;
+                            }
+                            var pilecodereaddatablock = pile.GetLinkage((ushort)BD.ElementLinkageId.String);
+                            if (null== pilecodereaddatablock)
+                                throw new NotSupportedException($"Pile Id:{pile.ElementId} doesn't contain pilecode linkage");
+                            pilenamelist.Add(PileName + pilecodereaddatablock.ReadString());
+                            pileIdlist.Add(pile.ElementId);
+                        }
+                        break;
+                    case PileType.SteelAndPercastConcrete:
+                        pilefactory = new SteelAndPercastConcretePileFactory(GammaR);
+                        foreach (var pile in elelist)
+                        {
+                            BG.DRange3d range;
+                            ((BDE.LineElement)pile).CalcElementRange(out range);
                             pileproplist.Add(new AnnularPileGeometry() { PileDiameter = this.PileDiameter, PileInnerDiameter = this.PileInnerDiameter, PileWeight = this.PileWeight, PileUnderWaterWeight = this.PileUnderwaterWeight, WaterLevel = WaterLevel, PileTopPoint = range.High.DPoint3dToPoint3d(1e-4), PileBottomPoint = range.Low.DPoint3dToPoint3d(1e-4) });
-                            break;
-                    }
-                    pilenamelist.Add(PileName + pile.GetLinkage((ushort)BD.ElementLinkageId.String).ReadString());
-                    pileIdlist.Add(pile.ElementId);
+                            pilenamelist.Add(PileName + pile.GetLinkage((ushort)BD.ElementLinkageId.String).ReadString());
+                            pileIdlist.Add(pile.ElementId);
+                        }
+                        break;
+                        //case PileType.Filling:
+                        //    pilefactory = new FillingPileFactory();
+                        //    break;
+                        //case PileType.Socketed:
+                        //    pilefactory = new SocketedPileFactory();
+                        //    break;
+                        //case PileType.PostgroutingFilling:
+                        //    pilefactory = new PostgroutingFillingPileFactory();
+                        //    break;
                 }
-                var templist = pilefactory.CreateNewPileArray(pileproplist.ToArray(), pilenamelist.ToArray(), pileIdlist.ToArray());
+
+                //foreach (var pile in elelist)
+                //{
+                //    BG.DRange3d range;
+                //    ((BDE.LineElement)pile).CalcElementRange(out range);
+                //    switch (SelectedPileCrossSectionType)
+                //    {
+                //        case PileCrossSectionType.Roundness:
+                //            pileproplist.Add(new RoundnessPileGeometry() { PileDiameter = this.PileDiameter, PileWeight = this.PileWeight, PileUnderWaterWeight = this.PileUnderwaterWeight, WaterLevel = WaterLevel, PileTopPoint = range.High.DPoint3dToPoint3d(1e-4), PileBottomPoint = range.Low.DPoint3dToPoint3d(1e-4) });
+                //            break;
+                //        case PileCrossSectionType.Square:
+                //            pileproplist.Add(new SquarePileGeometry() { PileDiameter = this.PileDiameter, PileWeight = this.PileWeight, PileUnderWaterWeight = this.PileUnderwaterWeight, WaterLevel = WaterLevel, PileTopPoint = range.High.DPoint3dToPoint3d(1e-4), PileBottomPoint = range.Low.DPoint3dToPoint3d(1e-4) });
+                //            break;
+                //        case PileCrossSectionType.Annular:
+                //            pileproplist.Add(new AnnularPileGeometry() { PileDiameter = this.PileDiameter, PileInnerDiameter = this.PileInnerDiameter, PileWeight = this.PileWeight, PileUnderWaterWeight = this.PileUnderwaterWeight, WaterLevel = WaterLevel, PileTopPoint = range.High.DPoint3dToPoint3d(1e-4), PileBottomPoint = range.Low.DPoint3dToPoint3d(1e-4) });
+                //            break;
+                //    }
+                //    pilenamelist.Add(PileName + pile.GetLinkage((ushort)BD.ElementLinkageId.String).ReadString());
+                //    pileIdlist.Add(pile.ElementId);
+                //}
+                var templist = pilefactory?.CreateNewPileArray(pileproplist.ToArray(), pilenamelist.ToArray(), pileIdlist.ToArray());
                 Piles.AddRange(templist);
 
                 CloseAction();
@@ -216,12 +259,12 @@ namespace PDIWT_MS_ZJCZL.ViewModels
     }
     public enum PileCrossSectionType
     {
-        [Display(Name = "圆形截面桩"),Image("pack://application:,,,/PDIWT_MS_ZJCZL;component/Resources/Image/Disk_16.png")]
-        Roundness,
-        [Display(Name = "方形截面桩"), Image("pack://application:,,,/PDIWT_MS_ZJCZL;component/Resources/Image/Square_16.png")]
+        [Display(Name = "方形截面"), Image("pack://application:,,,/PDIWT_MS_ZJCZL;component/Resources/Image/Square_16.png")]
         Square,
-        [Display(Name = "环形截面桩"),Image("pack://application:,,,/PDIWT_MS_ZJCZL;component/Resources/Image/Circle_16.png")]
-        Annular
+        [Display(Name = "方形圆空心截面"),Image("pack://application:,,,/PDIWT_MS_ZJCZL;component/Resources/Image/SquareWithRoundHole_16.png")]
+        SuareWithRoundHole,
+        [Display(Name = "多边形截面"), Image("pack://application:,,,/PDIWT_MS_ZJCZL;component/Resources/Image/Polygon_16.png")]
+        Polygon
     }
 
     public enum PileType
@@ -229,13 +272,13 @@ namespace PDIWT_MS_ZJCZL.ViewModels
         [Display(Name = "实心桩或桩端封闭")]
         Solid,                      //桩身实心火桩端封闭
         [Display(Name = "钢管桩与预制混凝土管桩")]
-        SteelAndPercastConcrete,    //钢管桩与预制混凝土管桩
-        [Display( Name = "灌注桩")]
-        Filling,                    //灌注桩
-        [Display(Name = "嵌岩桩")]
-        Socketed,                   //嵌岩桩
-        [Display(Name = "后注浆灌注桩")]
-        PostgroutingFilling         //后注浆灌注桩
+        SteelAndPercastConcrete    //钢管桩与预制混凝土管桩
+        //[Display( Name = "灌注桩")]
+        //Filling,                    //灌注桩
+        //[Display(Name = "嵌岩桩")]
+        //Socketed,                   //嵌岩桩
+        //[Display(Name = "后注浆灌注桩")]
+        //PostgroutingFilling         //后注浆灌注桩
     }
 
 }

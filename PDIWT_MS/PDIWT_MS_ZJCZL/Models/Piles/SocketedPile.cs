@@ -12,9 +12,10 @@ using DevExpress.Mvvm;
 
 namespace PDIWT_MS_ZJCZL.Models.Piles
 {
-    class SocketedPile : PileBase, IPileBearingCapacity
+    [Serializable]
+    class SocketedPile : PileBase
     {
-        public double CalculateQd()
+        public override double CalculateQd()
         {
             if (SocketedPileSoilLayerInfoProp == null || SocketedPileSoilLayerInfoProp.Count == 0)
                 throw new ArgumentNullException($"{PileCode}的SocketedPileSoilInfoProp属性为null或者为empty");
@@ -24,7 +25,7 @@ namespace PDIWT_MS_ZJCZL.Models.Piles
             return PilePropertyInfo.GetPilePerimeter() * accumlatenum / GammaCs + (PilePropertyInfo.GetPilePerimeter() * Xis * Hr + Xip * PilePropertyInfo.GetPileCrossSectionArea()) * Frk / GammaCr;
         }
 
-        public double CalculateQt()
+        public override double CalculateQt()
         {
             if (Hr >= 3 * PilePropertyInfo.PileDiameter)
             {

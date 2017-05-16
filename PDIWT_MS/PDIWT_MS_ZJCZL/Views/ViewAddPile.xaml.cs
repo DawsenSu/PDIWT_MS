@@ -22,7 +22,7 @@ namespace PDIWT_MS_ZJCZL.Views
         public ViewAddPile()
         {
             InitializeComponent();
-            combox_piletype.ItemsSource = Models.EnumBindingToCHSHelper.GetEnumDescriptionList(typeof(Models.PileType));
+            //combox_piletype.ItemsSource = Models.EnumBindingToCHSHelper.GetEnumDescriptionList(typeof(Models.PileType));
             //DataContext = new ViewModels.ViewAddPileViewModel();
             //combox_piletype.ItemsSource = Enum.GetNames(typeof(PDIWT_MS_ZJCZL.Models.PileType));
         }

@@ -10,7 +10,7 @@ using DevExpress.Mvvm.DataAnnotations;
 using PDIWT_MS_ZJCZL.Interface;
 using PDIWT_MS_ZJCZL.Models.Piles;
 using System.ComponentModel;
-
+using PDIWT_MS_ZJCZL.Models.Soil;
 
 namespace PDIWT_MS_ZJCZL.ViewModels
 {
@@ -26,18 +26,25 @@ namespace PDIWT_MS_ZJCZL.ViewModels
             var pileAnalysisData = new List<PileAnalysisInfo>();
             foreach (var pile in Piles)
             {
-                double holdlength = 0;
+                SoilLayerInfoBase holdsoillayerinfo = new SoilLayerInfoBase();
                 if (pile is SolidPile)
-                    holdlength = ((SolidPile)pile).SolidPileSoilLayerInfoProp.Last().PileInSoilLayerLength;
+                    holdsoillayerinfo = ((SolidPile)pile).SolidPileSoilLayerInfoProp.Last();
                 else if (pile is FillingPile)
-                    holdlength = ((FillingPile)pile).FillingPileSoilLayerInfoProp.Last().PileInSoilLayerLength;
+                    holdsoillayerinfo = ((FillingPile)pile).FillingPileSoilLayerInfoProp.Last();
+                else if (pile is SteelAndPercastConcretePile)
+                    holdsoillayerinfo = ((SteelAndPercastConcretePile)pile).SteelAndPercastConcretPileLayerInfoProp.Last();
+                else if (pile is SocketedPile)
+                    holdsoillayerinfo = ((SocketedPile)pile).SocketedPileSoilLayerInfoProp.Last();
+                else if (pile is PostgroutingFillingPile)
+                    holdsoillayerinfo = ((PostgroutingFillingPile)pile).PostgroutingFillingPileSoilLayerInfoProp.Last();
                 pileAnalysisData.Add(new PileAnalysisInfo()
                 {
                     PileCode = pile.PileCode,
                     Force = 0,
-                    PileBearingForce = ((IPileBearingCapacity)pile).CalculateQd(),
-                    PilePullingForce = ((IPileBearingCapacity)pile).CalculateQt(),
-                    PileHoldLength = holdlength,
+                    PileBearingForce = pile.CalculateQd(),
+                    PilePullingForce = pile.CalculateQt(),
+                    PileHoldLength = holdsoillayerinfo.PileInSoilLayerLength,
+                    PileHoldSoilName = holdsoillayerinfo.SoilLayerNum,
                     PileLength = pile.PilePropertyInfo.GetPileLength(),
                     PileDiameter = pile.PilePropertyInfo.PileDiameter
                 });
@@ -76,5 +83,6 @@ namespace PDIWT_MS_ZJCZL.ViewModels
         public double PileHoldLength { get; set; }
         public double PileLength { get; set; }
         public double PileDiameter { get; set; }
+        public string PileHoldSoilName { get; set; }
     }
 }

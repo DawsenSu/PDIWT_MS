@@ -157,6 +157,10 @@
                     FieldName="PileCode"
                     Header="编号"
                     ReadOnly="True" />
+                <dxg:GridColumn
+                    FieldName="PileDiameter"
+                    Header="桩径m"
+                    ReadOnly="True" />
                 <dxg:GridColumn FieldName="Force" Header="桩力" />
                 <dxg:GridColumn
                     FieldName="PileBearingForce"
@@ -169,6 +173,10 @@
                 <dxg:GridColumn
                     FieldName="PileHoldLength"
                     Header="入持力层深度"
+                    ReadOnly="True" />
+                <dxg:GridColumn
+                    FieldName="PileHoldSoilName"
+                    Header="持力层土质"
                     ReadOnly="True" />
                 <dxg:GridColumn
                     FieldName="PileLength"

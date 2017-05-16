@@ -12,8 +12,8 @@
     Title="从模型图层中添加桩"
     Width="300"
     Height="400"
-    WindowStartupLocation="CenterScreen"
     Icon="/PDIWT_MS_ZJCZL;component/Resources/Image/External Link.ico"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.Resources>
         <dx:EnumToVisibilityConverter x:Key="etovconvertor" />
@@ -37,7 +37,7 @@
                                     </dxmvvm:Interaction.Behaviors>
                                 </dxe:ComboBoxEdit>
                             </dxlc:LayoutItem>
-                            <dxlc:LayoutItem Label="桩截面类型">
+                            <dxlc:LayoutItem Label="桩截面类型" Visibility="{Binding SelectedPileType, Converter={StaticResource etovconvertor}, ConverterParameter=Solid}">
                                 <dxe:ComboBoxEdit EditValue="{Binding SelectedPileCrossSectionType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsTextEditable="False">
                                     <dxmvvm:Interaction.Behaviors>
                                         <dxmvvm:EnumItemsSourceBehavior EnumType="{x:Type ViewModels:PileCrossSectionType}" />
@@ -47,21 +47,36 @@
                             <dxlc:LayoutItem Label="桩名称前缀：">
                                 <dxe:TextEdit Text="{Binding PileName}" />
                             </dxlc:LayoutItem>
-                            <dxlc:LayoutGroup Orientation="Vertical" Visibility="{Binding SelectedPileCrossSectionType, Converter={StaticResource etovconvertor}, ConverterParameter=Roundness}">
-                                <dxlc:LayoutItem Label="桩直径(m)：">
-                                    <dxe:TextEdit Text="{Binding PileDiameter}" />
-                                </dxlc:LayoutItem>
+                            <dxlc:LayoutGroup Orientation="Vertical" Visibility="{Binding SelectedPileType, Converter={StaticResource etovconvertor}, ConverterParameter=Solid}">
+                                <dxlc:LayoutGroup Orientation="Vertical" Visibility="{Binding SelectedPileCrossSectionType, Converter={StaticResource etovconvertor}, ConverterParameter=Square}">
+                                    <dxlc:LayoutItem Label="桩边长(m)：">
+                                        <dxe:TextEdit Text="{Binding PileDiameter}" />
+                                    </dxlc:LayoutItem>
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Orientation="Vertical" Visibility="{Binding SelectedPileCrossSectionType, Converter={StaticResource etovconvertor}, ConverterParameter=SuareWithRoundHole}">
+                                    <dxlc:LayoutItem Label="桩边长(m)：">
+                                        <dxe:TextEdit Text="{Binding PileDiameter}" />
+                                    </dxlc:LayoutItem>
+                                    <dxlc:LayoutItem Label="桩孔直径(m)：">
+                                        <dxe:TextEdit Text="{Binding PileInnerDiameter}" />
+                                    </dxlc:LayoutItem>
+                                </dxlc:LayoutGroup>
+
+                                <dxlc:LayoutGroup Orientation="Vertical" Visibility="{Binding SelectedPileCrossSectionType, Converter={StaticResource etovconvertor}, ConverterParameter=Polygon}">
+                                    <dxlc:LayoutItem Label="桩截面积(m^2)：">
+                                        <dxe:TextEdit Text="{Binding PolygonCrossSectionArea}" />
+                                    </dxlc:LayoutItem>
+                                    <dxlc:LayoutItem Label="桩周长(m)：">
+                                        <dxe:TextEdit Text="{Binding PolygonCrossSectionPerimeter}" />
+                                    </dxlc:LayoutItem>
+                                </dxlc:LayoutGroup>
                             </dxlc:LayoutGroup>
-                            <dxlc:LayoutGroup Orientation="Vertical" Visibility="{Binding SelectedPileCrossSectionType, Converter={StaticResource etovconvertor}, ConverterParameter=Square}">
-                                <dxlc:LayoutItem Label="桩边长(m)：">
+                            <dxlc:LayoutGroup Orientation="Vertical" Visibility="{Binding SelectedPileType, Converter={StaticResource etovconvertor}, ConverterParameter=SteelAndPercastConcrete}">
+                                <dxlc:LayoutItem Label="桩外径(m)：">
                                     <dxe:TextEdit Text="{Binding PileDiameter}" />
                                 </dxlc:LayoutItem>
-                            </dxlc:LayoutGroup>
-                            <dxlc:LayoutGroup Orientation="Vertical" Visibility="{Binding SelectedPileCrossSectionType, Converter={StaticResource etovconvertor}, ConverterParameter=Annular}">
-                                <dxlc:LayoutItem Label="桩直径(m)：">
-                                    <dxe:TextEdit Text="{Binding PileDiameter}" />
-                                </dxlc:LayoutItem>
-                                <dxlc:LayoutItem Label="桩孔直径(m)：">
+                                <dxlc:LayoutItem Label="桩内径(m)：">
                                     <dxe:TextEdit Text="{Binding PileInnerDiameter}" />
                                 </dxlc:LayoutItem>
                             </dxlc:LayoutGroup>
@@ -80,11 +95,11 @@
                             <dxe:TextEdit Text="{Binding WaterLevel}" />
                         </dxlc:LayoutItem>
                         <dxlc:LayoutGroup View="Group">
-                            <dxlc:LayoutItem Label="γCR：">
+                            <dxlc:LayoutItem Label="γR：">
                                 <dxe:TextEdit Text="{Binding GammaR}" />
                             </dxlc:LayoutItem>
                         </dxlc:LayoutGroup>
-                        <dxlc:LayoutGroup
+                        <!--<dxlc:LayoutGroup
                             Orientation="Vertical"
                             View="Group"
                             Visibility="{Binding SelectedPileType, Converter={StaticResource etovconvertor}, ConverterParameter=Socketed}">
@@ -94,9 +109,8 @@
                             <dxlc:LayoutItem Label="Hr：">
                                 <dxe:TextEdit Text="{Binding Hr}" />
                             </dxlc:LayoutItem>
-                        </dxlc:LayoutGroup>
+                        </dxlc:LayoutGroup>-->
                     </dxlc:LayoutGroup>
-
                 </GroupBox>
                 <StackPanel
                     HorizontalAlignment="Right"

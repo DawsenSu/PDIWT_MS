@@ -12,9 +12,10 @@ using DevExpress.Mvvm;
 
 namespace PDIWT_MS_ZJCZL.Models.Piles
 {
-    class PostgroutingFillingPile : PileBase, IPileBearingCapacity
+    [Serializable]
+    class PostgroutingFillingPile : PileBase
     {
-        public double CalculateQd()
+        public override double CalculateQd()
         {
             if (PostgroutingFillingPileSoilLayerInfoProp == null || PostgroutingFillingPileSoilLayerInfoProp.Count == 0)
                 throw new ArgumentNullException($"{PileCode}的PostgroutingFillingPileLayerInfoProp属性为null或者为empty");
@@ -24,7 +25,7 @@ namespace PDIWT_MS_ZJCZL.Models.Piles
             return (PilePropertyInfo.GetPilePerimeter() * accumlatenum + BetaP * PsiP * Qr * PilePropertyInfo.GetPileCrossSectionArea()) / GammaR;
         }
 
-        public double CalculateQt()
+        public override double CalculateQt()
         {
             return base.CalculateQt(PostgroutingFillingPileSoilLayerInfoProp, GammaR);
         }

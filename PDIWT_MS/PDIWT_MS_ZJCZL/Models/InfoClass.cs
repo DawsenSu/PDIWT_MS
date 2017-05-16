@@ -17,8 +17,8 @@ namespace PDIWT_MS_ZJCZL.Models
     {
         //桩体信息
         [DisplayName("桩类型"), Description("桩的类型"),Category("桩信息")]
-        public PileType PileTypeInfo { get; set; }
-        [DisplayName("桩直径"), Description("桩的直径"), Category("桩信息")]
+        //public PileType PileTypeInfo { get; set; }
+        //[DisplayName("桩直径"), Description("桩的直径"), Category("桩信息")]
         public double PileDiameter { get; set; }
         [DisplayName("桩长"),Description("桩的长度"),Category("桩信息"),ReadOnly(true)]
         public double PileLength { get; set; }
@@ -93,19 +93,19 @@ namespace PDIWT_MS_ZJCZL.Models
         ByRay
     }
 
-    public enum PileType
-    {
-        [Description("实心桩或桩端封闭")]
-        Solid,                      //桩身实心火桩端封闭
-        [Description("管桩")]
-        SteelAndPercastConcrete,    //钢管桩与预制混凝土管桩
-        [Description("灌注桩")]
-        Filling,                    //灌注桩
-        [Description("嵌岩桩")]
-        Socketed,                   //嵌岩桩
-        [Description("后注浆灌注桩")]
-        PostgroutingFilling         //后注浆灌注桩
-    }
+    //public enum PileType
+    //{
+    //    [Description("实心桩或桩端封闭")]
+    //    Solid,                      //桩身实心火桩端封闭
+    //    [Description("管桩")]
+    //    SteelAndPercastConcrete,    //钢管桩与预制混凝土管桩
+    //    [Description("灌注桩")]
+    //    Filling,                    //灌注桩
+    //    [Description("嵌岩桩")]
+    //    Socketed,                   //嵌岩桩
+    //    [Description("后注浆灌注桩")]
+    //    PostgroutingFilling         //后注浆灌注桩
+    //}
 
     public static class CalculatePileCapacity
     {

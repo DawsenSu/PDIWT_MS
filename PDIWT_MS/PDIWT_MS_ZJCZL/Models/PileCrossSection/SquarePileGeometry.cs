@@ -10,6 +10,7 @@ using PDIWT_MS_ZJCZL.Interface;
 
 namespace PDIWT_MS_ZJCZL.Models.PileCrossSection
 {
+    [Serializable]
     class SquarePileGeometry : BindableBase, IPileProperty
     {
         public Point3d PileBottomPoint

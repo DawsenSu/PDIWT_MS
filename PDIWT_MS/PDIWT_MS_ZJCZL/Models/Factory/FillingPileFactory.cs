@@ -16,6 +16,7 @@ namespace PDIWT_MS_ZJCZL.Models.Factory
     {
         public override PileBase CreateNewPile(IPileProperty pileType, string pilecode, long pileId)
         {
+
             HCHXCodeQueryErrorCode status = pileQuery.QueryByRay(ref columnLayerInfoArray, pileType.PileTopPoint.Scale(1e4), pileType.PileBottomPoint.Scale(1e4));
             if (status != HCHXCodeQueryErrorCode.Success)
                 throw new ArgumentException("创建" + pilecode + "出错" + status.ToString());

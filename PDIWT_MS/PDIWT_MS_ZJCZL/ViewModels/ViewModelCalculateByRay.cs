@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using System.IO;
 
 using DevExpress.Mvvm.DataAnnotations;
 using DevExpress.Mvvm;
@@ -17,9 +18,11 @@ namespace PDIWT_MS_ZJCZL.ViewModels
     using PDIWT_MS_ZJCZL.Models.Soil;
     using PDIWT_MS_ZJCZL.Models.Factory;
     using PDIWT_MS_ZJCZL.Models.PileCrossSection;
+    using System.Xml.Serialization;
 
     public class ViewModelCalculateByRay : ViewModelBase
     {
+        [XmlArrayItem("Piles")]
         public ObservableCollection<PileBase> Piles
         {
             get { return GetProperty(() => Piles); }
@@ -165,10 +168,43 @@ namespace PDIWT_MS_ZJCZL.ViewModels
             analysisview.ShowDialog();
         }
 
+        [Command]
+        public void ExportToExcel()
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Excel 2007 - 2016|*.xlsx";
+            sfd.Title = "选择计算文件";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                if (File.Exists(sfd.FileName))
+                    File.Delete(sfd.FileName);
+                try
+                {
+                    var exporttoexcel = new ExportCalculationSheet(Piles.ToList());
+                    exporttoexcel.Export(sfd.FileName);
+                    MessageBox.Show($"文件已保存至{sfd.FileName}", "保存成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.ToString(), "输出错误！", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+        }
+        public bool CanExportToExcel()
+        {
+            return Piles.Count > 0;
+        }
+
+        //public void SerializerPiles()
+        //{
+        //    //XmlSerializerHelper.SaveToXml(@"D:\Test.xml", Piles, null, null);
+        //}
         protected override void OnInitializeInRuntime()
         {
             base.OnInitializeInRuntime();
             Piles = new ObservableCollection<PileBase>();
+            //Piles = XmlSerializerHelper.LoadFromXml<ObservableCollection<PileBase>>(@"D:\Test.xml");
             //Piles = new ObservableCollection<PileBase>
             //{
             //    new SolidPile

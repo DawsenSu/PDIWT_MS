@@ -11,9 +11,10 @@ using PDIWT_MS_ZJCZL.Models.Soil;
 
 namespace PDIWT_MS_ZJCZL.Models.Piles
 {
-    public class FillingPile : PileBase, IPileBearingCapacity
+    [Serializable]
+    public class FillingPile : PileBase
     {
-        public double CalculateQd()
+        public override double CalculateQd()
         {
             if (FillingPileSoilLayerInfoProp == null || FillingPileSoilLayerInfoProp.Count == 0)
                 throw new ArgumentNullException($"{PileCode}的PileLayerInfo属性为null或者为empty");
@@ -22,7 +23,7 @@ namespace PDIWT_MS_ZJCZL.Models.Piles
                 accumlatenum += pilesoil.PsiSi * pilesoil.PileInSoilLayerLength * pilesoil.Qfi;
             return (PilePropertyInfo.GetPilePerimeter() * accumlatenum + PsiP * Qr * PilePropertyInfo.GetPileCrossSectionArea()) / GammaR;
         }
-        public double CalculateQt()
+        public override double CalculateQt()
         {
             return base.CalculateQt(FillingPileSoilLayerInfoProp, GammaR);
         }

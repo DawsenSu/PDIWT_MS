@@ -14,8 +14,9 @@ namespace PDIWT_MS_ZJCZL.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            PileType pieltype = (PileType)value;
-            return EnumBindingToCHSHelper.GetEnumDesc(pieltype);
+            //PileType pieltype = (PileType)value;
+            //return EnumBindingToCHSHelper.GetEnumDesc(pieltype);
+            return "wrong";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

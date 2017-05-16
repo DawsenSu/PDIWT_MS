@@ -9,6 +9,7 @@ using DevExpress.Mvvm;
 
 namespace PDIWT_MS_ZJCZL.Models.PileCrossSection
 {
+    [Serializable]
     public class RoundnessPileGeometry : BindableBase,IPileProperty
     {
         public Point3d PileBottomPoint

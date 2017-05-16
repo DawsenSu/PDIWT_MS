@@ -158,6 +158,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\..\项目\科技开发中心\工具开发\桩基承载力\桩基承载力计算所需材料\HCHXCodeQueryLib20170427更新样条曲面\HCHXCodeQueryLib.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -191,6 +192,7 @@
     <Compile Include="Interface\IPileProperty.cs" />
     <Compile Include="KeyinCommands.cs" />
     <Compile Include="Models\DgnLineFromExcelFile.cs" />
+    <Compile Include="Models\ExportCalculationSheet.cs" />
     <Compile Include="Models\Factory\FillingPileFactory.cs" />
     <Compile Include="Models\HCHXQueryLibExtentsion.cs" />
     <Compile Include="Models\EnumBindingToCHSHelper.cs" />
@@ -198,6 +200,8 @@
     <Compile Include="Models\Factory\SolidPileFactory.cs" />
     <Compile Include="Models\InfoClass.cs" />
     <Compile Include="Models\PileCrossSection\AnnularPileGeometry.cs" />
+    <Compile Include="Models\PileCrossSection\PolygonPileGeometry.cs" />
+    <Compile Include="Models\PileCrossSection\SquareWithRoundHolePileGeometry.cs" />
     <Compile Include="Models\Piles\FillingPile.cs" />
     <Compile Include="Models\Piles\PileBase.cs" />
     <Compile Include="Models\Piles\PostgroutingFillingPile.cs" />
@@ -212,6 +216,7 @@
     <Compile Include="Models\Soil\SoilLayerInfoBase.cs" />
     <Compile Include="Models\PileCrossSection\SquarePileGeometry.cs" />
     <Compile Include="Models\Factory\PostgroutingFillingPileFactory.cs" />
+    <Compile Include="Models\XmlSerializerHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -331,7 +336,15 @@
   <ItemGroup>
     <Resource Include="Resources\Image\External Link.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Image\Down.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Image\Polygon_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Image\SquareWithRoundHole_16.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
 		Other similar extension points exist, see Microsoft.Common.targets.

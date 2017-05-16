@@ -135,7 +135,7 @@ namespace PDIWT_MS_ZJCZL.ViewModels
         protected override void OnInitializeInRuntime()
         {
             base.OnInitializeInRuntime();
-            PileDiameter = 2.3; PileTypeInfo = PileType.Socketed; PileCode = "A1";
+            PileDiameter = 2.3; PileTypeInfo = PileType.Solid; PileCode = "A1";
             GammaR = 1.2; StartPoint = new Point3d { X = -134.2015, Y = 68.1099, Z = 78.9160 }; EndPoint = new Point3d { X = -134.2015, Y = 68.1099, Z = -126.4281 };
         }
 

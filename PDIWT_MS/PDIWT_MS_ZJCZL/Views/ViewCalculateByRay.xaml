@@ -45,8 +45,10 @@
                     <templateselector:PileCrossSectionTemplateSelector
                         x:Key="crosssectiontempselector"
                         AnnualrTempKey="Annular"
+                        PolygonKey="Polygon"
                         RoumdnessTempKey="Roundness"
-                        SquareTempKey="Square" />
+                        SquareTempKey="Square"
+                        SquareWithRoundHoleKey="SquareWithRoundHole" />
                     <Style TargetType="Separator">
                         <Setter Property="BorderThickness" Value="2" />
                         <Setter Property="LayoutTransform">
@@ -83,7 +85,7 @@
                 <dxb:BarButtonItem
                     Command="{Binding DrawPileLineFromFileCommand}"
                     Content="根据Excel文件绘制桩中心线"
-                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/Microsoft Excel.ico" />
+                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/Down.ico" />
                 <dxb:BarButtonItem
                     Command="{Binding GetPilesFromLinesCommand}"
                     Content="从模型中提取设计桩列表"
@@ -92,6 +94,10 @@
                     Command="{Binding AnalysisCommand}"
                     Content="统计分析"
                     Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/Combo Chart.ico" />
+                <dxb:BarButtonItem
+                    Command="{Binding ExportToExcelCommand}"
+                    Content="输出计算表"
+                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/Microsoft Excel.ico" />
             </dxb:ToolBarControl>
         </dxb:BarContainerControl>
         <dxlc:LayoutControl VerticalAlignment="Stretch" Orientation="Vertical">
@@ -142,6 +148,20 @@
                                     <TextBlock Text="{Binding PileInnerDiameter, StringFormat=桩内径:{0}m}" />
                                 </StackPanel>
                             </DataTemplate>
+
+                            <DataTemplate x:Key="SquareWithRoundHole">
+                                <StackPanel>
+                                    <TextBlock Text="截面形式:方桩圆孔" />
+                                    <TextBlock Text="{Binding PileDiameter, StringFormat=桩边长:{0}m}" />
+                                    <TextBlock Text="{Binding PileInnerDiameter, StringFormat=桩孔径:{0}m}" />
+                                </StackPanel>
+                            </DataTemplate>
+
+                            <DataTemplate x:Key="Polygon">
+                                <StackPanel>
+                                    <TextBlock Text="截面形式:多边形" />
+                                </StackPanel>
+                            </DataTemplate>
                             <!--  桩身实心或桩端封闭  -->
                             <DataTemplate x:Key="SoildPileTemplate">
                                 <Border
@@ -164,7 +184,10 @@
                                                     </Style.Triggers>
                                                 </Style>
                                             </StackPanel.Style>
-                                            <TextBlock Text="桩类型:桩身实心或桩端封闭" Margin="0,5,0,0" TextWrapping="Wrap"/>
+                                            <TextBlock
+                                                Margin="0,5,0,0"
+                                                Text="桩类型:桩身实心或桩端封闭"
+                                                TextWrapping="Wrap" />
                                             <ContentPresenter
                                                 HorizontalAlignment="Stretch"
                                                 Content="{Binding PilePropertyInfo}"
@@ -172,7 +195,7 @@
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="截面积:" />
                                                 <TextBlock Text="{DXBinding 'PilePropertyInfo.GetPileCrossSectionArea().ToString(`n2`)', Mode=OneWay}" />
-                                                <TextBlock Text="m2" />
+                                                <TextBlock Text="m^2" />
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="周长:" />
@@ -210,7 +233,10 @@
                                                     </Style.Triggers>
                                                 </Style>
                                             </StackPanel.Style>
-                                            <TextBlock Text="桩类型:钢管桩与预制混凝土管桩" Margin="0,5,0,0" TextWrapping="Wrap"/>
+                                            <TextBlock
+                                                Margin="0,5,0,0"
+                                                Text="桩类型:钢管桩与预制混凝土管桩"
+                                                TextWrapping="Wrap" />
                                             <ContentPresenter
                                                 HorizontalAlignment="Stretch"
                                                 Content="{Binding PilePropertyInfo}"
@@ -256,7 +282,10 @@
                                                     </Style.Triggers>
                                                 </Style>
                                             </StackPanel.Style>
-                                            <TextBlock Text="桩类型:灌注桩" Margin="0,5,0,0" TextWrapping="Wrap"/>
+                                            <TextBlock
+                                                Margin="0,5,0,0"
+                                                Text="桩类型:灌注桩"
+                                                TextWrapping="Wrap" />
                                             <ContentPresenter
                                                 HorizontalAlignment="Stretch"
                                                 Content="{Binding PilePropertyInfo}"
@@ -302,7 +331,10 @@
                                                     </Style.Triggers>
                                                 </Style>
                                             </StackPanel.Style>
-                                            <TextBlock Text="桩类型:后注浆灌注桩" Margin="0,5,0,0" TextWrapping="Wrap"/>
+                                            <TextBlock
+                                                Margin="0,5,0,0"
+                                                Text="桩类型:后注浆灌注桩"
+                                                TextWrapping="Wrap" />
                                             <ContentPresenter
                                                 HorizontalAlignment="Stretch"
                                                 Content="{Binding PilePropertyInfo}"
@@ -348,7 +380,10 @@
                                                     </Style.Triggers>
                                                 </Style>
                                             </StackPanel.Style>
-                                            <TextBlock Text="桩类型:嵌岩桩" Margin="0,5,0,0" TextWrapping="Wrap"/>
+                                            <TextBlock
+                                                Margin="0,5,0,0"
+                                                Text="桩类型:嵌岩桩"
+                                                TextWrapping="Wrap" />
                                             <ContentPresenter
                                                 HorizontalAlignment="Stretch"
                                                 Content="{Binding PilePropertyInfo}"
@@ -858,11 +893,13 @@
                     <dxlc:LayoutItem Label="单桩垂直极限承载力设计值（kN）：">
                         <dxe:TextEdit
                             IsReadOnly="True"
-                            Mask="f2"
+                            Mask="n2"
                             MaskType="Numeric"
                             MaskUseAsDisplayFormat="True"
+                            NullText="未定义"
                             Style="{StaticResource RedFont}"
-                            Text="{DXBinding 'CurrentPile.CalculateQd()',Mode=OneWay}" />
+                            Text="{DXBinding 'CurrentPile.CalculateQd()',
+                                             Mode=OneWay}" />
                     </dxlc:LayoutItem>
                     <dxlc:LayoutItem Label="单桩抗拔极限承载力设计值（kN）：">
                         <dxlc:LayoutItem.Resources>
@@ -871,28 +908,30 @@
                                     <Setter.Value>
                                         <ControlTemplate>
                                             <DockPanel>
-                                                <TextBlock Foreground="Red" FontSize="20">!</TextBlock>
-                                                <AdornedElementPlaceholder></AdornedElementPlaceholder>
+                                                <TextBlock FontSize="20" Foreground="Red">!</TextBlock>
+                                                <AdornedElementPlaceholder />
                                             </DockPanel>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
                                 <Style.Triggers>
                                     <Trigger Property="Validation.HasError" Value="True">
-                                        <Setter Property="ToolTip" Value="{Binding Path=(Validation.Errors)[0].ErrorContent, RelativeSource={x:Static RelativeSource.Self}}"/>
-                                        <Setter Property="Background" Value="Red"/>
+                                        <Setter Property="Background" Value="Red" />
+                                        <Setter Property="ToolTip" Value="{Binding Path=(Validation.Errors)[0].ErrorContent, RelativeSource={x:Static RelativeSource.Self}}" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </dxlc:LayoutItem.Resources>
                         <dxe:TextEdit
                             IsReadOnly="True"
-                            Mask="f2"
+                            Mask="n2"
                             MaskType="Numeric"
+                            NullText="未定义"
                             MaskUseAsDisplayFormat="True"
-                            Style="{StaticResource TextOnException}"
-                            Text="{DXBinding 'CurrentPile.CalculateQt()',Mode=OneWay, ValidatesOnExceptions=True}">
-                        </dxe:TextEdit>
+                            Text="{DXBinding 'CurrentPile.CalculateQt()',
+                                             Mode=OneWay,
+                                             ValidatesOnExceptions=True}"
+                            TextWrapping="WrapWithOverflow" />
                     </dxlc:LayoutItem>
                 </dxlc:LayoutGroup>
                 <!--<Button
