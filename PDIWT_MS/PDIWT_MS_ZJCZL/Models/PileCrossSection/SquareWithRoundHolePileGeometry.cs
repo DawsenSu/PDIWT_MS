@@ -57,6 +57,10 @@ namespace PDIWT_MS_ZJCZL.Models.PileCrossSection
         {
             return PileDiameter * PileDiameter - Math.PI * Math.Pow(PileInnerDiameter / 2, 2);
         }
+        public double GetPileOutLineArea()
+        {
+            return PileDiameter * PileDiameter;
+        }
 
         public double GetPileGravity()
         {

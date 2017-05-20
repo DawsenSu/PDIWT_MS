@@ -40,7 +40,7 @@
                             <dxlc:LayoutItem Label="桩截面类型" Visibility="{Binding SelectedPileType, Converter={StaticResource etovconvertor}, ConverterParameter=Solid}">
                                 <dxe:ComboBoxEdit EditValue="{Binding SelectedPileCrossSectionType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsTextEditable="False">
                                     <dxmvvm:Interaction.Behaviors>
-                                        <dxmvvm:EnumItemsSourceBehavior EnumType="{x:Type ViewModels:PileCrossSectionType}" />
+                                        <dxmvvm:EnumItemsSourceBehavior EnumType="{x:Type ViewModels:SoildPileCrossSectionType}" />
                                     </dxmvvm:Interaction.Behaviors>
                                 </dxe:ComboBoxEdit>
                             </dxlc:LayoutItem>
@@ -54,7 +54,7 @@
                                     </dxlc:LayoutItem>
                                 </dxlc:LayoutGroup>
 
-                                <dxlc:LayoutGroup Orientation="Vertical" Visibility="{Binding SelectedPileCrossSectionType, Converter={StaticResource etovconvertor}, ConverterParameter=SuareWithRoundHole}">
+                                <dxlc:LayoutGroup Orientation="Vertical" Visibility="{Binding SelectedPileCrossSectionType, Converter={StaticResource etovconvertor}, ConverterParameter=SquareWithRoundHole}">
                                     <dxlc:LayoutItem Label="桩边长(m)：">
                                         <dxe:TextEdit Text="{Binding PileDiameter}" />
                                     </dxlc:LayoutItem>

@@ -102,14 +102,14 @@ namespace PDIWT_MS.Test
             msodp.SetDialogTitle("载入CellLibrary");
             msodp.SetDefaultFilter("*.cel");
             BD.DgnDocument dgndoc = msdm.OpenDocumentDialog(msodp, BM.FileListAttr.Default, BD.DgnDocument.FetchMode.Read);
-            if (null!=dgndoc)
+            if (null != dgndoc)
             {
                 app.AttachCellLibrary(dgndoc.FileName);
                 //BCOM.Point3d p = app.Point3dZero();
                 //BCOM.SharedCellElement sharedcell = app.CreateSharedCellElement3("JD1", ref p, true);
                 BD.Elements.SharedCellElement sharecell = new BD.Elements.SharedCellElement(BM.Session.Instance.GetActiveDgnModel(), null, "JD1", BG.DPoint3d.Zero, BG.DMatrix3d.Identity, BG.DPoint3d.FromXYZ(1, 1, 1));
                 System.Windows.MessageBox.Show($"CellName:{sharecell.CellName}\n");
-                
+
             }
 
 
@@ -131,10 +131,10 @@ namespace PDIWT_MS.Test
             }
             System.Windows.MessageBox.Show(name);
         }
-        
+
         public static void TestHCHXQueryLib()
         {
-            
+
             HCHXCodeQuery clr1 = new HCHXCodeQuery();
 
             AllLayerInfo idInfo = new AllLayerInfo();
@@ -248,8 +248,74 @@ namespace PDIWT_MS.Test
         public static void TestSoild()
         {
             BG.DgnSphere sphere = new Bentley.GeometryNET.DgnSphere(BG.DPoint3d.Zero, 1000);
-            
+
         }
 
+        public static void ScanBSplineSurface()
+        {
+            BCOM.Application app = Program.COM_App;
+            BCOM.ElementScanCriteria sc = new BCOM.ElementScanCriteriaClass();
+            sc.ExcludeAllTypes();
+            sc.IncludeType(BCOM.MsdElementType.BsplineSurface);
+
+            var ee = app.ActiveModelReference.Scan(sc);
+            //var firstcurrent = ee.Current;
+            var bsplinesurface = new List<BCOM.BsplineSurface>();
+            while (ee.MoveNext())
+            {
+                bsplinesurface.Add(ee.Current.AsBsplineSurfaceElement().ExtractBsplineSurface());
+            }
+            //foreach (var surface in bsplinesurface)
+            //{
+            //    //var surfacehandler = app.CreatePropertyHandler(surface);
+            //    //string s= surfacehandler.GetDisplayString();
+            //}
+            BCOM.Point3d p1 = app.Point3dFromXYZ(200, 110, 100);
+            BCOM.Ray3d ray1 = new Bentley.Interop.MicroStationDGN.Ray3d()
+            {
+                Origin = app.Point3dFromXYZ(200, 110, 100),
+                Direction = app.Point3dFromXYZ(0, 0, -200)
+            };
+            BCOM.Point3d insertpoint = app.Point3dZero();
+            BCOM.Point2d uv = app.Point2dZero();
+            foreach (var bsp in bsplinesurface)
+            {
+                if(bsp.IntersectRay3d(ref insertpoint,ref uv,ref ray1))
+                {
+                    string s = insertpoint.ToString();
+                    string s2 = uv.ToString();
+                }
+            }
+            //BCOM.LineElement line = app.CreateLineElement2(null, ref p1, ref p2);
+            //app.ActiveModelReference.AddElement(line);
+            //var matrixidentiy = app.Matrix3dIdentity();
+            //var insertspointlist = new List<BCOM.Point3d>();
+            //foreach (var bsp in bsplinesurface)
+            //{
+            //    var insertpoints = line.GetIntersectionPointsOnIntersector(bsp, ref matrixidentiy);
+            //    if (insertpoints != null && insertpoints.Length > 0)
+            //    {
+            //        foreach (var insterp in insertpoints)
+            //        {
+            //            insertspointlist.Add(insterp);
+            //        }
+            //    }
+
+            //}            
+        }
+
+        public static void TestDimsionElement()
+        {
+            BCOM.Application app = Program.COM_App;
+            var m = app.Matrix3dIdentity();
+            var dim = app.CreateDimensionElement1(null, ref m, Bentley.Interop.MicroStationDGN.MsdDimType.AngleLocation);
+            var p0 = app.Point3dFromXY(100, 100);
+            var p1 = app.Point3dFromXY(000, 0);
+            var p2 = app.Point3dFromXY(0, 100);
+            dim.AddReferencePoint(app.ActiveModelReference, ref p0);
+            dim.AddReferencePoint(app.ActiveModelReference, ref p1);
+            dim.AddReferencePoint(app.ActiveModelReference, ref p2);
+            app.ActiveModelReference.AddElement(dim);
+        }
     }
 }

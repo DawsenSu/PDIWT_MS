@@ -22,10 +22,10 @@ namespace PDIWT_MS_ZJCZL.Models.Piles
             double accumlatenum = 0;
             foreach (var pilesoil in SocketedPileSoilLayerInfoProp)
                 accumlatenum += pilesoil.Xifi * pilesoil.Qfi * pilesoil.PileInSoilLayerLength;
-            return PilePropertyInfo.GetPilePerimeter() * accumlatenum / GammaCs + (PilePropertyInfo.GetPilePerimeter() * Xis * Hr + Xip * PilePropertyInfo.GetPileCrossSectionArea()) * Frk / GammaCr;
+            return PilePropertyInfo.GetPilePerimeter() * accumlatenum / GammaCs + (PilePropertyInfo.GetPilePerimeter() * Xis * Hr + Xip * PilePropertyInfo.GetPileOutLineArea()) * Frk / GammaCr;
         }
 
-        public override double CalculateQt()
+        public override double CalculateTd()
         {
             if (Hr >= 3 * PilePropertyInfo.PileDiameter)
             {

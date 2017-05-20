@@ -78,6 +78,9 @@
       <HintPath>..\packages\BentleyECFramework.1.0.0\lib\Bentley.ECSystem3.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Bentley.ECXAttributes">
+      <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition Update 3\MicroStation\Bentley.ECXAttributes.dll</HintPath>
+    </Reference>
     <Reference Include="Bentley.General.1.0, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
       <HintPath>..\packages\BentleyCore.1.0.0\lib\Bentley.General.1.0.dll</HintPath>
       <Private>False</Private>
@@ -156,7 +159,15 @@
     </Reference>
     <Reference Include="HCHXCodeQueryLib, Version=1.0.6326.17226, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\..\项目\科技开发中心\工具开发\桩基承载力\桩基承载力计算所需材料\HCHXCodeQueryLib20170427更新样条曲面\HCHXCodeQueryLib.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\项目\科技开发中心\工具开发\桩基承载力\桩基承载力计算所需材料\HCHXCodeQueryLib-Mechanics\HCHXCodeQueryLib.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics, Version=3.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.3.8.0\lib\net40\MathNet.Numerics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MathNet.Spatial, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Spatial.0.4.0\lib\net40\MathNet.Spatial.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="PresentationCore" />
@@ -165,6 +176,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Printing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
@@ -185,6 +197,7 @@
   <ItemGroup>
     <Compile Include="Converter\DescriptionToEnumConvertor.cs" />
     <Compile Include="Converter\DoubleToStringF2Convertor.cs" />
+    <Compile Include="Converter\DPoint3dToStringConvertor.cs" />
     <Compile Include="Converter\Point3dToStringConvertor.cs" />
     <Compile Include="DateTemplateSelector\PileCrossSectionTemplateSelector.cs" />
     <Compile Include="DateTemplateSelector\PileListTemplateSelector.cs" />
@@ -202,6 +215,8 @@
     <Compile Include="Models\PileCrossSection\AnnularPileGeometry.cs" />
     <Compile Include="Models\PileCrossSection\PolygonPileGeometry.cs" />
     <Compile Include="Models\PileCrossSection\SquareWithRoundHolePileGeometry.cs" />
+    <Compile Include="Models\PileLengthCalculation.cs" />
+    <Compile Include="Models\PilePositionMap.cs" />
     <Compile Include="Models\Piles\FillingPile.cs" />
     <Compile Include="Models\Piles\PileBase.cs" />
     <Compile Include="Models\Piles\PostgroutingFillingPile.cs" />
@@ -227,12 +242,16 @@
     <Compile Include="Models\Factory\SteelAndPercastConcretePileFactory.cs" />
     <Compile Include="Models\Factory\SocketedPileFactory.cs" />
     <Compile Include="ViewModels\AnalysisViewModel.cs" />
+    <Compile Include="ViewModels\CollisionTestViewModel.cs" />
     <Compile Include="ViewModels\GetPilesFromLinesViewModel.cs" />
     <Compile Include="ViewModels\ViewAddPileViewModel.cs" />
     <Compile Include="ViewModels\ViewModelCalculateByRay.cs" />
     <Compile Include="ViewModels\ViewZJCZLViewModel.cs" />
     <Compile Include="Views\AnalysisView.xaml.cs">
       <DependentUpon>AnalysisView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CollisionTestView.xaml.cs">
+      <DependentUpon>CollisionTestView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\GetPilesFromLines.xaml.cs">
       <DependentUpon>GetPilesFromLines.xaml</DependentUpon>
@@ -286,6 +305,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CollisionTestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\GetPilesFromLines.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -308,7 +331,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Image\Center Direction.ico" />
+    <Resource Include="Resources\Image\Center Directionb.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Image\Bobbin.ico" />
@@ -344,6 +367,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Image\SquareWithRoundHole_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Image\collision.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Image\Design.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Image\Center Direction.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

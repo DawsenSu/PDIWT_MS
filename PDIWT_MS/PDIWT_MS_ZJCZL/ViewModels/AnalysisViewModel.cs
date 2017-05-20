@@ -42,9 +42,9 @@ namespace PDIWT_MS_ZJCZL.ViewModels
                     PileCode = pile.PileCode,
                     Force = 0,
                     PileBearingForce = pile.CalculateQd(),
-                    PilePullingForce = pile.CalculateQt(),
+                    PilePullingForce = pile.CalculateTd(),
                     PileHoldLength = holdsoillayerinfo.PileInSoilLayerLength,
-                    PileHoldSoilName = holdsoillayerinfo.SoilLayerNum,
+                    PileHoldSoilName = holdsoillayerinfo.SoilLayerName + holdsoillayerinfo.SoilLayerNum,
                     PileLength = pile.PilePropertyInfo.GetPileLength(),
                     PileDiameter = pile.PilePropertyInfo.PileDiameter
                 });

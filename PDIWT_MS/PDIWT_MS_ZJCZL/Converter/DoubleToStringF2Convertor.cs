@@ -12,7 +12,7 @@ namespace PDIWT_MS_ZJCZL.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-                return string.Format("n2", value);
+                return string.Format("{0:f2}", value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

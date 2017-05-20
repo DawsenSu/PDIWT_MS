@@ -101,5 +101,10 @@ namespace PDIWT_MS_ZJCZL.Models.PileCrossSection
             double z = PileTopPoint.Z - pileLength / oldlength * (PileTopPoint.Z - PileBottomPoint.Z);
             PileBottomPoint = new Point3d { X = x, Y = y, Z = z };
         }
+
+        public double GetPileOutLineArea()
+        {
+            return GetPileCrossSectionArea();
+        }
     }
 }

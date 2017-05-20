@@ -12,7 +12,7 @@ namespace PDIWT_MS_ZJCZL.Models.Soil
 {
     public class SoilLayerInfoBase : BindableBase
     {
-        [DisplayName("土层名称"), ReadOnly(true),Display(Order = 0)]
+        [DisplayName("土层名称"), ReadOnly(true), Display(Order = 0)]
         public string SoilLayerName
         {
             get { return GetProperty(() => SoilLayerName); }
@@ -24,24 +24,30 @@ namespace PDIWT_MS_ZJCZL.Models.Soil
             get { return GetProperty(() => SoilLayerNum); }
             set { SetProperty(() => SoilLayerNum, value); }
         }
-        [DisplayName("桩在此土层内的长度m"), ReadOnly(true), Display(Order = 2)]
+        [DisplayName("层顶高程m"), ReadOnly(true), Display(Order = 2)]
+        public double PileInSoilLayerTopZ
+        {
+            get { return GetProperty(() => PileInSoilLayerTopZ); }
+            set { SetProperty(() => PileInSoilLayerTopZ, value); }
+        }
+        [DisplayName("桩在此土层内的长度m"), ReadOnly(true), Display(Order = 3)]
         public double PileInSoilLayerLength // unit :m
         {
             get { return GetProperty(() => PileInSoilLayerLength); }
             set { SetProperty(() => PileInSoilLayerLength, value); }
         }
-        [DisplayName("极限侧摩阻力标准值qfi(kN)"), Display(Order = 3)]
+        [DisplayName("极限侧摩阻力标准值qfi(kN)"), Display(Order = 4)]
         public double Qfi
         {
             get { return GetProperty(() => Qfi); }
             set { SetProperty(() => Qfi, value); }
         }
-        [DisplayName("折减系数ξi"), Display(Order = 4)]
+        [DisplayName("折减系数ξi"), Display(Order = 5)]
         public double Xii
         {
             get { return GetProperty(() => Xii); }
             set { SetProperty(() => Xii, value); }
         }
-        
+
     }
 }

@@ -59,6 +59,11 @@ namespace PDIWT_MS_ZJCZL.Models.PileCrossSection
             return Math.PI* (Math.Pow(PileDiameter / 2, 2) - Math.Pow(PileInnerDiameter/2,2));
         }
 
+        public double GetPileOutLineArea()
+        {
+            return GetPileCrossSectionArea();
+        }
+
         public double GetPileGravity()
         {
             if (WaterLevel >= PileTopPoint.Z)

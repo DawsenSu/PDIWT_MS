@@ -25,7 +25,7 @@ namespace PDIWT_MS_ZJCZL.ViewModels
 {
     public class GetPilesFromLinesViewModel : ViewModelBase
     {
-        public Action CloseAction;//关闭代理
+        public Action CloseAction;//“关闭”代理
 
         public ObservableCollection<PileBase> Piles
         {
@@ -48,7 +48,7 @@ namespace PDIWT_MS_ZJCZL.ViewModels
             get { return GetProperty(() => SelectedPileType); }
             set { SetProperty(() => SelectedPileType, value); }
         }
-        public PileCrossSectionType SelectedPileCrossSectionType
+        public SoildPileCrossSectionType SelectedPileCrossSectionType
         {
             get { return GetProperty(() => SelectedPileCrossSectionType); }
             set { SetProperty(() => SelectedPileCrossSectionType, value); }
@@ -127,7 +127,7 @@ namespace PDIWT_MS_ZJCZL.ViewModels
             //    {"方形截面桩", PileCrossSectionType.Square },
             //    {"环形截面桩", PileCrossSectionType.Annular }
             //};
-            SelectedPileCrossSectionType = PileCrossSectionType.Square;
+            SelectedPileCrossSectionType = SoildPileCrossSectionType.Square;
             SelectedPileType = PileType.Solid;
             PileWeight = 25;
             PileUnderwaterWeight = 15;
@@ -178,24 +178,36 @@ namespace PDIWT_MS_ZJCZL.ViewModels
                         pilefactory = new SolidPileFactory(GammaR);
                         foreach (var pile in elelist)
                         {
-                            BG.DRange3d range;
-                            ((BDE.LineElement)pile).CalcElementRange(out range);
+                            //BG.DRange3d range;
+                            //((BDE.LineElement)pile).CalcElementRange(out range);//有问题
+
+                            BG.DPoint3d startp, endp;
+                            if(!((BDE.LineElement)pile).GetCurveVector().GetStartEnd(out startp, out endp))
+                            {
+                                System.Windows.Forms.MessageBox.Show($"无法获取Pile ID:{pile.ElementId}的起始点和终点");
+                                return;
+                            }
                             switch (SelectedPileCrossSectionType)
                             {
-                                case PileCrossSectionType.SuareWithRoundHole:
-                                    pileproplist.Add(new SquareWithRoundHolePileGeometry() { PileDiameter = this.PileDiameter, PileInnerDiameter =this.PileInnerDiameter, PileWeight = this.PileWeight, PileUnderWaterWeight = this.PileUnderwaterWeight, WaterLevel = WaterLevel, PileTopPoint = range.High.DPoint3dToPoint3d(1e-4), PileBottomPoint = range.Low.DPoint3dToPoint3d(1e-4) });
+                                case SoildPileCrossSectionType.SquareWithRoundHole:
+                                    pileproplist.Add(new SquareWithRoundHolePileGeometry() { PileDiameter = this.PileDiameter, PileInnerDiameter =this.PileInnerDiameter, PileWeight = this.PileWeight, PileUnderWaterWeight = this.PileUnderwaterWeight, WaterLevel = WaterLevel, PileTopPoint = startp.DPoint3dToPoint3d(1e-4), PileBottomPoint = endp.DPoint3dToPoint3d(1e-4) });
                                     break;
-                                case PileCrossSectionType.Square:
-                                    pileproplist.Add(new SquarePileGeometry() { PileDiameter = this.PileDiameter, PileWeight = this.PileWeight, PileUnderWaterWeight = this.PileUnderwaterWeight, WaterLevel = WaterLevel, PileTopPoint = range.High.DPoint3dToPoint3d(1e-4), PileBottomPoint = range.Low.DPoint3dToPoint3d(1e-4) });
+                                case SoildPileCrossSectionType.Square:
+                                    pileproplist.Add(new SquarePileGeometry() { PileDiameter = this.PileDiameter, PileWeight = this.PileWeight, PileUnderWaterWeight = this.PileUnderwaterWeight, WaterLevel = WaterLevel, PileTopPoint = startp.DPoint3dToPoint3d(1e-4), PileBottomPoint = endp.DPoint3dToPoint3d(1e-4) });
                                     break;
-                                case PileCrossSectionType.Polygon:
-                                    pileproplist.Add(new PolygonPileGeometry() { CrossSectionArea= this.PolygonCrossSectionArea, PileCrossSectionPerimeter = this.PolygonCrossSectionPerimeter, PileWeight = this.PileWeight, PileUnderWaterWeight = this.PileUnderwaterWeight, WaterLevel = WaterLevel, PileTopPoint = range.High.DPoint3dToPoint3d(1e-4), PileBottomPoint = range.Low.DPoint3dToPoint3d(1e-4) });
+                                case SoildPileCrossSectionType.Polygon:
+                                    pileproplist.Add(new PolygonPileGeometry() { CrossSectionArea= this.PolygonCrossSectionArea, PileCrossSectionPerimeter = this.PolygonCrossSectionPerimeter, PileWeight = this.PileWeight, PileUnderWaterWeight = this.PileUnderwaterWeight, WaterLevel = WaterLevel, PileTopPoint = startp.DPoint3dToPoint3d(1e-4), PileBottomPoint = endp.DPoint3dToPoint3d(1e-4) });
                                     break;
                             }
+
                             var pilecodereaddatablock = pile.GetLinkage((ushort)BD.ElementLinkageId.String);
-                            if (null== pilecodereaddatablock)
-                                throw new NotSupportedException($"Pile Id:{pile.ElementId} doesn't contain pilecode linkage");
-                            pilenamelist.Add(PileName + pilecodereaddatablock.ReadString());
+                            string pilename = string.Empty;
+                            if (null != pilecodereaddatablock)
+                                //throw new NotSupportedException($"Pile Id:{pile.ElementId} doesn't contain pilecode linkage");
+                                pilename = pilecodereaddatablock.ReadString();
+                            else
+                                pilename = pile.Description + " ID:" + pile.ElementId.ToString();
+                            pilenamelist.Add(PileName + pilename);
                             pileIdlist.Add(pile.ElementId);
                         }
                         break;
@@ -203,10 +215,23 @@ namespace PDIWT_MS_ZJCZL.ViewModels
                         pilefactory = new SteelAndPercastConcretePileFactory(GammaR);
                         foreach (var pile in elelist)
                         {
-                            BG.DRange3d range;
-                            ((BDE.LineElement)pile).CalcElementRange(out range);
-                            pileproplist.Add(new AnnularPileGeometry() { PileDiameter = this.PileDiameter, PileInnerDiameter = this.PileInnerDiameter, PileWeight = this.PileWeight, PileUnderWaterWeight = this.PileUnderwaterWeight, WaterLevel = WaterLevel, PileTopPoint = range.High.DPoint3dToPoint3d(1e-4), PileBottomPoint = range.Low.DPoint3dToPoint3d(1e-4) });
-                            pilenamelist.Add(PileName + pile.GetLinkage((ushort)BD.ElementLinkageId.String).ReadString());
+                            //BG.DRange3d range;
+                            //((BDE.LineElement)pile).CalcElementRange(out range);
+
+                            BG.DPoint3d startp, endp;
+                            if (!((BDE.LineElement)pile).GetCurveVector().GetStartEnd(out startp, out endp))
+                            {
+                                System.Windows.Forms.MessageBox.Show($"无法获取Pile ID:{pile.ElementId}的起始点和终点");
+                                return;
+                            }
+                            pileproplist.Add(new AnnularPileGeometry() { PileDiameter = this.PileDiameter, PileInnerDiameter = this.PileInnerDiameter, PileWeight = this.PileWeight, PileUnderWaterWeight = this.PileUnderwaterWeight, WaterLevel = WaterLevel, PileTopPoint = startp.DPoint3dToPoint3d(1e-4), PileBottomPoint = endp.DPoint3dToPoint3d(1e-4) });
+
+                            var pilecodereaddatablock = pile.GetLinkage((ushort)BD.ElementLinkageId.String);
+                            string pilename = string.Empty;
+                            if (null != pilecodereaddatablock)
+                                //throw new NotSupportedException($"Pile Id:{pile.ElementId} doesn't contain pilecode linkage");
+                                pilename = pilecodereaddatablock.ReadString();
+                            pilenamelist.Add(PileName + pilename);
                             pileIdlist.Add(pile.ElementId);
                         }
                         break;
@@ -257,12 +282,12 @@ namespace PDIWT_MS_ZJCZL.ViewModels
             CloseAction();
         }
     }
-    public enum PileCrossSectionType
+    public enum SoildPileCrossSectionType
     {
         [Display(Name = "方形截面"), Image("pack://application:,,,/PDIWT_MS_ZJCZL;component/Resources/Image/Square_16.png")]
         Square,
         [Display(Name = "方形圆空心截面"),Image("pack://application:,,,/PDIWT_MS_ZJCZL;component/Resources/Image/SquareWithRoundHole_16.png")]
-        SuareWithRoundHole,
+        SquareWithRoundHole,
         [Display(Name = "多边形截面"), Image("pack://application:,,,/PDIWT_MS_ZJCZL;component/Resources/Image/Polygon_16.png")]
         Polygon
     }

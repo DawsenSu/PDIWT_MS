@@ -22,12 +22,12 @@ namespace PDIWT_MS_ZJCZL.Models.Piles
             double accumlatenum = 0;
             foreach (var pilesoil in PostgroutingFillingPileSoilLayerInfoProp)
                 accumlatenum += pilesoil.BetaSi * pilesoil.PsiSi * pilesoil.Qfi * pilesoil.PileInSoilLayerLength;
-            return (PilePropertyInfo.GetPilePerimeter() * accumlatenum + BetaP * PsiP * Qr * PilePropertyInfo.GetPileCrossSectionArea()) / GammaR;
+            return (PilePropertyInfo.GetPilePerimeter() * accumlatenum + BetaP * PsiP * Qr * PilePropertyInfo.GetPileOutLineArea()) / GammaR;
         }
 
-        public override double CalculateQt()
+        public override double CalculateTd()
         {
-            return base.CalculateQt(PostgroutingFillingPileSoilLayerInfoProp, GammaR);
+            return base.CalculateTd(PostgroutingFillingPileSoilLayerInfoProp, GammaR);
         }
 
         public double BetaP

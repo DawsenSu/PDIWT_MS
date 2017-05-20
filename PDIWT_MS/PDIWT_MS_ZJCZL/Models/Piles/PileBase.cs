@@ -15,7 +15,7 @@ namespace PDIWT_MS_ZJCZL.Models.Piles
     [Serializable]
     public abstract class PileBase : BindableBase
     {
-        protected virtual double CalculateQt<T>(ObservableCollection<T> pileLayerInfoProp, double gammaR) where T : SoilLayerInfoBase
+        protected virtual double CalculateTd<T>(ObservableCollection<T> pileLayerInfoProp, double gammaR) where T : SoilLayerInfoBase
         {
             if (pileLayerInfoProp == null || pileLayerInfoProp.Count == 0)
                 throw new ArgumentNullException($"{PileCode}的PileLayerInfo属性为null或者为empty");
@@ -42,6 +42,6 @@ namespace PDIWT_MS_ZJCZL.Models.Piles
         }
 
         public abstract double CalculateQd();
-        public abstract double CalculateQt();
+        public abstract double CalculateTd();
     }
 }

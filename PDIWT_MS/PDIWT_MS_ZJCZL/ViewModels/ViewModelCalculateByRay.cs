@@ -6,6 +6,9 @@ using System.Linq;
 using System.Windows.Forms;
 using System.IO;
 
+using BCOM = Bentley.Interop.MicroStationDGN;
+using BG = Bentley.GeometryNET;
+
 using DevExpress.Mvvm.DataAnnotations;
 using DevExpress.Mvvm;
 
@@ -13,12 +16,13 @@ namespace PDIWT_MS_ZJCZL.ViewModels
 {
     using HCHXCodeQueryLib;
     using PDIWT_MS_ZJCZL.Interface;
-    using PDIWT_MS_ZJCZL.Models;
-    using PDIWT_MS_ZJCZL.Models.Piles;
+    using Models;
+    using Models.Piles;
     using PDIWT_MS_ZJCZL.Models.Soil;
     using PDIWT_MS_ZJCZL.Models.Factory;
     using PDIWT_MS_ZJCZL.Models.PileCrossSection;
     using System.Xml.Serialization;
+    using System.Threading.Tasks;
 
     public class ViewModelCalculateByRay : ViewModelBase
     {
@@ -34,7 +38,6 @@ namespace PDIWT_MS_ZJCZL.ViewModels
             get { return GetProperty(() => CurrentPile); }
             set { SetProperty(() => CurrentPile, value); }
         }
-
         //public double Qd
         //{
         //    get { return GetProperty(() => Qd); }
@@ -110,10 +113,7 @@ namespace PDIWT_MS_ZJCZL.ViewModels
 
             }
         }
-        public bool CanRemovePile()
-        {
-            return (Piles.Count > 0) && (CurrentPile != null);
-        }
+        public bool CanRemovePile() => (Piles.Count > 0) && (CurrentPile != null);
 
         [Command]
         public void RemoveAllPile()
@@ -121,10 +121,7 @@ namespace PDIWT_MS_ZJCZL.ViewModels
             CurrentPile = null;
             Piles.Clear();
         }
-        public bool CanRemoveAllPile()
-        {
-            return CanRemovePile();
-        }
+        public bool CanRemoveAllPile() => Piles.Count > 0;
 
         [Command]
         public void DrawPileLineFromFile()
@@ -167,7 +164,7 @@ namespace PDIWT_MS_ZJCZL.ViewModels
             analysisview.DataContext = analysisviewmodel;
             analysisview.ShowDialog();
         }
-
+        public bool CanAnalysis() => CanRemoveAllPile();
         [Command]
         public void ExportToExcel()
         {
@@ -181,8 +178,9 @@ namespace PDIWT_MS_ZJCZL.ViewModels
                 try
                 {
                     var exporttoexcel = new ExportCalculationSheet(Piles.ToList());
-                    exporttoexcel.Export(sfd.FileName);
-                    MessageBox.Show($"文件已保存至{sfd.FileName}", "保存成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Task task = Task.Run(() => exporttoexcel.Export(sfd.FileName))
+                        .ContinueWith(t => MessageBox.Show($"文件已保存至{sfd.FileName}", "保存成功", MessageBoxButtons.OK, MessageBoxIcon.Information), TaskContinuationOptions.OnlyOnRanToCompletion);
+                    //MessageBox.Show($"文件已保存至{sfd.FileName}", "保存成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception e)
                 {
@@ -191,11 +189,25 @@ namespace PDIWT_MS_ZJCZL.ViewModels
             }
 
         }
-        public bool CanExportToExcel()
-        {
-            return Piles.Count > 0;
-        }
+        public bool CanExportToExcel() => CanRemoveAllPile();
 
+        [Command]
+        public void CollisionTest()
+        {
+            var collisiontestview = new Views.CollisionTestView();
+            var collisiontestviewmodel = new ViewModels.CollisionTestViewModel(Piles);
+            collisiontestview.DataContext = collisiontestviewmodel;
+            collisiontestview.ShowDialog();
+        }
+        public bool CanCollisionTest() => CanRemoveAllPile();
+
+        [Command]
+        public void DrawPilePosition()
+        {
+            PilePositionMap map = new PilePositionMap(this.Piles);
+            map.CreateMap();
+        }
+        public bool CanDrawPilePosition() => CanRemoveAllPile();
         //public void SerializerPiles()
         //{
         //    //XmlSerializerHelper.SaveToXml(@"D:\Test.xml", Piles, null, null);

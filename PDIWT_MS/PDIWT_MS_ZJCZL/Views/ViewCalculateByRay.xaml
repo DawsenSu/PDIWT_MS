@@ -84,20 +84,34 @@
                 BarItemDisplayMode="ContentAndGlyph">
                 <dxb:BarButtonItem
                     Command="{Binding DrawPileLineFromFileCommand}"
-                    Content="根据Excel文件绘制桩中心线"
-                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/Down.ico" />
+                    Content="导入中心线"
+                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/Center Direction.ico" 
+                    ToolTip="根据Excel文件绘制桩中心线"/>
                 <dxb:BarButtonItem
                     Command="{Binding GetPilesFromLinesCommand}"
-                    Content="从模型中提取设计桩列表"
-                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/External Link.ico" />
+                    Content="提取列表"
+                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/External Link.ico" 
+                    ToolTip="从模型的中心线中提取设计桩列表"/>
                 <dxb:BarButtonItem
                     Command="{Binding AnalysisCommand}"
                     Content="统计分析"
-                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/Combo Chart.ico" />
+                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/Combo Chart.ico" 
+                    ToolTip="根据列表中的桩信息，得到设计承载力和桩端土层信息"/>
                 <dxb:BarButtonItem
                     Command="{Binding ExportToExcelCommand}"
                     Content="输出计算表"
-                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/Microsoft Excel.ico" />
+                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/Microsoft Excel.ico" 
+                    ToolTip="将计算结果输出成桩基承载力计算书"/>
+                <dxb:BarButtonItem
+                    Command="{Binding CollisionTestCommand}"
+                    Content="碰桩测试"
+                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/collision.ico"
+                    ToolTip="进行碰桩测试，检查装之间的最小距离"/>
+                <dxb:BarButtonItem
+                    Command="{Binding DrawPilePositionCommand}"
+                    Content="绘制桩位图"
+                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/Design.ico"
+                    ToolTip="根据桩的信息，绘制桩位图，存放在[桩位图]模型中"/>
             </dxb:ToolBarControl>
         </dxb:BarContainerControl>
         <dxlc:LayoutControl VerticalAlignment="Stretch" Orientation="Vertical">
@@ -455,12 +469,14 @@
                                     Orientation="Vertical"
                                     View="GroupBox">
                                     <dxg:GridControl
+                                        HorizontalContentAlignment="Center"
                                         AutoGenerateColumns="AddNew"
                                         ItemsSource="{Binding SolidPileSoilLayerInfoProp}"
                                         SelectionMode="Row">
                                         <dxg:GridControl.View>
                                             <dxg:TableView
                                                 AllowEditing="True"
+                                                AllowSorting="False"
                                                 AutoWidth="True"
                                                 ShowGroupPanel="False" />
                                         </dxg:GridControl.View>
@@ -514,12 +530,14 @@
                                     Orientation="Vertical"
                                     View="GroupBox">
                                     <dxg:GridControl
+                                        HorizontalContentAlignment="Center"
                                         AutoGenerateColumns="AddNew"
                                         ItemsSource="{Binding SteelAndPercastConcretPileLayerInfoProp}"
                                         SelectionMode="Row">
                                         <dxg:GridControl.View>
                                             <dxg:TableView
                                                 AllowEditing="True"
+                                                AllowSorting="False"
                                                 AutoWidth="True"
                                                 ShowGroupPanel="False" />
                                         </dxg:GridControl.View>
@@ -576,12 +594,14 @@
                                     Orientation="Vertical"
                                     View="GroupBox">
                                     <dxg:GridControl
+                                        HorizontalContentAlignment="Center"
                                         AutoGenerateColumns="AddNew"
                                         ItemsSource="{Binding FillingPileSoilLayerInfoProp}"
                                         SelectionMode="Row">
                                         <dxg:GridControl.View>
                                             <dxg:TableView
                                                 AllowEditing="True"
+                                                AllowSorting="False"
                                                 AutoWidth="True"
                                                 ShowGroupPanel="False" />
                                         </dxg:GridControl.View>
@@ -649,12 +669,14 @@
                                     Orientation="Vertical"
                                     View="GroupBox">
                                     <dxg:GridControl
+                                        HorizontalContentAlignment="Center"
                                         AutoGenerateColumns="AddNew"
                                         ItemsSource="{Binding SocketedPileSoilLayerInfoProp}"
                                         SelectionMode="Row">
                                         <dxg:GridControl.View>
                                             <dxg:TableView
                                                 AllowEditing="True"
+                                                AllowSorting="False"
                                                 AutoWidth="True"
                                                 ShowGroupPanel="False" />
                                         </dxg:GridControl.View>
@@ -806,12 +828,14 @@
                                     Orientation="Vertical"
                                     View="GroupBox">
                                     <dxg:GridControl
+                                        HorizontalContentAlignment="Center"
                                         AutoGenerateColumns="AddNew"
                                         ItemsSource="{Binding PostgroutingFillingPileSoilLayerInfoProp}"
                                         SelectionMode="Row">
                                         <dxg:GridControl.View>
                                             <dxg:TableView
                                                 AllowEditing="True"
+                                                AllowSorting="False"
                                                 AutoWidth="True"
                                                 ShowGroupPanel="False" />
                                         </dxg:GridControl.View>
@@ -926,9 +950,9 @@
                             IsReadOnly="True"
                             Mask="n2"
                             MaskType="Numeric"
-                            NullText="未定义"
                             MaskUseAsDisplayFormat="True"
-                            Text="{DXBinding 'CurrentPile.CalculateQt()',
+                            NullText="未定义"
+                            Text="{DXBinding 'CurrentPile.CalculateTd()',
                                              Mode=OneWay,
                                              ValidatesOnExceptions=True}"
                             TextWrapping="WrapWithOverflow" />

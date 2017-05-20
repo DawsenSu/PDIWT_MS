@@ -21,11 +21,11 @@ namespace PDIWT_MS_ZJCZL.Models.Piles
             double accumlatenum = 0;
             foreach (var pilesoil in FillingPileSoilLayerInfoProp)
                 accumlatenum += pilesoil.PsiSi * pilesoil.PileInSoilLayerLength * pilesoil.Qfi;
-            return (PilePropertyInfo.GetPilePerimeter() * accumlatenum + PsiP * Qr * PilePropertyInfo.GetPileCrossSectionArea()) / GammaR;
+            return (PilePropertyInfo.GetPilePerimeter() * accumlatenum + PsiP * Qr * PilePropertyInfo.GetPileOutLineArea()) / GammaR;
         }
-        public override double CalculateQt()
+        public override double CalculateTd()
         {
-            return base.CalculateQt(FillingPileSoilLayerInfoProp, GammaR);
+            return base.CalculateTd(FillingPileSoilLayerInfoProp, GammaR);
         }
 
         public double Qr

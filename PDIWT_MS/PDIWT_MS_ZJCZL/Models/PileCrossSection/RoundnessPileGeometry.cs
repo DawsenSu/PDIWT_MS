@@ -76,6 +76,11 @@ namespace PDIWT_MS_ZJCZL.Models.PileCrossSection
             return Math.Sqrt(Math.Pow(PileTopPoint.X - PileBottomPoint.X, 2) + Math.Pow(PileTopPoint.Y - PileBottomPoint.Y, 2) + Math.Pow(PileTopPoint.Z - PileBottomPoint.Z, 2));
         }
 
+        public double GetPileOutLineArea()
+        {
+            return GetPileCrossSectionArea();
+        }
+
         public double GetPilePerimeter()
         {
             return Math.PI * PileDiameter;

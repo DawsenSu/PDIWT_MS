@@ -1,0 +1,69 @@
+﻿<Window
+    x:Class="PDIWT_MS_ZJCZL.Views.CollisionTestView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ViewModels="clr-namespace:PDIWT_MS_ZJCZL.ViewModels"
+    xmlns:convertor="clr-namespace:PDIWT_MS_ZJCZL.Converter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="碰桩测试"
+    Width="500"
+    Height="300"
+    Icon="/PDIWT_MS_ZJCZL;component/Resources/Image/collision.ico">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="5,0" />
+            <Setter Property="MaxWidth" Value="100" />
+        </Style>
+        <convertor:DPoint3dToStringConvertor x:Key="DPtoString" />
+        <convertor:DoubleToStringF2Convertor x:Key="d2f2" />
+    </Window.Resources>
+    <dxlc:LayoutControl>
+        <dxlc:LayoutGroup Orientation="Vertical">
+            <dxg:GridControl ItemsSource="{Binding CollisionResult}" SelectionMode="Row">
+                <dxg:GridControl.View>
+                    <dxg:TableView
+                        AllowEditing="False"
+                        AutoWidth="True"
+                        BestFitArea="Header"
+                        ShowGroupPanel="False" />
+                </dxg:GridControl.View>
+                <dxg:GridColumn
+                    FieldName="PileAName"
+                    Header="桩A"
+                    HorizontalHeaderContentAlignment="Center" />
+                <dxg:GridColumn
+                    FieldName="PileBName"
+                    Header="桩B"
+                    HorizontalHeaderContentAlignment="Center" />
+                <dxg:GridColumn
+                    Binding="{Binding MinDistance, Converter={StaticResource d2f2}, Mode=OneWay}"
+                    Header="桩AB间最短距离mm"
+                    HorizontalHeaderContentAlignment="Center" />
+                <dxg:GridColumn
+                    Binding="{Binding PileACollisionPoint, Converter={StaticResource DPtoString}, Mode=OneWay}"
+                    Header="桩A碰撞点"
+                    HorizontalHeaderContentAlignment="Center" />
+                <dxg:GridColumn
+                    Binding="{Binding PileBCollisionPoint, Converter={StaticResource DPtoString}, Mode=OneWay}"
+                    Header="桩B碰撞点"
+                    HorizontalHeaderContentAlignment="Center" />
+            </dxg:GridControl>
+            <dxlc:LayoutItem Label="最小距离mm:">
+                <dxe:TextEdit Text="{Binding MinDistance}" ToolTip="打入桩不宜小于3.5倍桩径;灌注桩不宜小于2.5倍桩径;嵌岩桩不宜小于2倍桩径，冲孔工艺时不宜小于3倍桩径" />
+            </dxlc:LayoutItem>
+            <StackPanel
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Orientation="Horizontal">
+                <Button Command="{Binding ConductTestCommand}" Content="进行测试" />
+                <Button Command="{Binding DrawCollisionIndicatorCommand}" Content="标识碰撞" />
+                <!--<Button Command="{Binding TestCommand}" Content="Test"/>-->
+            </StackPanel>
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+</Window>

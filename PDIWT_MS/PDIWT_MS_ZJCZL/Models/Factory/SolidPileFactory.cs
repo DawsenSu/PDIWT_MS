@@ -9,7 +9,7 @@ using PDIWT_MS_ZJCZL.Models.Soil;
 using HCHXCodeQueryLib;
 using System.Collections.ObjectModel;
 using PDIWT_MS_ZJCZL.Models.PileCrossSection;
-
+using System.Text.RegularExpressions;
 
 namespace PDIWT_MS_ZJCZL.Models.Factory
 {
@@ -27,12 +27,16 @@ namespace PDIWT_MS_ZJCZL.Models.Factory
                 throw new ArgumentOutOfRangeException("SoildPile must be one of these pile cross section (square,square with round hole, polygon)");
             }
             HCHXCodeQueryErrorCode status = pileQuery.QueryByRay(ref columnLayerInfoArray, pileType.PileTopPoint.Scale(1e4), pileType.PileBottomPoint.Scale(1e4));
+            if (columnLayerInfoArray.m_layers.Count == 0)
+                status = HCHXCodeQueryErrorCode.NoIntersection;
             if (status != HCHXCodeQueryErrorCode.Success)
-                throw new ArgumentException("创建" + pilecode + "出错" + status.ToString());
+                throw new ArgumentException("创建" + pilecode + "出错:" + status.ToString());
             var resultlayer = columnLayerInfoArray.GetSortedColumnLayerList();
             var tempLayerBase = new ObservableCollection<SoilLayerInfoBase>();
             double temppileLength;
             var random = new Random();
+            string soilName, soilNum;
+            Regex regex = new Regex(@"\[.*\]");
             for (int i = 0; i < resultlayer.Count; i++)
             {
                 if (i == resultlayer.Count - 1)
@@ -40,9 +44,16 @@ namespace PDIWT_MS_ZJCZL.Models.Factory
                 else
                     temppileLength = resultlayer[i].TopPosition.Distance(resultlayer[i + 1].TopPosition);
                 temppileLength = Math.Round(temppileLength*1e-4,2);
-                tempLayerBase.Add(new SoilLayerInfoBase() { SoilLayerName = resultlayer[i].IntersectLayerInfo.Category, SoilLayerNum = resultlayer[i].IntersectLayerInfo.UserCode, PileInSoilLayerLength = temppileLength, Qfi = random.NextDouble(), Xii = random.NextDouble() });
+                Match mc = regex.Match(resultlayer[i].IntersectLayerInfo.UserCode);
+                soilName = soilNum = resultlayer[i].IntersectLayerInfo.UserCode;
+                if (mc.Success)
+                {
+                    soilName = mc.Value.Trim(new char[] { '[', ']' });
+                    soilNum = soilNum.Replace(mc.Value, string.Empty);
+                }
+                tempLayerBase.Add(new SoilLayerInfoBase() { SoilLayerName = soilName, SoilLayerNum = soilNum, PileInSoilLayerLength = temppileLength, PileInSoilLayerTopZ = Math.Round(resultlayer[i].TopPosition.Z*1e-4,2), Qfi = resultlayer[i].IntersectLayerInfo.Qfi, Xii = resultlayer[i].IntersectLayerInfo.Xii });
             }
-            return new SolidPile() { PileCode = pilecode, PileId = pileId, PilePropertyInfo = pileType, SolidPileSoilLayerInfoProp = tempLayerBase, GammaR = m_gammar, Qr = 6000 };
+            return new SolidPile() { PileCode = pilecode, PileId = pileId, PilePropertyInfo = pileType, SolidPileSoilLayerInfoProp = tempLayerBase, GammaR = m_gammar, Qr = resultlayer.Last().IntersectLayerInfo.Qri };
         }
     }
 }

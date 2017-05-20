@@ -34,6 +34,8 @@ namespace PDIWT_MS_ZJCZL.Interface
         double GetCosAlpha();
         // unit: m^2
         double GetPileCrossSectionArea();
+        // unit: m^2
+        double GetPileOutLineArea();
         // unit: kn
         double GetPileGravity();
         // pileLength: unit m
