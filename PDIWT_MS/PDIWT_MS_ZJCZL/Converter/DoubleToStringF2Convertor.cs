@@ -12,12 +12,14 @@ namespace PDIWT_MS_ZJCZL.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-                return string.Format("{0:f2}", value);
+            return string.Format("{0:f2}", value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            double outvalue = 0;
+            double.TryParse(value.ToString(), out outvalue);
+            return outvalue;
         }
     }
 }

@@ -83,6 +83,12 @@ namespace PDIWT_MS_ZJCZL.ViewModels
             get { return GetProperty(() => GammaR); }
             set { SetProperty(() => GammaR, value); }
         }
+
+        public double Eta
+        {
+            get { return GetProperty(() => Eta); }
+            set { SetProperty(() => Eta, value); }
+        }
         public double Gammas
         {
             get { return GetProperty(() => Gammas); }
@@ -129,6 +135,7 @@ namespace PDIWT_MS_ZJCZL.ViewModels
             //};
             SelectedPileCrossSectionType = SoildPileCrossSectionType.Square;
             SelectedPileType = PileType.Solid;
+            Eta = 1;
             PileWeight = 25;
             PileUnderwaterWeight = 15;
         }
@@ -212,7 +219,7 @@ namespace PDIWT_MS_ZJCZL.ViewModels
                         }
                         break;
                     case PileType.SteelAndPercastConcrete:
-                        pilefactory = new SteelAndPercastConcretePileFactory(GammaR);
+                        pilefactory = new SteelAndPercastConcretePileFactory(GammaR,Eta);
                         foreach (var pile in elelist)
                         {
                             //BG.DRange3d range;

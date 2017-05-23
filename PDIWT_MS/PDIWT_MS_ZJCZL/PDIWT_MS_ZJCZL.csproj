@@ -201,6 +201,7 @@
     <Compile Include="Converter\Point3dToStringConvertor.cs" />
     <Compile Include="DateTemplateSelector\PileCrossSectionTemplateSelector.cs" />
     <Compile Include="DateTemplateSelector\PileListTemplateSelector.cs" />
+    <Compile Include="Interface\IDeepAndShallowClone.cs" />
     <Compile Include="Interface\IPileBearingCapacity.cs" />
     <Compile Include="Interface\IPileProperty.cs" />
     <Compile Include="KeyinCommands.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="Models\Soil\SoilLayerInfoBase.cs" />
     <Compile Include="Models\PileCrossSection\SquarePileGeometry.cs" />
     <Compile Include="Models\Factory\PostgroutingFillingPileFactory.cs" />
+    <Compile Include="Models\Utilities.cs" />
     <Compile Include="Models\XmlSerializerHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -244,6 +246,7 @@
     <Compile Include="ViewModels\AnalysisViewModel.cs" />
     <Compile Include="ViewModels\CollisionTestViewModel.cs" />
     <Compile Include="ViewModels\GetPilesFromLinesViewModel.cs" />
+    <Compile Include="ViewModels\OptimizingPileLengthViewModel.cs" />
     <Compile Include="ViewModels\ViewAddPileViewModel.cs" />
     <Compile Include="ViewModels\ViewModelCalculateByRay.cs" />
     <Compile Include="ViewModels\ViewZJCZLViewModel.cs" />
@@ -255,6 +258,9 @@
     </Compile>
     <Compile Include="Views\GetPilesFromLines.xaml.cs">
       <DependentUpon>GetPilesFromLines.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OptimizingPileLengthView.xaml.cs">
+      <DependentUpon>OptimizingPileLengthView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ViewAddPile.xaml.cs">
       <DependentUpon>ViewAddPile.xaml</DependentUpon>
@@ -310,6 +316,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\GetPilesFromLines.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OptimizingPileLengthView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -376,6 +386,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Image\Center Direction.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Image\calculation_128px.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Image\calculation_24px.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 using DevExpress.Mvvm;
 using HCHXCodeQueryLib;
 using PDIWT_MS_ZJCZL.Interface;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace PDIWT_MS_ZJCZL.Models.PileCrossSection
 {
-    class PolygonPileGeometry : BindableBase,IPileProperty
+    [Serializable]
+    class PolygonPileGeometry : BindableBase, IPileProperty
     {
         public Point3d PileBottomPoint
         {
@@ -105,6 +108,20 @@ namespace PDIWT_MS_ZJCZL.Models.PileCrossSection
         public double GetPileOutLineArea()
         {
             return GetPileCrossSectionArea();
+        }
+        public object Clone()
+        {
+            PolygonPileGeometry clone = new PolygonPileGeometry()
+            {
+                PileTopPoint = this.PileTopPoint,
+                PileBottomPoint = this.PileBottomPoint,
+                PileDiameter = this.PileDiameter,
+                PileCrossSectionPerimeter = this.PileCrossSectionPerimeter,
+                PileInnerDiameter = this.PileInnerDiameter,
+                PileUnderWaterWeight = this.PileUnderWaterWeight,
+                PileWeight = this.PileWeight
+            };
+            return clone;
         }
     }
 }

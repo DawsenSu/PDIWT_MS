@@ -10,7 +10,7 @@ using HCHXCodeQueryLib;
 
 namespace PDIWT_MS_ZJCZL.Interface
 {
-    public interface IPileProperty
+    public interface IPileProperty :ICloneable
     {
         // unit:m
         double PileDiameter { get; set; }

@@ -36,25 +36,15 @@ namespace PDIWT_MS_ZJCZL.Models
             foreach (BCOM.ModelReference model in app.ActiveDesignFile.Models)
                 modelnames.Add(model.Name);
             if (modelnames.Contains(modelname))
-            {
-                if (!app.ActiveDesignFile.Models[modelname].Is3D)
-                {
-                    app.ActiveDesignFile.Models.Delete(app.ActiveDesignFile.Models[modelname]);
-                    return app.ActiveDesignFile.Models.Add(app.ActiveModelReference, modelname, modelname, BCOM.MsdModelType.Normal, true);
-                }
-                else
-                    return app.ActiveDesignFile.Models[modelname];
-            }
-            else
-            {
-                return app.ActiveDesignFile.Models.Add(app.ActiveModelReference, modelname, modelname, BCOM.MsdModelType.Normal, true);
-            }
+                app.ActiveDesignFile.Models.Delete(app.ActiveDesignFile.Models[modelname]);
+            return app.ActiveDesignFile.Models.Add(app.ActiveModelReference, modelname, modelname, BCOM.MsdModelType.Normal, false);
         }
         //posistion unit:m
         BCOM.LineElement[] CreateArrowElement(Point3d position, IPileProperty pileprop)
         {
             double uorpermaster = app.ActiveModelReference.UORsPerMasterUnit;
             BCOM.Point3d centroidp = position.Point3dToBCOMPoint3d(1e4 / uorpermaster);
+            centroidp.Z = 0; // 平面
             BG.DVector3d linevector = new BG.DVector3d(pileprop.PileTopPoint.Point3dToDPoint3d(), pileprop.PileBottomPoint.Point3dToDPoint3d());
             double xyrotationRad = linevector.AngleXY.Radians;
             double arrowbarlength = 5 * pileprop.PileDiameter * 1e4 / uorpermaster;
@@ -82,6 +72,7 @@ namespace PDIWT_MS_ZJCZL.Models
             double uorpermaster = app.ActiveModelReference.UORsPerMasterUnit;
             BCOM.Matrix3d m = app.Matrix3dIdentity();
             BCOM.Point3d centroidp = pileprop.PileTopPoint.Point3dToBCOMPoint3d(1e4 / uorpermaster);
+            centroidp.Z = 0; // xy平面
             double pilediameter = pileprop.PileDiameter * 1e4 / uorpermaster;
             int colorindex = 3;
             if ((pileprop is SquarePileGeometry) || (pileprop is SquarePileGeometry))
@@ -100,16 +91,33 @@ namespace PDIWT_MS_ZJCZL.Models
             }
             else
             {
-                var c = app.CreateEllipseElement2(null, ref centroidp, pilediameter/2, pilediameter/2, ref m, BCOM.MsdFillMode.NotFilled);
+                var c = app.CreateEllipseElement2(null, ref centroidp, pilediameter / 2, pilediameter / 2, ref m, BCOM.MsdFillMode.NotFilled);
                 c.Color = colorindex;
                 return c;
             }
         }
+        BCOM.TextElement CreatePileSkewnessText(IPileProperty pileprop)
+        {
+            double uorpermaster = app.ActiveModelReference.UORsPerMasterUnit;
+            BCOM.Point3d centroidp = pileprop.PileTopPoint.Point3dToBCOMPoint3d(1e4 / uorpermaster);
+            centroidp.Z = 0; // xy plane
+            BCOM.Point3d zerop = app.Point3dZero();
+            BCOM.Point3d textelefirstpoisition = app.Point3dFromXY( pileprop.PileDiameter * 1e4 / uorpermaster, 0);
+            BCOM.Matrix3d identitym = app.Matrix3dIdentity();
+            BCOM.TextElement textele = app.CreateTextElement1(null, Utilities.GetPileSkewnessString(pileprop.GetCosAlpha()), ref textelefirstpoisition, ref identitym);
+
+            BG.DVector3d linevector = new BG.DVector3d(pileprop.PileTopPoint.Point3dToDPoint3d(), pileprop.PileBottomPoint.Point3dToDPoint3d());
+            double xyrotationRad = linevector.AngleXY.Radians;
+            textele.RotateAboutZ(ref zerop, xyrotationRad);
+            textele.Move(ref centroidp);
+            return textele;
+        }
         //position unit:m
-        BCOM.TextElement CreatePileText(Point3d p, string text)
+        BCOM.TextElement CreatePilePositionText(Point3d p, string text)
         {
             double uorpermaster = app.ActiveModelReference.UORsPerMasterUnit;
             BCOM.Point3d centroidp = p.Point3dToBCOMPoint3d(1e4 / uorpermaster);
+            centroidp.Z = 0; // xy plane            
             BCOM.Matrix3d m = app.Matrix3dIdentity();
             BCOM.TextElement textele = app.CreateTextElement1(null, text, ref centroidp, ref m);
             return textele;
@@ -117,6 +125,9 @@ namespace PDIWT_MS_ZJCZL.Models
 
         public void CreateMap()
         {
+            BCOM.ModelReference modelref = AddNewModelReference("桩位图");
+            modelref.Activate();
+
             List<BCOM.Element> elelist = new List<BCOM.Element>();
             BG.DVector3d pilevector;
             foreach (var pile in Piles)
@@ -124,15 +135,15 @@ namespace PDIWT_MS_ZJCZL.Models
                 pilevector = new BG.DVector3d(pile.PilePropertyInfo.PileTopPoint.Point3dToDPoint3d(), pile.PilePropertyInfo.PileBottomPoint.Point3dToDPoint3d());
                 if (!pilevector.IsParallelOrOppositeTo(BG.DVector3d.UnitZ))
                     elelist.AddRange(CreateArrowElement(pile.PilePropertyInfo.PileTopPoint, pile.PilePropertyInfo));
+                elelist.Add(CreatePileSkewnessText(pile.PilePropertyInfo));
                 elelist.Add(CreatePileCrossSectionElement(pile.PilePropertyInfo));
-                elelist.Add(CreatePileText(pile.PilePropertyInfo.PileTopPoint, pile.PileCode));
+                elelist.Add(CreatePilePositionText(pile.PilePropertyInfo.PileTopPoint, pile.PileCode));
             }
-            BCOM.ModelReference modelref = AddNewModelReference("桩位图");
+
             foreach (var ele in elelist)
-                modelref.AddElement(ele);
-            modelref.Activate();
+                app.ActiveModelReference.AddElement(ele);
+            
             app.MessageCenter.AddMessage("桩位图绘制完成", "请在[桩位图]模型中查看", BCOM.MsdMessageCenterPriority.Info);
-            app.CadInputQueue.SendCommand("Mstn.Viewing.FitX");
         }
         #endregion
     }

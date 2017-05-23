@@ -13,6 +13,7 @@ using HCHXCodeQueryLib;
 
 namespace PDIWT_MS_ZJCZL.Models
 {
+    [Obsolete]
     public class PileInfoClass
     {
         //桩体信息
@@ -39,7 +40,7 @@ namespace PDIWT_MS_ZJCZL.Models
         //计算结果信息
         public CalculateResult Result { get; set; }
     }
-
+    [Obsolete]
     public class SoilInfoClass
     {
         [DisplayName("土层编号"), ReadOnly(true)]
@@ -69,24 +70,28 @@ namespace PDIWT_MS_ZJCZL.Models
         }
     }
 
+    [Obsolete]
     public class CalculateParameter
     {
         [DisplayName("垂直承载力分析系数")]
         public double GammaR { get; set; }
     }
 
+    [Obsolete]
     public class CalculateResult
     {
         public double UltimateBearingCapacity { get; set; }
         public double UltimatePullingCapacity { get; set; }
     }
 
+    [Obsolete]
     public class SearchPanel
     {
         public SearchType Type { get; set; }
         public string Name { get; set; }
     }
 
+    [Obsolete]
     public enum SearchType
     {
         ById,

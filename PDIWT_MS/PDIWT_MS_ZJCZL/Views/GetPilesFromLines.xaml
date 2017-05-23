@@ -94,11 +94,12 @@
                         <dxlc:LayoutItem Label="水位(m)：">
                             <dxe:TextEdit Text="{Binding WaterLevel}" />
                         </dxlc:LayoutItem>
-                        <dxlc:LayoutGroup View="Group">
-                            <dxlc:LayoutItem Label="γR：">
-                                <dxe:TextEdit Text="{Binding GammaR}" />
-                            </dxlc:LayoutItem>
-                        </dxlc:LayoutGroup>
+                        <dxlc:LayoutItem Label="γR：">
+                            <dxe:TextEdit Text="{Binding GammaR}" />
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="η：" Visibility="{Binding SelectedPileType, Converter={StaticResource etovconvertor}, ConverterParameter=SteelAndPercastConcrete}">
+                            <dxe:TextEdit Text="{Binding Eta}"/>
+                        </dxlc:LayoutItem>
                         <!--<dxlc:LayoutGroup
                             Orientation="Vertical"
                             View="Group"

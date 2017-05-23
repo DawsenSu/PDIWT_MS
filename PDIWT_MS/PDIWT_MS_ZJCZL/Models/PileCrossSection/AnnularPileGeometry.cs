@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using DevExpress.Mvvm;
 using HCHXCodeQueryLib;
 using PDIWT_MS_ZJCZL.Interface;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace PDIWT_MS_ZJCZL.Models.PileCrossSection
 {
@@ -96,6 +98,21 @@ namespace PDIWT_MS_ZJCZL.Models.PileCrossSection
             double y = PileTopPoint.Y - pileLength / oldlength * (PileTopPoint.Y - PileBottomPoint.Y);
             double z = PileTopPoint.Z - pileLength / oldlength * (PileTopPoint.Z - PileBottomPoint.Z);
             PileBottomPoint = new Point3d { X = x, Y = y, Z = z };
+        }
+
+        public object Clone()
+        {
+            AnnularPileGeometry clone = new AnnularPileGeometry()
+            {
+                PileTopPoint = this.PileTopPoint,
+                PileBottomPoint = this.PileBottomPoint,
+                PileDiameter = this.PileDiameter,
+                PileInnerDiameter = this.PileInnerDiameter,
+                PileUnderWaterWeight = this.PileUnderWaterWeight,
+                PileWeight = this.PileWeight,
+                WaterLevel = this.WaterLevel
+            };
+            return clone;
         }
     }
 }

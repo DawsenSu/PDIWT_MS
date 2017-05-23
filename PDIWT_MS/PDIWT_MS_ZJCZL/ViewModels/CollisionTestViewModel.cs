@@ -81,6 +81,7 @@ namespace PDIWT_MS_ZJCZL.ViewModels
             //MinDistance = 1;
         }
         public bool CanDrawCollisionIndicator() => CollisionResult.Count > 0;
+
         public List<long> GetPileAxisLineIds()
         {
             var idlist = new List<long>();
@@ -88,6 +89,7 @@ namespace PDIWT_MS_ZJCZL.ViewModels
                 idlist.Add(pile.PileId);
             return idlist;
         }
+
         public ObservableCollection<CollisionInfo> GetCollisionInfoList(double minallowdistance = 0/*unit mm*/)
         {
             //double uor_per_meter = Program.GetActiveDgnModel().GetModelInfo().UorPerMeter;

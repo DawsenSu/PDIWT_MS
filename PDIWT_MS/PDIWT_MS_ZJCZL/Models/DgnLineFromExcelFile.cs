@@ -96,6 +96,6 @@ namespace PDIWT_MS_ZJCZL.Models
         public double TopZ { get; set; }
         public double Skewness { get; set; }
         public double RotationDegree { get; set; }
-        public double Length { get; set; }
+        public double Length { get; set; } //unit: mm
     }
 }

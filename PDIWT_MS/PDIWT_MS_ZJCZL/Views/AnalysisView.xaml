@@ -12,11 +12,15 @@
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:convertor="clr-namespace:PDIWT_MS_ZJCZL.Converter"
     Title="分析结果"
     Width="600"
     Height="500"
     Icon="/PDIWT_MS_ZJCZL;component/Resources/Image/Combo Chart.ico"
     mc:Ignorable="d">
+    <Window.Resources>
+        <convertor:DoubleToStringF2Convertor x:Key="d2f2"/>
+    </Window.Resources>
     <dx:LoadingDecorator>
         <dx:LoadingDecorator.SplashScreenTemplate>
             <DataTemplate>
@@ -161,17 +165,17 @@
                     FieldName="PileDiameter"
                     Header="桩径m"
                     ReadOnly="True" />
-                <dxg:GridColumn FieldName="Force" Header="桩力" />
+                <!--<dxg:GridColumn FieldName="Force" Header="桩力" />-->
                 <dxg:GridColumn
-                    FieldName="PileBearingForce"
+                    Binding="{Binding PileBearingForce,Converter={StaticResource d2f2}}"
                     Header="抗压承载力"
                     ReadOnly="True" />
                 <dxg:GridColumn
-                    FieldName="PilePullingForce"
+                    Binding="{Binding PilePullingForce,Converter={StaticResource d2f2}}"
                     Header="抗拔承载力"
                     ReadOnly="True" />
                 <dxg:GridColumn
-                    FieldName="PileHoldLength"
+                    Binding="{Binding PileHoldLength,Converter={StaticResource d2f2}}"
                     Header="入持力层深度"
                     ReadOnly="True" />
                 <dxg:GridColumn
@@ -179,7 +183,7 @@
                     Header="持力层土质"
                     ReadOnly="True" />
                 <dxg:GridColumn
-                    FieldName="PileLength"
+                    Binding="{Binding PileLength,Converter={StaticResource d2f2}}"
                     Header="总桩长"
                     ReadOnly="True" />
             </dxg:GridControl>

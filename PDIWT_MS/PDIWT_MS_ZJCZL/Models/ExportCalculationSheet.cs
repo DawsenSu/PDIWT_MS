@@ -128,7 +128,7 @@ namespace PDIWT_MS_ZJCZL.Models
                         pilesoillayernum = actualpile.SolidPileSoilLayerInfoProp.Count;
                         //填充数据项
                         subsheet.Cells[startrowindex, 3].Value = actualpile.GammaR;
-                        subsheet.Cells[startrowindex + 2, 2].Value = GetPileProperty(actualpile.PilePropertyInfo);
+                        subsheet.Cells[startrowindex + 2, 2].Value = GetPileCrossSectionString(actualpile.PilePropertyInfo);
                         subsheet.Cells[startrowindex + 2, 4].Value = actualpile.PilePropertyInfo.PileDiameter;
                         subsheet.Cells[startrowindex + 2, 6].Value = actualpile.PilePropertyInfo.PileInnerDiameter;
                         subsheet.Cells[startrowindex + 3, 2].Value = actualpile.PilePropertyInfo.GetPileLength();
@@ -140,7 +140,7 @@ namespace PDIWT_MS_ZJCZL.Models
                         subsheet.Cells[startrowindex + 5, 2].Value = actualpile.PilePropertyInfo.PileWeight;
                         subsheet.Cells[startrowindex + 5, 4].Value = actualpile.PilePropertyInfo.PileUnderWaterWeight;
                         subsheet.Cells[startrowindex + 5, 6].Value = actualpile.PilePropertyInfo.WaterLevel;
-                        subsheet.Cells[startrowindex + 6, 2].Value = GetPileSkewnessString(actualpile.PilePropertyInfo.GetCosAlpha());
+                        subsheet.Cells[startrowindex + 6, 2].Value = Utilities.GetPileSkewnessString(actualpile.PilePropertyInfo.GetCosAlpha());
                         subsheet.Cells[startrowindex + 6, 4].Value = Math.Acos(actualpile.PilePropertyInfo.GetCosAlpha());
                         subsheet.Cells[startrowindex + 7, 2].Value = actualpile.PileCode;
                         for (int j = 0; j < actualpile.SolidPileSoilLayerInfoProp.Count; j++)
@@ -166,7 +166,7 @@ namespace PDIWT_MS_ZJCZL.Models
                         pilesoillayernum = actualpile.SteelAndPercastConcretPileLayerInfoProp.Count;
                         //填充数据项
                         subsheet.Cells[startrowindex, 3].Value = actualpile.GammaR;
-                        subsheet.Cells[startrowindex + 2, 2].Value = GetPileProperty(actualpile.PilePropertyInfo);
+                        subsheet.Cells[startrowindex + 2, 2].Value = GetPileCrossSectionString(actualpile.PilePropertyInfo);
                         subsheet.Cells[startrowindex + 2, 4].Value = actualpile.PilePropertyInfo.PileDiameter;
                         subsheet.Cells[startrowindex + 2, 6].Value = actualpile.PilePropertyInfo.PileInnerDiameter;
                         subsheet.Cells[startrowindex + 3, 2].Value = actualpile.PilePropertyInfo.GetPileLength();
@@ -178,7 +178,7 @@ namespace PDIWT_MS_ZJCZL.Models
                         subsheet.Cells[startrowindex + 5, 2].Value = actualpile.PilePropertyInfo.PileWeight;
                         subsheet.Cells[startrowindex + 5, 4].Value = actualpile.PilePropertyInfo.PileUnderWaterWeight;
                         subsheet.Cells[startrowindex + 5, 6].Value = actualpile.PilePropertyInfo.WaterLevel;
-                        subsheet.Cells[startrowindex + 6, 2].Value = GetPileSkewnessString(actualpile.PilePropertyInfo.GetCosAlpha());
+                        subsheet.Cells[startrowindex + 6, 2].Value = Utilities.GetPileSkewnessString(actualpile.PilePropertyInfo.GetCosAlpha());
                         subsheet.Cells[startrowindex + 6, 4].Value = actualpile.PilePropertyInfo.GetCosAlpha();
                         subsheet.Cells[startrowindex + 7, 2].Value = actualpile.PileCode;
                         for (int j = 0; j < actualpile.SteelAndPercastConcretPileLayerInfoProp.Count; j++)
@@ -227,18 +227,7 @@ namespace PDIWT_MS_ZJCZL.Models
             }
         }
 
-        string GetPileSkewnessString(double cosa)
-        {
-            if (Math.Abs(cosa - 1) < 1e-4)
-            {
-                return "直桩";
-            }
-            else
-            {
-                return string.Format("1:{0}", Math.Round(1.0 / Math.Sqrt(1 - cosa * cosa) / cosa, 0));
-            }
-        }
-        string GetPileProperty(IPileProperty pileproperty)
+        string GetPileCrossSectionString(IPileProperty pileproperty)
         {
             if (pileCrossSectionDict.ContainsKey(pileproperty.GetType()))
             {

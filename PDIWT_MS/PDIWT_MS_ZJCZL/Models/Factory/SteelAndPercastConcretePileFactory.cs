@@ -16,11 +16,13 @@ namespace PDIWT_MS_ZJCZL.Models.Factory
 {
     public class SteelAndPercastConcretePileFactory : PileFactory
     {
-        public SteelAndPercastConcretePileFactory(double gammar)
+        public SteelAndPercastConcretePileFactory(double gammar, double eta)
         {
             m_gammar = gammar;
+            m_eta = eta;
         }
         double m_gammar;
+        double m_eta;
         public override PileBase CreateNewPile(IPileProperty pileType, string pilecode, long pileId)
         {
             if (!(pileType is AnnularPileGeometry))
@@ -44,7 +46,7 @@ namespace PDIWT_MS_ZJCZL.Models.Factory
                     temppileLength = resultlayer[i].TopPosition.Distance(pileType.PileBottomPoint.Scale(1e4));
                 else
                     temppileLength = resultlayer[i].TopPosition.Distance(resultlayer[i + 1].TopPosition);
-                temppileLength = Math.Round(temppileLength * 1e-4, 2);
+                //temppileLength = Math.Round(temppileLength * 1e-4, 2);
                 Match mc = regex.Match(resultlayer[i].IntersectLayerInfo.UserCode);
                 soilName = soilNum = resultlayer[i].IntersectLayerInfo.UserCode;
                 if (mc.Success)
@@ -52,9 +54,9 @@ namespace PDIWT_MS_ZJCZL.Models.Factory
                     soilName = mc.Value.Trim(new char[] { '[', ']' });
                     soilNum = soilNum.Replace(mc.Value, string.Empty);
                 }
-                tempLayerBase.Add(new SoilLayerInfoBase() { SoilLayerName = soilName, SoilLayerNum = soilNum, PileInSoilLayerLength = temppileLength, PileInSoilLayerTopZ = Math.Round(resultlayer[i].TopPosition.Z * 1e-4, 2), Qfi = resultlayer[i].IntersectLayerInfo.Qfi, Xii = resultlayer[i].IntersectLayerInfo.Xii });
+                tempLayerBase.Add(new SoilLayerInfoBase() { SoilLayerName = soilName, SoilLayerNum = soilNum, PileInSoilLayerLength = temppileLength*1e-4, PileInSoilLayerTopZ = resultlayer[i].TopPosition.Z * 1e-4,Qfi = resultlayer[i].IntersectLayerInfo.Qfi, Xii = resultlayer[i].IntersectLayerInfo.Xii });
             }
-            return new SteelAndPercastConcretePile() { PileCode = pilecode, PileId = pileId, PilePropertyInfo = pileType, SteelAndPercastConcretPileLayerInfoProp = tempLayerBase, GammaR = m_gammar, Qr = resultlayer.Last().IntersectLayerInfo.Qri, Eta = 1.0/*应该由最后一层土层性质决定，参见规范*/ };
+            return new SteelAndPercastConcretePile() { PileCode = pilecode, PileId = pileId, PilePropertyInfo = pileType, SteelAndPercastConcretPileLayerInfoProp = tempLayerBase, GammaR = m_gammar, Qr = resultlayer.Last().IntersectLayerInfo.Qri, Eta = m_eta/*应该由最后一层土层性质决定，参见规范*/ };
         }
     }
 }

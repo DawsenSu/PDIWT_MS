@@ -23,6 +23,8 @@ namespace PDIWT_MS_ZJCZL.ViewModels
     using PDIWT_MS_ZJCZL.Models.PileCrossSection;
     using System.Xml.Serialization;
     using System.Threading.Tasks;
+    using System.Text;
+    using System.Diagnostics;
 
     public class ViewModelCalculateByRay : ViewModelBase
     {
@@ -165,6 +167,17 @@ namespace PDIWT_MS_ZJCZL.ViewModels
             analysisview.ShowDialog();
         }
         public bool CanAnalysis() => CanRemoveAllPile();
+
+        [Command]
+        public void GetPileLengthFromBearingForce()
+        {
+            Views.OptimizingPileLengthView optview = new Views.OptimizingPileLengthView();
+            OptimizingPileLengthViewModel optviewmodel = new OptimizingPileLengthViewModel(this.Piles);
+            optview.DataContext = optviewmodel;
+            optview.ShowDialog();
+        }
+        public bool CanGetPileLengthFromBearingForce() => CanRemoveAllPile();
+
         [Command]
         public void ExportToExcel()
         {
@@ -204,10 +217,44 @@ namespace PDIWT_MS_ZJCZL.ViewModels
         [Command]
         public void DrawPilePosition()
         {
-            PilePositionMap map = new PilePositionMap(this.Piles);
-            map.CreateMap();
+            try
+            {
+                PilePositionMap map = new PilePositionMap(this.Piles);
+                map.CreateMap();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
         }
         public bool CanDrawPilePosition() => CanRemoveAllPile();
+
+        [Command]
+        public void Test()
+        {
+            
+            try
+            {
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
+                StringBuilder sb = new StringBuilder();
+                foreach (var pile in Piles)
+                {
+                    PileLengthCalculation pilecalculation = new PileLengthCalculation(pile, 2000);
+                    sb.Append(pile.PileCode + "," + Utilities.CellingWithInterval(pilecalculation.GetPileLengthByBearingCapacity(),0.5) + "\n");
+                }
+                sw.Stop();
+                File.WriteAllText(@"D:\Result.csv", sb.ToString());
+                MessageBox.Show(sw.Elapsed.TotalSeconds.ToString());
+                //MessageBox.Show(sb.ToString());
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+
+        }
+        public bool CanTest() => CanRemoveAllPile();
         //public void SerializerPiles()
         //{
         //    //XmlSerializerHelper.SaveToXml(@"D:\Test.xml", Piles, null, null);
