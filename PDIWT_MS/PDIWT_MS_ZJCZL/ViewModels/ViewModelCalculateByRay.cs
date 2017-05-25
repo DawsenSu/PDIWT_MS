@@ -232,29 +232,37 @@ namespace PDIWT_MS_ZJCZL.ViewModels
         [Command]
         public void Test()
         {
-            
-            try
-            {
-                Stopwatch sw = new Stopwatch();
-                sw.Start();
-                StringBuilder sb = new StringBuilder();
-                foreach (var pile in Piles)
-                {
-                    PileLengthCalculation pilecalculation = new PileLengthCalculation(pile, 2000);
-                    sb.Append(pile.PileCode + "," + Utilities.CellingWithInterval(pilecalculation.GetPileLengthByBearingCapacity(),0.5) + "\n");
-                }
-                sw.Stop();
-                File.WriteAllText(@"D:\Result.csv", sb.ToString());
-                MessageBox.Show(sw.Elapsed.TotalSeconds.ToString());
-                //MessageBox.Show(sb.ToString());
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.ToString());
-            }
+
+            //try
+            //{
+            //    Stopwatch sw = new Stopwatch();
+            //    sw.Start();
+            //    StringBuilder sb = new StringBuilder();
+            //    foreach (var pile in Piles)
+            //    {
+            //        PileLengthCalculation pilecalculation = new PileLengthCalculation(pile, 2000);
+            //        sb.Append(pile.PileCode + "," + Utilities.CellingWithInterval(pilecalculation.GetPileLengthByBearingCapacity(),0.5) + "\n");
+            //    }
+            //    sw.Stop();
+            //    File.WriteAllText(@"D:\Result.csv", sb.ToString());
+            //    MessageBox.Show(sw.Elapsed.TotalSeconds.ToString());
+            //    //MessageBox.Show(sb.ToString());
+            //}
+            //catch (Exception e)
+            //{
+            //    MessageBox.Show(e.ToString());
+            //}
+            BCOM.Application app = Program.COM_App;
+            BCOM.Point3d o = app.Point3dZero();
+            BCOM.Matrix3d m = app.Matrix3dIdentity();
+            var text = app.CreateTextElement1(null,"text", ref o, ref m);
+            BCOM.TextStyle ts = app.ActiveSettings.TextStyle;
+            ts.Color = 2;
+            text.let_TextStyle(ts);
+            app.ActiveModelReference.AddElement(text);
 
         }
-        public bool CanTest() => CanRemoveAllPile();
+        //public bool CanTest() => CanRemoveAllPile();
         //public void SerializerPiles()
         //{
         //    //XmlSerializerHelper.SaveToXml(@"D:\Test.xml", Piles, null, null);

@@ -121,7 +121,7 @@
                     Content="绘制桩位图"
                     Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/Design.ico"
                     ToolTip="根据桩的信息，绘制桩位图，存放在[桩位图]模型中" />
-                <!--<dxb:BarButtonItem Command="{Binding TestCommand}" Content="Test" />-->
+                <dxb:BarButtonItem Command="{Binding TestCommand}" Content="Test" />
             </dxb:ToolBarControl>
         </dxb:BarContainerControl>
         <dxlc:LayoutControl VerticalAlignment="Stretch" Orientation="Vertical">

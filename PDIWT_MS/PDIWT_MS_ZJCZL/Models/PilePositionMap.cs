@@ -20,9 +20,12 @@ namespace PDIWT_MS_ZJCZL.Models
         public PilePositionMap(ObservableCollection<PileBase> piles)
         {
             Piles = piles;
+            app = Program.COM_App;
+            uorpermaster = app.ActiveModelReference.UORsPerMasterUnit;
         }
         #region Field
-        BCOM.Application app = Program.COM_App;
+        BCOM.Application app;
+        double uorpermaster;
         #endregion
 
         #region Properties
@@ -42,7 +45,7 @@ namespace PDIWT_MS_ZJCZL.Models
         //posistion unit:m
         BCOM.LineElement[] CreateArrowElement(Point3d position, IPileProperty pileprop)
         {
-            double uorpermaster = app.ActiveModelReference.UORsPerMasterUnit;
+            //double uorpermaster = app.ActiveModelReference.UORsPerMasterUnit;
             BCOM.Point3d centroidp = position.Point3dToBCOMPoint3d(1e4 / uorpermaster);
             centroidp.Z = 0; // 平面
             BG.DVector3d linevector = new BG.DVector3d(pileprop.PileTopPoint.Point3dToDPoint3d(), pileprop.PileBottomPoint.Point3dToDPoint3d());
@@ -69,7 +72,7 @@ namespace PDIWT_MS_ZJCZL.Models
         }
         BCOM.Element CreatePileCrossSectionElement(IPileProperty pileprop)
         {
-            double uorpermaster = app.ActiveModelReference.UORsPerMasterUnit;
+            //double uorpermaster = app.ActiveModelReference.UORsPerMasterUnit;
             BCOM.Matrix3d m = app.Matrix3dIdentity();
             BCOM.Point3d centroidp = pileprop.PileTopPoint.Point3dToBCOMPoint3d(1e4 / uorpermaster);
             centroidp.Z = 0; // xy平面
@@ -98,7 +101,7 @@ namespace PDIWT_MS_ZJCZL.Models
         }
         BCOM.TextElement CreatePileSkewnessText(IPileProperty pileprop)
         {
-            double uorpermaster = app.ActiveModelReference.UORsPerMasterUnit;
+            //double uorpermaster = app.ActiveModelReference.UORsPerMasterUnit;
             BCOM.Point3d centroidp = pileprop.PileTopPoint.Point3dToBCOMPoint3d(1e4 / uorpermaster);
             centroidp.Z = 0; // xy plane
             BCOM.Point3d zerop = app.Point3dZero();
@@ -115,13 +118,33 @@ namespace PDIWT_MS_ZJCZL.Models
         //position unit:m
         BCOM.TextElement CreatePilePositionText(Point3d p, string text)
         {
-            double uorpermaster = app.ActiveModelReference.UORsPerMasterUnit;
             BCOM.Point3d centroidp = p.Point3dToBCOMPoint3d(1e4 / uorpermaster);
             centroidp.Z = 0; // xy plane            
             BCOM.Matrix3d m = app.Matrix3dIdentity();
             BCOM.TextElement textele = app.CreateTextElement1(null, text, ref centroidp, ref m);
             return textele;
         }
+        void GetHVAxisStringList(IEnumerable<string> pilecodes, out List<string> haxisstrings, out List<string> vaxisstrings)
+        {
+            haxisstrings = new List<string>();
+            vaxisstrings = new List<string>();
+            foreach (var str in pilecodes)
+            {
+                string[] tempstr = str.Split(new char[] { '-' });
+                if (tempstr.Length < 2)
+                    throw new InvalidOperationException($"{str}无法通过'-'字符分割成横纵轴网坐标");
+                haxisstrings.Add(tempstr[tempstr.Length - 2]);
+                vaxisstrings.Add(tempstr[tempstr.Length - 1]);
+            }
+            haxisstrings = haxisstrings.Distinct().ToList();
+            vaxisstrings = vaxisstrings.Distinct().ToList();
+        }
+
+        //BCOM.LineElement[] CreateAxisGrid()
+        //{
+        //    Tuple<BCOM.Point3d, BCOM.Point3d> temp = new Tuple<BCOM.Point3d, BCOM.Point3d>(app.Point3dZero(), app.Point3dZero());
+        //    app.createli
+        //}
 
         public void CreateMap()
         {
