@@ -53,36 +53,39 @@ namespace PDIWT_Bentley_Install
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            FolderBrowserDialog fbD = new FolderBrowserDialog();
-            fbD.ShowNewFolderButton = false;
-            fbD.Description = "选择MircoStation Connect版的安装根目录";
-            //fbD.RootFolder = Environment.SpecialFolder.CommonProgramFiles;
-            if (fbD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                DirectoryInfo selectedDire = new DirectoryInfo(fbD.SelectedPath);
-                tempDire = selectedDire.Name;
-                tb_dllpath.Text = fbD.SelectedPath + @"\MicroStation\Mdlapps";
-            }
+            //FolderBrowserDialog fbD = new FolderBrowserDialog();
+            //fbD.ShowNewFolderButton = false;
+            //fbD.Description = "选择MircoStation Connect版的安装根目录";
+            ////fbD.RootFolder = Environment.SpecialFolder.CommonProgramFiles;
+            //if (fbD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            //{
+            //    DirectoryInfo selectedDire = new DirectoryInfo(fbD.SelectedPath);
+            //    tempDire = selectedDire.Name;
+            //    tb_dllpath.Text = fbD.SelectedPath + @"\MicroStation\Mdlapps";
+            //}
 
-            string bentleyLibPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            //string bentleyLibPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
-            for (int i = 1; i < 10; i++)
-            {
-                if (!Directory.Exists(bentleyLibPath + @"\Bentley\MicroStation\10.0.0_" + i))
-                {
-                    if (i == 1)
-                    {
-                        bentleyLibPath += @"\Bentley\MicroStation\10.0.0\prefs";
-                    }
-                    else
-                    {
-                        bentleyLibPath += @"\Bentley\MicroStation\10.0.0_" + (i - 1) + @"\prefs";
-                    }
-                    break;
-                }
-            }
-            tb_config.Text = bentleyLibPath;
-            btn_install.IsEnabled = true;
+            //for (int i = 1; i < 10; i++)
+            //{
+            //    if (!Directory.Exists(bentleyLibPath + @"\Bentley\MicroStation\10.0.0_" + i))
+            //    {
+            //        if (i == 1)
+            //        {
+            //            bentleyLibPath += @"\Bentley\MicroStation\10.0.0\prefs";
+            //        }
+            //        else
+            //        {
+            //            bentleyLibPath += @"\Bentley\MicroStation\10.0.0_" + (i - 1) + @"\prefs";
+            //        }
+            //        break;
+            //    }
+            //}
+            //tb_config.Text = bentleyLibPath;
+            //btn_install.IsEnabled = true;
+            RegistryKey hklm = Registry.LocalMachine;
+            RegistryKey hkMircoStation = hklm.OpenSubKey(@"SOFTWARE\Bentley\MicroStation\{39949BF5-7E21-4A7B-A640-6E7199B7D588}");        
+            tb_dllpath.Text = hkMircoStation?.GetValue("ProgramPath") as string;
 
         }
         string tempDire;

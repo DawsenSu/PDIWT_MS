@@ -28,6 +28,12 @@ namespace PDIWT_MS
         {
             PDIWT_MS.Test.WindowHost.ShowWindow();
         }
+        public static void CreateSolid(string unparsed)
+        {
+            //    PDIWT_MS.Test.SolidTest.CreateDgnBox();
+            //    PDIWT_MS.Test.SolidTest.CreateSphere();
+            PDIWT_MS.Test.SolidTest.CreateExtrudedSolid();
+        }
         #endregion
 
 

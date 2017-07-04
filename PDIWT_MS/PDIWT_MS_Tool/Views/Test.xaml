@@ -1,0 +1,14 @@
+﻿<bwpf:ToolSettingsHost
+    x:Class="PDIWT_MS_Tool.Views.Test"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:bwpf="clr-namespace:Bentley.MstnPlatformNET.WPF;assembly=Bentley.MicroStation.WPF"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PDIWT_MS_Tool.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="200"
+    Title="tes">
+    <StackPanel>
+        <Label Content="ss" />
+    </StackPanel>
+</bwpf:ToolSettingsHost>

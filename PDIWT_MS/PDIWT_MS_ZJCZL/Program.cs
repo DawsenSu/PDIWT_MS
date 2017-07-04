@@ -11,7 +11,7 @@ using BCOM = Bentley.Interop.MicroStationDGN;
 
 namespace PDIWT_MS_ZJCZL
 {
-    [BM.AddIn(MdlTaskID = "PDIWT_MS_ZJCZL")]
+    [BM.AddIn]
     internal sealed class Program : BM.AddIn
     {
         public static Program Addin = null;

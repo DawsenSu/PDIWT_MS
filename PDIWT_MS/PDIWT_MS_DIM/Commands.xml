@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+  <RootKeyinTable ID="root">
+    <Keyword SubtableRef="PDIWT_MS_DIM" CommandClass="MacroCommand" CommandWord="PDIWT_MS_DIM">
+      <Options Required="true" />
+    </Keyword>
+  </RootKeyinTable>
+
+  <SubKeyinTables>
+    <KeyinTable ID="PDIWT_MS_DIM">
+      <Keyword SubtableRef="TEST" CommandClass="MacroCommand" CommandWord="TEST">
+        <Options Required="true" />
+      </Keyword>
+    </KeyinTable>
+  </SubKeyinTables>
+
+  <SubKeyinTables>
+    <KeyinTable ID="TEST">
+      <Keyword CommandWord="DIM"></Keyword>
+    </KeyinTable>
+  </SubKeyinTables>
+
+  <KeyinHandlers>
+    <KeyinHandler Keyin="PDIWT_MS_DIM TEST DIM" Function="PDIWT_MS_DIM.KeyinCommands.DIM"/>
+  </KeyinHandlers>
+</KeyinTree>

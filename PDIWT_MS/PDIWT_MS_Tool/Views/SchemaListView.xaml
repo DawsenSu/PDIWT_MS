@@ -1,0 +1,20 @@
+﻿<Window
+    x:Class="PDIWT_MS_Tool.Views.SchemaListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ViewModels="clr-namespace:PDIWT_MS_Tool.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Schema"
+    Width="200"
+    Height="300"
+    SizeToContent="Width"
+    mc:Ignorable="d">
+    <dxmvvm:Interaction.Behaviors>
+        <dxmvvm:EventToCommand Command="{Binding FindSchemaCommand}" EventName="Loaded" />
+    </dxmvvm:Interaction.Behaviors>
+    <GroupBox Margin="3" Header="Schema列表">
+        <ListBox Background="White" ItemsSource="{Binding SchemaList}" />
+    </GroupBox>
+</Window>

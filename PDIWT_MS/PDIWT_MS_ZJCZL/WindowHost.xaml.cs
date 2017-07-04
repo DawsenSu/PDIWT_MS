@@ -31,7 +31,7 @@ namespace PDIWT_MS_ZJCZL
                 return;
             }
             m_window1 = new WindowHost();
-            m_window1.Icon = new BitmapImage(new Uri("pack://application:,,,/PDIWT_MS_ZJCZL;component/Resources/Image/Nonya Kueh.ico", UriKind.RelativeOrAbsolute));
+            //m_window1.Icon = new BitmapImage(new Uri("pack://application:,,,/PDIWT_MS_ZJCZL;component/Resources/Image/Nonya Kueh.ico", UriKind.RelativeOrAbsolute));
             m_window1.Show();
         }
 

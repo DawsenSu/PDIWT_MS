@@ -1,0 +1,45 @@
+﻿<Window
+    x:Class="Install.WizardWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dxco="http://schemas.devexpress.com/winfx/2008/xaml/controls"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:local="clr-namespace:Install"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:Install.ViewModels"
+    Title="中交水运规划设计院MS二次开发安装程序"
+    DataContext="{dxmvvm:ViewModelSource Type=viewmodels:MainViewModel}"
+    Width="700"
+    Height="400"
+    Icon="Resources/Software Installer.ico"
+    mc:Ignorable="d">
+    <dxco:Wizard AnimationType="SlideHorizontal" ItemsSource="{Binding Items}">
+        <dxco:Wizard.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="Templates.xaml" />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </dxco:Wizard.Resources>
+        <dxmvvm:Interaction.Behaviors>
+            <dxmvvm:EventToCommand
+                Command="{Binding CancelCommand}"
+                EventName="Cancel"
+                PassEventArgsToCommand="True" />
+        </dxmvvm:Interaction.Behaviors>
+        <dxco:Wizard.ItemContainerStyle>
+            <Style TargetType="dxco:WizardPage">
+                <Setter Property="Header" Value="{x:Null}" />
+                <Setter Property="AllowCancel" Value="{Binding CanCancel}" />
+                <Setter Property="AllowFinish" Value="{Binding CanFinish}" />
+                <Setter Property="AllowNext" Value="{Binding CanNext}" />
+                <Setter Property="AllowBack" Value="{Binding CanBack}" />
+                <Setter Property="ShowBack" Value="{Binding ShowBack}" />
+                <Setter Property="ShowNext" Value="{Binding ShowNext}" />
+                <Setter Property="ShowFinish" Value="{Binding ShowFinish}" />
+                <Setter Property="ShowCancel" Value="{Binding ShowCancel}" />
+            </Style>
+        </dxco:Wizard.ItemContainerStyle>
+    </dxco:Wizard>
+</Window>

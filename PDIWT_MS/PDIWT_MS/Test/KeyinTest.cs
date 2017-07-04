@@ -72,20 +72,20 @@ namespace PDIWT_MS.Test
             }
         }
 
-        public static void TestMSDocManager()
-        {
-            //继承自DgnDocmentManager 实现了相应的接口，可以拿来使用。
-            BM.MSDocumentManager msdm = BM.MSDocumentManager.Manager;
-            BM.MSDocumentOpenDialogParams msodp = new BM.MSDocumentOpenDialogParams();
-            msodp.SetDialogTitle("Test");
-            msodp.SetDefaultDir(@"D:\");
-            msodp.SetDefaultFilter("*.dgn");
-            BD.DgnDocument dgndoc = msdm.OpenDocumentDialog(msodp, BM.FileListAttr.Default, BD.DgnDocument.FetchMode.Read);
-            if (dgndoc != null)
-            {
-                System.Windows.MessageBox.Show(dgndoc.FileName);
-            }
-        }
+        //public static void TestMSDocManager()
+        //{
+        //    //继承自DgnDocmentManager 实现了相应的接口，可以拿来使用。
+        //    BM.MSDocumentManager msdm = BM.MSDocumentManager.Manager;
+        //    BM.MSDocumentOpenDialogParams msodp = new BM.MSDocumentOpenDialogParams();
+        //    msodp.SetDialogTitle("Test");
+        //    msodp.SetDefaultDir(@"D:\");
+        //    msodp.SetDefaultFilter("*.dgn");
+        //    BD.DgnDocument dgndoc = msdm.OpenDocumentDialog(msodp, BM.FileListAttr.Default, BD.DgnDocument.FetchMode.Read);
+        //    if (dgndoc != null)
+        //    {
+        //        System.Windows.MessageBox.Show(dgndoc.FileName);
+        //    }
+        //}
 
         public static void TestWPFToolSetting()
         {
@@ -93,27 +93,27 @@ namespace PDIWT_MS.Test
             tool.InstallNewInstance();
         }
 
-        public static void TestSharedCell()
-        {
-            BCOM.Application app = BM.InteropServices.Utilities.ComApp;
+        //public static void TestSharedCell()
+        //{
+        //    BCOM.Application app = BM.InteropServices.Utilities.ComApp;
 
-            BM.MSDocumentManager msdm = BM.MSDocumentManager.Manager;
-            BM.MSDocumentOpenDialogParams msodp = new BM.MSDocumentOpenDialogParams();
-            msodp.SetDialogTitle("载入CellLibrary");
-            msodp.SetDefaultFilter("*.cel");
-            BD.DgnDocument dgndoc = msdm.OpenDocumentDialog(msodp, BM.FileListAttr.Default, BD.DgnDocument.FetchMode.Read);
-            if (null != dgndoc)
-            {
-                app.AttachCellLibrary(dgndoc.FileName);
-                //BCOM.Point3d p = app.Point3dZero();
-                //BCOM.SharedCellElement sharedcell = app.CreateSharedCellElement3("JD1", ref p, true);
-                BD.Elements.SharedCellElement sharecell = new BD.Elements.SharedCellElement(BM.Session.Instance.GetActiveDgnModel(), null, "JD1", BG.DPoint3d.Zero, BG.DMatrix3d.Identity, BG.DPoint3d.FromXYZ(1, 1, 1));
-                System.Windows.MessageBox.Show($"CellName:{sharecell.CellName}\n");
+        //    BM.MSDocumentManager msdm = BM.MSDocumentManager.Manager;
+        //    BM.MSDocumentOpenDialogParams msodp = new BM.MSDocumentOpenDialogParams();
+        //    msodp.SetDialogTitle("载入CellLibrary");
+        //    msodp.SetDefaultFilter("*.cel");
+        //    BD.DgnDocument dgndoc = msdm.OpenDocumentDialog(msodp, BM.FileListAttr.Default, BD.DgnDocument.FetchMode.Read);
+        //    if (null != dgndoc)
+        //    {
+        //        app.AttachCellLibrary(dgndoc.FileName);
+        //        //BCOM.Point3d p = app.Point3dZero();
+        //        //BCOM.SharedCellElement sharedcell = app.CreateSharedCellElement3("JD1", ref p, true);
+        //        BD.Elements.SharedCellElement sharecell = new BD.Elements.SharedCellElement(BM.Session.Instance.GetActiveDgnModel(), null, "JD1", BG.DPoint3d.Zero, BG.DMatrix3d.Identity, BG.DPoint3d.FromXYZ(1, 1, 1));
+        //        System.Windows.MessageBox.Show($"CellName:{sharecell.CellName}\n");
 
-            }
+        //    }
 
 
-        }
+        //}
 
         public static void TestLibObj()
         {
@@ -285,23 +285,7 @@ namespace PDIWT_MS.Test
                     string s = insertpoint.ToString();
                     string s2 = uv.ToString();
                 }
-            }
-            //BCOM.LineElement line = app.CreateLineElement2(null, ref p1, ref p2);
-            //app.ActiveModelReference.AddElement(line);
-            //var matrixidentiy = app.Matrix3dIdentity();
-            //var insertspointlist = new List<BCOM.Point3d>();
-            //foreach (var bsp in bsplinesurface)
-            //{
-            //    var insertpoints = line.GetIntersectionPointsOnIntersector(bsp, ref matrixidentiy);
-            //    if (insertpoints != null && insertpoints.Length > 0)
-            //    {
-            //        foreach (var insterp in insertpoints)
-            //        {
-            //            insertspointlist.Add(insterp);
-            //        }
-            //    }
-
-            //}            
+            }          
         }
 
         public static void TestDimsionElement()
