@@ -1,0 +1,54 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    x:Class="PDIWT_MS_ZJCZL.WindowHost"
+    Title="桩基承载力"
+    Width="400"
+    Height="300">
+
+    <dxc:ChartControl>
+        <dxc:ChartControl.Legend>
+            <dxc:Legend BorderThickness="0" HorizontalPosition="Center" VerticalPosition="BottomOutside"/>
+        </dxc:ChartControl.Legend>
+        <dxc:ChartControl.Titles>
+            <dxc:Title Content="Financial Chart" HorizontalAlignment="Center"/>
+        </dxc:ChartControl.Titles>
+        <dxc:XYDiagram2D>
+            <dxc:XYDiagram2D.AxisY>
+                <dxc:AxisY2D>
+                    <dxc:AxisY2D.WholeRange>
+                        <dxc:Range dxc:AxisY2D.AlwaysShowZeroLevel="False"/>
+                    </dxc:AxisY2D.WholeRange>
+                </dxc:AxisY2D>
+            </dxc:XYDiagram2D.AxisY>
+            <dxc:CandleStickSeries2D DisplayName="Financial Series">
+                <dxc:CandleStickSeries2D.Indicators>
+                    <dxc:SimpleMovingAverage LegendText="High Value Moving Average" PointsCount="3" ShowInLegend="True" ValueLevel="High"/>
+                </dxc:CandleStickSeries2D.Indicators>
+                <dxc:SeriesPoint Argument="1/7/2013" dxc:FinancialSeries2D.CloseValue="135.15" dxc:FinancialSeries2D.HighValue="160.12" dxc:FinancialSeries2D.LowValue="90.15" dxc:FinancialSeries2D.OpenValue="115.20"/>
+                <dxc:SeriesPoint Argument="1/8/2013" dxc:FinancialSeries2D.CloseValue="98.32" dxc:FinancialSeries2D.HighValue="172.21" dxc:FinancialSeries2D.LowValue="81.23" dxc:FinancialSeries2D.OpenValue="152.23"/>
+                <dxc:SeriesPoint Argument="1/9/2013" dxc:FinancialSeries2D.CloseValue="109.23" dxc:FinancialSeries2D.HighValue="132.22" dxc:FinancialSeries2D.LowValue="100.23" dxc:FinancialSeries2D.OpenValue="115.55"/>
+                <dxc:SeriesPoint Argument="1/10/2013" dxc:FinancialSeries2D.CloseValue="130.15" dxc:FinancialSeries2D.HighValue="142.12" dxc:FinancialSeries2D.LowValue="101.10" dxc:FinancialSeries2D.OpenValue="103.20"/>
+                <dxc:SeriesPoint Argument="1/11/2013" dxc:FinancialSeries2D.CloseValue="86.59" dxc:FinancialSeries2D.HighValue="112.32" dxc:FinancialSeries2D.LowValue="85.26" dxc:FinancialSeries2D.OpenValue="100.23"/>
+                <dxc:SeriesPoint Argument="1/14/2013" dxc:FinancialSeries2D.CloseValue="95.87" dxc:FinancialSeries2D.HighValue="115.26" dxc:FinancialSeries2D.LowValue="93.21" dxc:FinancialSeries2D.OpenValue="110.23"/>
+                <dxc:SeriesPoint Argument="1/15/2013" dxc:FinancialSeries2D.CloseValue="97.95" dxc:FinancialSeries2D.HighValue="117.32" dxc:FinancialSeries2D.LowValue="95.32" dxc:FinancialSeries2D.OpenValue="110.25"/>
+                <dxc:SeriesPoint Argument="1/16/2013" dxc:FinancialSeries2D.CloseValue="137.75" dxc:FinancialSeries2D.HighValue="155.55" dxc:FinancialSeries2D.LowValue="102.98" dxc:FinancialSeries2D.OpenValue="115.20"/>
+                <dxc:SeriesPoint Argument="1/17/2013" dxc:FinancialSeries2D.CloseValue="133.83" dxc:FinancialSeries2D.HighValue="139.27" dxc:FinancialSeries2D.LowValue="115.55" dxc:FinancialSeries2D.OpenValue="126.36"/>
+                <dxc:SeriesPoint Argument="1/18/2013" dxc:FinancialSeries2D.CloseValue="139.25" dxc:FinancialSeries2D.HighValue="163.70" dxc:FinancialSeries2D.LowValue="89.93" dxc:FinancialSeries2D.OpenValue="114.20"/>
+                <dxc:SeriesPoint Argument="1/21/2013" dxc:FinancialSeries2D.CloseValue="99.01" dxc:FinancialSeries2D.HighValue="103.32" dxc:FinancialSeries2D.LowValue="79.23" dxc:FinancialSeries2D.OpenValue="83.26"/>
+                <dxc:SeriesPoint Argument="1/22/2013" dxc:FinancialSeries2D.CloseValue="135.15" dxc:FinancialSeries2D.HighValue="160.12" dxc:FinancialSeries2D.LowValue="90.15" dxc:FinancialSeries2D.OpenValue="115.20"/>
+                <dxc:SeriesPoint Argument="1/23/2013" dxc:FinancialSeries2D.CloseValue="125.15" dxc:FinancialSeries2D.HighValue="137.17" dxc:FinancialSeries2D.LowValue="101.25" dxc:FinancialSeries2D.OpenValue="105.99"/>
+                <dxc:SeriesPoint Argument="1/24/2013" dxc:FinancialSeries2D.CloseValue="119.18" dxc:FinancialSeries2D.HighValue="135.25" dxc:FinancialSeries2D.LowValue="110.25" dxc:FinancialSeries2D.OpenValue="125.20"/>
+                <dxc:SeriesPoint Argument="1/25/2013" dxc:FinancialSeries2D.CloseValue="120.15" dxc:FinancialSeries2D.HighValue="123.36" dxc:FinancialSeries2D.LowValue="111.00" dxc:FinancialSeries2D.OpenValue="116.20"/>
+                <dxc:SeriesPoint Argument="1/28/2013" dxc:FinancialSeries2D.CloseValue="135.15" dxc:FinancialSeries2D.HighValue="188.74" dxc:FinancialSeries2D.LowValue="100.01" dxc:FinancialSeries2D.OpenValue="170.20"/>
+                <dxc:SeriesPoint Argument="1/29/2013" dxc:FinancialSeries2D.CloseValue="116.73" dxc:FinancialSeries2D.HighValue="120.00" dxc:FinancialSeries2D.LowValue="95.36" dxc:FinancialSeries2D.OpenValue="100.03"/>
+                <dxc:SeriesPoint Argument="1/30/2013" dxc:FinancialSeries2D.CloseValue="105.32" dxc:FinancialSeries2D.HighValue="123.39" dxc:FinancialSeries2D.LowValue="98.32" dxc:FinancialSeries2D.OpenValue="99.98"/>
+                <dxc:SeriesPoint Argument="1/31/2013" dxc:FinancialSeries2D.CloseValue="137.94" dxc:FinancialSeries2D.HighValue="145.37" dxc:FinancialSeries2D.LowValue="96.68" dxc:FinancialSeries2D.OpenValue="117.20"/>
+            </dxc:CandleStickSeries2D>
+        </dxc:XYDiagram2D>
+    </dxc:ChartControl>
+
+</Window>

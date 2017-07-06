@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+		<ProductVersion>8.0.30703</ProductVersion>
+		<SchemaVersion>2.0</SchemaVersion>
+		<ProjectGuid>$guid1$</ProjectGuid>
+		<OutputType>Library</OutputType>
+		<AppDesignerFolder>Properties</AppDesignerFolder>
+		<RootNamespace>$safeprojectname$</RootNamespace>
+		<AssemblyName>$safeprojectname$</AssemblyName>
+		<TargetFrameworkVersion>v$targetframeworkversion$</TargetFrameworkVersion>
+		<FileAlignment>512</FileAlignment>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<OutputPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\</OutputPath>
+		<DefineConstants>DEBUG;TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+    <StartAction>Program</StartAction>
+    <StartProgram>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\microstation.exe</StartProgram>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+ 		<Optimize>true</Optimize>
+		<OutputPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\</OutputPath>
+		<DefineConstants>TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+    <StartAction>Program</StartAction>
+    <StartProgram>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\microstation.exe</StartProgram>
+	</PropertyGroup>
+	<ItemGroup>
+		<Reference Include="System"/>
+		$if$ ($targetframeworkversion$ >= 3.5)
+		<Reference Include="System.Core"/>
+		<Reference Include="System.Xml.Linq"/>
+    <Reference Include="System.Drawing"/>
+    <Reference Include="System.Windows.Forms"/>
+    $endif$
+    $if$ ($targetframeworkversion$ >= 4.0)
+    <Reference Include="Microsoft.CSharp"/>
+ 		$endif$
+		<Reference Include="System.Data"/>
+		<Reference Include="System.Xml"/>
+    <Reference Include="System.Data.DataSetExtensions"/>    
+  </ItemGroup>
+	<ItemGroup>
+    <Compile Include="KeyinCommands.cs" />
+    <Compile Include="Program.cs" />
+		<Compile Include="Properties\AssemblyInfo.cs" />
+	</ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Commands.xml">
+      <LogicalName>CommandTable.xml</LogicalName>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+
+ </Project>

@@ -5,7 +5,8 @@
         #region command
         public static void Command(string unparsed)
         {
-            WindowHost.ShowWindow();
+            //WindowHost.ShowWindow();
+            System.Windows.Forms.MessageBox.Show("Test");
         }
         #endregion
     }
