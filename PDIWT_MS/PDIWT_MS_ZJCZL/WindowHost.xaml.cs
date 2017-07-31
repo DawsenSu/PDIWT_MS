@@ -21,6 +21,7 @@ namespace PDIWT_MS_ZJCZL
 
             m_wndHelper = new WPFInteropHelper(this);
             m_wndHelper.Attach(Program.Addin, true, "WPFWindowTest");
+
         }
 
         public static void ShowWindow()

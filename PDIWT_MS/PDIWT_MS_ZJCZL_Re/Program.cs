@@ -1,40 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
-
+using Bentley.MstnPlatformNET.InteropServices;
 using BCOM = Bentley.Interop.MicroStationDGN;
 using BD = Bentley.DgnPlatformNET;
 using BM = Bentley.MstnPlatformNET;
 
-namespace $safeprojectname$
+namespace PDIWT_MS_ZJCZL_Re
 {
 
-    [BM.AddIn(MdlTaskID = "$safeprojectname$")]
+    [BM.AddInAttribute(MdlTaskID = "PDIWT_MS_ZJCZL_Re")]
     internal sealed class Program : BM.AddIn
     {
-        public static Program Addin = null;
+        public static Program Addin;
         private Program(IntPtr mdlDesc) : base(mdlDesc)
         {
             Addin = this;
         }
         protected override int Run(string[] commandLine)
         {
-            ReloadEvent += new ReloadEventHandler($safeprojectname$_ReloadEvent);
-            UnloadedEvent += new UnloadedEventHandler($safeprojectname$_UnloadedEvent);
+            ReloadEvent += PDIWT_MS_ZJCZL_Re_ReloadEvent;
+            UnloadedEvent += PDIWT_MS_ZJCZL_Re_UnloadedEvent;
             return 0;
         }
         protected override void OnUnloading(UnloadingEventArgs eventArgs)
         {
             base.OnUnloading(eventArgs);
         }
-        private void $safeprojectname$_ReloadEvent(BM.AddIn sender, ReloadEventArgs eventArgs)
+        private void PDIWT_MS_ZJCZL_Re_ReloadEvent(BM.AddIn sender, ReloadEventArgs eventArgs)
         {
 
         }
-        private void $safeprojectname$_UnloadedEvent(BM.AddIn sender, UnloadedEventArgs eventArgs)
+        private void PDIWT_MS_ZJCZL_Re_UnloadedEvent(BM.AddIn sender, UnloadedEventArgs eventArgs)
         {
 
         }
@@ -47,7 +42,7 @@ namespace $safeprojectname$
         {
             get
             {
-                return BM.InteropServices.Utilities.ComApp;
+                return Utilities.ComApp;
             }
         }
         //private static ResourceManager resourceManager

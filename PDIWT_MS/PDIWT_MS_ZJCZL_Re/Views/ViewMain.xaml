@@ -1,9 +1,8 @@
 ﻿<UserControl
-    x:Class="PDIWT_MS_ZJCZL.Views.ViewCalculateByRay"
+    x:Class="PDIWT_MS_ZJCZL_Re.Views.ViewMain"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:PileModel="clr-namespace:PDIWT_MS_ZJCZL.Models.Piles"
-    xmlns:convertor="clr-namespace:PDIWT_MS_ZJCZL.Converter"
+    xmlns:ViewModels="clr-namespace:PDIWT_MS_ZJCZL_Re.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
@@ -12,72 +11,9 @@
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:templateselector="clr-namespace:PDIWT_MS_ZJCZL.DateTemplateSelector"
     d:DesignHeight="300"
     d:DesignWidth="500"
     mc:Ignorable="d">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary>
-                    <dxmvvm:ObjectToObjectConverter x:Key="PileTypeToStringConvertor">
-                        <dxmvvm:MapItem Source="Solid" Target="实心桩或桩端封闭" />
-                        <dxmvvm:MapItem Source="SteelAndPercastConcrete" Target="管桩" />
-                        <dxmvvm:MapItem Source="Filling" Target="灌注桩" />
-                        <dxmvvm:MapItem Source="Socketed" Target="嵌岩桩" />
-                        <dxmvvm:MapItem Source="PostgroutingFilling" Target="后注浆灌注桩" />
-                    </dxmvvm:ObjectToObjectConverter>
-                    <!--<templateselector:PileListTemplateSelector
-                        x:Key="pilelisttmpselector"
-                        FillingPileKey="FillingPileTemplate"
-                        PostgroutingFillingPileKey="PostgroutingFillingPileTemplate"
-                        SocketedPileKey="SocketedPileTemplate"
-                        SoildPileKey="SoildPileTemplate"
-                        SteelAndPercastConcretePileKey="SteelAndPercastConcretePileTemplate" />
-                    <templateselector:PileListTemplateSelector
-                        x:Key="piledetailtmpselector"
-                        FillingPileKey="FillingPileDetailTemplate"
-                        NullPileKey="nullPileDetailTemplate"
-                        PostgroutingFillingPileKey="PostgroutingFillingPileDetailTemplate"
-                        SocketedPileKey="SocketedPileDetailTemplate"
-                        SoildPileKey="SoildPileDetailTemplate"
-                        SteelAndPercastConcretePileKey="SteelAndPercastConcretePileDetailTemplate" />
-                    <templateselector:PileCrossSectionTemplateSelector
-                        x:Key="crosssectiontempselector"
-                        AnnualrTempKey="Annular"
-                        PolygonKey="Polygon"
-                        RoumdnessTempKey="Roundness"
-                        SquareTempKey="Square"
-                        SquareWithRoundHoleKey="SquareWithRoundHole" />
-                    <convertor:DoubleToStringF2Convertor x:Key="d2f2" />-->
-                    <Style TargetType="Separator">
-                        <Setter Property="BorderThickness" Value="2" />
-                        <Setter Property="LayoutTransform">
-                            <Setter.Value>
-                                <RotateTransform Angle="-90" />
-                            </Setter.Value>
-                        </Setter>
-                        <Setter Property="Margin" Value="5" />
-                    </Style>
-                    <Style TargetType="dxb:BarButtonItem">
-                        <Setter Property="RibbonStyle" Value="SmallWithText" />
-                    </Style>
-                    <!--<Style TargetType="dxlc:LayoutGroup">
-                        <Setter Property="HeaderTemplate">
-                            <Setter.Value>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Header,RelativeSource={RelativeSource AncestorType=dxlc:LayoutGroup,Mode=FindAncestor}}" Background="Beige"/>
-                                </DataTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>-->
-                </ResourceDictionary>
-                <ResourceDictionary Source="/PDIWT_MS_ZJCZL;component/Resources/Xaml/OtherResourceDictionary.xaml" />
-                <!--<ResourceDictionary Source="/PDIWT_MS_ZJCZL;component/Resources/Xaml/PileListResourceDictionary.xaml" />-->
-                <!--<ResourceDictionary Source="/PDIWT_MS_ZJCZL;component/Resources/Xaml/PileDetailInfoResourceDictionary.xaml" />-->
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
     <DockPanel>
         <dxb:BarContainerControl DockPanel.Dock="Top">
             <dxb:ToolBarControl
@@ -89,42 +25,42 @@
                 <dxb:BarButtonItem
                     Command="{Binding DrawPileLineFromFileCommand}"
                     Content="导入中心线"
-                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/Center Direction.ico"
+                    Glyph="/PDIWT_MS_ZJCZL_Re;component/Resources/Image/Center Direction.ico"
                     ToolTip="根据Excel文件绘制桩中心线" />
                 <dxb:BarButtonItem
                     Command="{Binding GetPilesFromLinesCommand}"
                     Content="提取列表"
-                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/External Link.ico"
+                    Glyph="/PDIWT_MS_ZJCZL_Re;component/Resources/Image/External Link.ico"
                     ToolTip="从模型的中心线中提取设计桩列表" />
                 <dxb:BarButtonItem
                     Command="{Binding AnalysisCommand}"
                     Content="统计分析"
-                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/Combo Chart.ico"
+                    Glyph="/PDIWT_MS_ZJCZL_Re;component/Resources/Image/Combo Chart.ico"
                     ToolTip="根据列表中的桩信息，得到设计承载力和桩端土层信息" />
                 <dxb:BarButtonItem
                     Command="{Binding GetPileLengthFromBearingForceCommand}"
                     Content="优化桩长"
-                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/calculation_24px.ico"
+                    Glyph="/PDIWT_MS_ZJCZL_Re;component/Resources/Image/calculation_24px.ico"
                     ToolTip="根据目标桩基承载力，反推最优桩长" />
                 <dxb:BarButtonItem
                     Command="{Binding CollisionTestCommand}"
                     Content="碰桩测试"
-                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/collision.ico"
+                    Glyph="/PDIWT_MS_ZJCZL_Re;component/Resources/Image/collision.ico"
                     ToolTip="进行碰桩测试，检查装之间的最小距离" />
                 <dxb:BarButtonItem
                     Command="{Binding ExportToExcelCommand}"
                     Content="输出计算表"
-                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/Microsoft Excel.ico"
+                    Glyph="/PDIWT_MS_ZJCZL_Re;component/Resources/Image/Microsoft Excel.ico"
                     ToolTip="将计算结果输出成桩基承载力计算书" />
                 <dxb:BarButtonItem
                     Command="{Binding DrawPilePositionCommand}"
                     Content="绘制桩位图"
-                    Glyph="/PDIWT_MS_ZJCZL;component/Resources/Image/Design.ico"
+                    Glyph="/PDIWT_MS_ZJCZL_Re;component/Resources/Image/Design.ico"
                     ToolTip="根据桩的信息，绘制桩位图，存放在[桩位图]模型中" />
                 <dxb:BarButtonItem Command="{Binding TestCommand}" Content="Test" />
             </dxb:ToolBarControl>
         </dxb:BarContainerControl>
-        <dxlc:LayoutControl VerticalAlignment="Stretch" Orientation="Vertical">
+        <!--<dxlc:LayoutControl VerticalAlignment="Stretch" Orientation="Vertical">
             <dxlc:LayoutGroup Orientation="Horizontal">
                 <dxlc:LayoutGroup
                     HorizontalAlignment="Left"
@@ -150,7 +86,6 @@
                         </ListBox.ItemContainerStyle>
                         <ListBox.Resources>
                             <SolidColorBrush x:Key="pilelistInfoHeadForground" Color="#FFF74848" />
-
                             <DataTemplate x:Key="Roundness">
                                 <StackPanel>
                                     <TextBlock Text="截面形式:圆形" />
@@ -186,7 +121,7 @@
                                     <TextBlock Text="截面形式:多边形" />
                                 </StackPanel>
                             </DataTemplate>
-                            <!--  桩身实心或桩端封闭  -->
+                            --><!--  桩身实心或桩端封闭  --><!--
                             <DataTemplate x:Key="SoildPileTemplate">
                                 <Border
                                     Width="150"
@@ -235,7 +170,7 @@
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
-                            <!--  钢管桩与预制混凝土管桩  -->
+                            --><!--  钢管桩与预制混凝土管桩  --><!--
                             <DataTemplate x:Key="SteelAndPercastConcretePileTemplate">
                                 <Border
                                     Width="150"
@@ -284,7 +219,7 @@
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
-                            <!--  灌注桩  -->
+                            --><!--  灌注桩  --><!--
                             <DataTemplate x:Key="FillingPileTemplate">
                                 <Border
                                     Width="150"
@@ -333,7 +268,7 @@
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
-                            <!--  后注浆灌注桩  -->
+                            --><!--  后注浆灌注桩  --><!--
                             <DataTemplate x:Key="PostgroutingFillingPileTemplate">
                                 <Border
                                     Width="150"
@@ -382,7 +317,7 @@
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
-                            <!--  嵌岩桩  -->
+                            --><!--  嵌岩桩  --><!--
                             <DataTemplate x:Key="SocketedPileTemplate">
                                 <Border
                                     Width="150"
@@ -437,10 +372,10 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Bottom"
                         Orientation="Horizontal">
-                        <!--<Button
+                        --><!--<Button
                             Margin="10,0"
                             Command="{Binding AddPileCommand}"
-                            Content="增加" />-->
+                            Content="增加" />--><!--
                         <Button
                             Margin="10,0"
                             Command="{Binding RemovePileCommand}"
@@ -453,7 +388,7 @@
                 </dxlc:LayoutGroup>
                 <UserControl Content="{Binding CurrentPile}" ContentTemplateSelector="{StaticResource piledetailtmpselector}">
                     <UserControl.Resources>
-                        <!--  未选择任何桩时的模板  -->
+                        --><!--  未选择任何桩时的模板  --><!--
                         <DataTemplate x:Key="nullPileDetailTemplate">
                             <Grid>
                                 <Grid.Background>
@@ -471,7 +406,7 @@
                                     TextWrapping="Wrap" />
                             </Grid>
                         </DataTemplate>
-                        <!--  桩身实心或桩端封闭的细节布局模板  -->
+                        --><!--  桩身实心或桩端封闭的细节布局模板  --><!--
                         <DataTemplate x:Key="SoildPileDetailTemplate">
                             <dxlc:LayoutGroup View="Group">
                                 <dxlc:LayoutGroup
@@ -538,7 +473,7 @@
                                 </dxlc:LayoutGroup>
                             </dxlc:LayoutGroup>
                         </DataTemplate>
-                        <!--  钢管桩与预制混凝土管桩的细节布局模板  -->
+                        --><!--  钢管桩与预制混凝土管桩的细节布局模板  --><!--
                         <DataTemplate x:Key="SteelAndPercastConcretePileDetailTemplate">
                             <dxlc:LayoutGroup View="Group">
                                 <dxlc:LayoutGroup
@@ -608,7 +543,7 @@
                                 </dxlc:LayoutGroup>
                             </dxlc:LayoutGroup>
                         </DataTemplate>
-                        <!--  灌注桩的细节布局模板  -->
+                        --><!--  灌注桩的细节布局模板  --><!--
                         <DataTemplate x:Key="FillingPileDetailTemplate">
                             <dxlc:LayoutGroup View="Group">
                                 <dxlc:LayoutGroup
@@ -683,7 +618,7 @@
                                 </dxlc:LayoutGroup>
                             </dxlc:LayoutGroup>
                         </DataTemplate>
-                        <!--  嵌岩桩的细节布局模板  -->
+                        --><!--  嵌岩桩的细节布局模板  --><!--
                         <DataTemplate x:Key="SocketedPileDetailTemplate">
                             <dxlc:LayoutGroup View="Group">
                                 <dxlc:LayoutGroup
@@ -842,7 +777,7 @@
                                 </dxlc:LayoutGroup>
                             </dxlc:LayoutGroup>
                         </DataTemplate>
-                        <!--  后注浆灌注桩的细节布局模板  -->
+                        --><!--  后注浆灌注桩的细节布局模板  --><!--
                         <DataTemplate x:Key="PostgroutingFillingPileDetailTemplate">
                             <dxlc:LayoutGroup View="Group">
                                 <dxlc:LayoutGroup
@@ -980,13 +915,15 @@
                             TextWrapping="WrapWithOverflow" />
                     </dxlc:LayoutItem>
                 </dxlc:LayoutGroup>
-                <!--<Button
+                --><!--<Button
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     Command="{Binding CalculateCommand}"
-                    Content="计算桩基承载力" />-->
+                    Content="计算桩基承载力" />--><!--
             </dxlc:LayoutGroup>
-        </dxlc:LayoutControl>
+        </dxlc:LayoutControl>-->
     </DockPanel>
-
 </UserControl>
+
+
+

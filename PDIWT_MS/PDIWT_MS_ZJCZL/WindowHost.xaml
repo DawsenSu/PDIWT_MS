@@ -7,6 +7,6 @@
     Title="桩基承载力"
     Width="400"
     Height="300">
-    <!--<Views:ViewZJCZL />-->
-    <Views:ViewCalculateByRay />
+    <Views:ViewZJCZL />
+    <!--<Views:ViewCalculateByRay />-->
 </Window>
