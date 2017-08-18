@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+
+  <RootKeyinTable ID="root">
+    <Keyword SubtableRef="BentleyTrain01" CommandClass="MacroCommand" CommandWord="BentleyTrain01">
+      <Options Required="true" />
+    </Keyword>
+  </RootKeyinTable>
+
+  <SubKeyinTables>
+    <KeyinTable ID="BentleyTrain01">
+      <Keyword CommandWord="Command"></Keyword>
+      <Keyword CommandWord="PrintDictionaryModel"></Keyword>
+      <Keyword SubtableRef="CreateElement" CommandClass="MacroCommand" CommandWord="CreateElement">
+        <Options Required="true"/>
+      </Keyword>
+    </KeyinTable>
+  </SubKeyinTables>
+
+  <SubKeyinTables>
+    <KeyinTable ID="CreateElement">
+      <Keyword CommandWord="Line"/>
+      <Keyword CommandWord="UniLine"/>
+    </KeyinTable>  
+  </SubKeyinTables>
+  
+  <KeyinHandlers>
+    <KeyinHandler Keyin="BentleyTrain01 Command" Function="BentleyTrain01.KeyinCommands.Command"/>
+    <KeyinHandler Keyin="BentleyTrain01 PrintDictionaryModel" Function="BentleyTrain01.KeyinCommands.PrintDictionaryModel"/>
+    <KeyinHandler Keyin="BentleyTrain01 CreateElement Line" Function="BentleyTrain01.KeyinCommands.CreateElementLine"/>
+    <KeyinHandler Keyin="BentleyTrain01 CreateElement UniLine" Function="BentleyTrain01.KeyinCommands.CreateElementUniLine"/>
+  </KeyinHandlers>
+</KeyinTree>

@@ -21,30 +21,6 @@ namespace PDIWT_MS_Tool
             WindowHost.SetArmor_WindowHost.ShowWindow();
         }
         #endregion
-        #region  EC Schema and instance
-        public static void CmdFindSchema(string unparsed)
-        {
-            Views.SchemaListView.ShowWindow();
-        }
-
-        public static void CmdImportSchema(string unparsed)
-        {
-            Views.CreateAndImportSchemaView.ShowWindow();
-        }
-        public static void CmdFindAllInstance(string unparsed)
-        {
-            Views.FindnstancesView.ShowWindow();
-        }
-        public static void CmdWirteInstance(string unparsed)
-        {
-            Models.WriteInstanceOnElementTool tool = new Models.WriteInstanceOnElementTool(0, 0);
-            tool.InstallNewInstance();
-        }
-        public static void CmdFindAllOnElement(string unparsed)
-        {
-            Models.FindInstancesOnElementTool.InstallNewInstance();
-        }
-        #endregion
         #region Measure
         public static void LinestringArea(string unparsed)
         {
@@ -153,6 +129,36 @@ namespace PDIWT_MS_Tool
                     }
                 }                
             }
+        }
+        #endregion
+        #region  EC Schema and instance
+        public static void CmdFindSchema(string unparsed)
+        {
+            Views.SchemaListView.ShowWindow();
+        }
+
+        public static void CmdImportSchema(string unparsed)
+        {
+            Views.CreateAndImportSchemaView.ShowWindow();
+        }
+        public static void CmdFindAllInstance(string unparsed)
+        {
+            Views.FindnstancesView.ShowWindow();
+        }
+        public static void CmdWirteInstance(string unparsed)
+        {
+            Models.WriteInstanceOnElementTool tool = new Models.WriteInstanceOnElementTool(0, 0);
+            tool.InstallNewInstance();
+        }
+        public static void CmdFindAllOnElement(string unparsed)
+        {
+            Models.FindInstancesOnElementTool.InstallNewInstance();
+        }
+        #endregion
+        #region Level export
+        public static void ExportRGBColorTable(string unparsed)
+        {
+            Views.LevelExportView.ShowWindow();
         }
         #endregion
     }

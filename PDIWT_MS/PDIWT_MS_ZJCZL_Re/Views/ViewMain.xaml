@@ -121,7 +121,9 @@
                                     <TextBlock Text="截面形式:多边形" />
                                 </StackPanel>
                             </DataTemplate>
-                            --><!--  桩身实心或桩端封闭  --><!--
+        -->
+        <!--  桩身实心或桩端封闭  -->
+        <!--
                             <DataTemplate x:Key="SoildPileTemplate">
                                 <Border
                                     Width="150"
@@ -170,7 +172,9 @@
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
-                            --><!--  钢管桩与预制混凝土管桩  --><!--
+        -->
+        <!--  钢管桩与预制混凝土管桩  -->
+        <!--
                             <DataTemplate x:Key="SteelAndPercastConcretePileTemplate">
                                 <Border
                                     Width="150"
@@ -219,7 +223,9 @@
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
-                            --><!--  灌注桩  --><!--
+        -->
+        <!--  灌注桩  -->
+        <!--
                             <DataTemplate x:Key="FillingPileTemplate">
                                 <Border
                                     Width="150"
@@ -268,7 +274,9 @@
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
-                            --><!--  后注浆灌注桩  --><!--
+        -->
+        <!--  后注浆灌注桩  -->
+        <!--
                             <DataTemplate x:Key="PostgroutingFillingPileTemplate">
                                 <Border
                                     Width="150"
@@ -317,7 +325,9 @@
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
-                            --><!--  嵌岩桩  --><!--
+        -->
+        <!--  嵌岩桩  -->
+        <!--
                             <DataTemplate x:Key="SocketedPileTemplate">
                                 <Border
                                     Width="150"
@@ -372,10 +382,12 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Bottom"
                         Orientation="Horizontal">
-                        --><!--<Button
+        -->
+        <!--<Button
                             Margin="10,0"
                             Command="{Binding AddPileCommand}"
-                            Content="增加" />--><!--
+                            Content="增加" />-->
+        <!--
                         <Button
                             Margin="10,0"
                             Command="{Binding RemovePileCommand}"
@@ -388,7 +400,9 @@
                 </dxlc:LayoutGroup>
                 <UserControl Content="{Binding CurrentPile}" ContentTemplateSelector="{StaticResource piledetailtmpselector}">
                     <UserControl.Resources>
-                        --><!--  未选择任何桩时的模板  --><!--
+        -->
+        <!--  未选择任何桩时的模板  -->
+        <!--
                         <DataTemplate x:Key="nullPileDetailTemplate">
                             <Grid>
                                 <Grid.Background>
@@ -406,7 +420,9 @@
                                     TextWrapping="Wrap" />
                             </Grid>
                         </DataTemplate>
-                        --><!--  桩身实心或桩端封闭的细节布局模板  --><!--
+        -->
+        <!--  桩身实心或桩端封闭的细节布局模板  -->
+        <!--
                         <DataTemplate x:Key="SoildPileDetailTemplate">
                             <dxlc:LayoutGroup View="Group">
                                 <dxlc:LayoutGroup
@@ -473,7 +489,9 @@
                                 </dxlc:LayoutGroup>
                             </dxlc:LayoutGroup>
                         </DataTemplate>
-                        --><!--  钢管桩与预制混凝土管桩的细节布局模板  --><!--
+        -->
+        <!--  钢管桩与预制混凝土管桩的细节布局模板  -->
+        <!--
                         <DataTemplate x:Key="SteelAndPercastConcretePileDetailTemplate">
                             <dxlc:LayoutGroup View="Group">
                                 <dxlc:LayoutGroup
@@ -543,7 +561,9 @@
                                 </dxlc:LayoutGroup>
                             </dxlc:LayoutGroup>
                         </DataTemplate>
-                        --><!--  灌注桩的细节布局模板  --><!--
+        -->
+        <!--  灌注桩的细节布局模板  -->
+        <!--
                         <DataTemplate x:Key="FillingPileDetailTemplate">
                             <dxlc:LayoutGroup View="Group">
                                 <dxlc:LayoutGroup
@@ -618,7 +638,9 @@
                                 </dxlc:LayoutGroup>
                             </dxlc:LayoutGroup>
                         </DataTemplate>
-                        --><!--  嵌岩桩的细节布局模板  --><!--
+        -->
+        <!--  嵌岩桩的细节布局模板  -->
+        <!--
                         <DataTemplate x:Key="SocketedPileDetailTemplate">
                             <dxlc:LayoutGroup View="Group">
                                 <dxlc:LayoutGroup
@@ -777,7 +799,9 @@
                                 </dxlc:LayoutGroup>
                             </dxlc:LayoutGroup>
                         </DataTemplate>
-                        --><!--  后注浆灌注桩的细节布局模板  --><!--
+        -->
+        <!--  后注浆灌注桩的细节布局模板  -->
+        <!--
                         <DataTemplate x:Key="PostgroutingFillingPileDetailTemplate">
                             <dxlc:LayoutGroup View="Group">
                                 <dxlc:LayoutGroup
@@ -915,11 +939,13 @@
                             TextWrapping="WrapWithOverflow" />
                     </dxlc:LayoutItem>
                 </dxlc:LayoutGroup>
-                --><!--<Button
+        -->
+        <!--<Button
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     Command="{Binding CalculateCommand}"
-                    Content="计算桩基承载力" />--><!--
+                    Content="计算桩基承载力" />-->
+        <!--
             </dxlc:LayoutGroup>
         </dxlc:LayoutControl>-->
     </DockPanel>

@@ -1,0 +1,54 @@
+﻿<Window
+    x:Class="PDIWT_MS_Tool.Views.LevelExportView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ViewModels="clr-namespace:PDIWT_MS_Tool.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="输出图层ARGB值"
+    Width="310"
+    Height="130"
+    ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="MaxWidth" Value="120" />
+        </Style>
+    </Window.Resources>
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0">仅输出使用图层：</TextBlock>
+        <CheckBox
+            Grid.Row="0"
+            Grid.Column="1"
+            IsChecked="{Binding IsOnlyUsedLevel, Mode=TwoWay}" />
+        <TextBlock Grid.Row="1" Grid.Column="0">包含引用文件中的图层：</TextBlock>
+        <CheckBox
+            Grid.Row="1"
+            Grid.Column="1"
+            IsChecked="{Binding IsIncludeRefLevel, Mode=TwoWay}" />
+        <Button
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Command="{Binding ExportToExcelCommand}"
+            Content="输出至Excel文件" />
+        <!--<Button
+            Grid.Row="2"
+            Grid.Column="2"
+            Command="{Binding TestCommand}"
+            Content="Test"/>-->
+    </Grid>
+</Window>

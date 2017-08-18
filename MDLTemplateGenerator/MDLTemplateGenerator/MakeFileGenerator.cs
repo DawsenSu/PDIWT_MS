@@ -188,6 +188,7 @@ namespace MDLTemplateGenerator
             sb.Append(LinkLibContent);
         }
 
+        //Todo: 需要将cpp的依赖头文件解析，并加入到依赖列表中
         private void GenerateCompileDependence(IEnumerable<string> cppFileName)
         {
             StringBuilder compileContentBuilder = new StringBuilder();
@@ -308,7 +309,7 @@ namespace MDLTemplateGenerator
             GetRDependenceFiles(projectPath + appName + ".r", out cmdRdepList);
             GenerateCmdRescourceAndHeadFile(cmdRdepList);
 
-            if (rscFileNameList.Contains("chinese\\" + appName + "msg"))
+            if (rscFileNameList.Contains(appName + "msg"))
             {
                 List<string> msgRdepList;
                 GetRDependenceFiles(projectPath + "chinese\\" + appName + "msg.r", out msgRdepList);

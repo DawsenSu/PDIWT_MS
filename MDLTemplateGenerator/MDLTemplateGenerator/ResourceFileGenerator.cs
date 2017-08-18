@@ -65,11 +65,11 @@ namespace MDLTemplateGenerator
                 "#define CT_PDIWT\t2\n\n" +
                 "CommandTable CT_MAIN =\n" +
                 "{\n" +
-                "\t\t{ 1,\tCT_PDIWT,\tPLACEMENT,\tREQ,\t\"PDIWT\"},\n" +
+                "\t{ 1,\tCT_PDIWT,\tPLACEMENT,\tREQ,\t\"PDIWT\"},\n" +
                 "};\n\n" +
                 "CommandTable CT_PDIWT =\n" +
                 "{\n" +
-                $"\t\t{{ 1,\tCT_NONE,\tINHERIT,\tNONE,\t\"{VCPrjName.ToUpper()}\"}},\n" +
+                $"\t{{ 1,\tCT_NONE,\tINHERIT,\tNONE,\t\"{VCPrjName.ToUpper()}\"}},\n" +
                 "};\n";
             File.WriteAllText(VCPrjDir + VCPrjName + "cmd.r",cmdRscContent);
         }

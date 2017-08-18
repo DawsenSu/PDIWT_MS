@@ -21,7 +21,7 @@ namespace MDLTemplateGenerator
             VCPrjDir = Path.GetDirectoryName(vcprjPath) + "\\";
             xdoc = XDocument.Load(vcprjPath);
             root = xdoc.Root;
-            xNs = root.GetDefaultNamespace();
+            xNs = root?.GetDefaultNamespace();
         }
 
         void AddFiles()
