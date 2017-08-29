@@ -1,4 +1,4 @@
-﻿<UserControl
+﻿<Window
     x:Class="PDIWT_MS_CZ.Views.ViewCZ"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -12,8 +12,10 @@
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     xmlns:dxnav="http://schemas.devexpress.com/winfx/2008/xaml/navigation"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
-    <UserControl.Resources>
+    Title="闸首参数化"
+    Width="600"
+    Height="500">
+    <Window.Resources>
         <Style TargetType="{x:Type Expander}">
             <Setter Property="Foreground" Value="#FF4D6082" />
             <Setter Property="FontSize" Value="14" />
@@ -57,16 +59,13 @@
         <dxmvvm:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConvertor" />
         <dx:EnumToVisibilityConverter x:Key="enumToVisiblityConverter" />
         <dx:EnumToBoolConverter x:Key="enumToBoolConverter" />
-    </UserControl.Resources>
+    </Window.Resources>
     <StackPanel>
         <dxb:BarContainerControl ContainerType="Top">
-            <dxb:ToolBarControl
+            <dxb:MainMenuControl
                 AllowCustomizationMenu="False"
                 AllowHide="False"
-                AllowQuickCustomization="False"
-                BarItemDisplayMode="ContentAndGlyph"
-                BarItemHorizontalIndent="10"
-                UseWholeRow="True">
+                BarItemDisplayMode="ContentAndGlyph">
                 <dxb:BarButtonItem
                     Command="{Binding VertifyParamCommand}"
                     Content="验证参数"
@@ -95,7 +94,7 @@
                     Glyph="/PDIWT_MS_CZ;component/Image/Icons/Export.ico" />
                 <dxb:BarItemSeparator />
                 <!--<dxb:BarButtonItem Command="{Binding TestCommand}" Content="Test" />-->
-            </dxb:ToolBarControl>
+            </dxb:MainMenuControl>
         </dxb:BarContainerControl>
         <BulletDecorator Background="#FFD6DBE9">
             <BulletDecorator.Bullet>
@@ -190,7 +189,7 @@
                                             <dxe:TextEdit
                                                 Background="LightGray"
                                                 IsReadOnly="True"
-                                                Text="{DXBinding GetBDun_A(),
+                                                Text="{DXBinding 'GetBDun_A()',
                                                                  Mode=OneWay}" />
                                         </dxlc:LayoutItem>
                                         <dxlc:LayoutItem Label="b=">
@@ -203,7 +202,7 @@
                                             <dxe:TextEdit
                                                 Background="LightGray"
                                                 IsReadOnly="True"
-                                                Text="{DXBinding GetBDun_D(),
+                                                Text="{DXBinding 'GetBDun_D()',
                                                                  Mode=OneWay}" />
                                         </dxlc:LayoutItem>
                                         <dxlc:LayoutItem Label="e=">
@@ -248,7 +247,7 @@
                                 <dxe:TextEdit
                                     Background="LightGray"
                                     IsReadOnly="True"
-                                    Text="{DXBinding GetMK_A(),
+                                    Text="{DXBinding 'GetMK_A()',
                                                      Mode=OneWay}" />
                             </dxlc:LayoutItem>
                             <dxlc:LayoutItem Label="b=">
@@ -261,7 +260,7 @@
                                 <dxe:TextEdit
                                     Background="LightGray"
                                     IsReadOnly="True"
-                                    Text="{DXBinding GetMK_D(),
+                                    Text="{DXBinding 'GetMK_D()',
                                                      Mode=OneWay}" />
                             </dxlc:LayoutItem>
                             <dxlc:LayoutItem Label="e=">
@@ -572,4 +571,4 @@
         </ScrollViewer>
     </StackPanel>
 
-</UserControl>
+</Window>

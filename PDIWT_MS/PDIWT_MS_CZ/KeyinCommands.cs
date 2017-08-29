@@ -16,7 +16,7 @@ namespace PDIWT_MS_CZ
         #region (PDIWT_MS CZ) command
         public static void DrawAll(string unparsed)
         {
-            WindowHost.ShowWindow();
+            Views.ViewCZ.ShowWindow();
         }
         #endregion
     }

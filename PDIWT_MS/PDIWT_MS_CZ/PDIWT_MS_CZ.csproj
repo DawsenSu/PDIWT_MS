@@ -210,9 +210,6 @@
     <Compile Include="Views\ViewCZ.xaml.cs">
       <DependentUpon>ViewCZ.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WindowHost.xaml.cs">
-      <DependentUpon>WindowHost.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Commands.xml">
@@ -238,10 +235,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ViewCZ.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WindowHost.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

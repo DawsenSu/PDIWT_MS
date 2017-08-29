@@ -174,14 +174,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="KeyinCommands.cs" />
+    <Compile Include="Models\DrawLineElementFromExcelFile.cs" />
+    <Compile Include="Models\EnumClasses.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\ViewMainViewModel.cs" />
-    <Compile Include="Views\ViewMain.xaml.cs">
-      <DependentUpon>ViewMain.xaml</DependentUpon>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="WindowHost.xaml.cs">
-      <DependentUpon>WindowHost.xaml</DependentUpon>
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -190,22 +194,26 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\ViewMain.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WindowHost.xaml">
+    <Page Include="Views\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Folder Include="Interface\" />
+    <Folder Include="Models\Factory\" />
+    <Folder Include="Models\Piles\CrossSection\" />
+    <Folder Include="Models\Soil\" />
+    <Folder Include="Resources\Xaml\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Image\Bobbin.ico" />

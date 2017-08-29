@@ -4,7 +4,7 @@
     {
         public static void Command(string unparsed)
         {
-            WindowHost.ShowWindow();
+            Views.MainView.ShowWindow();
         }
     }
 }

@@ -1,0 +1,126 @@
+﻿<Window
+    x:Class="PDIWT_MS_Tool.Views.CellFastPutView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ViewModels="clr-namespace:PDIWT_MS_Tool.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="快速布置单元"
+    Width="500"
+    Height="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <dxb:BarContainerControl Grid.Row="0" ContainerType="Top">
+            <dxb:MainMenuControl
+                AllowCustomizationMenu="False"
+                AllowHide="False"
+                BarItemDisplayMode="ContentAndGlyph">
+                <dxb:BarButtonItem
+                    Command="{Binding OpenCellLibCommand}"
+                    Content="载入单元库库文件"
+                    Glyph="{dx:DXImageOffice2013 Image=Open_16x16.png}" />
+                <dxb:BarButtonItem
+                    Command="{Binding ImportFromFileCommand}"
+                    Content="从表格导入放置信息"
+                    Glyph="/PDIWT_MS_Tool;component/Resources/Images/Microsoft Excel.ico" />
+                <dxb:BarButtonItem
+                    Command="{Binding DeleteAllRowsCommand}"
+                    Content="删除所有行"
+                    Glyph="{dx:DXImageOffice2013 Image=DeleteList2_16x16.png}" />
+                <dxb:BarButtonItem
+                    Command="{Binding FastPutCommand}"
+                    Content="执行布置"
+                    Glyph="{dx:DXImage Image=Play_16x16.png}" />
+            </dxb:MainMenuControl>
+        </dxb:BarContainerControl>
+        <DockPanel Grid.Row="1" LastChildFill="True">
+
+            <dxg:GridControl
+                VerticalAlignment="Stretch"
+                AutoGenerateColumns="AddNew"
+                EnableSmartColumnsGeneration="True"
+                IsEnabled="{DXBinding 'CellNameTypes.Count',
+                                      Mode=OneWay}"
+                ItemsSource="{Binding ElementProps, Mode=TwoWay, NotifyOnSourceUpdated=True}"
+                SelectionMode="Cell">
+                <dxg:GridControl.View>
+                    <dxg:TableView
+                        AllowPerPixelScrolling="True"
+                        AutoWidth="True"
+                        NewItemRowPosition="Bottom"
+                        ShowGroupPanel="False">
+                        <dxg:TableView.RowCellMenuCustomizations>
+                            <dxb:BarButtonItem
+                                Command="{x:Static dxg:GridCommands.DeleteFocusedRow}"
+                                Content="删除当前行"
+                                Glyph="{dx:DXImage Image=Delete_16x16.png}" />
+                        </dxg:TableView.RowCellMenuCustomizations>
+                    </dxg:TableView>
+                </dxg:GridControl.View>
+                <dxg:GridColumn
+                    FieldName="CellName"
+                    Header="单元名称"
+                    HorizontalHeaderContentAlignment="Center">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings ItemsSource="{Binding CellNameTypes, NotifyOnSourceUpdated=True}" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn
+                    FieldName="X"
+                    Header="放置点X坐标"
+                    HorizontalHeaderContentAlignment="Center" />
+                <dxg:GridColumn
+                    FieldName="Y"
+                    Header="放置点Y坐标"
+                    HorizontalHeaderContentAlignment="Center" />
+                <dxg:GridColumn
+                    FieldName="Z"
+                    Header="放置点Z坐标"
+                    HorizontalHeaderContentAlignment="Center" />
+                <dxg:GridColumn
+                    FieldName="AngelX"
+                    Header="对X轴转角°"
+                    HorizontalHeaderContentAlignment="Center" />
+                <dxg:GridColumn
+                    FieldName="AngelY"
+                    Header="对Y轴转角°"
+                    HorizontalHeaderContentAlignment="Center" />
+                <dxg:GridColumn
+                    FieldName="AngelZ"
+                    Header="对Z轴转角°"
+                    HorizontalHeaderContentAlignment="Center" />
+            </dxg:GridControl>
+
+        </DockPanel>
+        <dxb:BarContainerControl Grid.Row="2" ContainerType="Bottom">
+            <dxb:StatusBarControl AllowCustomizationMenu="False" Caption="Status Bar">
+                <dxb:BarStaticItem Content="{Binding Path=Prompt}" />
+                <dxb:BarStaticItem Content="{Binding Path=Status}" />
+                <dxb:BarEditItem
+                    Alignment="Far"
+                    Content="完成度："
+                    EditValue="{Binding PutCellProgress}"
+                    EditWidth="100"
+                    IsVisible="True">
+                    <dxb:BarEditItem.EditSettings>
+                        <dxe:ProgressBarEditSettings
+                            ContentDisplayMode="None"
+                            IsPercent="True"
+                            Maximum="{DXBinding 'ElementProps.Count',
+                                                Mode=OneWay}" />
+                    </dxb:BarEditItem.EditSettings>
+                </dxb:BarEditItem>
+            </dxb:StatusBarControl>
+        </dxb:BarContainerControl>
+    </Grid>
+</Window>

@@ -6,9 +6,12 @@ using Bentley.DgnPlatformNET;
 using DevExpress.Mvvm.DataAnnotations;
 using DevExpress.Mvvm;
 
+using PDIWT_MS_ZJCZL_Re.Properties;
+using PDIWT_MS_ZJCZL_Re.Models;
 namespace PDIWT_MS_ZJCZL_Re.ViewModels
 {
-    public class ViewMainViewModel : ViewModelBase
+
+    public class MainViewModel : ViewModelBase
     {
         //public ObservableCollection<PileBase> Piles
         //{
@@ -21,14 +24,14 @@ namespace PDIWT_MS_ZJCZL_Re.ViewModels
         {
             OpenFileDialog ofd = new OpenFileDialog
             {
-                Filter = "Excel 2007 - 2016|*.xlsx",
-                Title = "选择输入文件"
+                Filter = Resources.ExcelFileFilter,
+                Title = Resources.OpenFileDlgTitle
             };
             if (ofd.ShowDialog() != DialogResult.OK) return;
             try
             {
-                //var dgnlinefromexcel = new DgnLineFromExcelFile(new System.IO.FileInfo(ofd.FileName));
-                //dgnlinefromexcel.DrawLines();
+                var dgnlinefromexcel = new DrawLineElementFromExcelFile(ofd.FileName);
+                dgnlinefromexcel.DrawLines();
                 MessageBox.Show("绘制完成！", "完成", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception e)

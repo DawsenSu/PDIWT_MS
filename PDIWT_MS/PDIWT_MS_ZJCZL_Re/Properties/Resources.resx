@@ -117,10 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="PromptHeader" xml:space="preserve">
-    <value>提示：</value>
+  <data name="ExcelFileFilter" xml:space="preserve">
+    <value>Excel 2007 - 2017文件|*.xlsx</value>
   </data>
-  <data name="StatusHeader" xml:space="preserve">
-    <value>状态：</value>
+  <data name="OpenFileDlgTitle" xml:space="preserve">
+    <value>选择输入文件</value>
+  </data>
+  <data name="PileAxis" xml:space="preserve">
+    <value>桩轴中心线</value>
   </data>
 </root>

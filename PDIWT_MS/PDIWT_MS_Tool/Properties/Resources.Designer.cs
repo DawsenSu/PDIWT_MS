@@ -61,11 +61,110 @@ namespace PDIWT_MS_Tool.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Cell Library (*.cell) | *.cel|Dgn File(*.dng) | *.dgn|All Files (*.*) | *.* 的本地化字符串。
+        /// </summary>
+        internal static string CellLibraryFilter {
+            get {
+                return ResourceManager.GetString("CellLibraryFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 失败 的本地化字符串。
+        /// </summary>
+        internal static string ErrorString {
+            get {
+                return ResourceManager.GetString("ErrorString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Excel 2007-2017文件(*.xlsx)|*.xlsx 的本地化字符串。
         /// </summary>
         internal static string ExcelFilter {
             get {
                 return ResourceManager.GetString("ExcelFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 提示： 的本地化字符串。
+        /// </summary>
+        internal static string PromptHeader {
+            get {
+                return ResourceManager.GetString("PromptHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 选择要放置的四边平面(或右键退出) 的本地化字符串。
+        /// </summary>
+        internal static string PutArmorToolChoosePlan {
+            get {
+                return ResourceManager.GetString("PutArmorToolChoosePlan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 确认放置 的本地化字符串。
+        /// </summary>
+        internal static string PutArmorToolConfirm {
+            get {
+                return ResourceManager.GetString("PutArmorToolConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 按平面放置单元 的本地化字符串。
+        /// </summary>
+        internal static string PutArmorToolName {
+            get {
+                return ResourceManager.GetString("PutArmorToolName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 所选元素类型不是&lt;Shape&gt; 的本地化字符串。
+        /// </summary>
+        internal static string PutArmorToolRejectReason {
+            get {
+                return ResourceManager.GetString("PutArmorToolRejectReason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 所选Shape不是平面Shape 的本地化字符串。
+        /// </summary>
+        internal static string PutArmorToolRejectReason2 {
+            get {
+                return ResourceManager.GetString("PutArmorToolRejectReason2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 所选平面shape不是矩形 的本地化字符串。
+        /// </summary>
+        internal static string PutArmorToolRejectReason3 {
+            get {
+                return ResourceManager.GetString("PutArmorToolRejectReason3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 状态： 的本地化字符串。
+        /// </summary>
+        internal static string StatusHeader {
+            get {
+                return ResourceManager.GetString("StatusHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 成功 的本地化字符串。
+        /// </summary>
+        internal static string SuccessString {
+            get {
+                return ResourceManager.GetString("SuccessString", resourceCulture);
             }
         }
     }

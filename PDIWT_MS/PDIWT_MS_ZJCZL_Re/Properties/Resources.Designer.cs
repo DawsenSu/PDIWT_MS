@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PDIWT_MS.Properties {
+namespace PDIWT_MS_ZJCZL_Re.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace PDIWT_MS.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PDIWT_MS.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PDIWT_MS_ZJCZL_Re.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,29 @@ namespace PDIWT_MS.Properties {
         }
         
         /// <summary>
-        ///   查找类似 提示： 的本地化字符串。
+        ///   查找类似 Excel 2007 - 2017文件|*.xlsx 的本地化字符串。
         /// </summary>
-        internal static string PromptHeader {
+        internal static string ExcelFileFilter {
             get {
-                return ResourceManager.GetString("PromptHeader", resourceCulture);
+                return ResourceManager.GetString("ExcelFileFilter", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 状态： 的本地化字符串。
+        ///   查找类似 选择输入文件 的本地化字符串。
         /// </summary>
-        internal static string StatusHeader {
+        internal static string OpenFileDlgTitle {
             get {
-                return ResourceManager.GetString("StatusHeader", resourceCulture);
+                return ResourceManager.GetString("OpenFileDlgTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 桩轴中心线 的本地化字符串。
+        /// </summary>
+        internal static string PileAxis {
+            get {
+                return ResourceManager.GetString("PileAxis", resourceCulture);
             }
         }
     }

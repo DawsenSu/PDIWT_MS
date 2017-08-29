@@ -11,25 +11,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DevExpress.Xpf.Grid;
 using BMWPF = Bentley.MstnPlatformNET.WPF;
 
-namespace PDIWT_MS_CZ.Views
+namespace PDIWT_MS_Tool.Views
 {
     /// <summary>
-    /// Interaction logic for ViewCZ.xaml
+    /// Interaction logic for SetArmor.xaml
     /// </summary>
-    public partial class ViewCZ : Window
+    public partial class CellsArmorPutView : Window
     {
-        private ViewCZ()
+        private CellsArmorPutView()
         {
             InitializeComponent();
-            this.DataContext = new ViewModels.ViewCZViewModel();
+            this.DataContext = new ViewModels.CellsArmorPutViewModel();
             m_wpfHelper = new BMWPF.WPFInteropHelper(this);
-            m_wpfHelper.Attach(Program.Addin, true, "ViewCZ");
+            m_wpfHelper.Attach(Program.Addin, true, "CellsArmorPutView");
         }
 
-        static ViewCZ m_windowhost;
+        static CellsArmorPutView m_windowhost;
         BMWPF.WPFInteropHelper m_wpfHelper;
 
         public static void ShowWindow()
@@ -39,7 +38,7 @@ namespace PDIWT_MS_CZ.Views
                 m_windowhost.Focus();
                 return;
             }
-            m_windowhost = new ViewCZ();
+            m_windowhost = new CellsArmorPutView();
             m_windowhost.Show();
         }
 
@@ -50,14 +49,6 @@ namespace PDIWT_MS_CZ.Views
             m_wpfHelper.Detach();
             m_wpfHelper.Dispose();
             m_windowhost = null;
-        }
-
-        private void TableView_InitNewRow(object sender, InitNewRowEventArgs e)
-        {
-            if(gridcontrol_gs.VisibleRowCount%2 == 0)
-                gridcontrol_gs.SetCellValue(e.RowHandle, "IntervalType", "格栅间距");
-            else
-                gridcontrol_gs.SetCellValue(e.RowHandle, "IntervalType", "格栅宽度");
         }
 
     }

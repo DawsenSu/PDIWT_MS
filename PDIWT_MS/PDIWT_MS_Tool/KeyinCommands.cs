@@ -15,12 +15,6 @@ namespace PDIWT_MS_Tool
 {
     class KeyinCommands
     {
-        #region Armor command
-        public static void SetArmorCommand(string unparsed)
-        {
-            WindowHost.SetArmor_WindowHost.ShowWindow();
-        }
-        #endregion
         #region Measure
         public static void LinestringArea(string unparsed)
         {
@@ -159,6 +153,26 @@ namespace PDIWT_MS_Tool
         public static void ExportRGBColorTable(string unparsed)
         {
             Views.LevelExportView.ShowWindow();
+        }
+        #endregion
+
+        #region Cells
+        public static void CellsFastPut(string unparsed)
+        {
+            Views.CellFastPutView.ShowWindow();
+        }
+
+        public static void CellsArmorPut(string unparsed)
+        {
+            Views.CellsArmorPutView.ShowWindow();
+        }
+        #endregion
+
+        #region Models
+
+        public static void ModelsCreateFromExcel(string unparsed)
+        {
+            Views.ModelCreatorView.ShowWindow();
         }
         #endregion
     }

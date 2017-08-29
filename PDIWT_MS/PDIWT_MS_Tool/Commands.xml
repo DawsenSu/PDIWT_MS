@@ -9,9 +9,6 @@
 
   <SubKeyinTables>
     <KeyinTable ID="PDIWT_MS_Tool">
-      <Keyword SubtableRef="Armor" CommandClass="MacroCommand" CommandWord="Armor">
-        <Options Required="true" />
-      </Keyword>
       <Keyword SubtableRef="Measure" CommandClass="MacroCommand" CommandWord="AREA">
         <Options Required="true" />
       </Keyword>
@@ -24,47 +21,48 @@
       <Keyword SubtableRef="LevelCmd" CommandClass="MacroCommand" CommandWord ="LEVEL">
         <Options Required="true"/>
       </Keyword>
+      <Keyword SubtableRef="CellCmd" CommandClass="MacroCommand" CommandWord ="CELLS">
+        <Options Required="true"/>
+      </Keyword>
+      <Keyword SubtableRef="ModelCmd" CommandClass="MacroCommand" CommandWord ="MODELS">
+        <Options Required="true"/>
+      </Keyword>
     </KeyinTable>
   </SubKeyinTables>
 
 
-  <SubKeyinTables>
-    <KeyinTable ID="Armor">
-      <Keyword CommandWord="Command"></Keyword>
-    </KeyinTable>
-  </SubKeyinTables>
-  
   <SubKeyinTables>
     <KeyinTable ID="Measure">
       <Keyword CommandWord="LINESTRINGAREA"/>
       <Keyword CommandWord="UNITE"/>
     </KeyinTable>
-  </SubKeyinTables>
 
-  <SubKeyinTables>
     <KeyinTable ID="SchemaCmd">
       <Keyword CommandWord="FIND"/>
       <Keyword CommandWord="IMPORT"/>
     </KeyinTable>
-  </SubKeyinTables>
 
-  <SubKeyinTables>
     <KeyinTable ID="InstanceCmd">
       <Keyword CommandWord="FINDALL"/>
       <Keyword CommandWord="WRITE"/>
       <Keyword CommandWord="FINDALLONELEMENT"/>
     </KeyinTable>
-  </SubKeyinTables>
 
-  <SubKeyinTables>
     <KeyinTable ID="LevelCmd">
       <Keyword CommandWord="EXPORTRGBCOLORTABLE"/>
+    </KeyinTable>
+
+    <KeyinTable ID="CellCmd">
+      <Keyword CommandWord="FASTPUT"/>
+      <Keyword CommandWord="ARMORPUT"/>
+    </KeyinTable>
+
+    <KeyinTable ID="ModelCmd">
+      <Keyword CommandWord="CREATEFROMEXCEL"/>
     </KeyinTable>
   </SubKeyinTables>
   
   <KeyinHandlers>
-    <!--ARMOR-->
-    <KeyinHandler Keyin="PDIWT_MS_Tool Armor Command" Function="PDIWT_MS_Tool.KeyinCommands.SetArmorCommand"/>
     <!--MEASURE-->
     <KeyinHandler Keyin="PDIWT_MS_Tool AREA LINESTRINGAREA" Function="PDIWT_MS_Tool.KeyinCommands.LinestringArea"/>
     <KeyinHandler Keyin="PDIWT_MS_Tool AREA UNITE" Function="PDIWT_MS_Tool.KeyinCommands.LinestringUnite"/>
@@ -77,5 +75,10 @@
     <KeyinHandler Keyin="PDIWT_MS_Tool INSTANCE FINDALLONELEMENT" Function="PDIWT_MS_Tool.KeyinCommands.CmdFindAllOnElement"/>
     <!--LEVEL-->
     <KeyinHandler Keyin="PDIWT_MS_Tool LEVEL EXPORTRGBCOLORTABLE" Function="PDIWT_MS_Tool.KeyinCommands.ExportRGBColorTable"/>
+    <!--CELLS-->
+    <KeyinHandler Keyin="PDIWT_MS_Tool CELLS FASTPUT" Function="PDIWT_MS_Tool.KeyinCommands.CellsFastPut"/>
+    <KeyinHandler Keyin="PDIWT_MS_Tool CELLS ARMORPUT" Function="PDIWT_MS_Tool.KeyinCommands.CellsArmorPut"/>
+<!--MODELS-->
+    <KeyinHandler Keyin="PDIWT_MS_Tool MODELS CREATEFROMEXCEL" Function="PDIWT_MS_Tool.KeyinCommands.ModelsCreateFromExcel"/>
   </KeyinHandlers>
 </KeyinTree>
