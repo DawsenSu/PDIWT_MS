@@ -40,6 +40,7 @@ namespace PDIWT_MS_CZ.Views
                 return;
             }
             m_windowhost = new ViewCZ();
+            m_windowhost.Icon = new BitmapImage(new Uri("pack://application:,,,/PDIWT_MS_CZ;component/Resources/Image/Icons/Wharf.ico", UriKind.RelativeOrAbsolute));
             m_windowhost.Show();
         }
 

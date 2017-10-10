@@ -8,6 +8,8 @@ using System.Resources;
 using BM = Bentley.MstnPlatformNET;
 using BD = Bentley.DgnPlatformNET;
 using BCOM = Bentley.Interop.MicroStationDGN;
+using System.IO;
+using System.Windows;
 
 namespace PDIWT_MS_CZ
 {
@@ -28,13 +30,9 @@ namespace PDIWT_MS_CZ
             return 0;
         }
 
-        protected override void OnUnloading(UnloadingEventArgs eventArgs)
-        {
-            base.OnUnloading(eventArgs);
-        }
-
         private void PDIWT_MS_ReloadEvent(BM.AddIn sender, ReloadEventArgs eventArgs)
         {
+
 
         }
         private void PDIWT_MS_UnloadedEvent(BM.AddIn sender, UnloadedEventArgs eventArgs)

@@ -76,6 +76,10 @@
                     Content="预览图形"
                     Glyph="/PDIWT_MS_CZ;component/Image/Icons/Preview Pane.ico" />
                 <dxb:BarButtonItem
+                    Command="{Binding ResetAllParametersCommand}"
+                    Content="重置参数"
+                    Glyph="{dx:DXImageOffice2013 Image=Reset_16x16.png}" />
+                <dxb:BarButtonItem
                     Command="{Binding DrawAllCommand}"
                     Content="绘制"
                     Glyph="/PDIWT_MS_CZ;component/Image/Icons/Create New.ico" />
@@ -401,7 +405,10 @@
 
                     </dxlc:LayoutGroup>
                 </dxlc:LayoutGroup>
-                <dxlc:LayoutGroup Header="空箱参数(mm)" Orientation="Vertical">
+                <dxlc:LayoutGroup
+                    Header="空箱参数(mm)"
+                    IsCollapsed="True"
+                    Orientation="Vertical">
                     <dxlc:LayoutItem Label="各空箱控制参数：(各距离均相对于边墩左下角点坐标)" LabelPosition="Top">
                         <dxg:GridControl
                             x:Name="hole_gc"
@@ -437,7 +444,10 @@
                             <dxg:GridColumn FieldName="ZDis" Header="Z轴距离" />
                         </dxg:GridControl>
                     </dxlc:LayoutItem>
-
+                    <Button
+                        HorizontalAlignment="Right"
+                        Command="{Binding ImportBoxParameterCommand}"
+                        Content="从Excel表中导入" />
                     <StackPanel Orientation="Vertical">
                         <CheckBox
                             x:Name="checkbox_trapezoid"
@@ -499,7 +509,7 @@
                         <dxlc:LayoutItem Label="格栅间隔宽度：">
                             <dxe:TextEdit Text="{Binding GS_MidWidth}" />
                         </dxlc:LayoutItem>
-                        <dxlc:LayoutItem Label="格栅宽度及间隔：" LabelPosition="Top">
+                        <dxlc:LayoutItem Label="格栅宽度及间隔(由轴线向单侧)：" LabelPosition="Top">
                             <dxg:GridControl
                                 x:Name="gridcontrol_gs"
                                 Height="180"
@@ -572,3 +582,4 @@
     </StackPanel>
 
 </Window>
+

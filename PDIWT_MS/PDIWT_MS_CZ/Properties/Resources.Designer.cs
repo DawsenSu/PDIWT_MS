@@ -59,5 +59,14 @@ namespace PDIWT_MS_CZ.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   查找类似 Excel2007-2016文件|*.xlsx 的本地化字符串。
+        /// </summary>
+        internal static string ExcelFilter {
+            get {
+                return ResourceManager.GetString("ExcelFilter", resourceCulture);
+            }
+        }
     }
 }

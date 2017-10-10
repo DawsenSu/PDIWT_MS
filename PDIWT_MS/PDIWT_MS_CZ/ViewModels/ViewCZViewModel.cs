@@ -10,11 +10,13 @@ using System.Collections.ObjectModel;
 using System.Collections;
 using System.IO;
 using System.Xml.Serialization;
+using PDIWT_MS_CZ.Properties;
 
 using PDIWT_MS_CZ.Models;
 
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
+using EPPlus.DataExtractor;
 
 using BM = Bentley.MstnPlatformNET;
 using BD = Bentley.DgnPlatformNET;
@@ -22,17 +24,28 @@ using Bentley.Interop.MicroStationDGN;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Drawing;
+using System.Windows.Forms;
+using DevExpress.Mvvm.Native;
+using DevExpress.Xpf.Grid.Native;
+using OfficeOpenXml;
+using MessageBox = System.Windows.MessageBox;
+using PDIWT_MS_Tool.Extension;
 
 namespace PDIWT_MS_CZ.ViewModels
 {
-    [XmlRoot(ElementName ="参数模板")]
+    [XmlRoot(ElementName = "参数模板")]
     public class ViewCZViewModel : ViewModelBase
     {
         Bentley.Interop.MicroStationDGN.Application app = Program.COM_App;
         protected override void OnInitializeInRuntime()
         {
             base.OnInitializeInRuntime();
+            InitializeParameters();
 
+        }
+
+        private void InitializeParameters()
+        {
             CurrentSSLDType = new Dictionary<SSLDType, string>
             {
                 {SSLDType.Dispersed,"分散输水"},
@@ -45,11 +58,13 @@ namespace PDIWT_MS_CZ.ViewModels
             DB_Removed_Thinckness = 2000; DB_Removed_A = 8000; DB_Removed_B = 8000; DB_Removed_C = 11000; DB_Removed_N = 1;
 
             BDun_Thickness = 17200;
-            /*BDun_A = 8500;*/ BDun_B = 10000; BDun_C = 2100;/* BDun_D = 16000;*/ BDun_E = 2100; BDun_F = 2000;
+            /*BDun_A = 8500;*/
+            BDun_B = 10000; BDun_C = 2100;/* BDun_D = 16000;*/ BDun_E = 2100; BDun_F = 2000;
             IsIncludeBDunChamfer = true; BDun_Tx = 1387; BDun_Ty = 1387; BDun_R1 = 1000;
 
             MK_Thickness = 4300;
-            /*MK_A = 11500;*/ MK_B = 2260; MK_C = 6650; /*MK_D = 10000;*/ MK_E = 2248.2215; MK_F = 2754.7785;
+            /*MK_A = 11500;*/
+            MK_B = 2260; MK_C = 6650; /*MK_D = 10000;*/ MK_E = 2248.2215; MK_F = 2754.7785;
 
             SSLD_Thickness = 3500; SSLD_YDis = 1500;
             SSLD_A = 6300; SSLD_B = 18200; SSLD_C = 2600; SSLD_D = 24500; SSLD_E = 4700; SSLD_F = 4600;
@@ -108,17 +123,17 @@ namespace PDIWT_MS_CZ.ViewModels
         }
         #region SLLDType
         [XmlIgnore]
-        public Dictionary<SSLDType,string> CurrentSSLDType
+        public Dictionary<SSLDType, string> CurrentSSLDType
         {
             get { return GetProperty(() => CurrentSSLDType); }
             set { SetProperty(() => CurrentSSLDType, value); }
         }
-        public KeyValuePair<SSLDType,string> SelectedSSLDType
+        public KeyValuePair<SSLDType, string> SelectedSSLDType
         {
             get { return GetProperty(() => SelectedSSLDType); }
             set { SetProperty(() => SelectedSSLDType, value); }
         }
-        
+
         #endregion
 
         #region VertifyProperty
@@ -150,45 +165,45 @@ namespace PDIWT_MS_CZ.ViewModels
             get { return GetProperty(() => DB_Thickness); }
             set { SetProperty(() => DB_Thickness, value); }
         }
-        [XmlElement(ElementName ="口门宽度")]
+        [XmlElement(ElementName = "口门宽度")]
         public double DB_DoorWidth
         {
             get { return GetProperty(() => DB_DoorWidth); }
             set { SetProperty(() => DB_DoorWidth, value); }
         }
 
-        [XmlElement(ElementName ="底板是否有切槽")]
+        [XmlElement(ElementName = "底板是否有切槽")]
 
         public bool IsIncludeDBRemoved
         {
             get { return GetProperty(() => IsIncludeDBRemoved); }
             set { SetProperty(() => IsIncludeDBRemoved, value); }
         }
-        [XmlElement(ElementName ="切槽高度")]
+        [XmlElement(ElementName = "切槽高度")]
         public double DB_Removed_Thinckness
         {
             get { return GetProperty(() => DB_Removed_Thinckness); }
             set { SetProperty(() => DB_Removed_Thinckness, value); }
         }
-        [XmlElement(ElementName ="切槽参数A")]
+        [XmlElement(ElementName = "切槽参数A")]
         public double DB_Removed_A
         {
             get { return GetProperty(() => DB_Removed_A); }
             set { SetProperty(() => DB_Removed_A, value); }
         }
-        [XmlElement(ElementName ="切槽参数B")]
+        [XmlElement(ElementName = "切槽参数B")]
         public double DB_Removed_B
         {
             get { return GetProperty(() => DB_Removed_B); }
             set { SetProperty(() => DB_Removed_B, value); }
         }
-        [XmlElement(ElementName ="切槽参数C")]
+        [XmlElement(ElementName = "切槽参数C")]
         public double DB_Removed_C
         {
             get { return GetProperty(() => DB_Removed_C); }
             set { SetProperty(() => DB_Removed_C, value); }
         }
-        [XmlElement(ElementName ="切槽坡度N")]
+        [XmlElement(ElementName = "切槽坡度N")]
         public double DB_Removed_N
         {
             get { return GetProperty(() => DB_Removed_N); }
@@ -560,7 +575,7 @@ namespace PDIWT_MS_CZ.ViewModels
             set { SetProperty(() => BaffleList, value); }
         }
         #endregion
-        
+
         #region Methods
         //可以使用SmartSoild.Blend命令来创建圆角
         SmartSolidElement GetCylinderCorner(Point3d Cornerorigin, double r, double height, double rotdegree = 0)
@@ -612,7 +627,7 @@ namespace PDIWT_MS_CZ.ViewModels
         }
         public double GetMK_A()
         {
-            return DB_DoorWidth/2;
+            return DB_DoorWidth / 2;
         }
         public double GetMK_D()
         {
@@ -779,7 +794,7 @@ namespace PDIWT_MS_CZ.ViewModels
             };
             linestringele[0] = app.CreateLineElement1(null, ref pointline1);
             BsplineCurve bscurve = new BsplineCurveClass(); //利用bsplinecurveclass获得bsplinecurve的实例引用
-            Point3d[] bscurvepolepoints = 
+            Point3d[] bscurvepolepoints =
             {
                 slld2points[1],
                 app.Point3dFromXYZ(0, SSLD_Endfilling_C+SSLD_Endfilling_B/2, 0),
@@ -940,7 +955,7 @@ namespace PDIWT_MS_CZ.ViewModels
         {
             SmartSolidElement ele_db = GetDB();
             SmartSolidElement ele_db_removed = null;
-            if(IsIncludeDBRemoved)
+            if (IsIncludeDBRemoved)
                 ele_db_removed = GetDBRemoved();
             SmartSolidElement ele_bdun = GetBDun();
             SmartSolidElement ele_mk = GetMK();
@@ -962,12 +977,12 @@ namespace PDIWT_MS_CZ.ViewModels
             List<SmartSolidElement> ele_baffleList = new List<SmartSolidElement>();
             if (IsIncludeBaffle)
                 ele_baffleList = GetBaffleList();
-            
+
             #region Sub\Union action
             SmartSolidElement cz, czLeft, czRigth;
             czLeft = app.SmartSolid.SolidUnion(ele_db, ele_bdun);
             czLeft = app.SmartSolid.SolidUnion(czLeft, ele_mk);
-            if(ele_ssld!=null)
+            if (ele_ssld != null)
                 czLeft = app.SmartSolid.SolidSubtract(czLeft, ele_ssld);
             if ((ele_divisionpier != null) && (SelectedSSLDType.Key == SSLDType.Dispersed))
                 czLeft = app.SmartSolid.SolidUnion(czLeft, ele_divisionpier);
@@ -982,10 +997,10 @@ namespace PDIWT_MS_CZ.ViewModels
                     czLeft = app.SmartSolid.SolidUnion(czLeft, ele_baffle);
             }
 
-            if (ele_db_removed!= null)
+            if (ele_db_removed != null)
                 czLeft = app.SmartSolid.SolidSubtract(czLeft, ele_db_removed);
 
-                
+
 
             czRigth = czLeft.Clone().AsSmartSolidElement;
             Point3d cz_mirrorStart, cz_mirrorEnd;
@@ -1005,7 +1020,7 @@ namespace PDIWT_MS_CZ.ViewModels
 
             result.Item1 = (DB_Length + 2) * (DB_Width + 2) * 0.15 * 1e-9;
 
-            double mkvol = GetMK().ComputeVolume()*2;
+            double mkvol = GetMK().ComputeVolume() * 2;
             double mkssldvol = 0;// SSLD_A * SSLD_Thickness * MK_A * 2; //存在问题
             SmartSolidElement ssld_insectbox = app.SmartSolid.CreateSlab(null, GetMK_A(), SSLD_A + SSLD_R3, SSLD_Thickness);
             Point3d point_offset = app.Point3dFromXYZ(-GetMK_A() / 2, SSLD_YDis + (SSLD_A + SSLD_R3) / 2, SSLD_Thickness / 2 + DB_Thickness);
@@ -1035,7 +1050,7 @@ namespace PDIWT_MS_CZ.ViewModels
                 holelistvol += holeele.ComputeVolume();
             }
             holelistvol *= 2e-9;
-            result.Item5 = bdunshapearea * (BDun_Thickness - DB_Thickness - MK_Thickness) * 2 * 1e-9 - result.Item7  -holelistvol;
+            result.Item5 = bdunshapearea * (BDun_Thickness - DB_Thickness - MK_Thickness) * 2 * 1e-9 - result.Item7 - holelistvol;
             result.Item12 = (BDun_Thickness - DB_Thickness) * 0.313 * 2;
             double dbunedgelength = 0;
             dbunedgelength += 2 * (GetBDun_A() + BDun_B + GetBDun_D() + BDun_E + BDun_F);
@@ -1164,6 +1179,13 @@ namespace PDIWT_MS_CZ.ViewModels
         }
 
         [Command]
+        public void ResetAllParameters()
+        {
+            InitializeParameters();
+        }
+
+
+        [Command]
         public void DrawAll()
         {
             try
@@ -1202,7 +1224,7 @@ namespace PDIWT_MS_CZ.ViewModels
             catch (Exception e)
             {
                 ErrorInfo += "统计工程量出错，请检查当前的种子文件是否为3d，单位为mm\n";
-                ErrorInfo += e.ToString() +"\n";
+                ErrorInfo += e.ToString() + "\n";
             }
 
         }
@@ -1245,7 +1267,7 @@ namespace PDIWT_MS_CZ.ViewModels
                     ErrorInfo = "模板参数保存至" + fileName + "\n参数模板导出成功!";
                     //MessageBox.Show("模板参数保存至"+fileName, "参数模板导出成功", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                
+
             }
             catch (Exception e)
             {
@@ -1266,17 +1288,18 @@ namespace PDIWT_MS_CZ.ViewModels
                 ofd.Filter = "XML文件|*.xml";
                 ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {  
+                {
                     ViewCZViewModel readedViewModel = XmlSerializerHelper.LoadFromXml<ViewCZViewModel>(ofd.FileName);
                     if (readedViewModel != null)
                     {
                         SelectedSSLDType = readedViewModel.SelectedSSLDType;
 
-                        DB_Length = readedViewModel.DB_Length; DB_Width = readedViewModel.DB_Width; DB_Thickness = readedViewModel.DB_Thickness;DB_DoorWidth = readedViewModel.DB_DoorWidth;
+                        DB_Length = readedViewModel.DB_Length; DB_Width = readedViewModel.DB_Width; DB_Thickness = readedViewModel.DB_Thickness; DB_DoorWidth = readedViewModel.DB_DoorWidth;
                         IsIncludeDBRemoved = readedViewModel.IsIncludeDBRemoved; DB_Removed_Thinckness = readedViewModel.DB_Removed_Thinckness; DB_Removed_A = readedViewModel.DB_Removed_A; DB_Removed_B = readedViewModel.DB_Removed_B; DB_Removed_C = readedViewModel.DB_Removed_C; DB_Removed_N = readedViewModel.DB_Removed_N;
 
                         BDun_Thickness = readedViewModel.BDun_Thickness;
-                        /*BDun_A = readedViewModel.BDun_A; */BDun_B = readedViewModel.BDun_B; BDun_C = readedViewModel.BDun_C; BDun_E = readedViewModel.BDun_E; BDun_F = readedViewModel.BDun_F;
+                        /*BDun_A = readedViewModel.BDun_A; */
+                        BDun_B = readedViewModel.BDun_B; BDun_C = readedViewModel.BDun_C; BDun_E = readedViewModel.BDun_E; BDun_F = readedViewModel.BDun_F;
                         IsIncludeBDunChamfer = readedViewModel.IsIncludeBDunChamfer; BDun_Tx = readedViewModel.BDun_Tx; BDun_Ty = readedViewModel.BDun_Ty; BDun_R1 = readedViewModel.BDun_R1;
 
                         MK_Thickness = readedViewModel.MK_Thickness;
@@ -1287,10 +1310,10 @@ namespace PDIWT_MS_CZ.ViewModels
                         SSLD_R1 = readedViewModel.SSLD_R1; SSLD_R2 = readedViewModel.SSLD_R2; SSLD_R3 = readedViewModel.SSLD_R3; SSLD_R4 = readedViewModel.SSLD_R4;
 
                         SSLD_Endfilling_XDis = readedViewModel.SSLD_Endfilling_XDis; SSLD_Endfilling_Width = readedViewModel.SSLD_Endfilling_Width;
-                        SSLD_Endfilling_A = readedViewModel.SSLD_Endfilling_A; SSLD_Endfilling_B = readedViewModel.SSLD_Endfilling_B;SSLD_Endfilling_C = readedViewModel.SSLD_Endfilling_C;SSLD_Endfilling_D = readedViewModel.SSLD_Endfilling_D;
+                        SSLD_Endfilling_A = readedViewModel.SSLD_Endfilling_A; SSLD_Endfilling_B = readedViewModel.SSLD_Endfilling_B; SSLD_Endfilling_C = readedViewModel.SSLD_Endfilling_C; SSLD_Endfilling_D = readedViewModel.SSLD_Endfilling_D;
 
                         IsIncludeDivisionPier = readedViewModel.IsIncludeDivisionPier;
-                        DivisionPier_R1 = readedViewModel.DivisionPier_R1; DivisionPier_R2 = readedViewModel.DivisionPier_R2; DivisionPier_R3 = readedViewModel.DivisionPier_R3; DivisionPier_A = readedViewModel.DivisionPier_A ; DivisionPier_B = readedViewModel.DivisionPier_B;
+                        DivisionPier_R1 = readedViewModel.DivisionPier_R1; DivisionPier_R2 = readedViewModel.DivisionPier_R2; DivisionPier_R3 = readedViewModel.DivisionPier_R3; DivisionPier_A = readedViewModel.DivisionPier_A; DivisionPier_B = readedViewModel.DivisionPier_B;
 
                         //HoleParamList.Clear();
                         int halfnum = readedViewModel.HoleParamList.Count / 2;
@@ -1330,6 +1353,39 @@ namespace PDIWT_MS_CZ.ViewModels
                 MessageBox.Show(e.ToString(), "参数模板导入错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        [Command]
+        public void ImportBoxParameter()
+        {
+            try
+            {
+                var sfd = new OpenFileDialog() {Title = "导入空箱参数", Filter = Resources.ExcelFilter};
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    using (var package = new ExcelPackage(new FileInfo(sfd.FileName)))
+                    {
+                        var sheet = package.Workbook.Worksheets[1];
+                        var HoleProperties = sheet.
+                            Extract<HoleProperty>()
+                            .WithProperty(p => p.HoleLength, "A")
+                            .WithProperty(p => p.HoleWidth, "B")
+                            .WithProperty(p => p.HoleHeight, "C")
+                            .WithProperty(p => p.ChamferLength, "D")
+                            .WithProperty(p => p.XDis, "E")
+                            .WithProperty(p => p.YDis, "F")
+                            .WithProperty(p => p.ZDis, "G")
+                            .GetData(2, row => row != sheet.Dimension.Rows + 1)
+                            .ToList();
+                        HoleParamList = HoleProperties.ToObservableCollection();
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString(), "空箱参数导入错误", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
     }
 
     public enum SSLDType
@@ -1337,5 +1393,4 @@ namespace PDIWT_MS_CZ.ViewModels
         Dispersed,
         Endfiling
     }
-
 }
