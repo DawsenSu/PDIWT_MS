@@ -12,6 +12,7 @@
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     xmlns:dxnav="http://schemas.devexpress.com/winfx/2008/xaml/navigation"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wpfmath="clr-namespace:WpfMath.Controls;assembly=WpfMath"
     Title="闸首参数化"
     Width="600"
     Height="500">
@@ -97,7 +98,7 @@
                     Content="输出参数模板"
                     Glyph="/PDIWT_MS_CZ;component/Image/Icons/Export.ico" />
                 <dxb:BarItemSeparator />
-                <!--<dxb:BarButtonItem Command="{Binding TestCommand}" Content="Test" />-->
+                <dxb:BarButtonItem Command="{Binding TestCommand}" Content="Test" />
             </dxb:MainMenuControl>
         </dxb:BarContainerControl>
         <BulletDecorator Background="#FFD6DBE9">

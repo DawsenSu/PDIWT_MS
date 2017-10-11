@@ -28,6 +28,7 @@ using System.Windows.Forms;
 using DevExpress.Mvvm.Native;
 using DevExpress.Xpf.Grid.Native;
 using OfficeOpenXml;
+using PDIWT_MS_CZ.Views;
 using MessageBox = System.Windows.MessageBox;
 using PDIWT_MS_Tool.Extension;
 
@@ -1241,12 +1242,13 @@ namespace PDIWT_MS_CZ.ViewModels
         [Command]
         public void Test()
         {
-            SmartSolidElement testele = GetDivisionPier();
-            Point3d origin = app.Point3dZero();
-            testele.Rotate(ref origin, Math.PI / 4, Math.PI / 4, Math.PI / 4);
-            IntPtr metafilehandle = new IntPtr(testele.DrawToEnhancedMetafile(200, 200, true));
-            Bitmap bitmap = new Bitmap(new System.Drawing.Imaging.Metafile(metafilehandle, true));
-            TestImage = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(bitmap.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+            //    SmartSolidElement testele = GetDivisionPier();
+            //    Point3d origin = app.Point3dZero();
+            //    testele.Rotate(ref origin, Math.PI / 4, Math.PI / 4, Math.PI / 4);
+            //    IntPtr metafilehandle = new IntPtr(testele.DrawToEnhancedMetafile(200, 200, true));
+            //    Bitmap bitmap = new Bitmap(new System.Drawing.Imaging.Metafile(metafilehandle, true));
+            //    TestImage = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(bitmap.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+            MainView.ShowWindow();
         }
 
         [Command]

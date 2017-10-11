@@ -10,7 +10,7 @@ namespace PDIWTEncrypt
     public class EncryptEntrance
     {
         #region Activation
-        private static void BeforeKeyExecute(Action doAction)
+        public static void BeforeKeyExecute(Action doAction)
         {
             string licensefilepath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Bentley\MicroStation\license.lic";
             PdiwtEncrypt pdiwt = new PdiwtEncrypt();

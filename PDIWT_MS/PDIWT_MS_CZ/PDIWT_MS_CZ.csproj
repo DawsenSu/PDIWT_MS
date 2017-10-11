@@ -153,6 +153,9 @@
     <Reference Include="DevExpress.Xpf.Core.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
+    <Reference Include="DevExpress.Xpf.Docking.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Xpf.Layout.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Xpf.NavBar.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Xpf.Printing.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>False</Private>
     </Reference>
@@ -165,13 +168,22 @@
     <Reference Include="DevExpress.Xpf.LayoutControl.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
-    <Reference Include="EPPlus, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
+    <Reference Include="DevExpress.Xpf.Themes.Office2016Colorful.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2016White.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.1.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.1\lib\net40\EPPlus.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EPPlus.DataExtractor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.DataExtractor.1.3.1\lib\EPPlus.DataExtractor.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="PDIWTEncrypt">
+      <HintPath>..\..\MDLTemplateGenerator\PDIWTEncrypt\bin\Release\PDIWTEncrypt.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -197,6 +209,10 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase" />
+    <Reference Include="WpfMath, Version=0.3.1.40510, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WpfMath.0.4.0\lib\net40\WpfMath.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\BaffleProperty.cs" />
@@ -207,7 +223,6 @@
     <Compile Include="Models\LockHeadParameters.cs" />
     <Compile Include="Models\SmartSoildExtentsions.cs" />
     <Compile Include="Models\XmlSerializerHelper.cs" />
-    <Compile Include="PDIWTEncrypt.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="KeyinCommands.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -218,12 +233,13 @@
     </Compile>
     <Compile Include="ViewModels\ExcelOutputViewModel.cs" />
     <Compile Include="ViewModels\ViewCZViewModel.cs" />
-    <Compile Include="Views\EncryptView.xaml.cs">
-      <DependentUpon>EncryptView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ExcelOutputWindow.xaml.cs">
       <DependentUpon>ExcelOutputWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\Preview.xaml.cs">
       <DependentUpon>Preview.xaml</DependentUpon>
     </Compile>
@@ -248,11 +264,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\EncryptView.xaml">
+    <Page Include="Views\ExcelOutputWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ExcelOutputWindow.xaml">
+    <Page Include="Views\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -264,6 +280,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Resource Include="XamlResources\TreeViewResource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\mk.png" />
@@ -301,7 +321,21 @@
     <ProjectReference Include="..\PDIWT_MS_Tool\PDIWT_MS_Tool.csproj">
       <Project>{767F5F7D-4A02-4EE9-870D-3488270FB842}</Project>
       <Name>PDIWT_MS_Tool</Name>
+      <Private>False</Private>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Image\Illustration\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Icons\Cancel.ico" />
+    <Resource Include="Image\Icons\Info.ico" />
+    <Resource Include="Image\Icons\Ok.ico" />
+    <Resource Include="Image\Icons\Prompt.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Icons\collaspe.ico" />
+    <Resource Include="Image\Icons\expand.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

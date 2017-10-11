@@ -18,23 +18,7 @@ namespace PDIWT_MS_CZ
         #region (PDIWT_MS CZ) command
         public static void DrawAll(string unparsed)
         {
-            BeforeKeyExecute(Views.ViewCZ.ShowWindow);
-        }
-        #endregion
-
-        #region Activation
-        private static void BeforeKeyExecute(Action doAction)
-        {
-            string licensefilepath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)+ @"\Bentley\MicroStation\license.lic";
-            PdiwtEncrypt pdiwt= new PdiwtEncrypt();
-            if (File.Exists(licensefilepath) && File.ReadAllText(licensefilepath) == pdiwt.GenerateActivationCodeString())
-            {
-                doAction();
-            }
-            else
-            {
-                Views.EncryptView.ShowWindow();
-            }
+            PDIWTEncrypt.EncryptEntrance.BeforeKeyExecute(Views.MainView.ShowWindow);
         }
         #endregion
     }
