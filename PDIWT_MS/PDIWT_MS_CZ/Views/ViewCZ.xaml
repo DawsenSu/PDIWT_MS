@@ -277,7 +277,10 @@
                         </dxlc:LayoutGroup>
                     </dxlc:LayoutGroup>
                 </dxlc:LayoutGroup>
-                <dxlc:LayoutGroup Header="输水廊道参数(mm)" Orientation="Vertical">
+                <dxlc:LayoutGroup
+                    Header="输水廊道参数(mm)"
+                    IsCollapsed="False"
+                    Orientation="Vertical">
                     <dxlc:LayoutItem Label="输水廊道形式：">
                         <ComboBox
                             x:Name="combox_ssldtype"
