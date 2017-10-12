@@ -24,6 +24,10 @@
                     <Style TargetType="{x:Type dx:GroupFrame}">
                         <Setter Property="Margin" Value="5" />
                     </Style>
+                    <Style x:Key="MidTextBlock" TargetType="{x:Type TextBlock}">
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                    </Style>
                     <!--  底板页面  -->
                     <DataTemplate x:Key="BaseBoardDataTemplate">
                         <Grid>
@@ -363,7 +367,7 @@
                                         <dxlc:LayoutGroup.Header>
                                             <StackPanel Orientation="Horizontal">
                                                 <CheckBox Name="CheckBox_WaterDivision" IsChecked="True" />
-                                                <TextBlock Text="分流墩" />
+                                                <TextBlock Style="{StaticResource MidTextBlock}" Text="分流墩" />
                                             </StackPanel>
                                         </dxlc:LayoutGroup.Header>
                                         <dxlc:LayoutControl Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConvertor}, ElementName=CheckBox_WaterDivision}">
@@ -391,9 +395,8 @@
                                         <dxlc:LayoutGroup.Header>
                                             <StackPanel Orientation="Horizontal">
                                                 <CheckBox Name="CheckBox_Grill" IsChecked="True" />
-                                                <TextBlock Text="出水格栅" />
+                                                <TextBlock Style="{StaticResource MidTextBlock}" Text="出水格栅" />
                                             </StackPanel>
-
                                         </dxlc:LayoutGroup.Header>
                                         <dxlc:LayoutItem
                                             Label="格栅宽度及间隔(由轴线向单侧)："
@@ -437,7 +440,7 @@
                                         <dxlc:LayoutGroup.Header>
                                             <StackPanel Orientation="Horizontal">
                                                 <CheckBox Name="CheckBox_Baffle" IsChecked="True" />
-                                                <TextBlock Text="消力坎" />
+                                                <TextBlock Style="{StaticResource MidTextBlock}" Text="消力坎" />
                                             </StackPanel>
                                         </dxlc:LayoutGroup.Header>
                                         <dxlc:LayoutControl View="Group" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConvertor}, ElementName=CheckBox_Baffle}">
@@ -472,7 +475,6 @@
                             </dxlc:LayoutControl>
                         </Grid>
                     </DataTemplate>
-
                     <DataTemplate x:Key="EmptyRectDataTemplate">
                         <Grid />
                     </DataTemplate>
@@ -546,7 +548,7 @@
                     <TreeViewItem Header="棱柱空箱" />
                 </TreeViewItem>
             </TreeView>
-            <UserControl ContentTemplate="{StaticResource EmptyRectDataTemplate}" />
+            <UserControl ContentTemplate="{StaticResource LocalConcertationCulvertDataTemplate}" />
         </dxlc:LayoutControl>
 
         <!--  状态栏  -->

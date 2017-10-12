@@ -22,10 +22,10 @@
                 <dxlc:LayoutItem Label="X=">
                     <dxe:TextEdit Text="{Binding XDis}" />
                 </dxlc:LayoutItem>
-                <dxlc:LayoutItem Label="X=">
+                <dxlc:LayoutItem Label="Y=">
                     <dxe:TextEdit Text="{Binding YDis}" />
                 </dxlc:LayoutItem>
-                <dxlc:LayoutItem Label="X=">
+                <dxlc:LayoutItem Label="Z=">
                     <dxe:TextEdit Text="{Binding ZDis}" />
                 </dxlc:LayoutItem>
             </dxlc:LayoutControl>
