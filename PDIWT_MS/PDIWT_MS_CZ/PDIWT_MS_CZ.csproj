@@ -233,9 +233,6 @@
     </Compile>
     <Compile Include="ViewModels\ExcelOutputViewModel.cs" />
     <Compile Include="ViewModels\ViewCZViewModel.cs" />
-    <Compile Include="Views\EmptyRectBox.xaml.cs">
-      <DependentUpon>EmptyRectBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ExcelOutputWindow.xaml.cs">
       <DependentUpon>ExcelOutputWindow.xaml</DependentUpon>
     </Compile>
@@ -267,10 +264,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\EmptyRectBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\ExcelOutputWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
