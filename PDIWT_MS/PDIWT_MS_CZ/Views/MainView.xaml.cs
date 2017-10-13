@@ -87,5 +87,10 @@ namespace PDIWT_MS_CZ.Views
         {
             ContentControl_Detail.Content = new DetailUserControl.EmptyRectBoxUserControl();
         }
+
+        private void ZPlanEmptyBox_TreeViewItem_Selected(object sender, RoutedEventArgs e)
+        {
+            ContentControl_Detail.Content = new DetailUserControl.ZPlanEmptyBoxUserControl();
+        }
     }
 }

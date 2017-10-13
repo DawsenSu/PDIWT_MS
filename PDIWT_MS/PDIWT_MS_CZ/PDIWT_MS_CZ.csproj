@@ -257,6 +257,9 @@
     <Compile Include="Views\DetailUserControl\SidePierUserControl.xaml.cs">
       <DependentUpon>SidePierUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DetailUserControl\ZPlanEmptyBoxUserControl.xaml.cs">
+      <DependentUpon>ZPlanEmptyBoxUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ExcelOutputWindow.xaml.cs">
       <DependentUpon>ExcelOutputWindow.xaml</DependentUpon>
     </Compile>
@@ -309,6 +312,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DetailUserControl\SidePierUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DetailUserControl\ZPlanEmptyBoxUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -376,9 +383,7 @@
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Image\Illustration\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Image\Icons\Cancel.ico" />
     <Resource Include="Image\Icons\Info.ico" />
@@ -388,6 +393,9 @@
   <ItemGroup>
     <Resource Include="Image\Icons\collaspe.ico" />
     <Resource Include="Image\Icons\expand.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Illustration\EmptyRectBoxChameferEdge.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

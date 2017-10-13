@@ -86,16 +86,21 @@
                 </TreeViewItem>
                 <TreeViewItem Header="空箱">
                     <TreeViewItem Header="长方形空箱" Selected="EmptyRectBox_TreeViewItem_Selected" />
-                    <TreeViewItem Header="棱柱空箱" />
+                    <TreeViewItem Header="棱柱空箱" Selected="ZPlanEmptyBox_TreeViewItem_Selected" />
                 </TreeViewItem>
             </TreeView>
             <ContentControl Name="ContentControl_Detail">
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="30">
-                    请选择相应模块
-                </TextBlock>
+                <Grid
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="LightBlue">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="30">
+                        请选择相应模块
+                    </TextBlock>
+                </Grid>
             </ContentControl>
         </dxlc:LayoutControl>
 

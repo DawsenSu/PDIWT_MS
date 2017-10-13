@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DevExpress.Xpf.Grid;
 
 namespace PDIWT_MS_CZ.Views.DetailUserControl
 {
@@ -23,6 +24,13 @@ namespace PDIWT_MS_CZ.Views.DetailUserControl
         public LocalConcertationCulvertUserControl()
         {
             InitializeComponent();
+        }
+        private void TableView_InitNewRow(object sender, InitNewRowEventArgs e)
+        {
+            if (GridControl_Grill.VisibleRowCount % 2 == 0)
+                GridControl_Grill.SetCellValue(e.RowHandle, "IntervalType", "格栅间距");
+            else
+                GridControl_Grill.SetCellValue(e.RowHandle, "IntervalType", "格栅宽度");
         }
     }
 }

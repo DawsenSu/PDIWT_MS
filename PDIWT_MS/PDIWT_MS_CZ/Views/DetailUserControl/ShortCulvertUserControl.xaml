@@ -33,32 +33,51 @@
             </dxlc:LayoutControl>
         </GroupBox>
         <GroupBox Grid.Row="1" Header="侧视图参数">
-            <dxlc:LayoutControl Orientation="Horizontal">
-                <Image MaxWidth="300" Source="../../Image/ssld2.png" />
-                <dxlc:LayoutControl Orientation="Vertical">
-                    <dxlc:LayoutItem Label="a=">
-                        <dxe:TextEdit Text="{Binding SSLD_Endfilling_Width}" />
-                    </dxlc:LayoutItem>
-                    <dxlc:LayoutItem Label="b=">
-                        <dxe:TextEdit Text="{Binding SSLD_Endfilling_A}" />
-                    </dxlc:LayoutItem>
-                    <dxlc:LayoutItem Label="c=">
-                        <dxe:TextEdit Text="{Binding SSLD_Endfilling_B}" />
-                    </dxlc:LayoutItem>
-                    <dxlc:LayoutItem Label="d=">
-                        <dxe:TextEdit Text="{Binding SSLD_Endfilling_C}" />
-                    </dxlc:LayoutItem>
-                    <dxlc:LayoutItem Label="e=">
-                        <dxe:TextEdit Text="{Binding SSLD_Endfilling_D}" />
-                    </dxlc:LayoutItem>
-                    <dxlc:LayoutItem Label="r1=">
-                        <dxe:TextEdit Text="{Binding SSLD_Endfilling_D}" />
-                    </dxlc:LayoutItem>
-                    <dxlc:LayoutItem Label="r2=">
-                        <dxe:TextEdit Text="{Binding SSLD_Endfilling_D}" />
-                    </dxlc:LayoutItem>
-                </dxlc:LayoutControl>
-            </dxlc:LayoutControl>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image
+                    Grid.Column="0"
+                    MaxWidth="300"
+                    Source="../../Image/ssld2.png" />
+                <StackPanel Grid.Column="1" Orientation="Vertical">
+                    <GroupBox Header="长度">
+                        <dxlc:LayoutGroup Orientation="Horizontal">
+                            <dxlc:LayoutGroup Orientation="Vertical">
+                                <dxlc:LayoutItem Label="a=">
+                                    <dxe:TextEdit Text="{Binding SSLD_Endfilling_Width}" />
+                                </dxlc:LayoutItem>
+                                <dxlc:LayoutItem Label="b=">
+                                    <dxe:TextEdit Text="{Binding SSLD_Endfilling_A}" />
+                                </dxlc:LayoutItem>
+                                <dxlc:LayoutItem Label="c=">
+                                    <dxe:TextEdit Text="{Binding SSLD_Endfilling_B}" />
+                                </dxlc:LayoutItem>
+                            </dxlc:LayoutGroup>
+                            <dxlc:LayoutGroup Orientation="Vertical">
+                                <dxlc:LayoutItem Label="d=">
+                                    <dxe:TextEdit Text="{Binding SSLD_Endfilling_C}" />
+                                </dxlc:LayoutItem>
+                                <dxlc:LayoutItem Label="e=">
+                                    <dxe:TextEdit Text="{Binding SSLD_Endfilling_D}" />
+                                </dxlc:LayoutItem>
+                            </dxlc:LayoutGroup>
+                        </dxlc:LayoutGroup>
+                    </GroupBox>
+                    <GroupBox Header="半径">
+                        <dxlc:LayoutGroup Orientation="Horizontal">
+                            <dxlc:LayoutItem Label="r1=">
+                                <dxe:TextEdit Text="{Binding SSLD_Endfilling_D}" />
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutItem Label="r2=">
+                                <dxe:TextEdit Text="{Binding SSLD_Endfilling_D}" />
+                            </dxlc:LayoutItem>
+                        </dxlc:LayoutGroup>
+                    </GroupBox>
+                </StackPanel>
+            </Grid>
         </GroupBox>
     </Grid>
 </UserControl>

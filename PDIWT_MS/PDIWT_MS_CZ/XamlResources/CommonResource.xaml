@@ -17,4 +17,37 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
+    <SolidColorBrush x:Key="BrushXPlan" Color="Red" />
+    <SolidColorBrush x:Key="BrushYPlan" Color="LightGreen" />
+    <SolidColorBrush x:Key="BrushZPlan" Color="Blue" />
+    <DataTemplate x:Key="DataTemplate_ListBoxItem" DataType="{x:Type ListBoxItem}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <CheckBox
+                Grid.Column="0"
+                VerticalAlignment="Center"
+                Content="{TemplateBinding ListBoxItem.Content}"
+                Foreground="{TemplateBinding ListBoxItem.Foreground}" />
+            <TextBlock
+                Grid.Column="1"
+                Style="{StaticResource MidTextBlock}"
+                Text="倒角长度：" />
+            <TextBox Grid.Column="2" Text="{Binding ChameferLength}" />
+            <TextBlock
+                Grid.Column="3"
+                Style="{StaticResource MidTextBlock}"
+                Text="倒角宽度：" />
+            <TextBox Grid.Column="4" Text="{Binding ChameferWidth}" />
+        </Grid>
+    </DataTemplate>
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="MaxHeight" Value="20" />
+        <Setter Property="Margin" Value="3" />
+    </Style>
 </ResourceDictionary>

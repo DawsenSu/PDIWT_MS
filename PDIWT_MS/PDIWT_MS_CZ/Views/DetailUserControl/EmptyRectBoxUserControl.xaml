@@ -9,7 +9,7 @@
     xmlns:local="clr-namespace:PDIWT_MS_CZ.Views.DetailUserControl"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="400"
-    d:DesignWidth="500"
+    d:DesignWidth="600"
     Background="White"
     mc:Ignorable="d">
     <UserControl.Resources>
@@ -19,11 +19,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <GroupBox Grid.Row="0" Header="位置参数">
-            <dxlc:LayoutControl Orientation="Horizontal">
+            <dxlc:LayoutGroup Orientation="Horizontal">
                 <dxlc:LayoutItem Label="X=">
                     <dxe:TextEdit Text="{Binding XDis}" />
                 </dxlc:LayoutItem>
@@ -33,10 +32,10 @@
                 <dxlc:LayoutItem Label="Z=">
                     <dxe:TextEdit Text="{Binding ZDis}" />
                 </dxlc:LayoutItem>
-            </dxlc:LayoutControl>
+            </dxlc:LayoutGroup>
         </GroupBox>
         <GroupBox Grid.Row="1" Header="形状参数">
-            <dxlc:LayoutControl Orientation="Horizontal">
+            <dxlc:LayoutGroup Orientation="Horizontal">
                 <dxlc:LayoutItem Label="长度=">
                     <dxe:TextEdit Text="{Binding XDis}" />
                 </dxlc:LayoutItem>
@@ -46,12 +45,62 @@
                 <dxlc:LayoutItem Label="高度=">
                     <dxe:TextEdit Text="{Binding ZDis}" />
                 </dxlc:LayoutItem>
-            </dxlc:LayoutControl>
+            </dxlc:LayoutGroup>
         </GroupBox>
         <GroupBox Grid.Row="2" Header="各边倒角">
-            <dxlc:LayoutControl Orientation="Horizontal">
-                <Image MaxWidth="100" Source="../../Image/mk.png" />
-            </dxlc:LayoutControl>
+            <dxlc:LayoutGroup Orientation="Horizontal">
+                <Image MaxWidth="200" Source="../../Image/Illustration/EmptyRectBoxChameferEdge.png" />
+                <ListBox HorizontalContentAlignment="Stretch" Background="White">
+                    <ListBoxItem
+                        Content="0"
+                        ContentTemplate="{StaticResource DataTemplate_ListBoxItem}"
+                        Foreground="{StaticResource BrushXPlan}" />
+                    <ListBoxItem
+                        Content="1"
+                        ContentTemplate="{StaticResource DataTemplate_ListBoxItem}"
+                        Foreground="{StaticResource BrushXPlan}" />
+                    <ListBoxItem
+                        Content="2"
+                        ContentTemplate="{StaticResource DataTemplate_ListBoxItem}"
+                        Foreground="{StaticResource BrushXPlan}" />
+                    <ListBoxItem
+                        Content="3"
+                        ContentTemplate="{StaticResource DataTemplate_ListBoxItem}"
+                        Foreground="{StaticResource BrushXPlan}" />
+                    <ListBoxItem
+                        Content="4"
+                        ContentTemplate="{StaticResource DataTemplate_ListBoxItem}"
+                        Foreground="{StaticResource BrushYPlan}" />
+                    <ListBoxItem
+                        Content="5"
+                        ContentTemplate="{StaticResource DataTemplate_ListBoxItem}"
+                        Foreground="{StaticResource BrushYPlan}" />
+                    <ListBoxItem
+                        Content="6"
+                        ContentTemplate="{StaticResource DataTemplate_ListBoxItem}"
+                        Foreground="{StaticResource BrushYPlan}" />
+                    <ListBoxItem
+                        Content="7"
+                        ContentTemplate="{StaticResource DataTemplate_ListBoxItem}"
+                        Foreground="{StaticResource BrushYPlan}" />
+                    <ListBoxItem
+                        Content="8"
+                        ContentTemplate="{StaticResource DataTemplate_ListBoxItem}"
+                        Foreground="{StaticResource BrushZPlan}" />
+                    <ListBoxItem
+                        Content="9"
+                        ContentTemplate="{StaticResource DataTemplate_ListBoxItem}"
+                        Foreground="{StaticResource BrushZPlan}" />
+                    <ListBoxItem
+                        Content="10"
+                        ContentTemplate="{StaticResource DataTemplate_ListBoxItem}"
+                        Foreground="{StaticResource BrushZPlan}" />
+                    <ListBoxItem
+                        Content="11"
+                        ContentTemplate="{StaticResource DataTemplate_ListBoxItem}"
+                        Foreground="{StaticResource BrushZPlan}" />
+                </ListBox>
+            </dxlc:LayoutGroup>
         </GroupBox>
     </Grid>
 </UserControl>
