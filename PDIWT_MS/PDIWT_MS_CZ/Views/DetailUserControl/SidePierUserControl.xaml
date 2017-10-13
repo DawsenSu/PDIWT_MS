@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     xmlns:local="clr-namespace:PDIWT_MS_CZ.Views.DetailUserControl"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="400"
@@ -85,7 +86,7 @@
                             Content="包含倒角"
                             IsChecked="True" />
                     </GroupBox.Header>
-                    <dxlc:LayoutControl Orientation="Vertical" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConvertor}, ElementName=CheckBox_SidePier}">
+                    <dxlc:LayoutControl Orientation="Vertical" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=CheckBox_SidePier}">
                         <dxlc:LayoutItem Label="Tx=">
                             <dxe:TextEdit Text="{Binding BDun_Tx, Mode=TwoWay}" />
                         </dxlc:LayoutItem>

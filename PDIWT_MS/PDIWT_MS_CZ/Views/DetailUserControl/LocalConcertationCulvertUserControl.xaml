@@ -7,6 +7,7 @@
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     xmlns:local="clr-namespace:PDIWT_MS_CZ.Views.DetailUserControl"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="500"
@@ -95,7 +96,7 @@
                             <TextBlock Style="{StaticResource MidTextBlock}" Text="分流墩" />
                         </StackPanel>
                     </dxlc:LayoutGroup.Header>
-                    <dxlc:LayoutControl Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConvertor}, ElementName=CheckBox_WaterDivision}">
+                    <dxlc:LayoutControl Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=CheckBox_WaterDivision}">
                         <Image MaxWidth="250" Source="../../Image/fld.png" />
                         <dxlc:LayoutControl Orientation="Vertical">
                             <dxlc:LayoutItem Label="R1=">
@@ -126,7 +127,7 @@
                     <dxlc:LayoutItem
                         Label="格栅宽度及间隔(由轴线向单侧)："
                         LabelPosition="Top"
-                        Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConvertor}, ElementName=CheckBox_Grill}">
+                        Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=CheckBox_Grill}">
                         <dxg:GridControl
                             Name="GridControl_Grill"
                             Height="180"
@@ -168,7 +169,7 @@
                             <TextBlock Style="{StaticResource MidTextBlock}" Text="消力坎" />
                         </StackPanel>
                     </dxlc:LayoutGroup.Header>
-                    <dxlc:LayoutControl View="Group" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConvertor}, ElementName=CheckBox_Baffle}">
+                    <dxlc:LayoutControl View="Group" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=CheckBox_Baffle}">
                         <dxlc:LayoutItem Label="消力坎参数" LabelPosition="Top">
                             <dxg:GridControl
                                 Height="180"

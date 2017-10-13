@@ -9,7 +9,7 @@
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     xmlns:dxn="http://schemas.devexpress.com/winfx/2008/xaml/navbar">
-    <dxmvvm:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConvertor" />
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <Style TargetType="{x:Type GroupBox}">
         <Setter Property="Margin" Value="5" />
     </Style>
