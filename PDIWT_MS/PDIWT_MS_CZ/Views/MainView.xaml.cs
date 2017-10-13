@@ -58,12 +58,34 @@ namespace PDIWT_MS_CZ.Views
             m_windowhost = null;
         }
 
-        //private void TableView_InitNewRow(object sender, InitNewRowEventArgs e)
-        //{
-        //    if (GridControl_Grill.VisibleRowCount % 2 == 0)
-        //        GridControl_Grill.SetCellValue(e.RowHandle, "IntervalType", "格栅间距");
-        //    else
-        //        GridControl_Grill.SetCellValue(e.RowHandle, "IntervalType", "格栅宽度");
-        //}
+        private void BaseBoard_TreeViewItem_Selected(object sender, RoutedEventArgs e)
+        {
+            ContentControl_Detail.Content = new DetailUserControl.BaseBoardUserControl();
+        }
+
+        private void SidePier_TreeViewItem_Selected(object sender, RoutedEventArgs e)
+        {
+            ContentControl_Detail.Content = new DetailUserControl.SidePierUserControl();
+        }
+
+        private void DoorSill_TreeViewItem_Selected(object sender, RoutedEventArgs e)
+        {
+            ContentControl_Detail.Content = new DetailUserControl.DoorSillUserControl();
+        }
+
+        private void ShortCulvert_TreeViewItem_Selected(object sender, RoutedEventArgs e)
+        {
+            ContentControl_Detail.Content = new DetailUserControl.ShortCulvertUserControl();
+        }
+
+        private void LocalConcertationCulvert_TreeViewItem_Selected(object sender, RoutedEventArgs e)
+        {
+            ContentControl_Detail.Content = new DetailUserControl.LocalConcertationCulvertUserControl();
+        }
+
+        private void EmptyRectBox_TreeViewItem_Selected(object sender, RoutedEventArgs e)
+        {
+            ContentControl_Detail.Content = new DetailUserControl.EmptyRectBoxUserControl();
+        }
     }
 }

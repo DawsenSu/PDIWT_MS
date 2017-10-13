@@ -153,9 +153,15 @@
     <Reference Include="DevExpress.Xpf.Core.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
-    <Reference Include="DevExpress.Xpf.Docking.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Xpf.Layout.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Xpf.NavBar.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Xpf.Docking.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Layout.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.NavBar.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="DevExpress.Xpf.Printing.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>False</Private>
     </Reference>
@@ -233,6 +239,24 @@
     </Compile>
     <Compile Include="ViewModels\ExcelOutputViewModel.cs" />
     <Compile Include="ViewModels\ViewCZViewModel.cs" />
+    <Compile Include="Views\DetailUserControl\BaseBoardUserControl.xaml.cs">
+      <DependentUpon>BaseBoardUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DetailUserControl\DoorSillUserControl.xaml.cs">
+      <DependentUpon>DoorSillUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DetailUserControl\EmptyRectBoxUserControl.xaml.cs">
+      <DependentUpon>EmptyRectBoxUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DetailUserControl\LocalConcertationCulvertUserControl.xaml.cs">
+      <DependentUpon>LocalConcertationCulvertUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DetailUserControl\ShortCulvertUserControl.xaml.cs">
+      <DependentUpon>ShortCulvertUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DetailUserControl\SidePierUserControl.xaml.cs">
+      <DependentUpon>SidePierUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ExcelOutputWindow.xaml.cs">
       <DependentUpon>ExcelOutputWindow.xaml</DependentUpon>
     </Compile>
@@ -264,6 +288,30 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\DetailUserControl\BaseBoardUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DetailUserControl\DoorSillUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DetailUserControl\EmptyRectBoxUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DetailUserControl\LocalConcertationCulvertUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DetailUserControl\ShortCulvertUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DetailUserControl\SidePierUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ExcelOutputWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -280,6 +328,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Resource Include="XamlResources\CommonResource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
     <Resource Include="XamlResources\TreeViewResource.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
