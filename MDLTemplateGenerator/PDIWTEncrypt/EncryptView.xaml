@@ -13,20 +13,27 @@
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
             <Setter Property="MaxHeight" Value="25" />
-            <Setter Property="MaxWidth" Value="180" />
+            <Setter Property="Width" Value="50" />
             <Setter Property="Margin" Value="3" />
         </Style>
     </Window.Resources>
     <dxlc:LayoutControl>
         <dxlc:LayoutGroup Orientation="Vertical">
             <dxlc:LayoutItem Label="激活序列号：" LabelPosition="Top">
-                <TextBox
+                <dxlc:LayoutGroup Orientation="Horizontal">
+                  <TextBox
                     x:Name="textbox_ComputerRelated"
                     Foreground="Brown"
-                    IsReadOnly="True" />
-            </dxlc:LayoutItem>
+                    IsReadOnly="True" 
+                    ToolTip="将此序列号发送给管理员 或 发送邮件到sudongsheng@pdiwt.con.cn进行咨询"/>
+                    <Button Content="复制" Click="CopyButton_Click"/>
+                </dxlc:LayoutGroup>
+                </dxlc:LayoutItem>
             <dxlc:LayoutItem Label="激活秘钥：" LabelPosition="Top">
-                <TextBox x:Name="textbox_ActivationKey" />
+                <dxlc:LayoutGroup Orientation="Horizontal">
+                    <TextBox x:Name="textbox_ActivationKey" />
+                    <Button Content="粘贴" Click="PasteButton_Click"/>
+                </dxlc:LayoutGroup>
             </dxlc:LayoutItem>
             <dxlc:LayoutGroup HorizontalAlignment="Center" Orientation="Horizontal">
                 <Button

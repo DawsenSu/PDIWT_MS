@@ -12,16 +12,13 @@ namespace PDIWTEncrypt
         #region Activation
         public static void BeforeKeyExecute(Action doAction)
         {
-            string licensefilepath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Bentley\MicroStation\license.lic";
+            //string licensefilepath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Bentley\MicroStation\license.lic";
             PdiwtEncrypt pdiwt = new PdiwtEncrypt();
-            if (File.Exists(licensefilepath) && File.ReadAllText(licensefilepath) == pdiwt.GenerateActivationCodeString())
-            {
+            if (RegistryUtilites.GetActivationKeyFromRegistry() == pdiwt.GenerateActivationCodeString())
                 doAction();
-            }
             else
-            {
                 EncryptView.ShowWindow();
-            }
+
         }
         #endregion
     }

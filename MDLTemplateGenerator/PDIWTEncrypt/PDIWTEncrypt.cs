@@ -7,10 +7,12 @@ using System.Management;
 using Microsoft.Win32;
 using System.IO;
 using System.Security.Cryptography;
+using System.Security;
+using System.Security.AccessControl;
 
 namespace PDIWTEncrypt
 {
-    class PdiwtEncrypt
+    public class PdiwtEncrypt
     {
         public PdiwtEncrypt()
         {
@@ -35,7 +37,7 @@ namespace PDIWTEncrypt
         public string GetComputerRelatedString()
         {
             ComputerInfo computerinfo = ComputerInfo.Instance();
-            string cpudiskstring = computerinfo.CpuID + computerinfo.DiskID;
+            string cpudiskstring = computerinfo.MacAddress;
             return GetMd5Hash(MD5.Create(), cpudiskstring).ToUpper();
         }
 
@@ -116,7 +118,7 @@ namespace PDIWTEncrypt
         }
     }
 
-    class ComputerInfo
+    public class ComputerInfo
     {
         private static ComputerInfo _instance;
         private ComputerInfo()
@@ -207,7 +209,7 @@ namespace PDIWTEncrypt
         }
     }
 
-    static class RegistryUtilites
+     public static class RegistryUtilites
     {
         /// <summary>
         /// 将激活秘钥写入注册项SOFTWARE\Bentley\PDIWT_MSADDIN中
@@ -216,7 +218,12 @@ namespace PDIWTEncrypt
         /// <param name="key">存储infomation的键</param>
         public static void WriteActivationKeyToRegistry(string infomation, string key = "ActivationKey")
         {
-            RegistryKey pdiwtmsaddinkey = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Bentley\PDIWT_MSADDIN");
+            string user = Environment.UserDomainName + "\\" + Environment.UserName;
+
+            RegistrySecurity rs = new RegistrySecurity();
+            rs.AddAccessRule(new RegistryAccessRule(user, RegistryRights.FullControl, AccessControlType.Allow));
+
+            RegistryKey pdiwtmsaddinkey = Registry.CurrentUser.CreateSubKey(@"Bentley\PDIWT_MSADDIN", RegistryKeyPermissionCheck.Default,rs);
             pdiwtmsaddinkey.SetValue(key, infomation);
             pdiwtmsaddinkey.Close();
         }
@@ -226,8 +233,8 @@ namespace PDIWTEncrypt
         /// <returns>如果存在则返回键值内容；如果不存在则返回null</returns>
         public static string GetActivationKeyFromRegistry()
         {
-            RegistryKey pdiwtmsaddinkey = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Bentley\PDIWT_MSADDIN");
-            string activationkey = pdiwtmsaddinkey.GetValue("ActivationKey")?.ToString();
+            RegistryKey pdiwtmsaddinkey = Registry.CurrentUser.OpenSubKey(@"Bentley\PDIWT_MSADDIN", RegistryRights.FullControl);
+            string activationkey = pdiwtmsaddinkey?.GetValue("ActivationKey")?.ToString();
             return activationkey;
         }
     }

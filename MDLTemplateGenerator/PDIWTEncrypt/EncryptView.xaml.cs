@@ -62,10 +62,38 @@ namespace PDIWTEncrypt
                 textbox_ActivationKey.Text = string.Empty;
                 return;
             }
-            File.WriteAllText(licensefilepath, textbox_ActivationKey.Text);
+            RegistryUtilites.WriteActivationKeyToRegistry(licensefilepath, textbox_ActivationKey.Text);
             MessageBox.Show("激活成功，请再次运行程序", "激活成功", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
         }
 
+        private void CopyButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Clipboard.SetText(textbox_ComputerRelated.Text);
+                MessageBox.Show("已将序列号复制到剪贴板！", "复制成功", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch
+            {
+                MessageBox.Show("复制错误！");
+            }
+        }
+
+        private void PasteButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                IDataObject data = Clipboard.GetDataObject();
+                if(data.GetDataPresent(DataFormats.Text))
+                {
+                    textbox_ActivationKey.Text = (string)data.GetData(DataFormats.UnicodeText, true);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("粘贴错误！");
+            }
+        }
     }
 }
