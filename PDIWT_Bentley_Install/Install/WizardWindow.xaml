@@ -9,9 +9,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="clr-namespace:Install.ViewModels"
     Title="中交水运规划设计院MS二次开发安装程序"
-    DataContext="{dxmvvm:ViewModelSource Type=viewmodels:MainViewModel}"
     Width="700"
     Height="400"
+    DataContext="{dxmvvm:ViewModelSource Type=viewmodels:MainViewModel}"
     Icon="Resources/Software Installer.ico"
     mc:Ignorable="d">
     <dxco:Wizard AnimationType="SlideHorizontal" ItemsSource="{Binding Items}">

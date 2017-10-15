@@ -82,11 +82,21 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.Data.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Mvvm.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Printing.v16.1.Core, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Xpf.Controls.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Xpf.Core.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v16.2">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\DevExpress.Data.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v16.2">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\DevExpress.Mvvm.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v16.2.Core">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\DevExpress.Printing.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Controls.v16.2">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\DevExpress.Xpf.Controls.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Core.v16.2">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\DevExpress.Xpf.Core.v16.2.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
