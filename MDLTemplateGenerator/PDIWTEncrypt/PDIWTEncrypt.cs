@@ -9,6 +9,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Security;
 using System.Security.AccessControl;
+using System.Security.Permissions;
 
 namespace PDIWTEncrypt
 {
@@ -216,6 +217,7 @@ namespace PDIWTEncrypt
         /// </summary>
         /// <param name="infomation">要写入的信息（秘钥）</param>
         /// <param name="key">存储infomation的键</param>
+        [RegistryPermission(SecurityAction.PermitOnly,Create = @"HKEY_LOCAL_MACHINE\SOFTWARE\Bentley\MicroStation\PDIWTMSADDIN")]
         public static void WriteActivationKeyToRegistry(string infomation, string key = "ActivationKey")
         {
             string user = Environment.UserDomainName + "\\" + Environment.UserName;
@@ -223,7 +225,7 @@ namespace PDIWTEncrypt
             RegistrySecurity rs = new RegistrySecurity();
             rs.AddAccessRule(new RegistryAccessRule(user, RegistryRights.FullControl, AccessControlType.Allow));
 
-            RegistryKey pdiwtmsaddinkey = Registry.CurrentUser.CreateSubKey(@"Bentley\PDIWT_MSADDIN", RegistryKeyPermissionCheck.Default,rs);
+            RegistryKey pdiwtmsaddinkey = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Bentley\MicroStation\PDIWTMSADDIN", RegistryKeyPermissionCheck.Default,rs);
             pdiwtmsaddinkey.SetValue(key, infomation);
             pdiwtmsaddinkey.Close();
         }
@@ -231,9 +233,10 @@ namespace PDIWTEncrypt
         /// 获得注册项中SOFTWARE\Bentley\PDIWT_MSADDIN的ActivationKey键值
         /// </summary>
         /// <returns>如果存在则返回键值内容；如果不存在则返回null</returns>
+        [RegistryPermission(SecurityAction.PermitOnly,Read = @"HKEY_LOCAL_MACHINE\SOFTWARE\Bentley\MicroStation\PDIWTMSADDIN")]
         public static string GetActivationKeyFromRegistry()
         {
-            RegistryKey pdiwtmsaddinkey = Registry.CurrentUser.OpenSubKey(@"Bentley\PDIWT_MSADDIN", RegistryRights.FullControl);
+            RegistryKey pdiwtmsaddinkey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Bentley\MicroStation\PDIWTMSADDIN", RegistryRights.FullControl);
             string activationkey = pdiwtmsaddinkey?.GetValue("ActivationKey")?.ToString();
             return activationkey;
         }
