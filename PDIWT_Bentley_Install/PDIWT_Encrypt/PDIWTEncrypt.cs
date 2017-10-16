@@ -11,11 +11,11 @@ using System.Security;
 using System.Security.AccessControl;
 using System.Security.Permissions;
 
-namespace PDIWTEncrypt
+namespace PDIWT_Encrypt
 {
-    public class PdiwtEncrypt
+    public class PDIWTEncrypt
     {
-        public PdiwtEncrypt()
+        public PDIWTEncrypt()
         {
             KeyWord = "wirttenbysudongsheng20171006";
         }
@@ -28,18 +28,68 @@ namespace PDIWTEncrypt
         public string GenerateActivationCodeString()
         {
             string codestr;
-            return EncryptMacStringWithKey(KeyWord, GetComputerRelatedString(), out codestr) == EncryptStatues.Success ? codestr : null;
+            return EncryptStringWithKey(KeyWord, GetComputerRelatedString(), out codestr) == EncryptStatues.Success ? codestr : null;
+        }
+        /// <summary>
+        /// 获得用key加密后的字符串，用于对比是否激活
+        /// </summary>
+        /// <param name="serialnumber">序列号（用户由界面提供）</param>
+        /// <returns>用key加密后的字符串</returns>
+        public string GenerateActivationCodeString(string serialnumber)
+        {
+            string codestr;
+            return EncryptStringWithKey(KeyWord, serialnumber, out codestr) == EncryptStatues.Success ? codestr : null;
         }
 
         /// <summary>
-        /// 获得与本机cpu和disk相关的序列号
+        /// 获得与本机硬件香瓜你的字符串
         /// </summary>
-        /// <returns>返回cpu与硬盘字符串合并后MD5的散列数</returns>
+        /// <returns>返回硬件字符串的MD5散列数</returns>
         public string GetComputerRelatedString()
         {
             ComputerInfo computerinfo = ComputerInfo.Instance();
             string cpudiskstring = computerinfo.MacAddress;
             return GetMd5Hash(MD5.Create(), cpudiskstring).ToUpper();
+        }
+        
+        /// <summary>
+        /// 通过传入序列号和与本机有关的字符串计算加密字符
+        /// </summary>
+        /// <param name="key">传入的秘钥字符串</param>
+        /// <param name="inputstring">传入的与本机有关的字符串</param>
+        /// <param name="codestring">获得的加密密码</param>
+        /// <returns>如果成功，返回状态为Success</returns>
+        private EncryptStatues EncryptStringWithKey(string key, string inputstring, out string codestring)
+        {
+            codestring = string.Empty;
+            if (inputstring == null)
+                return EncryptStatues.CanNotGetMacString;
+            //Get mac hash code string and extract odd posistion chars
+            //Get key hash code string adn extract even posistion chars
+            string inputhashoddstring = GetOddAndEvenSubString(GetMd5Hash(MD5.Create(), inputstring), true);
+            string keyhashevenstring = GetOddAndEvenSubString(GetMd5Hash(MD5.Create(), key), false);
+            //Get the substring length
+            int hashstringlength = inputhashoddstring.Length;
+            int[] indexnums = new int[hashstringlength];
+            for (int i = 0; i < hashstringlength; i++)
+                indexnums[i] = (inputhashoddstring[i] + keyhashevenstring[i]) % 36;
+
+            StringBuilder sb = new StringBuilder();
+            string fixstring = "abcdefghijklmnopqrstuvwxyz0123456789";
+            for (int i = 0; i < hashstringlength; i++)
+            {
+                sb.Append(fixstring[indexnums[i]]);
+                if (i % 4 == 3 && i != (hashstringlength - 1))
+                    sb.Append("-");
+            }
+            codestring = sb.ToString().ToUpper();
+            return EncryptStatues.Success;
+        }
+
+        enum EncryptStatues
+        {
+            Success,
+            CanNotGetMacString
         }
 
         /// <summary>
@@ -78,45 +128,6 @@ namespace PDIWTEncrypt
             return stringBuilder.ToString();
         }
 
-        /// <summary>
-        /// 通过本机MAC物理地址和传入的字符串计算加密字符
-        /// </summary>
-        /// <param name="key">传入的秘钥字符串</param>
-        /// <param name="inputstring">传入的与本机有关的字符串</param>
-        /// <param name="codestring">获得的加密密码</param>
-        /// <returns>如果成功，返回状态为Success</returns>
-        private EncryptStatues EncryptMacStringWithKey(string key, string inputstring, out string codestring)
-        {
-            codestring = string.Empty;
-            if (inputstring == null)
-                return EncryptStatues.CanNotGetMacString;
-            //Get mac hash code string and extract odd posistion chars
-            //Get key hash code string adn extract even posistion chars
-            string inputhashoddstring = GetOddAndEvenSubString(GetMd5Hash(MD5.Create(), inputstring), true);
-            string keyhashevenstring = GetOddAndEvenSubString(GetMd5Hash(MD5.Create(), key), false);
-            //Get the substring length
-            int hashstringlength = inputhashoddstring.Length;
-            int[] indexnums = new int[hashstringlength];
-            for (int i = 0; i < hashstringlength; i++)
-                indexnums[i] = (inputhashoddstring[i] + keyhashevenstring[i]) % 36;
-
-            StringBuilder sb = new StringBuilder();
-            string fixstring = "abcdefghijklmnopqrstuvwxyz0123456789";
-            for (int i = 0; i < hashstringlength; i++)
-            {
-                sb.Append(fixstring[indexnums[i]]);
-                if (i % 4 == 3 && i != (hashstringlength - 1))
-                    sb.Append("-");
-            }
-            codestring = sb.ToString().ToUpper();
-            return EncryptStatues.Success;
-        }
-
-        enum EncryptStatues
-        {
-            Success,
-            CanNotGetMacString
-        }
     }
 
     public class ComputerInfo
@@ -207,38 +218,6 @@ namespace PDIWTEncrypt
             {
                 return null;
             }
-        }
-    }
-
-     public static class RegistryUtilites
-    {
-        /// <summary>
-        /// 将激活秘钥写入注册项SOFTWARE\Bentley\PDIWT_MSADDIN中
-        /// </summary>
-        /// <param name="infomation">要写入的信息（秘钥）</param>
-        /// <param name="key">存储infomation的键</param>
-        [RegistryPermission(SecurityAction.PermitOnly,Create = @"HKEY_LOCAL_MACHINE\SOFTWARE\Bentley\MicroStation\PDIWTMSADDIN")]
-        public static void WriteActivationKeyToRegistry(string infomation, string key = "ActivationKey")
-        {
-            string user = Environment.UserDomainName + "\\" + Environment.UserName;
-
-            RegistrySecurity rs = new RegistrySecurity();
-            rs.AddAccessRule(new RegistryAccessRule(user, RegistryRights.FullControl, AccessControlType.Allow));
-
-            RegistryKey pdiwtmsaddinkey = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Bentley\MicroStation\PDIWTMSADDIN", RegistryKeyPermissionCheck.Default,rs);
-            pdiwtmsaddinkey.SetValue(key, infomation);
-            pdiwtmsaddinkey.Close();
-        }
-        /// <summary>
-        /// 获得注册项中SOFTWARE\Bentley\PDIWT_MSADDIN的ActivationKey键值
-        /// </summary>
-        /// <returns>如果存在则返回键值内容；如果不存在则返回null</returns>
-        [RegistryPermission(SecurityAction.PermitOnly,Read = @"HKEY_LOCAL_MACHINE\SOFTWARE\Bentley\MicroStation\PDIWTMSADDIN")]
-        public static string GetActivationKeyFromRegistry()
-        {
-            RegistryKey pdiwtmsaddinkey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Bentley\MicroStation\PDIWTMSADDIN", RegistryRights.FullControl);
-            string activationkey = pdiwtmsaddinkey?.GetValue("ActivationKey")?.ToString();
-            return activationkey;
         }
     }
 }

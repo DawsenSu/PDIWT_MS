@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,57 +12,37 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Diagnostics;
-using Bentley.DgnPlatformNET;
-using BMWPF = Bentley.MstnPlatformNET.WPF;
+using System.Security;
+using System.Security.AccessControl;
+using System.Security.Permissions;
 
-namespace PDIWTEncrypt
+namespace PDIWT_Encrypt.Activation
 {
     /// <summary>
-    /// Interaction logic for EncryptView.xaml
+    /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class EncryptView : Window
+    public partial class MainWindow : Window
     {
-        private EncryptView()
+        public MainWindow()
         {
             InitializeComponent();
-            _pdiwt = new PdiwtEncrypt();
+            _pdiwt = new PDIWTEncrypt();
             textbox_ComputerRelated.Text = _pdiwt.GetComputerRelatedString();
         }
-
-        static EncryptView _windowhost;
-        private readonly PdiwtEncrypt _pdiwt;
-        public static void ShowWindow()
-        {
-            if (_windowhost != null)
-            {
-                _windowhost.Focus();
-                return;
-            }
-            _windowhost = new EncryptView();
-            _windowhost.Show();
-        }
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-            _windowhost = null;
-        }
-
+        private readonly PDIWTEncrypt _pdiwt;
         private void CancelButton_OnClick(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
         private void ActivateButton_OnClick(object sender, RoutedEventArgs e)
         {
-            string licensefilepath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Bentley\MicroStation\license.lic";
             if (textbox_ActivationKey.Text != _pdiwt.GenerateActivationCodeString())
             {
                 MessageBox.Show("激活码错误请重新输入！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 textbox_ActivationKey.Text = string.Empty;
                 return;
             }
-            RegistryUtilites.WriteActivationKeyToRegistry(licensefilepath, textbox_ActivationKey.Text);
+            RegistryUtilities.WriteActivationKeyToRegistry(textbox_ActivationKey.Text);
             MessageBox.Show("激活成功，请再次运行程序", "激活成功", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
         }
@@ -85,9 +65,9 @@ namespace PDIWTEncrypt
             try
             {
                 IDataObject data = Clipboard.GetDataObject();
-                if(data.GetDataPresent(DataFormats.Text))
+                if (data.GetDataPresent(DataFormats.Text))
                 {
-                    textbox_ActivationKey.Text = (string)data.GetData(DataFormats.UnicodeText, true);
+                    textbox_ActivationKey.Text = (string)data.GetData(DataFormats.UnicodeText, true)??"";
                 }
             }
             catch (Exception)
