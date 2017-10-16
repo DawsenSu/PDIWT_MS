@@ -8,7 +8,7 @@
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     xmlns:local="clr-namespace:PDIWT_MS_CZ.Views.DetailUserControl"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="400"
+    d:DesignHeight="500"
     d:DesignWidth="500"
     Background="White"
     mc:Ignorable="d">
@@ -41,8 +41,8 @@
                 <Image
                     Grid.RowSpan="2"
                     Grid.Column="0"
-                    Width="150"
-                    Source="/PDIWT_MS_CZ;component/Image/bdun.png" />
+                    Width="200"
+                    Source="../../Image/Illustration/SidePier.png" />
                 <GroupBox
                     Grid.Row="0"
                     Grid.Column="1"

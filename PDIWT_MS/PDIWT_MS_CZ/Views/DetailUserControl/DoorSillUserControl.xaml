@@ -29,8 +29,8 @@
         </GroupBox>
         <GroupBox Grid.Row="1" Header="平面形状参数">
             <dxlc:LayoutControl>
-                <Image MaxWidth="250" Source="/PDIWT_MS_CZ;component/Image/mk.png" />
-                <dxlc:LayoutControl>
+                <Image MaxWidth="350" Source="../../Image/Illustration/DoorSill.png" />
+                <dxlc:LayoutControl MaxWidth="150">
                     <dxlc:LayoutGroup Orientation="Vertical">
                         <dxlc:LayoutItem Label="a=">
                             <dxe:TextEdit
@@ -44,8 +44,6 @@
                         <dxlc:LayoutItem Label="c=">
                             <dxe:TextEdit Text="{Binding MK_C, Mode=TwoWay}" />
                         </dxlc:LayoutItem>
-                    </dxlc:LayoutGroup>
-                    <dxlc:LayoutGroup Orientation="Vertical">
                         <dxlc:LayoutItem Label="d=">
                             <dxe:TextEdit
                                 Background="LightGray"

@@ -51,20 +51,17 @@
                     </StackPanel>
                 </dxlc:LayoutGroup.Header>
                 <dxlc:LayoutGroup Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=CheckBox_IShapeGrooving}">
-                    <Image MaxWidth="300" Source="/PDIWT_MS_CZ;component/Image/dbremoved.png" />
+                    <Image MaxWidth="350" Source="../../Image/Illustration/ShapeIGrooving.png" />
                     <GroupBox Header="参数列表">
                         <dxlc:LayoutControl Orientation="Vertical">
                             <dxlc:LayoutItem Label="切槽厚度=">
                                 <dxe:TextEdit Text="{Binding DB_Removed_Thinckness}" />
                             </dxlc:LayoutItem>
-                            <dxlc:LayoutItem Label="切槽顶长=">
+                            <dxlc:LayoutItem Label="切槽宽a=">
                                 <dxe:TextEdit Text="{Binding DB_Removed_A}" />
                             </dxlc:LayoutItem>
-                            <dxlc:LayoutItem Label="切槽底长=">
+                            <dxlc:LayoutItem Label="切槽宽b=">
                                 <dxe:TextEdit Text="{Binding DB_Removed_B}" />
-                            </dxlc:LayoutItem>
-                            <dxlc:LayoutItem Label="坡度n=">
-                                <dxe:TextEdit Text="{Binding DB_Removed_N}" />
                             </dxlc:LayoutItem>
                         </dxlc:LayoutControl>
                     </GroupBox>
@@ -79,18 +76,18 @@
                     </StackPanel>
                 </dxlc:LayoutGroup.Header>
                 <dxlc:LayoutGroup Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=CheckBox_TShapeGrooving}">
-                    <Image MaxWidth="300" Source="/PDIWT_MS_CZ;component/Image/dbremoved.png" />
-                    <dxlc:LayoutControl Orientation="Vertical">
+                    <Image MaxWidth="350" Source="../../Image/Illustration/ShapeTGrooving.png" />
+                    <dxlc:LayoutControl MaxWidth="150" Orientation="Vertical">
                         <dxlc:LayoutItem Label="切槽厚度=">
                             <dxe:TextEdit Text="{Binding DB_Removed_Thinckness}" />
                         </dxlc:LayoutItem>
-                        <dxlc:LayoutItem Label="切槽长度1=">
+                        <dxlc:LayoutItem Label="切槽长度a=">
                             <dxe:TextEdit Text="{Binding DB_Removed_A}" />
                         </dxlc:LayoutItem>
-                        <dxlc:LayoutItem Label="切槽长度2=">
+                        <dxlc:LayoutItem Label="切槽长度b=">
                             <dxe:TextEdit Text="{Binding DB_Removed_B}" />
                         </dxlc:LayoutItem>
-                        <dxlc:LayoutItem Label="切槽宽度1=">
+                        <dxlc:LayoutItem Label="切槽宽度c=">
                             <dxe:TextEdit Text="{Binding DB_Removed_C}" />
                         </dxlc:LayoutItem>
                         <dxlc:LayoutItem Label="坡度n=">

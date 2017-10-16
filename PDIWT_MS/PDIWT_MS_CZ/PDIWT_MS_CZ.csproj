@@ -188,8 +188,8 @@
       <HintPath>..\packages\EPPlus.DataExtractor.1.3.1\lib\EPPlus.DataExtractor.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PDIWTEncrypt">
-      <HintPath>..\..\MDLTemplateGenerator\PDIWTEncrypt\bin\Release\PDIWTEncrypt.dll</HintPath>
+    <Reference Include="PDIWT_Encrypt">
+      <HintPath>..\..\PDIWT_Bentley_Install\PDIWT_Encrypt\bin\Debug\PDIWT_Encrypt.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -245,6 +245,9 @@
     <Compile Include="Views\DetailUserControl\DoorSillUserControl.xaml.cs">
       <DependentUpon>DoorSillUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DetailUserControl\EmptyBoxSummaryUserControl.xaml.cs">
+      <DependentUpon>EmptyBoxSummaryUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DetailUserControl\EmptyRectBoxUserControl.xaml.cs">
       <DependentUpon>EmptyRectBoxUserControl.xaml</DependentUpon>
     </Compile>
@@ -256,6 +259,9 @@
     </Compile>
     <Compile Include="Views\DetailUserControl\SidePierUserControl.xaml.cs">
       <DependentUpon>SidePierUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DetailUserControl\WaterConveySysUserControl.xaml.cs">
+      <DependentUpon>WaterConveySysUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DetailUserControl\ZPlanEmptyBoxUserControl.xaml.cs">
       <DependentUpon>ZPlanEmptyBoxUserControl.xaml</DependentUpon>
@@ -299,6 +305,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\DetailUserControl\EmptyBoxSummaryUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DetailUserControl\EmptyRectBoxUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -312,6 +322,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DetailUserControl\SidePierUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DetailUserControl\WaterConveySysUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -383,7 +397,15 @@
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Image\Illustration\DoorSill.png" />
+    <Resource Include="Image\Illustration\localConcertationCulvert.png" />
+    <Resource Include="Image\Illustration\ShapeIGrooving.png" />
+    <Resource Include="Image\Illustration\ShapeTGrooving.png" />
+    <Resource Include="Image\Illustration\ShortCulvert.png" />
+    <Resource Include="Image\Illustration\SidePier.png" />
+    <Resource Include="Image\Illustration\WaterDivision.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\Icons\Cancel.ico" />
     <Resource Include="Image\Icons\Info.ico" />

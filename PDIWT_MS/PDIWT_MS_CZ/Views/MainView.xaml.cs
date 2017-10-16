@@ -73,24 +73,14 @@ namespace PDIWT_MS_CZ.Views
             ContentControl_Detail.Content = new DetailUserControl.DoorSillUserControl();
         }
 
-        private void ShortCulvert_TreeViewItem_Selected(object sender, RoutedEventArgs e)
+        private void WaterConveySys_TreeViewItem_OnSelected(object sender, RoutedEventArgs e)
         {
-            ContentControl_Detail.Content = new DetailUserControl.ShortCulvertUserControl();
+            ContentControl_Detail.Content = new DetailUserControl.WaterConveySysUserControl();
         }
 
-        private void LocalConcertationCulvert_TreeViewItem_Selected(object sender, RoutedEventArgs e)
+        private void EmptyBoxSummary_TreeViewItem_OnSelected(object sender, RoutedEventArgs e)
         {
-            ContentControl_Detail.Content = new DetailUserControl.LocalConcertationCulvertUserControl();
-        }
-
-        private void EmptyRectBox_TreeViewItem_Selected(object sender, RoutedEventArgs e)
-        {
-            ContentControl_Detail.Content = new DetailUserControl.EmptyRectBoxUserControl();
-        }
-
-        private void ZPlanEmptyBox_TreeViewItem_Selected(object sender, RoutedEventArgs e)
-        {
-            ContentControl_Detail.Content = new DetailUserControl.ZPlanEmptyBoxUserControl();
+            ContentControl_Detail.Content = new DetailUserControl.EmptyBoxSummaryUserControl();
         }
     }
 }

@@ -1,0 +1,38 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace PDIWT_MS_CZ.Views.DetailUserControl
+{
+    /// <summary>
+    /// WaterConveySysUserControl.xaml 的交互逻辑
+    /// </summary>
+    public partial class WaterConveySysUserControl : UserControl
+    {
+        public WaterConveySysUserControl()
+        {
+            InitializeComponent();
+        }
+
+        private void ShortCulvert_ListBoxItem_OnSelected(object sender, RoutedEventArgs e)
+        {
+            ContentControl_WaterConveySys.Content = new ShortCulvertUserControl();
+        }
+
+        private void LocalConcertationCulvert_ListBoxItem_OnSelected(object sender, RoutedEventArgs e)
+        {
+            ContentControl_WaterConveySys.Content = new LocalConcertationCulvertUserControl();
+        }
+    }
+}

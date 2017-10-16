@@ -18,7 +18,7 @@ namespace PDIWT_MS_CZ
         #region (PDIWT_MS CZ) command
         public static void DrawAll(string unparsed)
         {
-            PDIWTEncrypt.EncryptEntrance.BeforeKeyExecute(Views.MainView.ShowWindow);
+            PDIWT_Encrypt.Entrance.VerifyActivationState(Views.MainView.ShowWindow);
         }
         #endregion
     }

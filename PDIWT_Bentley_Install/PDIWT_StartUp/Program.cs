@@ -37,11 +37,27 @@ namespace PDIWT_StartUp
 
         public static void StartUpMSWithConfiguration(string mspath)
         {
-            ProcessStartInfo msprocessStartInfo = new ProcessStartInfo()
+            RegistryKey pdiwtKey = Registry.CurrentUser.OpenSubKey(@"Bentley\MicroStation\PDIWTMSADDIN");
+            var workspace = pdiwtKey?.GetValue("WorkSpace") as string;
+            var workset = pdiwtKey?.GetValue("WorkSet") as string;
+
+            ProcessStartInfo msprocessStartInfo;
+            if (string.IsNullOrEmpty(workspace) || string.IsNullOrEmpty(workset))
             {
-                FileName = mspath,
-                Arguments=@"-WKPDIWT -WWXQH"
-            };
+                msprocessStartInfo = new ProcessStartInfo()
+                {
+                    FileName = mspath,
+                };
+            }
+            else
+            {
+                msprocessStartInfo = new ProcessStartInfo()
+                {
+                    FileName = mspath,
+                    Arguments = $"-WK{workspace} -WW{workset}"
+                };
+            }
+
             Process.Start(msprocessStartInfo);            
         }
     }

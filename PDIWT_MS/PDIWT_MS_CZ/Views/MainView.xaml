@@ -70,7 +70,7 @@
             <dxb:BarItemSeparator />
             <!--<dxb:BarButtonItem Command="{Binding TestCommand}" Content="Test" />-->
         </dxb:MainMenuControl>
-        <!--  主面板  -->
+        <!--  主面板 todo:将此控件替换为tabControl  -->
         <dxlc:LayoutControl
             Grid.Row="1"
             Grid.ColumnSpan="2"
@@ -80,14 +80,8 @@
                 <TreeViewItem Header="底板" Selected="BaseBoard_TreeViewItem_Selected" />
                 <TreeViewItem Header="边墩" Selected="SidePier_TreeViewItem_Selected" />
                 <TreeViewItem Header="门槛" Selected="DoorSill_TreeViewItem_Selected" />
-                <TreeViewItem Header="输水系统">
-                    <TreeViewItem Header="短廊道输水" Selected="ShortCulvert_TreeViewItem_Selected" />
-                    <TreeViewItem Header="局部集中输水" Selected="LocalConcertationCulvert_TreeViewItem_Selected" />
-                </TreeViewItem>
-                <TreeViewItem Header="空箱">
-                    <TreeViewItem Header="长方形空箱" Selected="EmptyRectBox_TreeViewItem_Selected" />
-                    <TreeViewItem Header="棱柱空箱" Selected="ZPlanEmptyBox_TreeViewItem_Selected" />
-                </TreeViewItem>
+                <TreeViewItem Header="输水系统" Selected="WaterConveySys_TreeViewItem_OnSelected" />
+                <TreeViewItem Header="空箱" Selected="EmptyBoxSummary_TreeViewItem_OnSelected" />
             </TreeView>
             <ContentControl Name="ContentControl_Detail">
                 <Grid

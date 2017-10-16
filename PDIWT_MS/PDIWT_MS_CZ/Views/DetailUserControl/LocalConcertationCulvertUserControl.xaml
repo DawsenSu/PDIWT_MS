@@ -38,7 +38,7 @@
             <dxlc:LayoutGroup View="Tabs">
                 <dxlc:LayoutGroup Header="俯视图平面参数">
                     <dxlc:LayoutControl>
-                        <Image MaxWidth="200" Source="../../Image/ssld.png" />
+                        <Image MaxWidth="200" Source="../../Image/Illustration/localConcertationCulvert.png" />
                         <dxlc:LayoutGroup Margin="5,0" Orientation="Vertical">
                             <GroupBox Header="长度参数">
                                 <dxlc:LayoutControl Orientation="Horizontal">
@@ -97,7 +97,7 @@
                         </StackPanel>
                     </dxlc:LayoutGroup.Header>
                     <dxlc:LayoutControl Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=CheckBox_WaterDivision}">
-                        <Image MaxWidth="250" Source="../../Image/fld.png" />
+                        <Image MaxWidth="250" Source="../../Image/Illustration/WaterDivision.png" />
                         <dxlc:LayoutControl Orientation="Vertical">
                             <dxlc:LayoutItem Label="R1=">
                                 <dxe:TextEdit Text="{Binding DivisionPier_R1}" />
@@ -108,10 +108,10 @@
                             <dxlc:LayoutItem Label="R3=">
                                 <dxe:TextEdit Text="{Binding DivisionPier_R3}" />
                             </dxlc:LayoutItem>
-                            <dxlc:LayoutItem Label="A=">
+                            <dxlc:LayoutItem Label="a=">
                                 <dxe:TextEdit Text="{Binding DivisionPier_A}" />
                             </dxlc:LayoutItem>
-                            <dxlc:LayoutItem Label="B=">
+                            <dxlc:LayoutItem Label="b=">
                                 <dxe:TextEdit Text="{Binding DivisionPier_B}" />
                             </dxlc:LayoutItem>
                         </dxlc:LayoutControl>
