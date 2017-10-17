@@ -23,6 +23,7 @@ namespace PDIWT_MS_CZ.Views.DetailUserControl
         public ShortCulvertUserControl()
         {
             InitializeComponent();
+            DataContext = new ViewModels.DetailUserControl.ShortCulvertUCViewModel();
         }
     }
 }

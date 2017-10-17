@@ -57,30 +57,5 @@ namespace PDIWT_MS_CZ.Views
             m_wpfHelper.Dispose();
             m_windowhost = null;
         }
-
-        private void BaseBoard_TreeViewItem_Selected(object sender, RoutedEventArgs e)
-        {
-            ContentControl_Detail.Content = new DetailUserControl.BaseBoardUserControl();
-        }
-
-        private void SidePier_TreeViewItem_Selected(object sender, RoutedEventArgs e)
-        {
-            ContentControl_Detail.Content = new DetailUserControl.SidePierUserControl();
-        }
-
-        private void DoorSill_TreeViewItem_Selected(object sender, RoutedEventArgs e)
-        {
-            ContentControl_Detail.Content = new DetailUserControl.DoorSillUserControl();
-        }
-
-        private void WaterConveySys_TreeViewItem_OnSelected(object sender, RoutedEventArgs e)
-        {
-            ContentControl_Detail.Content = new DetailUserControl.WaterConveySysUserControl();
-        }
-
-        private void EmptyBoxSummary_TreeViewItem_OnSelected(object sender, RoutedEventArgs e)
-        {
-            ContentControl_Detail.Content = new DetailUserControl.EmptyBoxSummaryUserControl();
-        }
     }
 }

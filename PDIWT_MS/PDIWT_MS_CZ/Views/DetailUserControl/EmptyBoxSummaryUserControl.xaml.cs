@@ -24,5 +24,17 @@ namespace PDIWT_MS_CZ.Views.DetailUserControl
         {
             InitializeComponent();
         }
+
+        private void RectEmptyBox_ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            ListBox_EmtyBoxSummary.Items.Add(new ListBoxItem() {Content = "1"});
+            ContentControl_EmptyBoxDetail.Content = new RectEmptyBoxUserControl();
+        }
+
+        private void ZPlanEmptyBox_ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            ListBox_EmtyBoxSummary.Items.Add(new ListBoxItem() { Content = "2" });
+            ContentControl_EmptyBoxDetail.Content = new ZPlanEmptyBoxUserControl();
+        }
     }
 }

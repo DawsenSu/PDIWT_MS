@@ -25,24 +25,54 @@
             <dxlc:LayoutControl>
                 <dxlc:LayoutGroup Orientation="Vertical">
                     <dxlc:LayoutItem Label="船闸长(顺河向)=">
-                        <dxe:TextEdit Text="{Binding DB_Length}" />
+                        <dxe:TextEdit Text="{Binding CZ_BaseBoard.BaseBoardLength}" />
                     </dxlc:LayoutItem>
                     <dxlc:LayoutItem Label="船闸宽(横河向)=">
-                        <dxe:TextEdit Text="{Binding DB_Width}" />
+                        <dxe:TextEdit Text="{Binding CZ_BaseBoard.BaseBoardWidth}" />
                     </dxlc:LayoutItem>
                 </dxlc:LayoutGroup>
                 <dxlc:LayoutGroup Orientation="Vertical">
                     <dxlc:LayoutItem Label="高度=">
-                        <dxe:TextEdit Text="{Binding DB_Thickness}" />
+                        <dxe:TextEdit Text="{Binding CZ_BaseBoard.BaseBoardHeight}" />
                     </dxlc:LayoutItem>
                     <dxlc:LayoutItem Label="口门宽度=">
-                        <dxe:TextEdit Text="{Binding DB_DoorWidth}" />
+                        <dxe:TextEdit Text="{Binding CZ_BaseBoard.EntranceWidth}" />
                     </dxlc:LayoutItem>
                 </dxlc:LayoutGroup>
             </dxlc:LayoutControl>
         </GroupBox>
-        <dxlc:LayoutGroup Grid.Row="1" View="Tabs">
-            <!--  I型切槽  -->
+        <GroupBox Grid.Row="1">
+            <GroupBox.Header>
+                <CheckBox
+                    Name="CheckBox_TShapeGrooving"
+                    Content="T型切槽"
+                    IsChecked="{Binding CZ_BaseBoard.IsGrooving}" />
+            </GroupBox.Header>
+            <dxlc:LayoutGroup Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=CheckBox_TShapeGrooving}">
+                <Image MaxWidth="350" Source="../../Image/Illustration/ShapeTGrooving.png" />
+                <dxlc:LayoutControl Orientation="Vertical">
+                    <dxlc:LayoutItem Label="切槽厚度=">
+                        <dxe:TextEdit Text="{Binding CZ_BaseBoard.TGrooving.GroovingHeight}" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="切槽长度a=">
+                        <dxe:TextEdit Text="{Binding CZ_BaseBoard.TGrooving.GroovingBackLength}" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="切槽长度b=">
+                        <dxe:TextEdit Text="{Binding CZ_BaseBoard.TGrooving.GroovingFrontLength}" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="切槽宽度c=">
+                        <dxe:TextEdit Text="{Binding CZ_BaseBoard.TGrooving.GroovingWidth}" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="坡度n=">
+                        <dxe:TextEdit Text="{Binding CZ_BaseBoard.TGrooving.GroovingGradient}" />
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutControl>
+            </dxlc:LayoutGroup>
+        </GroupBox>
+        <!--<dxlc:LayoutGroup Grid.Row="1" View="Tabs">
+        -->
+        <!--  I型切槽  -->
+        <!--
             <dxlc:LayoutGroup>
                 <dxlc:LayoutGroup.Header>
                     <StackPanel Orientation="Horizontal">
@@ -67,7 +97,9 @@
                     </GroupBox>
                 </dxlc:LayoutGroup>
             </dxlc:LayoutGroup>
-            <!--  T型切槽  -->
+        -->
+        <!--  T型切槽  -->
+        <!--
             <dxlc:LayoutGroup>
                 <dxlc:LayoutGroup.Header>
                     <StackPanel Orientation="Horizontal">
@@ -96,6 +128,6 @@
                     </dxlc:LayoutControl>
                 </dxlc:LayoutGroup>
             </dxlc:LayoutGroup>
-        </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>-->
     </Grid>
 </UserControl>

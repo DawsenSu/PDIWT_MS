@@ -10,7 +10,33 @@
     Background="White"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <ResourceDictionary Source="../../XamlResources/CommonResource.xaml" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../XamlResources/CommonResource.xaml" />
+                <ResourceDictionary>
+                    <DataTemplate x:Key="DataTemplate.ListBoxItem.RectEmptyBox" DataType="{x:Type ListBoxItem}">
+                        <Border
+                            Margin="2"
+                            Background="Wheat"
+                            BorderBrush="SteelBlue"
+                            BorderThickness="1"
+                            CornerRadius="3">
+                            <Grid Margin="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <TextBlock
+                                    Grid.Row="0"
+                                    FontWeight="Bold"
+                                    Text="{TemplateBinding ListBoxItem.Content}" />
+                                <TextBlock Grid.Row="1" Text="长方体空箱" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid Margin="3">
         <Grid.RowDefinitions>
@@ -21,17 +47,23 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <ListBox Grid.Row="0" Grid.Column="0" />
+        <ListBox
+            Name="ListBox_EmtyBoxSummary"
+            Grid.Row="0"
+            Grid.Column="0"
+            HorizontalAlignment="Stretch"
+            VerticalContentAlignment="Stretch"
+            ItemTemplate="{StaticResource DataTemplate.ListBoxItem.RectEmptyBox}" />
         <StackPanel
             Grid.Row="1"
             Grid.Column="0"
             Orientation="Vertical">
-            <Button Content="插入长方体空箱" />
-            <Button Content="插入棱柱空箱" />
+            <Button Click="RectEmptyBox_ButtonBase_OnClick" Content="插入长方体空箱" />
+            <Button Click="ZPlanEmptyBox_ButtonBase_OnClick" Content="插入棱柱空箱" />
             <Button Content="删除所选空箱" Foreground="DarkRed" />
         </StackPanel>
         <ContentControl
-            Name="ContentControl_EmptyBoxSummary"
+            Name="ContentControl_EmptyBoxDetail"
             Grid.Row="0"
             Grid.RowSpan="2"
             Grid.Column="1"

@@ -221,6 +221,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\EdgeToForegroundConverter.cs" />
     <Compile Include="Models\BaffleProperty.cs" />
     <Compile Include="Models\BitmapHelper.cs" />
     <Compile Include="Models\GetCZQuantityTable.cs" />
@@ -237,6 +238,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\DetailUserControl\BaseBoardUCViewModel.cs" />
+    <Compile Include="ViewModels\DetailUserControl\DoorSillUCViewModel.cs" />
+    <Compile Include="ViewModels\DetailUserControl\LocalConcertationCulvertUCViewModel.cs" />
+    <Compile Include="ViewModels\DetailUserControl\RectEmptyBoxUCViewModel.cs" />
+    <Compile Include="ViewModels\DetailUserControl\ShortCulvertUCViewModel.cs" />
+    <Compile Include="ViewModels\DetailUserControl\SidePierUCViewModel.cs" />
     <Compile Include="ViewModels\ExcelOutputViewModel.cs" />
     <Compile Include="ViewModels\ViewCZViewModel.cs" />
     <Compile Include="Views\DetailUserControl\BaseBoardUserControl.xaml.cs">
@@ -248,8 +255,8 @@
     <Compile Include="Views\DetailUserControl\EmptyBoxSummaryUserControl.xaml.cs">
       <DependentUpon>EmptyBoxSummaryUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DetailUserControl\EmptyRectBoxUserControl.xaml.cs">
-      <DependentUpon>EmptyRectBoxUserControl.xaml</DependentUpon>
+    <Compile Include="Views\DetailUserControl\RectEmptyBoxUserControl.xaml.cs">
+      <DependentUpon>RectEmptyBoxUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DetailUserControl\LocalConcertationCulvertUserControl.xaml.cs">
       <DependentUpon>LocalConcertationCulvertUserControl.xaml</DependentUpon>
@@ -309,7 +316,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DetailUserControl\EmptyRectBoxUserControl.xaml">
+    <Page Include="Views\DetailUserControl\RectEmptyBoxUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -349,6 +356,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Resource Include="XamlResources\TabControlResource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
     <Resource Include="XamlResources\CommonResource.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

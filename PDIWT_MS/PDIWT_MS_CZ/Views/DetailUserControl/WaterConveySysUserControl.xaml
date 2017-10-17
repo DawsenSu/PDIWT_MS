@@ -27,9 +27,7 @@
             Margin="5,0"
             VerticalAlignment="Center"
             Text="输水系统类型:" />
-        <ComboBox
-            Grid.Row="0"
-            Grid.Column="1">
+        <ComboBox Grid.Row="0" Grid.Column="1">
             <ComboBoxItem Content="短廊道输水" Selected="ShortCulvert_ListBoxItem_OnSelected" />
             <ComboBoxItem Content="局部集中输水" Selected="LocalConcertationCulvert_ListBoxItem_OnSelected" />
         </ComboBox>

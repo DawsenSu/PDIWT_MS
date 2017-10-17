@@ -12,8 +12,8 @@ namespace PDIWT_MS_CZ.Models
     {
         public BaseBoard LH_BaseBoard { get; set; }
         public SidePier LH_SidePier { get; set; }
-        public List<EmptyRectBox> LH_EmptyRectBoxs { get; set; } = new List<EmptyRectBox>();
-        public List<EmptyZPlanBox> LH_EmptyZPlanBoxs { get; set; } = new List<EmptyZPlanBox>();
+        public List<RectEmptyBox> LH_EmptyRectBoxs { get; set; } = new List<RectEmptyBox>();
+        public List<ZPlanEmptyBox> LH_EmptyZPlanBoxs { get; set; } = new List<ZPlanEmptyBox>();
         public DoorSill LH_DoorSill { get; set; }
         public LocalConcertationCulvert LH_LocalConcertationCulvert { get; set; }
         public ShortCulvert LH_ShortCulvert { get; set; }
@@ -66,13 +66,14 @@ namespace PDIWT_MS_CZ.Models
     #region 边墩参数
     public class SidePier
     {
+        public double PierHeight { get; set; }
         public double PierXY_A { get; set; }
         public double PierXY_B { get; set; }
         public double PierXY_C { get; set; }
         public double PierXY_D { get; set; }
         public double PierXY_E { get; set; }
         public double PierXY_F { get; set; }
-        public double PierHeight { get; set; }
+        public bool IsChamfered { get; set; }
         public double PierChamfer_Tx { get; set; }
         public double PierChamfer_Ty { get; set; }
         public double PierChamfer_R { get; set; }
@@ -83,7 +84,7 @@ namespace PDIWT_MS_CZ.Models
     /// <summary>
     /// 长方形空箱
     /// </summary>
-    public class EmptyRectBox
+    public class RectEmptyBox
     {
         // 位置参数
         public double XDis { get; set; }
@@ -95,13 +96,13 @@ namespace PDIWT_MS_CZ.Models
         public double EmptyBoxWidth { get; set; }
         public double EmptyBoxHeight { get; set; }
 
-        public List<EmptyBoxEdgeChameferInfo> ChameferInfos { get; set; } = new List<EmptyBoxEdgeChameferInfo>();
+        public List<EmptyBoxEdgeChameferInfo> ChamferInfos { get; set; } = new List<EmptyBoxEdgeChameferInfo>();
     }
 
     /// <summary>
     /// Z平面任意形状空箱
     /// </summary>
-    public class EmptyZPlanBox
+    public class ZPlanEmptyBox
     {
         // 位置参数
         public double XDis { get; set; }
@@ -111,7 +112,7 @@ namespace PDIWT_MS_CZ.Models
         public double EmptyBoxHeight { get; set; }
 
         public List<DPoint2d> Point2Ds { get; set; } = new List<DPoint2d>();
-        public List<EmptyBoxEdgeChameferInfo> ChameferInfos { get; set; } = new List<EmptyBoxEdgeChameferInfo>();
+        public List<EmptyBoxEdgeChameferInfo> ChamferInfos { get; set; } = new List<EmptyBoxEdgeChameferInfo>();
     }
 
     /// <summary>
@@ -119,7 +120,8 @@ namespace PDIWT_MS_CZ.Models
     /// </summary>
     public class EmptyBoxEdgeChameferInfo
     {
-        public EdgeIndicator EdgeFlag { get; set; }
+        public int EdgeIndicator { get; set; }
+        public bool IsChamfered { get; set; }
         public double ChamferLength { get; set; }
         public double ChamferWidth { get; set; }
     }
@@ -158,13 +160,13 @@ namespace PDIWT_MS_CZ.Models
     /// </summary>
     public class DoorSill
     {
+        public double DoorSillHeight { get; set; }
         public double DoorSill_A { get; set; }
         public double DoorSill_B { get; set; }
         public double DoorSill_C { get; set; }
         public double DoorSill_D { get; set; }
         public double DoorSill_E { get; set; }
         public double DoorSill_F { get; set; }
-        public double DoorSillHeight { get; set; }
     }
     #endregion
 
@@ -174,6 +176,9 @@ namespace PDIWT_MS_CZ.Models
     /// </summary>
     public class LocalConcertationCulvert
     {
+        //位置参数
+        public double Culvert_Pier_BackDis { get; set; }
+
         //形状参数
         public double Culvert_Height { get; set; }
         public double Culvert_A { get; set; }
@@ -182,18 +187,20 @@ namespace PDIWT_MS_CZ.Models
         public double Culvert_D { get; set; }
         public double Culvert_E { get; set; }
         public double Culvert_F { get; set; }
+        public bool IsChamfered { get; set; }
         public double Culvert_Chamfer_R1 { get; set; }
         public double Culvert_Chamfer_R2 { get; set; }
         public double Culvert_Chamfer_R3 { get; set; }
         public double Culvert_Chamfer_R4 { get; set; }
-        //位置参数
-        public double Culvert_Pier_BackDis { get; set; }
-        //分流墩参数
-        public double WaterDivision_R1 { get; set; }
-        public double WaterDivision_R2 { get; set; }
-        public double WaterDivision_R3 { get; set; }
-        public double WaterDivision_A { get; set; }
-        public double WaterDivision_B { get; set; }
+        //消能工参数
+        public bool IsIncludeWaterDivision { get; set; }
+        public WaterDivision Culvert_WaterDivision { get; set; }
+
+        public bool IsIncludeEnergyDisspater { get; set; }
+        public EnergyDisspater Culvert_EnergyDisspater { get; set; }
+
+        public bool IsIncludeBaffle { get; set; }
+        public List<Baffle> Culvert_Baffle { get; set; }
     }
     /// <summary>
     /// 短廊道参数
@@ -205,7 +212,6 @@ namespace PDIWT_MS_CZ.Models
         public double Culvert_B { get; set; }
         public double Culvert_C { get; set; }
         public double Culvert_D { get; set; }
-        public double Culvert_E { get; set; }
         public double Culvert_R1 { get; set; }
         public double Culvert_R2 { get; set; }
         //位置参数
@@ -214,14 +220,24 @@ namespace PDIWT_MS_CZ.Models
     #endregion
 
     #region 消能工参数
+
     /// <summary>
-    /// 消能工参数：包括出水格栅参数及消力坎参数
+    /// 消能工参数：包括分流墩、出水格栅参数及消力坎参数
     /// </summary>
+    public class WaterDivision
+    {
+        public double WaterDivision_R1 { get; set; }
+        public double WaterDivision_R2 { get; set; }
+        public double WaterDivision_R3 { get; set; }
+        public double WaterDivision_A { get; set; }
+        public double WaterDivision_B { get; set; }
+    }
+
     public class EnergyDisspater
     {
         //出水格栅
         public double Grille_TwolineInterval { get; set; }
-        public List<double> GrillWidthList { get; set; } = new List<double>();
+        public List<double> GrilleWidthList { get; set; } = new List<double>();
         //消力坎参数
     }
 
