@@ -22,6 +22,28 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../XamlResources/TreeViewResource.xaml" />
                 <ResourceDictionary Source="../XamlResources/CommonResource.xaml" />
+                <ResourceDictionary>
+                    <!--<Style TargetType="{x:Type MenuItem}">
+                        <Setter Property="HeaderTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <Grid VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Header,RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>-->
+                    <Style TargetType="{x:Type Separator}">
+                        <Setter Property="LayoutTransform">
+                            <Setter.Value>
+                                <RotateTransform Angle="90" />
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Background" Value="AliceBlue" />
+                        <Setter Property="BorderBrush" Value="Black"/>
+                    </Style>
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -32,24 +54,47 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <!--  命令栏  -->
-        <dxb:MainMenuControl
-            Grid.Row="0"
-            Grid.ColumnSpan="2"
-            AllowCustomizationMenu="False"
-            AllowHide="False"
-            BarItemDisplayMode="ContentAndGlyph">
-            <dxb:BarButtonItem Content="验证参数" Glyph="/PDIWT_MS_CZ;component/Image/Icons/Check File.ico" />
-            <dxb:BarItemSeparator />
-            <dxb:BarButtonItem Content="预览图形" Glyph="/PDIWT_MS_CZ;component/Image/Icons/Preview Pane.ico" />
-            <dxb:BarButtonItem Content="重置参数" Glyph="{dx:DXImageOffice2013 Image=Reset_16x16.png}" />
-            <dxb:BarButtonItem Content="绘制" Glyph="/PDIWT_MS_CZ;component/Image/Icons/Create New.ico" />
-            <dxb:BarButtonItem Content="输出工程量" Glyph="/PDIWT_MS_CZ;component/Image/Icons/Microsoft Excel.ico" />
-            <dxb:BarItemSeparator />
-            <dxb:BarButtonItem Content="导入参数模板" Glyph="/PDIWT_MS_CZ;component/Image/Icons/Import.ico" />
-            <dxb:BarButtonItem Content="输出参数模板" Glyph="/PDIWT_MS_CZ;component/Image/Icons/Export.ico" />
-            <dxb:BarItemSeparator />
-            <dxb:BarButtonItem Command="{Binding TestCommand}" Content="Test" />
-        </dxb:MainMenuControl>
+        <Menu Grid.Row="0" Grid.ColumnSpan="2">
+            <MenuItem Header="验证参数">
+                <MenuItem.Icon>
+                    <Image Source="../Image/Icons/Check File.ico" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="预览图形">
+                <MenuItem.Icon>
+                    <Image Source="../Image/Icons/Preview Pane.ico" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="重置参数">
+                <MenuItem.Icon>
+                    <Image Source="../Image/Icons/Preview Pane.ico" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="绘制">
+                <MenuItem.Icon>
+                    <Image Source="../Image/Icons/Create New.ico" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="输出工程量">
+                <MenuItem.Icon>
+                    <Image Source="../Image/Icons/Microsoft Excel.ico" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="导入参数模板">
+                <MenuItem.Icon>
+                    <Image Source="../Image/Icons/Import.ico" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="输出参数模板">
+                <MenuItem.Icon>
+                    <Image Source="../Image/Icons/Export.ico" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator />
+            <MenuItem Command="{Binding TestCommand}" Header="Test" />
+        </Menu>
         <!--  主面板 todo:针对此控件进行美化  -->
         <TabControl
             Grid.Row="1"
@@ -74,25 +119,26 @@
             </TabItem>
         </TabControl>
         <!--  状态栏  -->
-        <dxb:StatusBarControl
+        <StatusBar
             Grid.Row="2"
-            Grid.ColumnSpan="2"
-            AllowCustomizationMenu="False"
-            Caption="Status Bar">
-            <dxb:BarStaticItem
-                BarItemDisplayMode="ContentAndGlyph"
-                Content="提示:"
-                Glyph="/PDIWT_MS_CZ;component/Image/Icons/Info.ico"
-                ItemMinWidth="400" />
-            <dxb:BarItemSeparator />
-            <dxb:BarStaticItem
-                BarItemDisplayMode="ContentAndGlyph"
-                Content="状态:"
-                Glyph="/PDIWT_MS_CZ;component/Image/Icons/Prompt.ico"
-                ItemMinWidth="200" />
-            <dxb:BarStaticItem Alignment="Far" Glyph="/PDIWT_MS_CZ;component/Image/Icons/Ok.ico" />
-        </dxb:StatusBarControl>
-
+            Background="#FF007ACC"
+            Foreground="White">
+            <StatusBarItem Width="400">
+                <StackPanel Orientation="Horizontal">
+                    <Image Height="15" Source="../Image/Icons/Info.ico" />
+                    <TextBlock Text="提示:" />
+                </StackPanel>
+            </StatusBarItem>
+            <StatusBarItem Width="200">
+                <StackPanel Orientation="Horizontal">
+                    <Image Height="15" Source="../Image/Icons/Prompt.ico" />
+                    <TextBlock Text=" 状态:" />
+                </StackPanel>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <Image Height="15" Source="../Image/Icons/Ok.ico" />
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </Window>
 
