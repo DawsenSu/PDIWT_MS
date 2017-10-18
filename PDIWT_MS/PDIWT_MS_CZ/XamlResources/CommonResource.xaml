@@ -21,16 +21,32 @@
         <Setter Property="MaxHeight" Value="20" />
         <Setter Property="Margin" Value="3" />
     </Style>
+    <Style TargetType="{x:Type TextBlock}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="2,0" />
+    </Style>
+    <Style TargetType="{x:Type TextBox}">
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Margin" Value="2,1" />
+    </Style>
     <SolidColorBrush x:Key="DisabledBackgroud" Color="{x:Static SystemColors.ControlDarkColor}" />
     <!--  DataGrid  -->
     <Style TargetType="{x:Type DataGrid}">
         <Setter Property="AutoGenerateColumns" Value="False" />
         <Setter Property="Margin" Value="3" />
         <Setter Property="Background" Value="White" />
+        <Setter Property="CanUserSortColumns" Value="False" />
+        <Setter Property="CanUserAddRows" Value="True" />
+        <Setter Property="CanUserDeleteRows" Value="True" />
+        <Setter Property="CanUserReorderColumns" Value="False" />
         <Setter Property="ContextMenu">
             <Setter.Value>
                 <ContextMenu StaysOpen="true">
-                    <Button Content="删行" />
+                    <MenuItem Header="删行">
+                        <MenuItem.Icon>
+                            <Image Source="../Image/Icons/Delete.ico" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </ContextMenu>
             </Setter.Value>
         </Setter>

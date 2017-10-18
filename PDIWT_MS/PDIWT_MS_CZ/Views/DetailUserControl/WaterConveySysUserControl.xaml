@@ -4,13 +4,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:PDIWT_MS_CZ.Views.DetailUserControl"
+    xmlns:localcon="clr-namespace:PDIWT_MS_CZ.Converters"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewd="clr-namespace:PDIWT_MS_CZ.Views.DetailUserControl"
     d:DesignHeight="400"
     d:DesignWidth="600"
     Background="White"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <ResourceDictionary Source="../../XamlResources/CommonResource.xaml" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../XamlResources/CommonResource.xaml" />
+                <ResourceDictionary>
+                    <viewd:ShortCulvertUserControl x:Key="ShortCulvertUserControl" DataContext="{Binding LH_ShortCulvert, Mode=TwoWay}" />
+                    <viewd:LocalConcertationCulvertUserControl x:Key="LocalConcertationCulvertUserControl" DataContext="{Binding LH_LocalConcertationCulvert, Mode=TwoWay}" />
+                    <localcon:IndexToContentConverter x:Key="IndexToContentConverter" />
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid Margin="5">
         <Grid.RowDefinitions>
@@ -27,14 +38,18 @@
             Margin="5,0"
             VerticalAlignment="Center"
             Text="输水系统类型:" />
-        <ComboBox Grid.Row="0" Grid.Column="1">
-            <ComboBoxItem Content="短廊道输水" Selected="ShortCulvert_ListBoxItem_OnSelected" />
-            <ComboBoxItem Content="局部集中输水" Selected="LocalConcertationCulvert_ListBoxItem_OnSelected" />
+        <ComboBox
+            Grid.Row="0"
+            Grid.Column="1"
+            SelectedIndex="{Binding LH_CulvertChoosenIndex}">
+            <ComboBoxItem Content="短廊道输水" />
+            <ComboBoxItem Content="局部集中输水" />
         </ComboBox>
         <ContentControl
-            Name="ContentControl_WaterConveySys"
             Grid.Row="1"
             Grid.ColumnSpan="2"
-            Margin="5" />
+            Margin="5"
+            Content="{Binding LH_CulvertChoosenIndex, Converter={StaticResource IndexToContentConverter}, Mode=OneWay}"
+            DataContext="{Binding}" />
     </Grid>
 </UserControl>

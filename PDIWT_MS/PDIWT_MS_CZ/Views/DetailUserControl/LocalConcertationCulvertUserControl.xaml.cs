@@ -23,16 +23,7 @@ namespace PDIWT_MS_CZ.Views.DetailUserControl
     {
         public LocalConcertationCulvertUserControl()
         {
-            DataContext = new ViewModels.DetailUserControl.LocalConcertationCulvertUCViewModel();
-
             InitializeComponent();
         }
-        //private void TableView_InitNewRow(object sender, InitNewRowEventArgs e)
-        //{
-        //    if (GridControl_Grill.VisibleRowCount % 2 == 0)
-        //        GridControl_Grill.SetCellValue(e.RowHandle, "IntervalType", "格栅间距");
-        //    else
-        //        GridControl_Grill.SetCellValue(e.RowHandle, "IntervalType", "格栅宽度");
-        //}
     }
 }

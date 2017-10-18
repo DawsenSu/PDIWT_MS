@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DevExpress.XtraExport.Helpers;
+using PDIWT_MS_CZ.Models;
 
 namespace PDIWT_MS_CZ.Views.DetailUserControl
 {
@@ -23,6 +25,26 @@ namespace PDIWT_MS_CZ.Views.DetailUserControl
         public ZPlanEmptyBoxUserControl()
         {
             InitializeComponent();
+            DataContext = new ViewModels.DetailUserControl.ZPlanEmptyBoxUCViewModel();
+        }
+
+        private void DrawXYPlan_ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            var xyplaninfos = DataGrid_Info.ItemsSource;
+            var xyplanpolygon = new Polygon()
+            {
+                Stroke = new SolidColorBrush(Colors.Red),
+                StrokeThickness = 1,
+                Fill = new SolidColorBrush(Colors.LightYellow),
+                RenderTransform = new ScaleTransform(100,100),
+                RenderTransformOrigin = new Point(0,0)
+            };
+            foreach (var xyplaninfo in xyplaninfos)
+            {
+                var info = (ZPlanInfo) xyplaninfo;
+                xyplanpolygon.Points.Add(new Point(info.Point2D.X,info.Point2D.Y));
+            }
+            Canvas_XY.Children.Add(xyplanpolygon);
         }
     }
 }

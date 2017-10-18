@@ -24,15 +24,5 @@ namespace PDIWT_MS_CZ.Views.DetailUserControl
         {
             InitializeComponent();
         }
-
-        private void ShortCulvert_ListBoxItem_OnSelected(object sender, RoutedEventArgs e)
-        {
-            ContentControl_WaterConveySys.Content = new ShortCulvertUserControl();
-        }
-
-        private void LocalConcertationCulvert_ListBoxItem_OnSelected(object sender, RoutedEventArgs e)
-        {
-            ContentControl_WaterConveySys.Content = new LocalConcertationCulvertUserControl();
-        }
     }
 }

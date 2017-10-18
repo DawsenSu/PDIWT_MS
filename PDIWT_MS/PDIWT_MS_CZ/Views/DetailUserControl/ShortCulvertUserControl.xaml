@@ -11,6 +11,7 @@
     d:DesignHeight="400"
     d:DesignWidth="500"
     Background="White"
+    DataContext="{Binding LH_ShortCulvert, Mode=TwoWay}"
     mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary Source="../../XamlResources/CommonResource.xaml" />
@@ -23,14 +24,32 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <GroupBox Grid.Row="0" Header="基本参数">
-            <dxlc:LayoutControl Orientation="Vertical">
-                <dxlc:LayoutItem Label="廊道宽度=">
-                    <dxe:TextEdit Text="{Binding CZ_ShortCulvert.Culvert_Width}" />
-                </dxlc:LayoutItem>
-                <dxlc:LayoutItem Label="廊道边壁距边墩距离=">
-                    <dxe:TextEdit Text="{Binding CZ_ShortCulvert.Culvert_Pier_BackDis}" />
-                </dxlc:LayoutItem>
-            </dxlc:LayoutControl>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Text="廊道宽度=" />
+                <TextBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Text="{Binding Culvert_Width}" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Text="廊道边壁距边墩距离=" />
+                <TextBox
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Text="{Binding Culvert_Pier_BackDis}" />
+            </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Header="侧视图参数">
             <Grid>
@@ -44,30 +63,78 @@
                     Source="../../Image/Illustration/ShortCulvert.png" />
                 <StackPanel Grid.Column="1" Orientation="Vertical">
                     <GroupBox Header="长度">
-                        <dxlc:LayoutGroup Orientation="Vertical">
-                            <dxlc:LayoutItem Label="a=">
-                                <dxe:TextEdit Text="{Binding CZ_ShortCulvert.Culvert_A}" />
-                            </dxlc:LayoutItem>
-                            <dxlc:LayoutItem Label="b=">
-                                <dxe:TextEdit Text="{Binding CZ_ShortCulvert.Culvert_B}" />
-                            </dxlc:LayoutItem>
-                            <dxlc:LayoutItem Label="c=">
-                                <dxe:TextEdit Text="{Binding CZ_ShortCulvert.Culvert_C}" />
-                            </dxlc:LayoutItem>
-                            <dxlc:LayoutItem Label="d=">
-                                <dxe:TextEdit Text="{Binding CZ_ShortCulvert.Culvert_D}" />
-                            </dxlc:LayoutItem>
-                        </dxlc:LayoutGroup>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Text="a=" />
+                            <TextBox
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Text="{Binding Culvert_A}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Text="b=" />
+                            <TextBox
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Text="{Binding Culvert_B}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                Text="c=" />
+                            <TextBox
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Text="{Binding Culvert_C}" />
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                Text="d=" />
+                            <TextBox
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Text="{Binding Culvert_D}" />
+                        </Grid>
                     </GroupBox>
                     <GroupBox Header="半径">
-                        <dxlc:LayoutGroup Orientation="Vertical">
-                            <dxlc:LayoutItem Label="R1=">
-                                <dxe:TextEdit Text="{Binding CZ_ShortCulvert.Culvert_R1}" />
-                            </dxlc:LayoutItem>
-                            <dxlc:LayoutItem Label="R2=">
-                                <dxe:TextEdit Text="{Binding CZ_ShortCulvert.Culvert_R2}" />
-                            </dxlc:LayoutItem>
-                        </dxlc:LayoutGroup>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Text="R1=" />
+                            <TextBox
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Text="{Binding Culvert_R1}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Text="R2=" />
+                            <TextBox
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Text="{Binding Culvert_R2}" />
+                        </Grid>
                     </GroupBox>
                 </StackPanel>
             </Grid>

@@ -48,7 +48,7 @@
             <dxb:BarButtonItem Content="导入参数模板" Glyph="/PDIWT_MS_CZ;component/Image/Icons/Import.ico" />
             <dxb:BarButtonItem Content="输出参数模板" Glyph="/PDIWT_MS_CZ;component/Image/Icons/Export.ico" />
             <dxb:BarItemSeparator />
-            <!--<dxb:BarButtonItem Command="{Binding TestCommand}" Content="Test" />-->
+            <dxb:BarButtonItem Command="{Binding TestCommand}" Content="Test" />
         </dxb:MainMenuControl>
         <!--  主面板 todo:针对此控件进行美化  -->
         <TabControl
@@ -58,16 +58,16 @@
             KeyboardNavigation.TabNavigation="Cycle"
             TabStripPlacement="Left">
             <TabItem Header="底板">
-                <DetailUC:BaseBoardUserControl />
+                <DetailUC:BaseBoardUserControl DataContext="{Binding CZ_LockHeadParameters.LH_BaseBoard, Mode=TwoWay}" />
             </TabItem>
             <TabItem Header="边墩">
-                <DetailUC:SidePierUserControl />
+                <DetailUC:SidePierUserControl DataContext="{Binding CZ_LockHeadParameters.LH_SidePier, Mode=TwoWay}" />
             </TabItem>
             <TabItem Header="门槛">
-                <DetailUC:DoorSillUserControl />
+                <DetailUC:DoorSillUserControl DataContext="{Binding CZ_LockHeadParameters.LH_DoorSill, Mode=TwoWay}" />
             </TabItem>
             <TabItem Header="输水系统">
-                <DetailUC:WaterConveySysUserControl />
+                <DetailUC:WaterConveySysUserControl DataContext="{Binding CZ_LockHeadParameters, Mode=TwoWay}" />
             </TabItem>
             <TabItem Header="空箱">
                 <DetailUC:EmptyBoxSummaryUserControl />

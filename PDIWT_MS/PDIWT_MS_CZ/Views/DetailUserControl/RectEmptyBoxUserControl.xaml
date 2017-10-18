@@ -21,7 +21,11 @@
                     <SolidColorBrush x:Key="BrushXPlan" Color="Red" />
                     <SolidColorBrush x:Key="BrushYPlan" Color="LightGreen" />
                     <SolidColorBrush x:Key="BrushZPlan" Color="Blue" />
-                    <localCon:EdgeToForegroundConverter x:Key="EdgeToForegroundConverter" />
+                    <localCon:EdgeToForegroundConverter
+                        x:Key="EdgeToForegroundConverter"
+                        XBrush="{StaticResource BrushXPlan}"
+                        YBrush="{StaticResource BrushYPlan}"
+                        ZBrush="{StaticResource BrushZPlan}" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -68,6 +72,7 @@
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="{x:Type ListBoxItem}">
                             <Setter Property="Margin" Value="2" />
+                            <Setter Property="Foreground" Value="{Binding EdgeIndicator, Converter={StaticResource EdgeToForegroundConverter}, Mode=OneWay}" />
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type ListBoxItem}">
@@ -83,7 +88,6 @@
                                                 Grid.Column="0"
                                                 VerticalAlignment="Center"
                                                 Content="{Binding EdgeIndicator}"
-                                                Foreground="Red"
                                                 IsChecked="{Binding IsChamfered}" />
                                             <TextBlock
                                                 Grid.Column="1"

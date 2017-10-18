@@ -222,6 +222,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\EdgeToForegroundConverter.cs" />
+    <Compile Include="Converters\IndexToContentConverter.cs" />
     <Compile Include="Models\BaffleProperty.cs" />
     <Compile Include="Models\BitmapHelper.cs" />
     <Compile Include="Models\GetCZQuantityTable.cs" />
@@ -238,12 +239,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\DetailUserControl\BaseBoardUCViewModel.cs" />
-    <Compile Include="ViewModels\DetailUserControl\DoorSillUCViewModel.cs" />
-    <Compile Include="ViewModels\DetailUserControl\LocalConcertationCulvertUCViewModel.cs" />
     <Compile Include="ViewModels\DetailUserControl\RectEmptyBoxUCViewModel.cs" />
-    <Compile Include="ViewModels\DetailUserControl\ShortCulvertUCViewModel.cs" />
-    <Compile Include="ViewModels\DetailUserControl\SidePierUCViewModel.cs" />
+    <Compile Include="ViewModels\DetailUserControl\ZPlanEmptyBoxUCViewModel.cs" />
     <Compile Include="ViewModels\ExcelOutputViewModel.cs" />
     <Compile Include="ViewModels\ViewCZViewModel.cs" />
     <Compile Include="Views\DetailUserControl\BaseBoardUserControl.xaml.cs">

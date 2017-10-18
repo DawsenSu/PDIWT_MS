@@ -23,7 +23,6 @@ namespace PDIWT_MS_CZ.Views.DetailUserControl
         public SidePierUserControl()
         {
             InitializeComponent();
-            DataContext = new ViewModels.DetailUserControl.SidePierUCViewModel();
         }
     }
 }
