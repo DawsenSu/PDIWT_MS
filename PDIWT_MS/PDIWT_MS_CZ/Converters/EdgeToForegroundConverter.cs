@@ -19,9 +19,9 @@ namespace PDIWT_MS_CZ.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             int edge = (int) value;
-            if (edge <= 4)
+            if (edge <= 3)
                 return XBrush;
-            else if (edge>=9)
+            else if (edge>=8)
             {
                 return ZBrush;
             }

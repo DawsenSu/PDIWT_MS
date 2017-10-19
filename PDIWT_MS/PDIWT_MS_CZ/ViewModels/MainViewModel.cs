@@ -2,27 +2,38 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Windows;
+using System.IO;
+using System.Windows.Forms;
+using Bentley.DgnPlatformNET;
+using Bentley.GeometryNET;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
-using DevExpress.XtraPrinting.Native;
+using ExtendedXmlSerialization;
 using PDIWT_MS_CZ.Models;
-using PDIWT_MS_CZ.ViewModels.DetailUserControl;
-using PDIWT_MS_Tool.Views;
+using PDIWT_MS_CZ.Properties;
+
+using MessageBox = System.Windows.MessageBox;
 
 namespace PDIWT_MS_CZ.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        [Command]
-        public void Test()
+        public string Prompt
         {
-            MessageBox.Show(CZ_LockHeadParameters.LH_LocalConcertationCulvert.Culvert_Baffle.Count.ToString());
+            get { return GetProperty(() => Prompt); }
+            set { SetProperty(() => Prompt, value); }
+        }
+        public string Status
+        {
+            get { return GetProperty(() => Status); }
+            set { SetProperty(() => Status, value); }
         }
 
-        [BindableProperty]
-        public LockHeadParameters CZ_LockHeadParameters { get; set; }
-
+        public LockHeadParameters CZ_LockHeadParameters
+        {
+            get { return GetProperty(() => CZ_LockHeadParameters); }
+            set { SetProperty(() => CZ_LockHeadParameters, value); }
+        }
 
         public MainViewModel()
         {
@@ -108,16 +119,16 @@ namespace PDIWT_MS_CZ.ViewModels
                     Culvert_EnergyDisspater = new EnergyDisspater()
                     {
                         Grille_TwolineInterval = 1,
-                        GrilleWidthList = new List<GrillInterval>()
+                        GrilleWidthList = new ObservableCollection<GrillInterval>()
                         {
-                            new GrillInterval() {Interval = 1},
-                            new GrillInterval() {Interval =2},
-                            new GrillInterval() {Interval = 3},
-                            new GrillInterval() {Interval = 4}
+                            new GrillInterval() {Interval = 1, RoundChamferRadius = 1},
+                            new GrillInterval() {Interval =2 ,RoundChamferRadius = 2},
+                            new GrillInterval() {Interval = 3, RoundChamferRadius = 3},
+                            new GrillInterval() {Interval = 4, RoundChamferRadius = 4}
                         }
                     },
                     IsIncludeBaffle = true,
-                    Culvert_Baffle = new List<Baffle>()
+                    Culvert_Baffle = new ObservableCollection<Baffle>()
                     {
                         new Baffle() {Baffle_MidMidDis = 1, Baffle_Height = 2, Baffle_Width = 3},
                         new Baffle() {Baffle_MidMidDis = 12, Baffle_Height = 22, Baffle_Width = 32},
@@ -125,8 +136,236 @@ namespace PDIWT_MS_CZ.ViewModels
                         new Baffle() {Baffle_MidMidDis = 14, Baffle_Height = 24, Baffle_Width = 34},
                         new Baffle() {Baffle_MidMidDis = 15, Baffle_Height = 25, Baffle_Width = 35}
                     }
+                },
+                LH_EmptyRectBoxs = new ObservableCollection<RectEmptyBox>()
+                {
+                    new RectEmptyBox()
+                    {
+                        XDis = 1,
+                        YDis = 2,
+                        ZDis = 3,
+                        EmptyBoxLength = 4,
+                        EmptyBoxWidth = 5,
+                        EmptyBoxHeight = 6,
+                        ChamferInfos = new ObservableCollection<EmptyBoxEdgeChameferInfo>()
+                        {
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 0,
+                                ChamferLength = 0,
+                                ChamferWidth = 0
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 1,
+                                ChamferLength = 1,
+                                ChamferWidth = 1
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 2,
+                                ChamferLength = 2,
+                                ChamferWidth = 2
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 3,
+                                ChamferLength = 3,
+                                ChamferWidth = 3
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 4,
+                                ChamferLength = 4,
+                                ChamferWidth = 4
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 5,
+                                ChamferLength = 5,
+                                ChamferWidth = 5
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 6,
+                                ChamferLength = 6,
+                                ChamferWidth = 6
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 7,
+                                ChamferLength = 7,
+                                ChamferWidth = 7
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 8,
+                                ChamferLength = 8,
+                                ChamferWidth = 8
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 9,
+                                ChamferLength = 9,
+                                ChamferWidth = 9
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 10,
+                                ChamferLength = 10,
+                                ChamferWidth = 10
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 11,
+                                ChamferLength = 11,
+                                ChamferWidth = 11
+                            }
+                        }
+                    }
+                },
+                LH_EmptyZPlanBoxs = new ObservableCollection<ZPlanEmptyBox>()
+                {
+                    new ZPlanEmptyBox()
+                    {
+                        XDis = 1,
+                        YDis = 2,
+                        ZDis = 3,
+                        EmptyBoxHeight = 4,
+                        ZPlanInfos= new ObservableCollection<ZPlanInfo>()
+                        {
+                            new ZPlanInfo()
+                            {
+                                X =  0,
+                                Y=0,
+                                BoxEdgeChamferInfo= new EmptyBoxEdgeChameferInfo()
+                                {
+                                    EdgeIndicator = 0,
+                                    IsChamfered = true,
+                                    ChamferLength = 1,
+                                    ChamferWidth = 1
+                                }
+                            },
+                            new ZPlanInfo()
+                            {
+                                X=1,
+                                Y=0,
+                                BoxEdgeChamferInfo = new EmptyBoxEdgeChameferInfo()
+                                {
+                                    EdgeIndicator = 1,
+                                    IsChamfered = true,
+                                    ChamferLength = 2,
+                                    ChamferWidth = 2
+                                }
+                            },
+                            new ZPlanInfo()
+                            {
+                                X=1,
+                                Y=1,
+                                BoxEdgeChamferInfo = new EmptyBoxEdgeChameferInfo()
+                                {
+                                    EdgeIndicator = 2,
+                                    IsChamfered = true,
+                                    ChamferLength = 3,
+                                    ChamferWidth = 3
+                                }
+                            },
+                            new ZPlanInfo()
+                            {
+                                X = 0,
+                                Y = 1,
+                                BoxEdgeChamferInfo = new EmptyBoxEdgeChameferInfo()
+                                {
+                                    EdgeIndicator = 3,
+                                    IsChamfered = true,
+                                    ChamferLength = 4,
+                                    ChamferWidth = 4
+                                }
+                            }
+                        }
+                    }
                 }
             };
+            Prompt = "模块加载成功";
+            Status = Resources.Status_Success;
         }
+
+        [Command]
+        public void InputTemplate()
+        {
+            try
+            {
+                OpenFileDialog ofDialog = new OpenFileDialog()
+                {
+                    Title = "导入参数模板",
+                    Filter = Resources.XMLFilter
+                };
+                if (ofDialog.ShowDialog() == DialogResult.OK)
+                {
+                    ExtendedXmlSerializer serializer = new ExtendedXmlSerializer();
+                    string xmlstring = File.ReadAllText(ofDialog.FileName);
+                    CZ_LockHeadParameters = serializer.Deserialize<LockHeadParameters>(xmlstring);
+                    Prompt = ofDialog.FileName + "导入成功";
+                    Status = Resources.Status_Success;
+                }
+            }
+            catch (Exception e)
+            {
+                Prompt = "发生错误" + e.Message;
+                Status = Resources.Status_Fail;
+            }
+
+
+        }
+
+
+        [Command]
+        public void OutputTemplate()
+        {
+            try
+            {
+                SaveFileDialog sfDialog = new SaveFileDialog()
+                {
+                    Title = "导出参数模板",
+                    Filter = Resources.XMLFilter
+                };
+                if (sfDialog.ShowDialog() == DialogResult.OK)
+                {
+                    if (File.Exists(sfDialog.FileName))
+                        File.Delete(sfDialog.FileName);
+                    ExtendedXmlSerializer seriliSerializer = new ExtendedXmlSerializer();
+                    var xml = seriliSerializer.Serialize(CZ_LockHeadParameters);
+                    Console.WriteLine(xml);
+                    File.WriteAllText(sfDialog.FileName, xml);
+                    Prompt = "模板文件输出至" + sfDialog.FileName;
+                    Status = Resources.Status_Success;
+                }
+            }
+            catch (Exception e)
+            {
+                Prompt = "发生错误" + e.Message;
+                Status = Resources.Status_Fail;
+            }
+
+        }
+
+        [Command]
+        public void Test()
+        {
+            MessageBox.Show(CZ_LockHeadParameters.LH_LocalConcertationCulvert.Culvert_Baffle.Count.ToString());
+        }
+
     }
 }

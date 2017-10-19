@@ -286,6 +286,10 @@
                                 Width="*"
                                 Binding="{Binding Interval}"
                                 Header="距离" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding RoundChamferRadius}"
+                                Header="格栅圆倒角半径" />
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel

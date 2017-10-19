@@ -23,25 +23,23 @@
                 <ResourceDictionary Source="../XamlResources/TreeViewResource.xaml" />
                 <ResourceDictionary Source="../XamlResources/CommonResource.xaml" />
                 <ResourceDictionary>
-                    <!--<Style TargetType="{x:Type MenuItem}">
+                    <Style x:Key="SeparatorRectStyle" TargetType="{x:Type Rectangle}">
+                        <Setter Property="Width" Value="2" />
+                        <Setter Property="Height" Value="18" />
+                        <Setter Property="Fill" Value="LightSteelBlue" />
+                        <Setter Property="Focusable" Value="False" />
+                    </Style>
+                    <Style x:Key="MenuItemStyle" TargetType="{x:Type MenuItem}">
                         <Setter Property="HeaderTemplate">
                             <Setter.Value>
                                 <DataTemplate>
-                                    <Grid VerticalAlignment="Center">
-                                        <TextBlock Text="{Binding Header,RelativeSource={RelativeSource TemplatedParent}}"/>
-                                    </Grid>
+                                    <TextBlock
+                                        VerticalAlignment="Center"
+                                        Text="{Binding}"
+                                        TextAlignment="Center" />
                                 </DataTemplate>
                             </Setter.Value>
                         </Setter>
-                    </Style>-->
-                    <Style TargetType="{x:Type Separator}">
-                        <Setter Property="LayoutTransform">
-                            <Setter.Value>
-                                <RotateTransform Angle="90" />
-                            </Setter.Value>
-                        </Setter>
-                        <Setter Property="Background" Value="AliceBlue" />
-                        <Setter Property="BorderBrush" Value="Black"/>
                     </Style>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
@@ -55,44 +53,50 @@
         </Grid.RowDefinitions>
         <!--  命令栏  -->
         <Menu Grid.Row="0" Grid.ColumnSpan="2">
-            <MenuItem Header="验证参数">
+            <MenuItem Header="验证参数" Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Icon>
                     <Image Source="../Image/Icons/Check File.ico" />
                 </MenuItem.Icon>
             </MenuItem>
-            <Separator />
-            <MenuItem Header="预览图形">
+            <Rectangle Style="{StaticResource SeparatorRectStyle}" />
+            <MenuItem Header="预览图形" Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Icon>
                     <Image Source="../Image/Icons/Preview Pane.ico" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="重置参数">
+            <MenuItem Header="重置参数" Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Icon>
-                    <Image Source="../Image/Icons/Preview Pane.ico" />
+                    <Image Source="../Image/Icons/Reset.ico" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="绘制">
+            <MenuItem Header="绘制" Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Icon>
                     <Image Source="../Image/Icons/Create New.ico" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="输出工程量">
+            <MenuItem Header="输出工程量" Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Icon>
                     <Image Source="../Image/Icons/Microsoft Excel.ico" />
                 </MenuItem.Icon>
             </MenuItem>
-            <Separator />
-            <MenuItem Header="导入参数模板">
+            <Rectangle Style="{StaticResource SeparatorRectStyle}" />
+            <MenuItem
+                Command="{Binding InputTemplateCommand}"
+                Header="导入参数模板"
+                Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Icon>
                     <Image Source="../Image/Icons/Import.ico" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="输出参数模板">
+            <MenuItem
+                Command="{Binding OutputTemplateCommand}"
+                Header="输出参数模板"
+                Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Icon>
                     <Image Source="../Image/Icons/Export.ico" />
                 </MenuItem.Icon>
             </MenuItem>
-            <Separator />
+            <Rectangle Style="{StaticResource SeparatorRectStyle}" />
             <MenuItem Command="{Binding TestCommand}" Header="Test" />
         </Menu>
         <!--  主面板 todo:针对此控件进行美化  -->
@@ -115,7 +119,7 @@
                 <DetailUC:WaterConveySysUserControl DataContext="{Binding CZ_LockHeadParameters, Mode=TwoWay}" />
             </TabItem>
             <TabItem Header="空箱">
-                <DetailUC:EmptyBoxSummaryUserControl />
+                <DetailUC:EmptyBoxSummaryUserControl DataContext="{Binding CZ_LockHeadParameters, Mode=TwoWay}" />
             </TabItem>
         </TabControl>
         <!--  状态栏  -->
@@ -126,13 +130,13 @@
             <StatusBarItem Width="400">
                 <StackPanel Orientation="Horizontal">
                     <Image Height="15" Source="../Image/Icons/Info.ico" />
-                    <TextBlock Text="提示:" />
+                    <TextBlock Text="{Binding Prompt, Mode=TwoWay, StringFormat=提示:{0}}" />
                 </StackPanel>
             </StatusBarItem>
             <StatusBarItem Width="200">
                 <StackPanel Orientation="Horizontal">
                     <Image Height="15" Source="../Image/Icons/Prompt.ico" />
-                    <TextBlock Text=" 状态:" />
+                    <TextBlock Text="{Binding Status, Mode=TwoWay, StringFormat=状态:{0}}" />
                 </StackPanel>
             </StatusBarItem>
             <StatusBarItem HorizontalAlignment="Right">

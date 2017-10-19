@@ -18,12 +18,11 @@ namespace PDIWT_MS_CZ.Views.DetailUserControl
     /// <summary>
     /// EmptyRectBoxUserControl.xaml 的交互逻辑
     /// </summary>
-    public partial class RectEmptyBoxUserControl : UserControl
+    public partial class RectEmptyBoxWindow : Window
     {
-        public RectEmptyBoxUserControl()
+        public RectEmptyBoxWindow()
         {
             InitializeComponent();
-            DataContext = new ViewModels.DetailUserControl.RectEmptyBoxUCViewModel();
         }
     }
 }

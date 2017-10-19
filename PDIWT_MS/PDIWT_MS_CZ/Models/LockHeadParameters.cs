@@ -27,9 +27,9 @@ namespace PDIWT_MS_CZ.Models
         [BindableProperty]
         public LocalConcertationCulvert LH_LocalConcertationCulvert { get; set; }
         [BindableProperty]
-        public List<RectEmptyBox> LH_EmptyRectBoxs { get; set; } = new List<RectEmptyBox>();
+        public ObservableCollection<RectEmptyBox> LH_EmptyRectBoxs { get; set; } = new ObservableCollection<RectEmptyBox>();
         [BindableProperty]
-        public List<ZPlanEmptyBox> LH_EmptyZPlanBoxs { get; set; } = new List<ZPlanEmptyBox>();
+        public ObservableCollection<ZPlanEmptyBox> LH_EmptyZPlanBoxs { get; set; } = new ObservableCollection<ZPlanEmptyBox>();
         public bool IsParametersValid()
         {
             //todo: 添加参数合理性判断
@@ -139,7 +139,7 @@ namespace PDIWT_MS_CZ.Models
         public double EmptyBoxHeight { get; set; }
 
         [BindableProperty]
-        public List<EmptyBoxEdgeChameferInfo> ChamferInfos { get; set; } = new List<EmptyBoxEdgeChameferInfo>();
+        public ObservableCollection<EmptyBoxEdgeChameferInfo> ChamferInfos { get; set; } = new ObservableCollection<EmptyBoxEdgeChameferInfo>();
     }
 
     /// <summary>
@@ -159,13 +159,15 @@ namespace PDIWT_MS_CZ.Models
         public double EmptyBoxHeight { get; set; }
 
         [BindableProperty]
-        public List<ZPlanInfo> ZPlanInfos { get; set; } = new List<ZPlanInfo>();
+        public ObservableCollection<ZPlanInfo> ZPlanInfos { get; set; } = new ObservableCollection<ZPlanInfo>();
     }
 
     public class ZPlanInfo
     {
         [BindableProperty]
-        public DPoint2d Point2D { get; set; }
+        public double X { get; set; }
+        [BindableProperty]
+        public double Y { get; set; }
         [BindableProperty]
         public EmptyBoxEdgeChameferInfo BoxEdgeChamferInfo { get; set; }
     }
@@ -284,7 +286,7 @@ namespace PDIWT_MS_CZ.Models
         [BindableProperty]
         public bool IsIncludeBaffle { get; set; }
         [BindableProperty]
-        public List<Baffle> Culvert_Baffle { get; set; }
+        public ObservableCollection<Baffle> Culvert_Baffle { get; set; }
     }
     /// <summary>
     /// 短廊道参数
@@ -336,7 +338,7 @@ namespace PDIWT_MS_CZ.Models
         [BindableProperty]
         public double Grille_TwolineInterval { get; set; }
         [BindableProperty]
-        public List<GrillInterval> GrilleWidthList { get; set; } = new List<GrillInterval>();
+        public ObservableCollection<GrillInterval> GrilleWidthList { get; set; } = new ObservableCollection<GrillInterval>();
         //消力坎参数
     }
 
@@ -344,6 +346,8 @@ namespace PDIWT_MS_CZ.Models
     {
         [BindableProperty]
         public double Interval { get; set; }
+        [BindableProperty]
+        public double RoundChamferRadius { get; set; }
     }
 
     public class Baffle
@@ -355,6 +359,5 @@ namespace PDIWT_MS_CZ.Models
         [BindableProperty]
         public double Baffle_Height { get; set; }
     }
-
     #endregion
 }

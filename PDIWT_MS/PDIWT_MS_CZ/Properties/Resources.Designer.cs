@@ -68,5 +68,32 @@ namespace PDIWT_MS_CZ.Properties {
                 return ResourceManager.GetString("ExcelFilter", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 失败 的本地化字符串。
+        /// </summary>
+        internal static string Status_Fail {
+            get {
+                return ResourceManager.GetString("Status_Fail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 成功 的本地化字符串。
+        /// </summary>
+        internal static string Status_Success {
+            get {
+                return ResourceManager.GetString("Status_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 XML文件|*.xml 的本地化字符串。
+        /// </summary>
+        internal static string XMLFilter {
+            get {
+                return ResourceManager.GetString("XMLFilter", resourceCulture);
+            }
+        }
     }
 }
