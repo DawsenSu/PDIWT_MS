@@ -195,6 +195,10 @@
     <Reference Include="PDIWT_Encrypt">
       <HintPath>..\..\PDIWT_Bentley_Install\PDIWT_Encrypt\bin\Debug\PDIWT_Encrypt.dll</HintPath>
     </Reference>
+    <Reference Include="PDIWT_MS_CZ_CPP, Version=1.0.6502.25497, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\PDIWT_MS_CZ_CPP.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />

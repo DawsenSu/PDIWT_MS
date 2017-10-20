@@ -41,18 +41,18 @@ namespace PDIWT_MS_CZ.ViewModels
             {
                 LH_BaseBoard = new BaseBoard()
                 {
-                    BaseBoardLength = 100,
+                    BaseBoardLength = 400,
                     BaseBoardWidth = 200,
-                    BaseBoardHeight = 300,
+                    BaseBoardHeight = 100,
                     EntranceWidth = 400,
                     IsGrooving = true,
                     TGrooving = new ShapeTGrooving()
                     {
-                        GroovingHeight = 0,
-                        GroovingBackLength = 1,
-                        GroovingFrontLength = 2,
-                        GroovingWidth = 3,
-                        GroovingGradient = 4
+                        GroovingHeight = 50,
+                        GroovingBackLength = 30,
+                        GroovingFrontLength =20,
+                        GroovingWidth = 10,
+                        GroovingGradient = 1
                     }
                 },
                 LH_SidePier = new SidePier()
@@ -364,7 +364,9 @@ namespace PDIWT_MS_CZ.ViewModels
         [Command]
         public void Test()
         {
-            MessageBox.Show(CZ_LockHeadParameters.LH_LocalConcertationCulvert.Culvert_Baffle.Count.ToString());
+            //MessageBox.Show(CZ_LockHeadParameters.LH_LocalConcertationCulvert.Culvert_Baffle.Count.ToString());
+            PDIWT_MS_CZ_CPP.LockHeadDrawing Drawing = new PDIWT_MS_CZ_CPP.LockHeadDrawing(CZ_LockHeadParameters);
+            Drawing.DoDraw();
         }
 
     }

@@ -43,7 +43,7 @@
         <Setter Property="ContextMenu">
             <Setter.Value>
                 <ContextMenu StaysOpen="true">
-                    <MenuItem Header="删行">
+                    <MenuItem Command="Delete" Header="删行">
                         <MenuItem.Icon>
                             <Image Source="../Image/Icons/Delete.ico" />
                         </MenuItem.Icon>

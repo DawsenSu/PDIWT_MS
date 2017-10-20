@@ -96,6 +96,7 @@
                                 Width="*"
                                 Binding="{Binding Y, Mode=TwoWay}"
                                 Header="Y坐标" />
+                            <!--  todo 数据绑定似乎没效果,不能及时反映  -->
                             <DataGridCheckBoxColumn
                                 Width="auto"
                                 Binding="{Binding BoxEdgeChamferInfo.IsChamfered, Mode=TwoWay}"
@@ -114,7 +115,7 @@
                         Grid.Row="1"
                         MaxWidth="100"
                         HorizontalAlignment="Right"
-                        Click="DrawXYPlan_ButtonBase_OnClick"
+                        Click="ButtonBase_OnClick"
                         Content="绘制平面样图" />
                 </Grid>
             </Grid>

@@ -69,7 +69,7 @@
                     </Style>
                     <Style x:Key="ItemConatinerStyle_ZPlanBox" TargetType="{x:Type ListBoxItem}">
                         <Setter Property="Margin" Value="2" />
-                        <Setter Property="Background" Value="LightBlue" />
+                        <Setter Property="Background" Value="LightPink" />
                         <Setter Property="ContentTemplate">
                             <Setter.Value>
                                 <DataTemplate>

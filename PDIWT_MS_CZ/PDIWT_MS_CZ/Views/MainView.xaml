@@ -130,13 +130,13 @@
             <StatusBarItem Width="400">
                 <StackPanel Orientation="Horizontal">
                     <Image Height="15" Source="../Image/Icons/Info.ico" />
-                    <TextBlock Text="{Binding Prompt, Mode=TwoWay, StringFormat=提示:{0}}" />
+                    <TextBlock Text="{Binding Prompt, Mode=TwoWay, StringFormat=提示：{0}}" />
                 </StackPanel>
             </StatusBarItem>
             <StatusBarItem Width="200">
                 <StackPanel Orientation="Horizontal">
                     <Image Height="15" Source="../Image/Icons/Prompt.ico" />
-                    <TextBlock Text="{Binding Status, Mode=TwoWay, StringFormat=状态:{0}}" />
+                    <TextBlock Text="{Binding Status, Mode=TwoWay, StringFormat=状态：{0}}" />
                 </StackPanel>
             </StatusBarItem>
             <StatusBarItem HorizontalAlignment="Right">

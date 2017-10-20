@@ -29,7 +29,7 @@ namespace PDIWT_MS_CZ.Views.DetailUserControl
             InitializeComponent();
         }
 
-        private void DrawXYPlan_ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private void DrawZPlanShape()
         {
             Canvas_XY.Children.Clear();
 
@@ -56,7 +56,7 @@ namespace PDIWT_MS_CZ.Views.DetailUserControl
                 StrokeThickness = 2
             };
             Canvas_XY.Children.Add(polygon_drawing);
-            Canvas.SetLeft(polygon_drawing,10);
+            Canvas.SetLeft(polygon_drawing, 10);
             Canvas.SetTop(polygon_drawing, 10);
 
 
@@ -70,6 +70,12 @@ namespace PDIWT_MS_CZ.Views.DetailUserControl
                 Canvas.SetTop(text, point.Y + 11);
                 i++;
             }
+        }
+
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            DrawZPlanShape();
         }
     }
 }
