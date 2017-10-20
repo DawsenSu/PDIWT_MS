@@ -385,13 +385,6 @@
     <Resource Include="Image\Icons\Wharf.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PDIWT_MS_Tool\PDIWT_MS_Tool.csproj">
-      <Project>{767F5F7D-4A02-4EE9-870D-3488270FB842}</Project>
-      <Name>PDIWT_MS_Tool</Name>
-      <Private>False</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Image\Illustration\DoorSill.png" />
     <Resource Include="Image\Illustration\localConcertationCulvert.png" />
     <Resource Include="Image\Illustration\ShapeIGrooving.png" />

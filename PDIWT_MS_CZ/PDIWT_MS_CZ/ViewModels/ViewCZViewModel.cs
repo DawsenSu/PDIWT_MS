@@ -30,7 +30,7 @@ using DevExpress.Xpf.Grid.Native;
 using OfficeOpenXml;
 using PDIWT_MS_CZ.Views;
 using MessageBox = System.Windows.MessageBox;
-using PDIWT_MS_Tool.Extension;
+//using PDIWT_MS_Tool.Extension;
 
 namespace PDIWT_MS_CZ.ViewModels
 {
@@ -1378,7 +1378,7 @@ namespace PDIWT_MS_CZ.ViewModels
                             .WithProperty(p => p.ZDis, "G")
                             .GetData(2, row => row != sheet.Dimension.Rows + 1)
                             .ToList();
-                        HoleParamList = HoleProperties.ToObservableCollection();
+                        //HoleParamList = HoleProperties.ToObservableCollection();
                     }
                 }
 
