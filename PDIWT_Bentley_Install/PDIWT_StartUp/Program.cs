@@ -8,6 +8,7 @@ using System.Security.AccessControl;
 using System.Security.Permissions;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Management;
 
 namespace PDIWT_StartUp
 {

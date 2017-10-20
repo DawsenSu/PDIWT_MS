@@ -162,9 +162,15 @@ namespace PDIWT_Encrypt
                 ManagementObjectCollection moc = mc.GetInstances();
                 foreach (ManagementObject mo in moc)
                 {
-                    if ((bool)mo["IPEnabled"])
+                    //if ((bool)mo["IPEnabled"])
+                    //{
+                    //    mac = mo["MacAddress"].ToString();
+                    //    break;
+                    //}
+                    var tempmacobj = mo["IPEnabled"];
+                    if(tempmacobj!=null)
                     {
-                        mac = mo["MacAddress"].ToString();
+                        mac = tempmacobj.ToString();
                         break;
                     }
                 }
