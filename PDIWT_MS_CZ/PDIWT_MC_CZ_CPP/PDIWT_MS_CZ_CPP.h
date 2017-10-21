@@ -2,6 +2,7 @@
 
 #pragma once
 #include "Stdafx.h"
+#include <cstdlib>
 #include <PSolid\PSolidCoreAPI.h>
 
 using namespace System;
@@ -20,7 +21,11 @@ namespace PDIWT_MS_CZ_CPP {
 		property LockHeadParameters^ LH_LockHeadParameter;
 		void DoDraw();
 	private:
+		//Utilities Function
 		Transform GetModelTransform();
-		StatusInt DrawBaseBoard(EditElementHandleP);
+		bvector<DPoint3d> GetAddedPointVector(const DPoint3d, const bvector<DPoint3d>);
+		//Draw Function
+		StatusInt DrawBaseBoard(EditElementHandleP,DPoint3dCR);
+		StatusInt DrawBaseBoard_Cut(EditElementHandleP, DPoint3dCR);
 	};
 }

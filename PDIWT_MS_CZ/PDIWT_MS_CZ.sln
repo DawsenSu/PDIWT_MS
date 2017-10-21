@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDIWT_MS_CZ", "PDIWT_MS_CZ\PDIWT_MS_CZ.csproj", "{9449DDCE-4DD8-4F24-B6D8-31434E15CDFA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PDIWT_MC_CZ_CPP", "PDIWT_MC_CZ_CPP\PDIWT_MC_CZ_CPP.vcxproj", "{0F2B43F7-2364-43A5-A87A-9F14B3B5CB37}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PDIWT_MS_CZ_CPP", "PDIWT_MC_CZ_CPP\PDIWT_MC_CZ_CPP.vcxproj", "{0F2B43F7-2364-43A5-A87A-9F14B3B5CB37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,5 +42,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2C920049-1D5E-4E95-B20C-0A12D666A1E8}
 	EndGlobalSection
 EndGlobal

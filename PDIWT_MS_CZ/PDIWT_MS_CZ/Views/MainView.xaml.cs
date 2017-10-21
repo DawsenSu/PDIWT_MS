@@ -11,7 +11,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DevExpress.Xpf.Grid;
 using BMWPF = Bentley.MstnPlatformNET.WPF;
 
 namespace PDIWT_MS_CZ.Views
@@ -24,7 +23,8 @@ namespace PDIWT_MS_CZ.Views
         private MainView()
         {
             InitializeComponent();
-            this.DataContext = new ViewModels.MainViewModel();
+            var locator = new ViewModels.ViewModelLocator();
+            this.DataContext = locator.MainVM;
             m_wpfHelper = new BMWPF.WPFInteropHelper(this);
             m_wpfHelper.Attach(Program.Addin, true, "MainView");
         }

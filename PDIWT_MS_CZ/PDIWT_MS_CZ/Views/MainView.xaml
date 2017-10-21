@@ -4,16 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:DetailUC="clr-namespace:PDIWT_MS_CZ.Views.DetailUserControl"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
-    xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"
-    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
-    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
-    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
-    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
-    xmlns:dxn="http://schemas.devexpress.com/winfx/2008/xaml/navbar"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:vm="clr-namespace:PDIWT_MS_CZ.ViewModels"
     Title="闸首参数化"
     Width="800"
     Height="600">
@@ -81,7 +74,7 @@
             </MenuItem>
             <Rectangle Style="{StaticResource SeparatorRectStyle}" />
             <MenuItem
-                Command="{Binding InputTemplateCommand}"
+                Command="{Binding InputTemplate}"
                 Header="导入参数模板"
                 Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Icon>
@@ -89,7 +82,7 @@
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem
-                Command="{Binding OutputTemplateCommand}"
+                Command="{Binding OutputTemplate}"
                 Header="输出参数模板"
                 Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Icon>
@@ -97,7 +90,7 @@
                 </MenuItem.Icon>
             </MenuItem>
             <Rectangle Style="{StaticResource SeparatorRectStyle}" />
-            <MenuItem Command="{Binding TestCommand}" Header="Test" />
+            <MenuItem Command="{Binding Test}" Header="Test" />
         </Menu>
         <!--  主面板 todo:针对此控件进行美化  -->
         <TabControl

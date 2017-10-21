@@ -22,7 +22,26 @@ Transform PDIWT_MS_CZ_CPP::LockHeadDrawing::GetModelTransform()
 	return Transform::FromFixedPointAndScaleFactors(DPoint3d::FromZero(), modelscale, modelscale, modelscale);
 }
 
-StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawBaseBoard(EditElementHandleP _eeh)
+bvector<DPoint3d> PDIWT_MS_CZ_CPP::LockHeadDrawing::GetAddedPointVector(const DPoint3d anchorPoint, const bvector<DPoint3d> relativeLengthVector)
+{
+	bvector<DPoint3d> _resultpoints;
+	for (int index = 0; index < relativeLengthVector.size(); index++)
+	{
+		if (index == 0)
+		{
+			_resultpoints.push_back(DPoint3d::FromSumOf(anchorPoint,relativeLengthVector[index]));
+		}
+		else
+		{
+			_resultpoints.push_back(DPoint3d::FromSumOf(relativeLengthVector[index - 1], relativeLengthVector[index]));
+		}
+	}
+	return _resultpoints;
+}
+
+
+
+StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawBaseBoard(EditElementHandleP _eeh, DPoint3dCR anchorPoint)
 {
 	BaseBoard^ _baseboardparam = LH_LockHeadParameter->LH_BaseBoard;
 
@@ -42,6 +61,7 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawBaseBoard(EditElementHandleP _ee
 	ISolidKernelEntityPtr _outbaseboard;
 	if (SolidUtil::Create::BodyFromSolidPrimitive(_outbaseboard, *_boxptr, *ACTIVEMODEL) != SUCCESS)
 		return ERROR;
+
 	//Draw cut
 	if (_baseboardparam->IsGrooving)
 	{
@@ -50,21 +70,21 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawBaseBoard(EditElementHandleP _ee
 		double _offset = _cutparam->GroovingHeight / _cutparam->GroovingGradient;
 		bvector<DPoint3d> _bottom_section
 		{
-			{ _xCoord,_y_adjust },
-			{ _xCoord,_y_adjust - _cutparam->GroovingFrontLength },
-			{ _xCoord + (_baseboardparam->BaseBoardLength - _cutparam->GroovingWidth) / 2,_y_adjust - _cutparam->GroovingFrontLength },
-			{ _xCoord + (_baseboardparam->BaseBoardLength - _cutparam->GroovingWidth) / 2,_y_adjust - _cutparam->GroovingFrontLength - _cutparam->GroovingBackLength },
-			{ 0,_y_adjust - _cutparam->GroovingFrontLength - _cutparam->GroovingBackLength },
-			{ 0, _y_adjust }
+			DPoint3d{ _xCoord,_y_adjust },
+			DPoint3d{ _xCoord,_y_adjust - _cutparam->GroovingFrontLength },
+			DPoint3d{ _xCoord + (_baseboardparam->BaseBoardLength - _cutparam->GroovingWidth) / 2,_y_adjust - _cutparam->GroovingFrontLength },
+			DPoint3d{ _xCoord + (_baseboardparam->BaseBoardLength - _cutparam->GroovingWidth) / 2,_y_adjust - _cutparam->GroovingFrontLength - _cutparam->GroovingBackLength },
+			DPoint3d{ 0,_y_adjust - _cutparam->GroovingFrontLength - _cutparam->GroovingBackLength },
+			DPoint3d{ 0, _y_adjust }
 		};
 		bvector<DPoint3d> _top_section
 		{
-			{ _xCoord,_y_adjust, _cutparam->GroovingHeight},
-			{ _xCoord,_y_adjust - _cutparam->GroovingFrontLength + _offset, _cutparam->GroovingHeight },
-			{ _xCoord + (_baseboardparam->BaseBoardLength - _cutparam->GroovingWidth) / 2 + _offset,_y_adjust - _cutparam->GroovingFrontLength + _offset, _cutparam->GroovingHeight },
-			{ _xCoord + (_baseboardparam->BaseBoardLength - _cutparam->GroovingWidth) / 2 + _offset,_y_adjust - _cutparam->GroovingFrontLength - _cutparam->GroovingBackLength + _offset , _cutparam->GroovingHeight },
-			{ 0,_y_adjust - _cutparam->GroovingFrontLength - _cutparam->GroovingBackLength + _offset, _cutparam->GroovingHeight },
-			{ 0, _y_adjust, _cutparam->GroovingHeight }
+			DPoint3d{ _xCoord,_y_adjust, _cutparam->GroovingHeight},
+			DPoint3d{ _xCoord,_y_adjust - _cutparam->GroovingFrontLength + _offset, _cutparam->GroovingHeight },
+			DPoint3d{ _xCoord + (_baseboardparam->BaseBoardLength - _cutparam->GroovingWidth) / 2 + _offset,_y_adjust - _cutparam->GroovingFrontLength + _offset, _cutparam->GroovingHeight },
+			DPoint3d{ _xCoord + (_baseboardparam->BaseBoardLength - _cutparam->GroovingWidth) / 2 + _offset,_y_adjust - _cutparam->GroovingFrontLength - _cutparam->GroovingBackLength + _offset , _cutparam->GroovingHeight },
+			DPoint3d{ 0,_y_adjust - _cutparam->GroovingFrontLength - _cutparam->GroovingBackLength + _offset, _cutparam->GroovingHeight },
+			DPoint3d{ 0, _y_adjust, _cutparam->GroovingHeight }
 		};
 		CurveVectorPtr _bottom_cv = CurveVector::CreateLinear(_bottom_section, CurveVector::BOUNDARY_TYPE_Outer); //简化
 		CurveVectorPtr _top_cv = CurveVector::CreateLinear(_top_section, CurveVector::BOUNDARY_TYPE_Outer);
@@ -90,4 +110,19 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawBaseBoard(EditElementHandleP _ee
 		return SUCCESS;
 	}
 	return ERROR;
+}
+
+//此模块的anchor Point 地板前端底部中心点。
+//  ------------------*------------------
+// |									 |
+// |									 |
+// |									 |
+// |									 |
+//  -------------------------------------
+StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawBaseBoard_Cut(EditElementHandleP eeh, DPoint3dCR anchorPoint)
+{
+	ShapeTGrooving^ _cutparam = LH_LockHeadParameter->LH_BaseBoard->TGrooving;
+	double _offset = _cutparam->GroovingHeight / _cutparam->GroovingGradient;
+
+	return SUCCESS;
 }

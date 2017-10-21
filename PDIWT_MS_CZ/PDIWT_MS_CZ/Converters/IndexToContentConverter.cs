@@ -10,7 +10,7 @@ using System.Windows.Data;
 
 namespace PDIWT_MS_CZ.Converters
 {
-    class IndexToContentConverter:IValueConverter
+    public class IndexToContentConverter:IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

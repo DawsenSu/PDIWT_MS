@@ -4,35 +4,44 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
+
 using Bentley.DgnPlatformNET;
 using Bentley.GeometryNET;
-using DevExpress.Mvvm;
-using DevExpress.Mvvm.DataAnnotations;
+
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+
 using ExtendedXmlSerialization;
+
 using PDIWT_MS_CZ.Models;
 using PDIWT_MS_CZ.Properties;
 
 using MessageBox = System.Windows.MessageBox;
 
+
 namespace PDIWT_MS_CZ.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        private string _prompt;
         public string Prompt
         {
-            get { return GetProperty(() => Prompt); }
-            set { SetProperty(() => Prompt, value); }
-        }
-        public string Status
-        {
-            get { return GetProperty(() => Status); }
-            set { SetProperty(() => Status, value); }
+            get { return _prompt; }
+            set { Set(ref _prompt, value); }
         }
 
+        private string _status;
+        public string Status
+        {
+            get { return _status; }
+            set { Set(ref _status, value); }
+        }
+
+        private LockHeadParameters _cz_lockheadparameters;
         public LockHeadParameters CZ_LockHeadParameters
         {
-            get { return GetProperty(() => CZ_LockHeadParameters); }
-            set { SetProperty(() => CZ_LockHeadParameters, value); }
+            get { return _cz_lockheadparameters; }
+            set { Set(ref _cz_lockheadparameters, value); }
         }
 
         public MainViewModel()
@@ -302,8 +311,9 @@ namespace PDIWT_MS_CZ.ViewModels
             Status = Resources.Status_Success;
         }
 
-        [Command]
-        public void InputTemplate()
+        private RelayCommand _inputtemplate;
+        public RelayCommand InputTemplate => _inputtemplate?? (_inputtemplate = new RelayCommand(ExecuteInputTemplate));
+        private void ExecuteInputTemplate()
         {
             try
             {
@@ -326,13 +336,11 @@ namespace PDIWT_MS_CZ.ViewModels
                 Prompt = "发生错误" + e.Message;
                 Status = Resources.Status_Fail;
             }
-
-
         }
 
-
-        [Command]
-        public void OutputTemplate()
+        private RelayCommand _outputtemplate;
+        public RelayCommand OutputTemplate => _outputtemplate ?? (_outputtemplate = new RelayCommand(ExecuteOutputTemplate));
+        public void ExecuteOutputTemplate()
         {
             try
             {
@@ -361,12 +369,13 @@ namespace PDIWT_MS_CZ.ViewModels
 
         }
 
-        [Command]
-        public void Test()
+        private RelayCommand _test;
+        public RelayCommand Test => _test ?? (_test = new RelayCommand(ExecuteTest));
+        public void ExecuteTest()
         {
-            //MessageBox.Show(CZ_LockHeadParameters.LH_LocalConcertationCulvert.Culvert_Baffle.Count.ToString());
-            PDIWT_MS_CZ_CPP.LockHeadDrawing Drawing = new PDIWT_MS_CZ_CPP.LockHeadDrawing(CZ_LockHeadParameters);
-            Drawing.DoDraw();
+            MessageBox.Show(CZ_LockHeadParameters.LH_LocalConcertationCulvert.Culvert_Baffle.Count.ToString());
+            //PDIWT_MS_CZ_CPP.LockHeadDrawing Drawing = new PDIWT_MS_CZ_CPP.LockHeadDrawing(CZ_LockHeadParameters);
+            //Drawing.DoDraw();
         }
 
     }

@@ -10,7 +10,7 @@ using Brush = System.Drawing.Brush;
 
 namespace PDIWT_MS_CZ.Converters
 {
-    class EdgeToForegroundConverter:IValueConverter
+    public class EdgeToForegroundConverter:IValueConverter
     {
         public SolidColorBrush XBrush { get; set; }
         public SolidColorBrush YBrush { get; set; }

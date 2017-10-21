@@ -12,9 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DevExpress.Mvvm.Native;
-using DevExpress.Xpf.Core.Native;
-using DevExpress.XtraExport.Helpers;
 using PDIWT_MS_CZ.Models;
 
 namespace PDIWT_MS_CZ.Views.DetailUserControl
