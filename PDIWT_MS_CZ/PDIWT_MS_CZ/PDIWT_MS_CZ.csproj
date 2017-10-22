@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\..\..\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\PDIWT_ADDIN\</OutputPath>
+    <OutputPath>..\..\..\..\..\..\..\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -162,8 +162,7 @@
     <Reference Include="PDIWT_Encrypt">
       <HintPath>..\..\PDIWT_Bentley_Install\PDIWT_Encrypt\bin\Debug\PDIWT_Encrypt.dll</HintPath>
     </Reference>
-    <Reference Include="PDIWT_MS_CZ_CPP, Version=1.0.6504.16344, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="PDIWT_MS_CZ_CPP">
       <HintPath>..\..\..\..\..\..\..\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\PDIWT_ADDIN\PDIWT_MS_CZ_CPP.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />

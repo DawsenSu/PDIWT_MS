@@ -50,32 +50,32 @@ namespace PDIWT_MS_CZ.ViewModels
             {
                 LH_BaseBoard = new BaseBoard()
                 {
-                    BaseBoardLength = 400,
-                    BaseBoardWidth = 200,
-                    BaseBoardHeight = 100,
+                    BaseBoardLength = 200,
+                    BaseBoardWidth = 400,
+                    BaseBoardHeight = 50,
                     EntranceWidth = 400,
                     IsGrooving = true,
                     TGrooving = new ShapeTGrooving()
                     {
-                        GroovingHeight = 50,
+                        GroovingHeight = 5,
                         GroovingBackLength = 30,
-                        GroovingFrontLength =20,
-                        GroovingWidth = 10,
+                        GroovingFrontLength =30,
+                        GroovingWidth = 20,
                         GroovingGradient = 1
                     }
                 },
                 LH_SidePier = new SidePier()
                 {
-                    PierHeight = 1,
-                    PierXY_A = 2,
-                    PierXY_B = 3,
-                    PierXY_C = 4,
-                    PierXY_D = 5,
-                    PierXY_E = 6,
-                    PierXY_F = 7,
+                    PierHeight = 200,
+                    PierXY_A = 200,
+                    PierXY_B = 30,
+                    PierXY_C = 25,
+                    PierXY_D = 200,
+                    PierXY_E = 250,
+                    PierXY_F = 25,
                     IsChamfered = true,
-                    PierChamfer_Tx = 8,
-                    PierChamfer_Ty = 9,
+                    PierChamfer_Tx = 15,
+                    PierChamfer_Ty = 10,
                     PierChamfer_R = 10
                 },
                 LH_DoorSill = new DoorSill()

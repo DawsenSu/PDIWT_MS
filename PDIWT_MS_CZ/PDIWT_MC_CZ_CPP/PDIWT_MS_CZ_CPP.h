@@ -27,5 +27,6 @@ namespace PDIWT_MS_CZ_CPP {
 		//Draw Function
 		StatusInt DrawBaseBoard(ISolidKernelEntityPtr &,DPoint3dCR);
 		StatusInt DrawBaseBoard_Cut(ISolidKernelEntityPtr &, DPoint3dCR);
+		StatusInt DrawSidePier(ISolidKernelEntityPtr&, DPoint3dCR);
 	};
 }
