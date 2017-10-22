@@ -373,9 +373,9 @@ namespace PDIWT_MS_CZ.ViewModels
         public RelayCommand Test => _test ?? (_test = new RelayCommand(ExecuteTest));
         public void ExecuteTest()
         {
-            MessageBox.Show(CZ_LockHeadParameters.LH_LocalConcertationCulvert.Culvert_Baffle.Count.ToString());
-            //PDIWT_MS_CZ_CPP.LockHeadDrawing Drawing = new PDIWT_MS_CZ_CPP.LockHeadDrawing(CZ_LockHeadParameters);
-            //Drawing.DoDraw();
+            //MessageBox.Show(CZ_LockHeadParameters.LH_LocalConcertationCulvert.Culvert_Baffle.Count.ToString());
+            PDIWT_MS_CZ_CPP.LockHeadDrawing Drawing = new PDIWT_MS_CZ_CPP.LockHeadDrawing(CZ_LockHeadParameters);
+            Drawing.DoDraw();
         }
 
     }

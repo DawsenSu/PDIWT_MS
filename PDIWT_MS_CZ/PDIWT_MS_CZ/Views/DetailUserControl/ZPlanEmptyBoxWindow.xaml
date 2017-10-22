@@ -86,7 +86,8 @@
                     <DataGrid
                         Name="DataGrid_Info"
                         Grid.Row="0"
-                        ItemsSource="{Binding ZPlanInfos, Mode=TwoWay}">
+                        ItemsSource="{Binding ZPlanInfos, Mode=TwoWay}"
+                        LoadingRow="DataGrid_Info_LoadingRow">
                         <DataGrid.Columns>
                             <DataGridTextColumn
                                 Width="*"

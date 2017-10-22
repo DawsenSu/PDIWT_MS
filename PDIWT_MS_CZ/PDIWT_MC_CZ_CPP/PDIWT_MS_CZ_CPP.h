@@ -19,13 +19,13 @@ namespace PDIWT_MS_CZ_CPP {
 	public:
 		LockHeadDrawing(LockHeadParameters^);
 		property LockHeadParameters^ LH_LockHeadParameter;
-		void DoDraw();
+		StatusInt DoDraw();
 	private:
 		//Utilities Function
 		Transform GetModelTransform();
-		bvector<DPoint3d> GetAddedPointVector(const DPoint3d, const bvector<DPoint3d>);
+		bvector<DPoint3d> GetAddedPointVector(const DPoint3d, const bvector<DPoint3d>&);
 		//Draw Function
-		StatusInt DrawBaseBoard(EditElementHandleP,DPoint3dCR);
-		StatusInt DrawBaseBoard_Cut(EditElementHandleP, DPoint3dCR);
+		StatusInt DrawBaseBoard(ISolidKernelEntityPtr &,DPoint3dCR);
+		StatusInt DrawBaseBoard_Cut(ISolidKernelEntityPtr &, DPoint3dCR);
 	};
 }

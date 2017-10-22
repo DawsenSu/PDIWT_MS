@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PDIWT_MS_CZ.Models;
+using System.Collections.ObjectModel;
 
 namespace PDIWT_MS_CZ.Views.DetailUserControl
 {
@@ -30,7 +31,8 @@ namespace PDIWT_MS_CZ.Views.DetailUserControl
         {
             Canvas_XY.Children.Clear();
 
-            var xyplaninfos = DataGrid_Info.ItemsSource;
+            var xyplaninfos = DataGrid_Info.ItemsSource as ObservableCollection<ZPlanInfo>;
+            if (xyplaninfos == null || xyplaninfos.Count == 0) return;
             PointCollection points = new PointCollection();
             foreach (var xyplaninfo in xyplaninfos)
             {
@@ -73,6 +75,11 @@ namespace PDIWT_MS_CZ.Views.DetailUserControl
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             DrawZPlanShape();
+        }
+
+        private void DataGrid_Info_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            e.Row.Header = e.Row.GetIndex();
         }
     }
 }
