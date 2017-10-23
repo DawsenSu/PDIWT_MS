@@ -80,13 +80,13 @@ namespace PDIWT_MS_CZ.ViewModels
                 },
                 LH_DoorSill = new DoorSill()
                 {
-                    DoorSillHeight = 1,
-                    DoorSill_A = 2,
-                    DoorSill_B = 3,
-                    DoorSill_C = 4,
-                    DoorSill_D = 5,
-                    DoorSill_E = 6,
-                    DoorSill_F = 7
+                    DoorSillHeight =10,
+                    DoorSill_A = 200,
+                    DoorSill_B = 50,
+                    DoorSill_C = 30,
+                    DoorSill_D = 70,
+                    DoorSill_E = 20,
+                    DoorSill_F = 30
                 },
                 LH_CulvertChoosenIndex = 1,
                 LH_ShortCulvert = new ShortCulvert()

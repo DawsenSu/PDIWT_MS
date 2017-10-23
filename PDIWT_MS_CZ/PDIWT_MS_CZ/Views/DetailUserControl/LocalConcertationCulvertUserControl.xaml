@@ -128,11 +128,14 @@
                                 Text="{Binding Culvert_F}" />
                         </Grid>
                     </GroupBox>
-                    <GroupBox
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Header="倒角参数">
-                        <Grid>
+                    <GroupBox Grid.Row="1" Grid.Column="1">
+                        <GroupBox.Header>
+                            <CheckBox
+                                Name="CheckBox_Chamfer"
+                                Content="倒角参数"
+                                IsChecked="{Binding IsChamfered}" />
+                        </GroupBox.Header>
+                        <Grid Visibility="{Binding ElementName=CheckBox_Chamfer, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
