@@ -35,12 +35,16 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DoDraw()
 	ISolidKernelEntityPtr _localconculvert_SKE;
 	if (DrawLocalConcertationCulvert(_localconculvert_SKE, DPoint3d{ 0,0,0 }))
 		return ERROR;
+
+	ISolidKernelEntityPtr _waterdiv_SKE;
+	if (DrawWaterDivision(_waterdiv_SKE, DPoint3d{ 0,0,0 }))
+		return ERROR;
 #pragma endregion
 
 
-	if ((SolidUtil::Modify::TransformBody(_localconculvert_SKE, GetModelTransform(DPoint3d::FromZero())) != SUCCESS)
+	if ((SolidUtil::Modify::TransformBody(_waterdiv_SKE, GetModelTransform(DPoint3d::FromZero())) != SUCCESS)
 		||
-		(SolidUtil::Convert::BodyToElement(_cz_whole, *_localconculvert_SKE, nullptr, *ACTIVEMODEL) != SUCCESS))
+		(SolidUtil::Convert::BodyToElement(_cz_whole, *_waterdiv_SKE, nullptr, *ACTIVEMODEL) != SUCCESS))
 		return ERROR;
 
 	_cz_whole.AddToModel();
@@ -77,6 +81,33 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::CloneMirrorSolidAndUnion(ISolidKerne
 		return ERROR;
 	if (SolidUtil::Modify::BooleanUnion(_left_inoutSoild, &_rightSolid, 1))
 		return ERROR;
+	return SUCCESS;
+}
+
+StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawRoundChamferCorner(CurveVectorPtr & _outcvptr, DPoint3dCR _anchorpoint, double _radius, double _phase)
+{
+	bvector<DPoint3d> _pts
+	{
+		DPoint3d::From(_radius,0),
+		DPoint3d::From(-_radius,_radius)
+	};
+	bvector<DPoint3d> _global_pts = GetAddedPointVector(_anchorpoint, _pts);
+	CurveVectorPtr _triangle_cv = CurveVector::CreateLinear(_global_pts, CurveVector::BOUNDARY_TYPE_Outer);
+	auto _arc = DEllipse3d::FromArcCenterStartEnd(DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(_radius, _radius)), _global_pts[1], _global_pts[2]);
+	CurveVectorPtr _arc_cv = CurveVector::CreateDisk(_arc);
+	_outcvptr = CurveVector::AreaDifference(*_triangle_cv, *_arc_cv);
+	Transform _rotation_trans = Transform::FromAxisAndRotationAngle(DRay3d::FromOriginAndVector(_anchorpoint, DVec3d::UnitZ()), PI / 2 * _phase);
+	if (!_outcvptr->TransformInPlace(_rotation_trans))
+		return ERROR;
+	return SUCCESS;
+}
+
+StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DebugCurveVector(CurveVectorCR _cv)
+{
+	EditElementHandle _eeh;
+	if (DraftingElementSchema::ToElement(_eeh, _cv, nullptr, true, *ACTIVEMODEL))
+		return ERROR;
+	_eeh.AddToModel();
 	return SUCCESS;
 }
 
@@ -249,13 +280,13 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawDoorSill(ISolidKernelEntityPtr& 
 	};
 	bvector<DPoint3d> _global_bottom_section = GetAddedPointVector(_anchorpoint, _bottom_section);
 	CurveVectorPtr _doorsill_bottom_left_cv = CurveVector::CreateLinear(_global_bottom_section, CurveVector::BOUNDARY_TYPE_Outer);
-	ISolidPrimitivePtr _doorsill_bottom_left_SP = ISolidPrimitive::CreateDgnExtrusion(DgnExtrusionDetail(_doorsill_bottom_left_cv, DVec3d::FromScale(DVec3d::UnitZ(), _doorsillparam->DoorSillHeight),true));
+	ISolidPrimitivePtr _doorsill_bottom_left_SP = ISolidPrimitive::CreateDgnExtrusion(DgnExtrusionDetail(_doorsill_bottom_left_cv, DVec3d::FromScale(DVec3d::UnitZ(), _doorsillparam->DoorSillHeight), true));
 	if (SolidUtil::Create::BodyFromSolidPrimitive(_outdoorsill, *_doorsill_bottom_left_SP, *ACTIVEMODEL))
 		return ERROR;
 	if (CloneMirrorSolidAndUnion(_outdoorsill, _anchorpoint))
 		return ERROR;
 	return SUCCESS;
-	
+
 }
 
 //此模块的anchor point为集中输水廊道下中心点
@@ -278,19 +309,45 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawLocalConcertationCulvert(ISolidK
 	{
 		DPoint3d::From(-_localconculvertparam->Culvert_A,0),
 		DPoint3d::From(0,_localconculvertparam->Culvert_E),
-		DPoint3d::From(0,_localconculvertparam->Culvert_C),
+		DPoint3d::From(_localconculvertparam->Culvert_C,0),
 		DPoint3d::From(0,-_localconculvertparam->Culvert_F),
-		DPoint3d::From(-(_localconculvertparam->Culvert_C-_localconculvertparam->Culvert_B),0),
-		DPoint3d::From(0,-(_localconculvertparam->Culvert_E-_localconculvertparam->Culvert_F-_localconculvertparam->Culvert_D)),
-		DPoint3d::From(_localconculvertparam->Culvert_A-_localconculvertparam->Culvert_B,0),
+		DPoint3d::From(-(_localconculvertparam->Culvert_C - _localconculvertparam->Culvert_B),0),
+		DPoint3d::From(0,-(_localconculvertparam->Culvert_E - _localconculvertparam->Culvert_F - _localconculvertparam->Culvert_D)),
+		DPoint3d::From(_localconculvertparam->Culvert_A - _localconculvertparam->Culvert_B,0),
 		DPoint3d::From(0,-_localconculvertparam->Culvert_D)
 	};
 	bvector<DPoint3d> _global_bottom_section_pts = GetAddedPointVector(_anchorpoint, _bottom_section);
 	CurveVectorPtr _bottom_section_cv = CurveVector::CreateLinear(_global_bottom_section_pts, CurveVector::BOUNDARY_TYPE_Outer);
+
 	if (_localconculvertparam->IsChamfered)
 	{
+		CurveVectorPtr _r1_cv, _r2_cv, _r3_cv, _r4_cv;
+		DrawRoundChamferCorner(_r1_cv, _global_bottom_section_pts[1], _localconculvertparam->Culvert_Chamfer_R1, 0);
+		DrawRoundChamferCorner(_r2_cv, _global_bottom_section_pts[6], _localconculvertparam->Culvert_Chamfer_R2, 0);
+		//DrawRoundChamferCorner(_r3_cv, _global_bottom_section_pts[2], _localconculvertparam->Culvert_Chamfer_R3, 4); //  这句有问题
+		DrawRoundChamferCorner(_r4_cv, _global_bottom_section_pts[5], _localconculvertparam->Culvert_Chamfer_R4, 3);
+
+		bvector<DPoint3d> _pts
+		{
+			DPoint3d::From(_localconculvertparam->Culvert_Chamfer_R3,0),
+			DPoint3d::From(-_localconculvertparam->Culvert_Chamfer_R3,-_localconculvertparam->Culvert_Chamfer_R3)
+		};
+		bvector<DPoint3d> _global_pts = GetAddedPointVector(_global_bottom_section_pts[2], _pts);
+		CurveVectorPtr _triangle_cv = CurveVector::CreateLinear(_global_pts, CurveVector::BOUNDARY_TYPE_Outer);
+		auto _arc = DEllipse3d::FromArcCenterStartEnd(DPoint3d::FromSumOf(_global_bottom_section_pts[2], DPoint3d::From(_localconculvertparam->Culvert_Chamfer_R3,- _localconculvertparam->Culvert_Chamfer_R3)), _global_pts[1], _global_pts[2]);
+		CurveVectorPtr _arc_cv = CurveVector::CreateDisk(_arc);
+		_r3_cv = CurveVector::AreaDifference(*_triangle_cv, *_arc_cv);
+
+
+		_bottom_section_cv = CurveVector::AreaUnion(*_bottom_section_cv, *_r2_cv);
+		_bottom_section_cv = CurveVector::AreaUnion(*_bottom_section_cv, *_r4_cv);
+		_bottom_section_cv = CurveVector::AreaDifference(*_bottom_section_cv, *_r1_cv);
+		_bottom_section_cv = CurveVector::AreaDifference(*_bottom_section_cv, *_r3_cv);
 
 	}
+
+	//if (DebugCurveVector(*_bottom_section_cv))
+	//	return ERROR;
 
 	ISolidPrimitivePtr _localconculvert_bottom_section_SP = ISolidPrimitive::CreateDgnExtrusion(DgnExtrusionDetail(_bottom_section_cv, DVec3d::FromScale(DVec3d::UnitZ(), _localconculvertparam->Culvert_Height), true));
 	if (SolidUtil::Create::BodyFromSolidPrimitive(_outconcertationculvert, *_localconculvert_bottom_section_SP, *ACTIVEMODEL))
@@ -300,4 +357,44 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawLocalConcertationCulvert(ISolidK
 
 	return SUCCESS;
 
+}
+
+StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawWaterDivision(ISolidKernelEntityPtr &_outwaterdiv, DPoint3dCR _anchorpoint)
+{
+	WaterDivision^ _waterdivparam = LH_LockHeadParameter->LH_LocalConcertationCulvert->Culvert_WaterDivision;
+	bvector<DPoint3d> _waterdiv_pts
+	{
+		DPoint3d::From(0,-_waterdivparam->WaterDivision_R3),
+		DPoint3d::From(0,2 * _waterdivparam->WaterDivision_R3),
+		DPoint3d::From(-_waterdivparam->WaterDivision_A,0),		//[3]
+		DPoint3d::From(-_waterdivparam->WaterDivision_R1,_waterdivparam->WaterDivision_R1),
+		DPoint3d::From(0,_waterdivparam->WaterDivision_B),
+		DPoint3d::From(-(_waterdivparam->WaterDivision_R2 - _waterdivparam->WaterDivision_R1),0),
+		DPoint3d::From(0,-(_waterdivparam->WaterDivision_B + _waterdivparam->WaterDivision_R1+2*_waterdivparam->WaterDivision_R3-_waterdivparam->WaterDivision_R2)),
+		DPoint3d::From(_waterdivparam->WaterDivision_R2,-_waterdivparam->WaterDivision_R2)
+	};
+	bvector<DPoint3d> _global_waterdiv_pts = GetAddedPointVector(_anchorpoint, _waterdiv_pts);
+	CurveVectorPtr _waterdiv_cv = CurveVector::Create(CurveVector::BOUNDARY_TYPE_Outer);
+	DEllipse3d _arc_r3 = DEllipse3d::FromArcCenterStartEnd(_anchorpoint, _global_waterdiv_pts[0], _global_waterdiv_pts[1]);
+	_waterdiv_cv->Add(ICurvePrimitive::CreateArc(_arc_r3));
+	_waterdiv_cv->Add(ICurvePrimitive::CreateLine(DSegment3d::From(_global_waterdiv_pts[2], _global_waterdiv_pts[3])));
+	DEllipse3d _arc_r1 = DEllipse3d::FromArcCenterStartEnd(DPoint3d::FromSumOf(_global_waterdiv_pts[3], DPoint3d::From(0, _waterdivparam->WaterDivision_R1)),
+		_global_waterdiv_pts[3], _global_waterdiv_pts[4]);
+	_waterdiv_cv->Add(ICurvePrimitive::CreateArc(_arc_r1));
+	_waterdiv_cv->Add(ICurvePrimitive::CreateLine(DSegment3d::From(_global_waterdiv_pts[4], _global_waterdiv_pts[5])));
+	double _r4 = _waterdivparam->WaterDivision_R2 - _waterdivparam->WaterDivision_R1;
+	DEllipse3d _arc_r4 = DEllipse3d::FromArcCenterStartEnd(DPoint3d::FromSumOf(_global_waterdiv_pts[5], DPoint3d::From(-_r4, 0)), _global_waterdiv_pts[5], _global_waterdiv_pts[6]);
+	_waterdiv_cv->Add(ICurvePrimitive::CreateArc(_arc_r4));
+	_waterdiv_cv->Add(ICurvePrimitive::CreateLine(DSegment3d::From(_global_waterdiv_pts[6], _global_waterdiv_pts[7])));
+	DEllipse3d _arc_r2 = DEllipse3d::FromArcCenterStartEnd(DPoint3d::FromSumOf(_global_waterdiv_pts[8], DPoint3d::From(0, _waterdivparam->WaterDivision_R2)), _global_waterdiv_pts[7], _global_waterdiv_pts[8]);
+	_waterdiv_cv->Add(ICurvePrimitive::CreateArc(_arc_r2));
+	_waterdiv_cv->Add(ICurvePrimitive::CreateLine(DSegment3d::From(_global_waterdiv_pts[8], _global_waterdiv_pts[1])));
+
+	if (DebugCurveVector(*_waterdiv_cv))
+		return ERROR;
+
+	ISolidPrimitivePtr _waterdiv_SP = ISolidPrimitive::CreateDgnExtrusion(DgnExtrusionDetail(_waterdiv_cv, DVec3d::FromScale(DVec3d::UnitZ(), LH_LockHeadParameter->LH_LocalConcertationCulvert->Culvert_Height), true));
+	if (SolidUtil::Create::BodyFromSolidPrimitive(_outwaterdiv, *_waterdiv_SP, *ACTIVEMODEL))
+		return ERROR;
+	return SUCCESS;
 }

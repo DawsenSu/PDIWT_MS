@@ -3,6 +3,7 @@
 #pragma once
 #include "Stdafx.h"
 #include <cstdlib>
+#include <cmath>
 #include <PSolid\PSolidCoreAPI.h>
 
 using namespace System;
@@ -28,12 +29,16 @@ namespace PDIWT_MS_CZ_CPP {
 		bvector<DPoint3d> GetAddedPointVector(const DPoint3d, const bvector<DPoint3d>&);
 		// 将传入的实体进行通过定位点的x平面的镜像复制合并后传出
 		StatusInt CloneMirrorSolidAndUnion(ISolidKernelEntityPtr&, DPoint3dCR);
+		// 画出切角curveVector进行进行切角合并(分别位于1,2,3,4象限)
+		StatusInt DrawRoundChamferCorner(CurveVectorPtr&, DPoint3dCR, double, double);
+		StatusInt DebugCurveVector(CurveVectorCR);
 		//Draw Function
-		StatusInt DrawBaseBoard(ISolidKernelEntityPtr &,DPoint3dCR);
+		StatusInt DrawBaseBoard(ISolidKernelEntityPtr &, DPoint3dCR);
 		StatusInt DrawBaseBoard_Cut(ISolidKernelEntityPtr &, DPoint3dCR); // DrawBaseBoar SubFunction
 		StatusInt DrawSidePier(ISolidKernelEntityPtr&, DPoint3dCR);
 		StatusInt DrawDoorSill(ISolidKernelEntityPtr&, DPoint3dCR);
 		StatusInt DrawLocalConcertationCulvert(ISolidKernelEntityPtr&, DPoint3dCR);
+		StatusInt DrawWaterDivision(ISolidKernelEntityPtr&, DPoint3dCR);
 		//StatusInt DrawShortCulvert(ISolidKernelEntityPtr&, DPoint3dCR);
 		//StatusInt DrawRectEmptyBox(ISolidKernelEntityPtr&, DPoint3dCR);
 		//StatusInt DrawZPlanEmptyBox(ISolidKernelEntityPtr&, DPoint3dCR);
