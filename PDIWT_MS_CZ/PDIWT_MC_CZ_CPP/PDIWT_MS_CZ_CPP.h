@@ -16,6 +16,11 @@ using namespace PDIWT_MS_CZ::Models;
 
 namespace PDIWT_MS_CZ_CPP {
 
+	public enum class Quadrant
+	{
+		One, Two, Three, Four
+	};
+
 	public ref class LockHeadDrawing
 	{
 
@@ -33,7 +38,7 @@ namespace PDIWT_MS_CZ_CPP {
 		// 将传入的实体进行通过定位点的x平面的镜像复制合并后传出
 		StatusInt CloneMirrorSolidAndUnion(ISolidKernelEntityPtr&, DPoint3dCR);
 		// 画出切角curveVector进行进行切角合并(分别位于1,2,3,4象限)
-		StatusInt DrawRoundChamferCorner(CurveVectorPtr&, DPoint3dCR, double, double);
+		StatusInt DrawRoundChamferCorner(CurveVectorPtr&, DPoint3dCR, double, Quadrant);
 		StatusInt DebugCurveVector(CurveVectorCR);
 		//Draw Function
 		StatusInt DrawBaseBoard(ISolidKernelEntityPtr &, DPoint3dCR);
@@ -46,4 +51,6 @@ namespace PDIWT_MS_CZ_CPP {
 		StatusInt DrawRectEmptyBoxes(bvector<ISolidKernelEntityPtr>&, DPoint3dCR);
 		StatusInt DrawZPlanEmptyBox(bvector<ISolidKernelEntityPtr>&, DPoint3dCR);
 	};
+
+
 }

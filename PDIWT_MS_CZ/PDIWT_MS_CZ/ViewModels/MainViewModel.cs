@@ -50,112 +50,508 @@ namespace PDIWT_MS_CZ.ViewModels
             {
                 LH_BaseBoard = new BaseBoard()
                 {
-                    BaseBoardLength = 200,
-                    BaseBoardWidth = 400,
-                    BaseBoardHeight = 50,
-                    EntranceWidth = 400,
+                    BaseBoardLength = 28000,
+                    BaseBoardWidth = 40000,
+                    BaseBoardHeight = 3000,
+                    EntranceWidth = 2300,
                     IsGrooving = true,
                     TGrooving = new ShapeTGrooving()
                     {
-                        GroovingHeight = 5,
-                        GroovingBackLength = 30,
-                        GroovingFrontLength =30,
-                        GroovingWidth = 20,
+                        GroovingHeight = 2000,
+                        GroovingBackLength = 8000,
+                        GroovingFrontLength =8000,
+                        GroovingWidth = 22000,
                         GroovingGradient = 1
                     }
                 },
                 LH_SidePier = new SidePier()
                 {
-                    PierHeight = 200,
-                    PierXY_A = 200,
-                    PierXY_B = 30,
-                    PierXY_C = 25,
-                    PierXY_D = 200,
-                    PierXY_E = 250,
-                    PierXY_F = 25,
+                    PierHeight = 17200,
+                    PierXY_A = 8500,
+                    PierXY_B = 2100,
+                    PierXY_C = 2100,
+                    PierXY_D = 10000,
+                    PierXY_E = 16000,
+                    PierXY_F = 2000,
                     IsChamfered = true,
-                    PierChamfer_Tx = 15,
-                    PierChamfer_Ty = 10,
-                    PierChamfer_R = 10
+                    PierChamfer_Tx = 1387,
+                    PierChamfer_Ty = 1387,
+                    PierChamfer_R = 1000
                 },
                 LH_DoorSill = new DoorSill()
                 {
-                    DoorSillHeight =10,
-                    DoorSill_A = 200,
-                    DoorSill_B = 50,
-                    DoorSill_C = 30,
-                    DoorSill_D = 70,
-                    DoorSill_E = 20,
-                    DoorSill_F = 30
+                    DoorSillHeight =4300,
+                    DoorSill_A = 23000,
+                    DoorSill_B = 2260,
+                    DoorSill_C = 6650,
+                    DoorSill_D = 10000,
+                    DoorSill_E = 2248.2215,
+                    DoorSill_F = 2754.7785
                 },
                 LH_CulvertChoosenIndex = 1,
                 LH_ShortCulvert = new ShortCulvert()
                 {
-                    Culvert_Pier_BackDis = 30,
-                    Culvert_Width = 50,
-                    Culvert_A = 100,
+                    Culvert_Pier_BackDis = 1800,
+                    Culvert_Width = 3500,
+                    Culvert_A = 700,
                     Culvert_B = 300,
-                    Culvert_C = 100,
-                    Culvert_D = 150,
-                    Culvert_R1 = 50,
-                    Culvert_R2 = 80
+                    Culvert_C = 16000,
+                    Culvert_D = 2000,
+                    Culvert_R1 = 2000,
+                    Culvert_R2 = 4600
                 },
                 LH_LocalConcertationCulvert = new LocalConcertationCulvert()
                 {
-                    Culvert_Height = 50,
-                    Culvert_Pier_BackDis = 2,
-                    Culvert_A = 200,
-                    Culvert_B = 50,
-                    Culvert_C = 100,
-                    Culvert_D = 50,
-                    Culvert_E = 200,
-                    Culvert_F = 30,
+                    Culvert_Height = 3500,
+                    Culvert_Pier_BackDis = 1500,
+                    Culvert_A = 18200,
+                    Culvert_B = 2600,
+                    Culvert_C = 4600,
+                    Culvert_D = 6300,
+                    Culvert_E = 24500,
+                    Culvert_F = 4700,
                     IsChamfered = true,
-                    Culvert_Chamfer_R1 = 9,
-                    Culvert_Chamfer_R2 = 8,
-                    Culvert_Chamfer_R3 = 11,
-                    Culvert_Chamfer_R4 = 12,
+                    Culvert_Chamfer_R1 = 6400,
+                    Culvert_Chamfer_R2 = 1800,
+                    Culvert_Chamfer_R3 = 1000,
+                    Culvert_Chamfer_R4 = 1000,
                     IsIncludeWaterDivision = true,
                     Culvert_WaterDivision = new WaterDivision()
                     {
-                        WaterDivision_A = 10,
-                        WaterDivision_B = 5,
-                        WaterDivision_R1 = 12,
-                        WaterDivision_R2 = 15,
-                        WaterDivision_R3 = 5
+                        WaterDivision_A = 650,
+                        WaterDivision_B = 0,
+                        WaterDivision_R1 = 4400,
+                        WaterDivision_R2 = 4700,
+                        WaterDivision_R3 = 250
                     },
                     IsIncludeEnergyDisspater = true,
                     Culvert_EnergyDisspater = new EnergyDisspater()
                     {
-                        Grille_TwolineInterval = 1,
+                        Grille_TwolineInterval = 500,
                         GrilleWidthList = new ObservableCollection<GrillInterval>()
                         {
-                            new GrillInterval() {Interval = 1, RoundChamferRadius = 1},
-                            new GrillInterval() {Interval =2 ,RoundChamferRadius = 2},
-                            new GrillInterval() {Interval = 3, RoundChamferRadius = 3},
-                            new GrillInterval() {Interval = 4, RoundChamferRadius = 4}
+                            new GrillInterval() {Interval = 250, RoundChamferRadius = 0},
+                            new GrillInterval() {Interval =300 ,RoundChamferRadius = 150},
+                            new GrillInterval() {Interval = 500, RoundChamferRadius = 0},
+                            new GrillInterval() {Interval =300 ,RoundChamferRadius = 150},
+                            new GrillInterval() {Interval = 500, RoundChamferRadius = 0},
+                            new GrillInterval() {Interval =300 ,RoundChamferRadius = 150},
+                            new GrillInterval() {Interval = 500, RoundChamferRadius = 0},
+                            new GrillInterval() {Interval = 500 ,RoundChamferRadius = 250},
+                            new GrillInterval() {Interval = 500, RoundChamferRadius = 0},
+                            new GrillInterval() {Interval = 500 ,RoundChamferRadius = 250},
+                            new GrillInterval() {Interval = 500, RoundChamferRadius = 0},
+                            new GrillInterval() {Interval = 800 ,RoundChamferRadius = 400},
+                            new GrillInterval() {Interval = 800, RoundChamferRadius = 0},
+                            new GrillInterval() {Interval = 800 ,RoundChamferRadius = 400},
+                            new GrillInterval() {Interval = 800, RoundChamferRadius = 0},
+                            new GrillInterval() {Interval = 800 ,RoundChamferRadius = 400},
+                            new GrillInterval() {Interval = 800, RoundChamferRadius = 0},
+                            new GrillInterval() {Interval = 1000, RoundChamferRadius = 500}
                         }
                     },
                     IsIncludeBaffle = true,
                     Culvert_Baffle = new ObservableCollection<Baffle>()
                     {
-                        new Baffle() {Baffle_MidMidDis = 1, Baffle_Height = 2, Baffle_Width = 3},
-                        new Baffle() {Baffle_MidMidDis = 12, Baffle_Height = 22, Baffle_Width = 32},
-                        new Baffle() {Baffle_MidMidDis = 13, Baffle_Height = 23, Baffle_Width = 33},
-                        new Baffle() {Baffle_MidMidDis = 14, Baffle_Height = 24, Baffle_Width = 34},
-                        new Baffle() {Baffle_MidMidDis = 15, Baffle_Height = 25, Baffle_Width = 35}
+                        new Baffle() {Baffle_MidMidDis = 0, Baffle_Height = 2000, Baffle_Width = 250},
+                        new Baffle() {Baffle_MidMidDis = 4500, Baffle_Height = 1500, Baffle_Width = 500},
+                        new Baffle() {Baffle_MidMidDis = 9000, Baffle_Height = 1000, Baffle_Width = 500}
                     }
                 },
                 LH_EmptyRectBoxs = new ObservableCollection<RectEmptyBox>()
                 {
-                    new RectEmptyBox()
+                    new RectEmptyBox()  //1
                     {
-                        XDis = 1,
-                        YDis = 2,
-                        ZDis = 3,
-                        EmptyBoxLength = 50,
-                        EmptyBoxWidth = 60,
-                        EmptyBoxHeight = 70,
+                        XDis = 800,
+                        YDis = 900,
+                        ZDis = 300,
+                        EmptyBoxLength = 4200,
+                        EmptyBoxWidth = 6900,
+                        EmptyBoxHeight = 8400,
+                        ChamferInfos = new ObservableCollection<EmptyBoxEdgeChameferInfo>()
+                        {
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 0,
+                                ChamferLength = 0,
+                                ChamferWidth = 0
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 1,
+                                ChamferLength = 1,
+                                ChamferWidth = 1
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 2,
+                                ChamferLength = 2,
+                                ChamferWidth = 2
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 3,
+                                ChamferLength = 3,
+                                ChamferWidth = 3
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 4,
+                                ChamferLength = 4,
+                                ChamferWidth = 4
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 5,
+                                ChamferLength = 5,
+                                ChamferWidth = 5
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 6,
+                                ChamferLength = 6,
+                                ChamferWidth = 6
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 7,
+                                ChamferLength = 7,
+                                ChamferWidth = 7
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 8,
+                                ChamferLength = 8,
+                                ChamferWidth = 8
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 9,
+                                ChamferLength = 9,
+                                ChamferWidth = 9
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 10,
+                                ChamferLength = 10,
+                                ChamferWidth = 10
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 11,
+                                ChamferLength = 11,
+                                ChamferWidth = 11
+                            }
+                        }
+                    },
+                    new RectEmptyBox() //2
+                    {
+                        XDis = 800,
+                        YDis = 10900,
+                        ZDis = 300,
+                        EmptyBoxLength = 6000,
+                        EmptyBoxWidth = 4800,
+                        EmptyBoxHeight = 2200,
+                        ChamferInfos = new ObservableCollection<EmptyBoxEdgeChameferInfo>()
+                        {
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 0,
+                                ChamferLength = 0,
+                                ChamferWidth = 0
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 1,
+                                ChamferLength = 1,
+                                ChamferWidth = 1
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 2,
+                                ChamferLength = 2,
+                                ChamferWidth = 2
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 3,
+                                ChamferLength = 3,
+                                ChamferWidth = 3
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 4,
+                                ChamferLength = 4,
+                                ChamferWidth = 4
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 5,
+                                ChamferLength = 5,
+                                ChamferWidth = 5
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 6,
+                                ChamferLength = 6,
+                                ChamferWidth = 6
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 7,
+                                ChamferLength = 7,
+                                ChamferWidth = 7
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 8,
+                                ChamferLength = 8,
+                                ChamferWidth = 8
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 9,
+                                ChamferLength = 9,
+                                ChamferWidth = 9
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 10,
+                                ChamferLength = 10,
+                                ChamferWidth = 10
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 11,
+                                ChamferLength = 11,
+                                ChamferWidth = 11
+                            }
+                        }
+                    },
+                    new RectEmptyBox() //3
+                    {
+                        XDis = 800,
+                        YDis = 10900,
+                        ZDis = 3300,
+                        EmptyBoxLength = 6000,
+                        EmptyBoxWidth = 4800,
+                        EmptyBoxHeight = 5400,
+                        ChamferInfos = new ObservableCollection<EmptyBoxEdgeChameferInfo>()
+                        {
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 0,
+                                ChamferLength = 0,
+                                ChamferWidth = 0
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 1,
+                                ChamferLength = 1,
+                                ChamferWidth = 1
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 2,
+                                ChamferLength = 2,
+                                ChamferWidth = 2
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 3,
+                                ChamferLength = 3,
+                                ChamferWidth = 3
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 4,
+                                ChamferLength = 4,
+                                ChamferWidth = 4
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 5,
+                                ChamferLength = 5,
+                                ChamferWidth = 5
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 6,
+                                ChamferLength = 6,
+                                ChamferWidth = 6
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 7,
+                                ChamferLength = 7,
+                                ChamferWidth = 7
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 8,
+                                ChamferLength = 8,
+                                ChamferWidth = 8
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 9,
+                                ChamferLength = 9,
+                                ChamferWidth = 9
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 10,
+                                ChamferLength = 10,
+                                ChamferWidth = 10
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 11,
+                                ChamferLength = 11,
+                                ChamferWidth = 11
+                            }
+                        }
+                    },
+                    new RectEmptyBox() //4
+                    {
+                        XDis = 800,
+                        YDis = 17900,
+                        ZDis = 300,
+                        EmptyBoxLength = 2700,
+                        EmptyBoxWidth = 4800,
+                        EmptyBoxHeight = 8400,
+                        ChamferInfos = new ObservableCollection<EmptyBoxEdgeChameferInfo>()
+                        {
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 0,
+                                ChamferLength = 0,
+                                ChamferWidth = 0
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 1,
+                                ChamferLength = 1,
+                                ChamferWidth = 1
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 2,
+                                ChamferLength = 2,
+                                ChamferWidth = 2
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 3,
+                                ChamferLength = 3,
+                                ChamferWidth = 3
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 4,
+                                ChamferLength = 4,
+                                ChamferWidth = 4
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 5,
+                                ChamferLength = 5,
+                                ChamferWidth = 5
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 6,
+                                ChamferLength = 6,
+                                ChamferWidth = 6
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 7,
+                                ChamferLength = 7,
+                                ChamferWidth = 7
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 8,
+                                ChamferLength = 8,
+                                ChamferWidth = 8
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 9,
+                                ChamferLength = 9,
+                                ChamferWidth = 9
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 10,
+                                ChamferLength = 10,
+                                ChamferWidth = 10
+                            },
+                            new EmptyBoxEdgeChameferInfo()
+                            {
+                                IsChamfered = true,
+                                EdgeIndicator = 11,
+                                ChamferLength = 11,
+                                ChamferWidth = 11
+                            }
+                        }
+                    },
+                    new RectEmptyBox() //5
+                    {
+                        XDis = 800,
+                        YDis = 21600,
+                        ZDis = 300,
+                        EmptyBoxLength = 5500,
+                        EmptyBoxWidth = 4800,
+                        EmptyBoxHeight = 8400,
                         ChamferInfos = new ObservableCollection<EmptyBoxEdgeChameferInfo>()
                         {
                             new EmptyBoxEdgeChameferInfo()
@@ -249,10 +645,10 @@ namespace PDIWT_MS_CZ.ViewModels
                 {
                     new ZPlanEmptyBox()
                     {
-                        XDis = 1,
-                        YDis = 2,
-                        ZDis = 3,
-                        EmptyBoxHeight = 4,
+                        XDis = 800,
+                        YDis = 5800,
+                        ZDis = 300,
+                        EmptyBoxHeight = 8400,
                         ZPlanInfos= new ObservableCollection<ZPlanInfo>()
                         {
                             new ZPlanInfo()
@@ -269,7 +665,7 @@ namespace PDIWT_MS_CZ.ViewModels
                             },
                             new ZPlanInfo()
                             {
-                                X=1,
+                                X=4100,
                                 Y=0,
                                 BoxEdgeChamferInfo = new EmptyBoxEdgeChameferInfo()
                                 {
@@ -281,8 +677,20 @@ namespace PDIWT_MS_CZ.ViewModels
                             },
                             new ZPlanInfo()
                             {
-                                X=1,
-                                Y=1,
+                                X=6400,
+                                Y=3300,
+                                BoxEdgeChamferInfo = new EmptyBoxEdgeChameferInfo()
+                                {
+                                    EdgeIndicator = 1,
+                                    IsChamfered = true,
+                                    ChamferLength = 2,
+                                    ChamferWidth = 2
+                                }
+                            },
+                            new ZPlanInfo()
+                            {
+                                X=6400,
+                                Y=4300,
                                 BoxEdgeChamferInfo = new EmptyBoxEdgeChameferInfo()
                                 {
                                     EdgeIndicator = 2,
@@ -294,7 +702,7 @@ namespace PDIWT_MS_CZ.ViewModels
                             new ZPlanInfo()
                             {
                                 X = 0,
-                                Y = 1,
+                                Y = 4300,
                                 BoxEdgeChamferInfo = new EmptyBoxEdgeChameferInfo()
                                 {
                                     EdgeIndicator = 3,
