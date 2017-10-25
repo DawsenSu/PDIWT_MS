@@ -5,7 +5,6 @@
 #include <cstdlib>
 #include <cmath>
 #include <PSolid\PSolidCoreAPI.h>
-#include <gsl\gsl_roots.h>
 
 using namespace System;
 using namespace System::Collections::Generic;

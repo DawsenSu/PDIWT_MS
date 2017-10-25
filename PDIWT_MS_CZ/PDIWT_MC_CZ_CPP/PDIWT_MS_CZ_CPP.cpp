@@ -49,7 +49,7 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DoDraw()
 
 #pragma region RectEmptyBox
 	bvector<ISolidKernelEntityPtr> _rectemptyboxes;
-	if (DrawRectEmptyBoxes(_rectemptyboxes, DPoint3d{0,0,0}))
+	if (DrawRectEmptyBoxes(_rectemptyboxes, DPoint3d{ 0,0,0 }))
 		return ERROR;
 #pragma endregion
 #pragma region ZPlanEmptyBox
@@ -57,7 +57,7 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DoDraw()
 	if (DrawZPlanEmptyBox(_zplanemptyboxes, DPoint3d{ 0,0,0 }))
 		return ERROR;
 #pragma endregion
-	
+
 	_cz_whole_SKE = _localconculvert_SKE;
 
 	if ((SolidUtil::Modify::TransformBody(_cz_whole_SKE, GetModelTransform(DPoint3d::FromZero())) != SUCCESS)
@@ -361,22 +361,10 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawLocalConcertationCulvert(ISolidK
 	if (_localconculvertparam->IsChamfered)
 	{
 		CurveVectorPtr _r1_cv, _r2_cv, _r3_cv, _r4_cv;
-		DrawRoundChamferCorner(_r1_cv, _global_bottom_section_pts[1], _localconculvertparam->Culvert_Chamfer_R1,	 Quadrant::One);
+		DrawRoundChamferCorner(_r1_cv, _global_bottom_section_pts[1], _localconculvertparam->Culvert_Chamfer_R1, Quadrant::One);
 		DrawRoundChamferCorner(_r2_cv, _global_bottom_section_pts[6], _localconculvertparam->Culvert_Chamfer_R2, Quadrant::One);
-		DrawRoundChamferCorner(_r3_cv, _global_bottom_section_pts[2], _localconculvertparam->Culvert_Chamfer_R3, Quadrant::Four); 
+		DrawRoundChamferCorner(_r3_cv, _global_bottom_section_pts[2], _localconculvertparam->Culvert_Chamfer_R3, Quadrant::Four);
 		DrawRoundChamferCorner(_r4_cv, _global_bottom_section_pts[5], _localconculvertparam->Culvert_Chamfer_R4, Quadrant::Four);
-
-		//bvector<DPoint3d> _pts
-		//{
-		//	DPoint3d::From(_localconculvertparam->Culvert_Chamfer_R3,0),
-		//	DPoint3d::From(-_localconculvertparam->Culvert_Chamfer_R3,-_localconculvertparam->Culvert_Chamfer_R3)
-		//};
-		//bvector<DPoint3d> _global_pts = GetAddedPointVector(_global_bottom_section_pts[2], _pts);
-		//CurveVectorPtr _triangle_cv = CurveVector::CreateLinear(_global_pts, CurveVector::BOUNDARY_TYPE_Outer);
-		//auto _arc = DEllipse3d::FromArcCenterStartEnd(DPoint3d::FromSumOf(_global_bottom_section_pts[2], DPoint3d::From(_localconculvertparam->Culvert_Chamfer_R3,- _localconculvertparam->Culvert_Chamfer_R3)), _global_pts[1], _global_pts[2]);
-		//CurveVectorPtr _arc_cv = CurveVector::CreateDisk(_arc);
-		//_r3_cv = CurveVector::AreaDifference(*_triangle_cv, *_arc_cv);
-
 
 		_bottom_section_cv = CurveVector::AreaUnion(*_bottom_section_cv, *_r2_cv);
 		_bottom_section_cv = CurveVector::AreaUnion(*_bottom_section_cv, *_r4_cv);
@@ -385,12 +373,40 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawLocalConcertationCulvert(ISolidK
 
 	}
 
-	//if (DebugCurveVector(*_bottom_section_cv))
-	//	return ERROR;
 	_bottom_section_cv->SimplifyLinestrings(0.01, true, true);
 	ISolidPrimitivePtr _localconculvert_bottom_section_SP = ISolidPrimitive::CreateDgnExtrusion(DgnExtrusionDetail(_bottom_section_cv, DVec3d::FromScale(DVec3d::UnitZ(), _localconculvertparam->Culvert_Height), true));
 	if (SolidUtil::Create::BodyFromSolidPrimitive(_outconcertationculvert, *_localconculvert_bottom_section_SP, *ACTIVEMODEL))
 		return ERROR;
+
+	if (_localconculvertparam->IsIncludeBaffle)
+	{
+		bvector<ISolidKernelEntityPtr> _baffle_vector_SKE;
+		for each (auto _baffle in _localconculvertparam->Culvert_Baffle)
+		{
+			DPoint3d _baseorigin = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From( -_baffle->Baffle_MidMidDis - _baffle->Baffle_Width / 2,0));
+			DPoint3d _toporigin = DPoint3d::FromSumOf(_baseorigin, DPoint3d::From(0, 0, _baffle->Baffle_Height));
+			DgnBoxDetail _baffle_detail
+			(
+				_baseorigin,
+				_toporigin,
+				DVec3d::UnitX(),
+				DVec3d::UnitY(),
+				_baffle->Baffle_Width,
+				_localconculvertparam->Culvert_D,
+				_baffle->Baffle_Width,
+				_localconculvertparam->Culvert_D,
+				true
+			);
+			ISolidPrimitivePtr _baffle_SP = ISolidPrimitive::CreateDgnBox(_baffle_detail);
+			ISolidKernelEntityPtr _baffle_SKE;
+			if (SolidUtil::Create::BodyFromSolidPrimitive(_baffle_SKE, *_baffle_SP, *ACTIVEMODEL))
+				return ERROR;
+			_baffle_vector_SKE.push_back(_baffle_SKE);
+		}
+		if (SolidUtil::Modify::BooleanSubtract(_outconcertationculvert, &_baffle_vector_SKE[0], _baffle_vector_SKE.size()))
+			return ERROR;
+	}
+
 	if (CloneMirrorSolidAndUnion(_outconcertationculvert, _anchorpoint))
 		return ERROR;
 
@@ -419,7 +435,7 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawWaterDivision(ISolidKernelEntity
 		DPoint3d::From(-_waterdivparam->WaterDivision_R1,_waterdivparam->WaterDivision_R1),
 		DPoint3d::From(0,_waterdivparam->WaterDivision_B),//[5]
 		DPoint3d::From(-(_waterdivparam->WaterDivision_R2 - _waterdivparam->WaterDivision_R1),0),
-		DPoint3d::From(0,-(_waterdivparam->WaterDivision_B + _waterdivparam->WaterDivision_R1+2*_waterdivparam->WaterDivision_R3-_waterdivparam->WaterDivision_R2)),
+		DPoint3d::From(0,-(_waterdivparam->WaterDivision_B + _waterdivparam->WaterDivision_R1 + 2 * _waterdivparam->WaterDivision_R3 - _waterdivparam->WaterDivision_R2)),
 		DPoint3d::From(_waterdivparam->WaterDivision_R2,-_waterdivparam->WaterDivision_R2)
 	};
 	bvector<DPoint3d> _global_waterdiv_pts = GetAddedPointVector(_anchorpoint, _waterdiv_pts);
@@ -492,16 +508,16 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawShortCulvert(ISolidKernelEntityP
 		0,
 		aplha
 	);
-	_shortcuvlert_path_cv -> Add(ICurvePrimitive::CreateArc(_arc_r2));
-	DPoint3d _arc_r2_bg,_arc_r2_end;
+	_shortcuvlert_path_cv->Add(ICurvePrimitive::CreateArc(_arc_r2));
+	DPoint3d _arc_r2_bg, _arc_r2_end;
 	_arc_r2.EvaluateEndPoints(_arc_r2_bg, _arc_r2_end);
 	DEllipse3d _arc_r1;
 	_arc_r1.InitFromPoints
 	(
-		DPoint3d::FromSumOf(_global_section_pts[2],DPoint3d::From(0,0,-_shortculvertparam->Culvert_R1)),
+		DPoint3d::FromSumOf(_global_section_pts[2], DPoint3d::From(0, 0, -_shortculvertparam->Culvert_R1)),
 		_global_section_pts[2],
 		DPoint3d::FromSumOf(_global_section_pts[2], DPoint3d::From(0, _shortculvertparam->Culvert_R1, -_shortculvertparam->Culvert_R1)),
-		fc_2pi-aplha,
+		fc_2pi - aplha,
 		aplha
 	);
 	DPoint3d _arc_r1_bg, _arc_r1_end;
@@ -509,7 +525,7 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawShortCulvert(ISolidKernelEntityP
 	_shortcuvlert_path_cv->Add(ICurvePrimitive::CreateLine(DSegment3d::From(_arc_r2_end, _arc_r1_bg)));
 	_shortcuvlert_path_cv->Add(ICurvePrimitive::CreateArc(_arc_r1));
 	_shortcuvlert_path_cv->Add(ICurvePrimitive::CreateLine(DSegment3d::From(_global_section_pts[2], _global_section_pts[3])));
-	
+
 	bvector<DPoint3d> _shortculvert_profile
 	{
 		DPoint3d::From(_shortculvertparam->Culvert_Width,0,0),
@@ -557,7 +573,7 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawRectEmptyBoxes(bvector<ISolidKer
 		ISolidKernelEntityPtr _rectbox_SKE;
 		if (SolidUtil::Create::BodyFromSolidPrimitive(_rectbox_SKE, *_rectbox_ptr, *ACTIVEMODEL))
 			return	ERROR;
-		
+
 		_outrectemptyboxes.push_back(_rectbox_SKE);
 	}
 	return SUCCESS;

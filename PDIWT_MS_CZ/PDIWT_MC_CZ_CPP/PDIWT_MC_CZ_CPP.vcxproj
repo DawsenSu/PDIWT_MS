@@ -23,7 +23,7 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
     <RootNamespace>PDIWT_MC_CZ_CPP</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
     <ProjectName>PDIWT_MS_CZ_CPP</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -44,7 +44,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CLRSupport>true</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -80,8 +80,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(MSAPP)</OutDir>
-    <IncludePath>$(MSSDKINC);D:\Programma\Source\C++\gsl\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(MSSDKLIB);D:\Programma\Source\C++\gsl\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(MSSDKINC);$(IncludePath)</IncludePath>
+    <LibraryPath>$(MSSDKLIB);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -133,9 +133,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Reference Include="MathNet.Numerics">
-      <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\MathNet.Numerics.dll</HintPath>
-    </Reference>
     <Reference Include="PDIWT_MS_CZ">
       <HintPath>..\..\..\..\..\..\..\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\PDIWT_MS_CZ.dll</HintPath>
       <Private>false</Private>
