@@ -91,14 +91,14 @@ namespace PDIWT_MS_CZ.ViewModels
                 LH_CulvertChoosenIndex = 1,
                 LH_ShortCulvert = new ShortCulvert()
                 {
-                    Culvert_Pier_BackDis = 1,
-                    Culvert_Width = 2,
-                    Culvert_A = 3,
-                    Culvert_B = 4,
-                    Culvert_C = 5,
-                    Culvert_D = 6,
-                    Culvert_R1 = 7,
-                    Culvert_R2 = 8
+                    Culvert_Pier_BackDis = 30,
+                    Culvert_Width = 50,
+                    Culvert_A = 100,
+                    Culvert_B = 300,
+                    Culvert_C = 100,
+                    Culvert_D = 150,
+                    Culvert_R1 = 50,
+                    Culvert_R2 = 80
                 },
                 LH_LocalConcertationCulvert = new LocalConcertationCulvert()
                 {
@@ -153,9 +153,9 @@ namespace PDIWT_MS_CZ.ViewModels
                         XDis = 1,
                         YDis = 2,
                         ZDis = 3,
-                        EmptyBoxLength = 4,
-                        EmptyBoxWidth = 5,
-                        EmptyBoxHeight = 6,
+                        EmptyBoxLength = 50,
+                        EmptyBoxWidth = 60,
+                        EmptyBoxHeight = 70,
                         ChamferInfos = new ObservableCollection<EmptyBoxEdgeChameferInfo>()
                         {
                             new EmptyBoxEdgeChameferInfo()

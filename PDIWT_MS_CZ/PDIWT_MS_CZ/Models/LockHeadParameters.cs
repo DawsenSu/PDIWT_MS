@@ -358,4 +358,12 @@ namespace PDIWT_MS_CZ.Models
         public double Baffle_Height { get; set; }
     }
     #endregion
+    public static class SolveEqution
+    {
+        public static void GetAlphaAndL(double a, double b, double c, double d, double R1, double R2, out double alpha, out double l)
+        {
+            alpha = MathNet.Numerics.FindRoots.OfFunction(x => (d - (1 - Math.Cos(x)) * (R1 + R2)) / (b - Math.Sin(x) * (R1 + R2)) - Math.Tan(x), 0, Math.PI / 2);
+            l = (d - (1 - Math.Cos(alpha)) * (R1 + R2)) / Math.Sin(alpha);
+        }
+    }
 }

@@ -41,10 +41,30 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DoDraw()
 		return ERROR;
 #pragma endregion
 
+#pragma region ShortCulvert
+	ISolidKernelEntityPtr _shortculvert_SKE;
+	if (DrawShortCulvert(_shortculvert_SKE, DPoint3d{ 0,0,0 }))
+		return ERROR;
+#pragma endregion
 
-	if ((SolidUtil::Modify::TransformBody(_waterdiv_SKE, GetModelTransform(DPoint3d::FromZero())) != SUCCESS)
+#pragma region RectEmptyBox
+	bvector<ISolidKernelEntityPtr> _rectemptyboxes;
+	if (DrawRectEmptyBoxes(_rectemptyboxes, DPoint3d{0,0,0}))
+		return ERROR;
+#pragma endregion
+#pragma region ZPlanEmptyBox
+	bvector<ISolidKernelEntityPtr> _zplanemptyboxes;
+	if (DrawZPlanEmptyBox(_zplanemptyboxes, DPoint3d{ 0,0,0 }))
+		return ERROR;
+#pragma endregion
+
+
+
+	_cz_whole_SKE = _zplanemptyboxes.at(0);
+
+	if ((SolidUtil::Modify::TransformBody(_cz_whole_SKE, GetModelTransform(DPoint3d::FromZero())) != SUCCESS)
 		||
-		(SolidUtil::Convert::BodyToElement(_cz_whole, *_waterdiv_SKE, nullptr, *ACTIVEMODEL) != SUCCESS))
+		(SolidUtil::Convert::BodyToElement(_cz_whole, *_cz_whole_SKE, nullptr, *ACTIVEMODEL) != SUCCESS))
 		return ERROR;
 
 	_cz_whole.AddToModel();
@@ -96,11 +116,12 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawRoundChamferCorner(CurveVectorPt
 	auto _arc = DEllipse3d::FromArcCenterStartEnd(DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(_radius, _radius)), _global_pts[1], _global_pts[2]);
 	CurveVectorPtr _arc_cv = CurveVector::CreateDisk(_arc);
 	_outcvptr = CurveVector::AreaDifference(*_triangle_cv, *_arc_cv);
-	Transform _rotation_trans = Transform::FromAxisAndRotationAngle(DRay3d::FromOriginAndVector(_anchorpoint, DVec3d::UnitZ()), PI / 2 * _phase);
+	Transform _rotation_trans = Transform::FromAxisAndRotationAngle(DRay3d::FromOriginAndVector(_anchorpoint, DVec3d::UnitZ()), fc_pi / 2 * _phase);
 	if (!_outcvptr->TransformInPlace(_rotation_trans))
 		return ERROR;
 	return SUCCESS;
 }
+
 
 StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DebugCurveVector(CurveVectorCR _cv)
 {
@@ -324,7 +345,7 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawLocalConcertationCulvert(ISolidK
 		CurveVectorPtr _r1_cv, _r2_cv, _r3_cv, _r4_cv;
 		DrawRoundChamferCorner(_r1_cv, _global_bottom_section_pts[1], _localconculvertparam->Culvert_Chamfer_R1, 0);
 		DrawRoundChamferCorner(_r2_cv, _global_bottom_section_pts[6], _localconculvertparam->Culvert_Chamfer_R2, 0);
-		//DrawRoundChamferCorner(_r3_cv, _global_bottom_section_pts[2], _localconculvertparam->Culvert_Chamfer_R3, 4); //  这句有问题
+		//DrawRoundChamferCorner(_r3_cv, _global_bottom_section_pts[2], _localconculvertparam->Culvert_Chamfer_R3, 3); //  这句有问题 旋转角度后不精确，导致取差集出错
 		DrawRoundChamferCorner(_r4_cv, _global_bottom_section_pts[5], _localconculvertparam->Culvert_Chamfer_R4, 3);
 
 		bvector<DPoint3d> _pts
@@ -358,7 +379,17 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawLocalConcertationCulvert(ISolidK
 	return SUCCESS;
 
 }
-
+//此模块的anchor point为分流墩右下半圆的圆心
+//	  --
+//   /  \
+//  |	 |
+//  |	 |
+//  \	 \
+//   \	  \
+//    \	   \
+//	   \	---------\
+//		\			* |
+//		 \-----------/
 StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawWaterDivision(ISolidKernelEntityPtr &_outwaterdiv, DPoint3dCR _anchorpoint)
 {
 	WaterDivision^ _waterdivparam = LH_LockHeadParameter->LH_LocalConcertationCulvert->Culvert_WaterDivision;
@@ -375,26 +406,164 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawWaterDivision(ISolidKernelEntity
 	};
 	bvector<DPoint3d> _global_waterdiv_pts = GetAddedPointVector(_anchorpoint, _waterdiv_pts);
 	CurveVectorPtr _waterdiv_cv = CurveVector::Create(CurveVector::BOUNDARY_TYPE_Outer);
-	DEllipse3d _arc_r3 = DEllipse3d::FromArcCenterStartEnd(_anchorpoint, _global_waterdiv_pts[0], _global_waterdiv_pts[1]);
+	DEllipse3d _arc_r3;
+	_arc_r3.InitArcFromPointTangentPoint(_global_waterdiv_pts[1], DVec3d::UnitX(), _global_waterdiv_pts[2]);
 	_waterdiv_cv->Add(ICurvePrimitive::CreateArc(_arc_r3));
 	_waterdiv_cv->Add(ICurvePrimitive::CreateLine(DSegment3d::From(_global_waterdiv_pts[2], _global_waterdiv_pts[3])));
-	DEllipse3d _arc_r1 = DEllipse3d::FromArcCenterStartEnd(DPoint3d::FromSumOf(_global_waterdiv_pts[3], DPoint3d::From(0, _waterdivparam->WaterDivision_R1)),
-		_global_waterdiv_pts[3], _global_waterdiv_pts[4]);
+
+	DEllipse3d _arc_r1;
+	_arc_r1.InitArcFromPointTangentPoint(_global_waterdiv_pts[3], DVec3d::From(-1, 0), _global_waterdiv_pts[4]);
 	_waterdiv_cv->Add(ICurvePrimitive::CreateArc(_arc_r1));
 	_waterdiv_cv->Add(ICurvePrimitive::CreateLine(DSegment3d::From(_global_waterdiv_pts[4], _global_waterdiv_pts[5])));
 	double _r4 = _waterdivparam->WaterDivision_R2 - _waterdivparam->WaterDivision_R1;
-	DEllipse3d _arc_r4 = DEllipse3d::FromArcCenterStartEnd(DPoint3d::FromSumOf(_global_waterdiv_pts[5], DPoint3d::From(-_r4, 0)), _global_waterdiv_pts[5], _global_waterdiv_pts[6]);
+	DEllipse3d _arc_r4;
+	_arc_r4.InitArcFromPointTangentPoint(_global_waterdiv_pts[5], DVec3d::UnitY(), _global_waterdiv_pts[6]);
 	_waterdiv_cv->Add(ICurvePrimitive::CreateArc(_arc_r4));
 	_waterdiv_cv->Add(ICurvePrimitive::CreateLine(DSegment3d::From(_global_waterdiv_pts[6], _global_waterdiv_pts[7])));
-	DEllipse3d _arc_r2 = DEllipse3d::FromArcCenterStartEnd(DPoint3d::FromSumOf(_global_waterdiv_pts[8], DPoint3d::From(0, _waterdivparam->WaterDivision_R2)), _global_waterdiv_pts[7], _global_waterdiv_pts[8]);
+	DEllipse3d _arc_r2;
+	_arc_r2.InitArcFromPointTangentPoint(_global_waterdiv_pts[7], DVec3d::From(0, -1), _global_waterdiv_pts[8]);
 	_waterdiv_cv->Add(ICurvePrimitive::CreateArc(_arc_r2));
 	_waterdiv_cv->Add(ICurvePrimitive::CreateLine(DSegment3d::From(_global_waterdiv_pts[8], _global_waterdiv_pts[1])));
-
-	if (DebugCurveVector(*_waterdiv_cv))
-		return ERROR;
 
 	ISolidPrimitivePtr _waterdiv_SP = ISolidPrimitive::CreateDgnExtrusion(DgnExtrusionDetail(_waterdiv_cv, DVec3d::FromScale(DVec3d::UnitZ(), LH_LockHeadParameter->LH_LocalConcertationCulvert->Culvert_Height), true));
 	if (SolidUtil::Create::BodyFromSolidPrimitive(_outwaterdiv, *_waterdiv_SP, *ACTIVEMODEL))
 		return ERROR;
 	return SUCCESS;
 }
+
+//此模块的anchorpoint为廊道右下角点
+// ------------
+// |			\
+// 	-------\	 \
+//          \	  \
+//	         \	   \
+//			  \	    -----------
+//			   \			  |
+//      		\-------------*	  
+
+StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawShortCulvert(ISolidKernelEntityPtr& _outshortculvert, DPoint3dCR _anchorpoint)
+{
+	ShortCulvert^ _shortculvertparam = LH_LockHeadParameter->LH_ShortCulvert;
+	double aplha, l;
+	PDIWT_MS_CZ::Models::SolveEqution::GetAlphaAndL
+	(
+		_shortculvertparam->Culvert_A,
+		_shortculvertparam->Culvert_B,
+		_shortculvertparam->Culvert_C,
+		_shortculvertparam->Culvert_D,
+		_shortculvertparam->Culvert_R1,
+		_shortculvertparam->Culvert_R2,
+		aplha, l
+	);
+
+	bvector<DPoint3d> _shortculvert_section
+	{
+		DPoint3d::From(0,_shortculvertparam->Culvert_C,0),
+		DPoint3d::From(0,_shortculvertparam->Culvert_B,_shortculvertparam->Culvert_D),
+		DPoint3d::From(0,_shortculvertparam->Culvert_A,0)
+	};
+	bvector<DPoint3d> _global_section_pts = GetAddedPointVector(_anchorpoint, _shortculvert_section);
+	CurveVectorPtr _shortcuvlert_path_cv = CurveVector::Create(CurveVector::BOUNDARY_TYPE_Open);
+	_shortcuvlert_path_cv->Add(ICurvePrimitive::CreateLine(DSegment3d::From(_global_section_pts[0], _global_section_pts[1]))); //bug
+	DEllipse3d _arc_r2;
+	_arc_r2.InitFromPoints
+	(
+		DPoint3d::FromSumOf(_global_section_pts[1], DPoint3d::From(0, 0, _shortculvertparam->Culvert_R2)),
+		_global_section_pts[1],
+		DPoint3d::FromSumOf(_global_section_pts[1], DPoint3d::From(0, _shortculvertparam->Culvert_R2, _shortculvertparam->Culvert_R2)),
+		0,
+		aplha
+	);
+	_shortcuvlert_path_cv -> Add(ICurvePrimitive::CreateArc(_arc_r2));
+	DPoint3d _arc_r2_bg,_arc_r2_end;
+	_arc_r2.EvaluateEndPoints(_arc_r2_bg, _arc_r2_end);
+	DEllipse3d _arc_r1;
+	_arc_r1.InitFromPoints
+	(
+		DPoint3d::FromSumOf(_global_section_pts[2],DPoint3d::From(0,0,-_shortculvertparam->Culvert_R1)),
+		_global_section_pts[2],
+		DPoint3d::FromSumOf(_global_section_pts[2], DPoint3d::From(0, _shortculvertparam->Culvert_R1, -_shortculvertparam->Culvert_R1)),
+		fc_2pi-aplha,
+		aplha
+	);
+	DPoint3d _arc_r1_bg, _arc_r1_end;
+	_arc_r1.EvaluateEndPoints(_arc_r1_bg, _arc_r1_end);
+	_shortcuvlert_path_cv->Add(ICurvePrimitive::CreateLine(DSegment3d::From(_arc_r2_end, _arc_r1_bg)));
+	_shortcuvlert_path_cv->Add(ICurvePrimitive::CreateArc(_arc_r1));
+	_shortcuvlert_path_cv->Add(ICurvePrimitive::CreateLine(DSegment3d::From(_global_section_pts[2], _global_section_pts[3])));
+	
+	bvector<DPoint3d> _shortculvert_profile
+	{
+		DPoint3d::From(_shortculvertparam->Culvert_Width,0,0),
+		DPoint3d::From(0,0,_shortculvertparam->Culvert_R2 - _shortculvertparam->Culvert_R1),
+		DPoint3d::From(-_shortculvertparam->Culvert_Width,0,0)
+	};
+	bvector<DPoint3d> _global_shortculvert_pts = GetAddedPointVector(_anchorpoint, _shortculvert_profile);
+	CurveVectorPtr _shortculvert_profile_cv = CurveVector::CreateLinear(_global_shortculvert_pts, CurveVector::BOUNDARY_TYPE_Outer);
+
+	if (SolidUtil::Create::BodyFromSweep(_outshortculvert, *_shortculvert_profile_cv, *_shortcuvlert_path_cv, *ACTIVEMODEL, false, false, false))
+		return ERROR;
+
+	return SUCCESS;
+}
+
+//此模块的anchorpoint为矩形空箱的左上角点
+//	   -----------
+//	  /			 /|
+//   *----------- |
+//   |			| |
+//   |			| |
+//   |			|/
+//   ------------
+
+StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawRectEmptyBoxes(bvector<ISolidKernelEntityPtr> & _outrectemptyboxes, DPoint3dCR _anchorpoint)
+{
+	ObservableCollection<RectEmptyBox^>^ _rectemptyboxesparam = LH_LockHeadParameter->LH_EmptyRectBoxs;
+	for each (RectEmptyBox^ _rectbox in _rectemptyboxesparam)
+	{
+		DPoint3d _topOrigin = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(_rectbox->XDis, _rectbox->YDis, -_rectbox->ZDis));
+		DPoint3d _baseOrigin = DPoint3d::FromSumOf(_topOrigin, DVec3d::UnitZ(), -_rectbox->EmptyBoxHeight);
+		DgnBoxDetail _dgnbox
+		(
+			_baseOrigin,
+			_topOrigin,
+			DVec3d::UnitX(),
+			DVec3d::UnitY(),
+			_rectbox->EmptyBoxWidth,
+			_rectbox->EmptyBoxLength,
+			_rectbox->EmptyBoxWidth,
+			_rectbox->EmptyBoxLength,
+			true
+		);
+		ISolidPrimitivePtr _rectbox_ptr = ISolidPrimitive::CreateDgnBox(_dgnbox);
+		ISolidKernelEntityPtr _rectbox_SKE;
+		if (SolidUtil::Create::BodyFromSolidPrimitive(_rectbox_SKE, *_rectbox_ptr, *ACTIVEMODEL))
+			return	ERROR;
+		
+		_outrectemptyboxes.push_back(_rectbox_SKE);
+	}
+	return SUCCESS;
+}
+
+//此模块的anchorpoint为平面0点
+StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawZPlanEmptyBox(bvector<ISolidKernelEntityPtr>& _outzplanemptybox, DPoint3dCR _anchorpoint)
+{
+	ObservableCollection<ZPlanEmptyBox^>^ _zplanemptybox = LH_LockHeadParameter->LH_EmptyZPlanBoxs;
+	for each (ZPlanEmptyBox^ _zplanbox in _zplanemptybox)
+	{
+		DPoint3d _topOrigin = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(_zplanbox->XDis, _zplanbox->YDis, -_zplanbox->ZDis));
+		bvector<DPoint3d> _zplan_pts;
+		for each (auto pt in _zplanbox->ZPlanInfos)
+			_zplan_pts.push_back(DPoint3d::From(pt->X, pt->Y));
+		CurveVectorPtr _zplanbox_cv = CurveVector::CreateLinear(_zplan_pts, CurveVector::BOUNDARY_TYPE_Outer);
+		_zplanbox_cv->TransformInPlace(Transform::From(DVec3d::FromStartEnd(_zplan_pts[0], _topOrigin)));
+
+		ISolidPrimitivePtr _zplanbox_sp = ISolidPrimitive::CreateDgnExtrusion(DgnExtrusionDetail(_zplanbox_cv, DVec3d::FromScale(DVec3d::UnitZ(), -_zplanbox->EmptyBoxHeight), true));
+		ISolidKernelEntityPtr _zplanbox_SKE;
+		if (SolidUtil::Create::BodyFromSolidPrimitive(_zplanbox_SKE, *_zplanbox_sp, *ACTIVEMODEL))
+			return ERROR;
+		_outzplanemptybox.push_back(_zplanbox_SKE);
+	}
+	return SUCCESS;
+}
+
