@@ -72,8 +72,6 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DoDraw()
 		ISolidKernelEntityPtr _right_shortculvert_SKE;
 		if (SolidUtil::CopyEntity(_right_shortculvert_SKE, *_left_shortculvert_SKE))
 			return ERROR;
-		Transform _xymirrortrans;
-		_xymirrortrans.InitFromMirrorPlane(_whole_anchor, DVec3d::UnitX());
 		if (SolidUtil::Modify::TransformBody(_right_shortculvert_SKE, _xymirrortrans))
 			return ERROR;
 
@@ -88,19 +86,36 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DoDraw()
 	bvector<ISolidKernelEntityPtr> _rectemptyboxes;
 	if (DrawRectEmptyBoxes(_rectemptyboxes, _rectemptybox_anchor))
 		return ERROR;
+	size_t _rectemptybox_count = _rectemptyboxes.size();
+	ISolidKernelEntityPtr _temp;
+	for (size_t i = 0; i < _rectemptybox_count; i++)
+	{
+		if (SolidUtil::CopyEntity(_temp, *_rectemptyboxes[i]))
+			return ERROR;
+		_temp->PreMultiplyEntityTransformInPlace(_xymirrortrans);
+		_rectemptyboxes.push_back(_temp);
+	}
 	if (SolidUtil::Modify::BooleanSubtract(_cz_whole_SKE, &_rectemptyboxes[0], _rectemptyboxes.size()))
 		return ERROR;
+
+
 #pragma endregion
 
 #pragma region ZPlanEmptyBox
 	bvector<ISolidKernelEntityPtr> _zplanemptyboxes;
 	if (DrawZPlanEmptyBox(_zplanemptyboxes, _rectemptybox_anchor))
 		return ERROR;
+	size_t _zplanemptybox_count = _zplanemptyboxes.size();
+	for (size_t i = 0; i < _zplanemptybox_count; i++)
+	{
+		if (SolidUtil::CopyEntity(_temp, *_zplanemptyboxes[i]))
+			return ERROR;
+		_temp->PreMultiplyEntityTransformInPlace(_xymirrortrans);
+		_zplanemptyboxes.push_back(_temp);
+	}
 	if (SolidUtil::Modify::BooleanSubtract(_cz_whole_SKE, &_zplanemptyboxes[0], _zplanemptyboxes.size()))
 		return ERROR;
 #pragma endregion
-
-	//_cz_whole_SKE = _rectemptyboxes.at(0);
 
 	if ((SolidUtil::Modify::TransformBody(_cz_whole_SKE, GetModelTransform(DPoint3d::FromZero())) != SUCCESS)
 		||
@@ -108,6 +123,15 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DoDraw()
 		return ERROR;
 
 	_cz_whole.AddToModel();
+	return SUCCESS;
+}
+
+StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DoTest()
+{
+	ISolidKernelEntityPtr _localconculvert_SKE;
+	if (DrawLocalConcertationCulvert(_localconculvert_SKE, DPoint3d{ 0,0,0 }))
+		return ERROR;
+	DebugISolidKernelEntity(*_localconculvert_SKE);
 	return SUCCESS;
 }
 
@@ -470,10 +494,10 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawLocalConcertationCulvert(ISolidK
 	{
 		ObservableCollection<GrillInterval^>^ _grillwidthlistparam = _localconculvertparam->Culvert_EnergyDisspater->GrilleWidthList;
 		int _grill_width_list_count = _grillwidthlistparam->Count;
-		double _grill_height = LH_LockHeadParameter->LH_DoorSill->DoorSillHeight;
+		double _grill_height = LH_LockHeadParameter->LH_DoorSill->DoorSillHeight-_localconculvertparam->Culvert_Height;
 		double _grill_length = (_localconculvertparam->Culvert_D - _localconculvertparam->Culvert_EnergyDisspater->Grille_TwolineInterval) / 2;
 		DPoint3d _grill_temp_Point = Dpoint3d::FromSumOf(_anchorpoint, Dpoint3d::From(0, 0, _localconculvertparam->Culvert_Height));
-		ISolidKernelEntityPtr _grill_SKE;
+		ISolidKernelEntityPtr _grill_SKE[2];
 		for (int i = 0; i < _grill_width_list_count; i += 2)
 		{
 			double _radius_right = _grillwidthlistparam[i]->RoundChamferRadius;
@@ -485,9 +509,13 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawLocalConcertationCulvert(ISolidK
 
 			DPoint3d _offsetvector = DPoint3d::From(-(_grillwidthlistparam[i]->Interval + _grillwidthlistparam[i + 1]->Interval), 0);
 			_grill_temp_Point = DPoint3d::FromSumOf(_grill_temp_Point, _offsetvector);
-			if (DrawGrillInterval(_grill_SKE, _grillwidthlistparam[i + 1]->Interval, _grill_height, _grill_length, _radius_right, _radius_left, _grill_temp_Point))
+			if (DrawGrillInterval(_grill_SKE[0], _grillwidthlistparam[i + 1]->Interval, _grill_height, _grill_length, _radius_right, _radius_left, _grill_temp_Point))
 				return ERROR;
-			if (SolidUtil::Modify::BooleanUnion(_outconcertationculvert, &_grill_SKE, 1))
+			if (SolidUtil::CopyEntity(_grill_SKE[1], *_grill_SKE[0]))
+				return ERROR;
+			_grill_SKE[1]->PreMultiplyEntityTransformInPlace(Transform::From(DPoint3d::From(0, _grill_length + _localconculvertparam->Culvert_EnergyDisspater->Grille_TwolineInterval)));
+
+			if (SolidUtil::Modify::BooleanUnion(_outconcertationculvert, &_grill_SKE[0], 2))
 				return ERROR;
 		}
 	}
@@ -516,10 +544,10 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawGrillInterval(ISolidKernelEntity
 	DrawRoundChamferCorner(_r2_cv, _global_grill_pts[1], _radius_right, Quadrant::One);
 	DrawRoundChamferCorner(_r3_cv, _global_grill_pts[2], _radius_right, Quadrant::Four);
 	DrawRoundChamferCorner(_r4_cv, _global_grill_pts[3], _radius_left, Quadrant::Three);
-	//_grill_section_cv = CurveVector::AreaUnion(*_grill_section_cv, *_r1_cv);
-	//_grill_section_cv = CurveVector::AreaUnion(*_grill_section_cv, *_r2_cv);
-	//_grill_section_cv = CurveVector::AreaUnion(*_grill_section_cv, *_r3_cv);
-	//_grill_section_cv = CurveVector::AreaUnion(*_grill_section_cv, *_r4_cv);
+	_grill_section_cv = CurveVector::AreaUnion(*_grill_section_cv, *_r1_cv);
+	_grill_section_cv = CurveVector::AreaUnion(*_grill_section_cv, *_r2_cv);
+	_grill_section_cv = CurveVector::AreaUnion(*_grill_section_cv, *_r3_cv);
+	_grill_section_cv = CurveVector::AreaUnion(*_grill_section_cv, *_r4_cv);
 	//DebugCurveVector(*_r1_cv);
 	//DebugCurveVector(*_r2_cv);
 	//DebugCurveVector(*_r3_cv);

@@ -28,6 +28,7 @@ namespace PDIWT_MS_CZ_CPP {
 		LockHeadDrawing(LockHeadParameters^);
 		property LockHeadParameters^ LH_LockHeadParameter;
 		StatusInt DoDraw();
+		StatusInt DoTest();
 	private:
 		//Utilities Function
 		// 获得相对于定位点的模型uor比例缩放矩阵

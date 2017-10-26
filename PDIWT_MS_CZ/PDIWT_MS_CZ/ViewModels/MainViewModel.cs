@@ -130,23 +130,23 @@ namespace PDIWT_MS_CZ.ViewModels
                         Grille_TwolineInterval = 500,
                         GrilleWidthList = new ObservableCollection<GrillInterval>()
                         {
-                            new GrillInterval() {Interval = 250, RoundChamferRadius = 250},
+                            new GrillInterval() {Interval = 250, RoundChamferRadius = 50},
                             new GrillInterval() {Interval =300 ,RoundChamferRadius = 0},
-                            new GrillInterval() {Interval = 500, RoundChamferRadius = 250},
+                            new GrillInterval() {Interval = 500, RoundChamferRadius = 50},
                             new GrillInterval() {Interval =300 ,RoundChamferRadius = 0},
-                            new GrillInterval() {Interval = 500, RoundChamferRadius = 250},
+                            new GrillInterval() {Interval = 500, RoundChamferRadius = 50},
                             new GrillInterval() {Interval =300 ,RoundChamferRadius = 0},
-                            new GrillInterval() {Interval = 500, RoundChamferRadius = 250},
+                            new GrillInterval() {Interval = 500, RoundChamferRadius = 50},
                             new GrillInterval() {Interval = 500 ,RoundChamferRadius = 0},
-                            new GrillInterval() {Interval = 500, RoundChamferRadius = 250},
+                            new GrillInterval() {Interval = 500, RoundChamferRadius = 50},
                             new GrillInterval() {Interval = 500 ,RoundChamferRadius = 0},
-                            new GrillInterval() {Interval = 500, RoundChamferRadius = 250},
+                            new GrillInterval() {Interval = 500, RoundChamferRadius = 50},
                             new GrillInterval() {Interval = 800 ,RoundChamferRadius = 0},
-                            new GrillInterval() {Interval = 800, RoundChamferRadius = 400},
+                            new GrillInterval() {Interval = 800, RoundChamferRadius = 50},
                             new GrillInterval() {Interval = 800 ,RoundChamferRadius = 0},
-                            new GrillInterval() {Interval = 800, RoundChamferRadius = 400},
+                            new GrillInterval() {Interval = 800, RoundChamferRadius = 50},
                             new GrillInterval() {Interval = 800 ,RoundChamferRadius = 0},
-                            new GrillInterval() {Interval = 800, RoundChamferRadius = 400},
+                            new GrillInterval() {Interval = 800, RoundChamferRadius = 50},
                             new GrillInterval() {Interval = 1000, RoundChamferRadius = 0}
                         }
                     },
@@ -677,8 +677,8 @@ namespace PDIWT_MS_CZ.ViewModels
                             },
                             new ZPlanInfo()
                             {
-                                X=1000,
-                                Y=3300,
+                                X=6400,
+                                Y=1000,
                                 BoxEdgeChamferInfo = new EmptyBoxEdgeChameferInfo()
                                 {
                                     EdgeIndicator = 1,
@@ -781,7 +781,14 @@ namespace PDIWT_MS_CZ.ViewModels
         public RelayCommand Test => _test ?? (_test = new RelayCommand(ExecuteTest));
         public void ExecuteTest()
         {
-            //MessageBox.Show(CZ_LockHeadParameters.LH_LocalConcertationCulvert.Culvert_Baffle.Count.ToString());
+            PDIWT_MS_CZ_CPP.LockHeadDrawing Drawing = new PDIWT_MS_CZ_CPP.LockHeadDrawing(CZ_LockHeadParameters);
+            Drawing.DoTest();
+        }
+
+        private RelayCommand _DrawAll;
+        public RelayCommand DrawAll => _DrawAll ?? (_DrawAll = new RelayCommand(ExecuteDrawAll));
+        public void ExecuteDrawAll()
+        {
             PDIWT_MS_CZ_CPP.LockHeadDrawing Drawing = new PDIWT_MS_CZ_CPP.LockHeadDrawing(CZ_LockHeadParameters);
             Drawing.DoDraw();
         }

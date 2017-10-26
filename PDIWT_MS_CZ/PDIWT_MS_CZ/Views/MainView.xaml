@@ -73,7 +73,10 @@
                     <Image Source="../Image/Icons/Reset.ico" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="绘制" Style="{StaticResource MenuItemStyle}">
+            <MenuItem
+                Command="{Binding DrawAll}"
+                Header="绘制"
+                Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Icon>
                     <Image Source="../Image/Icons/Create New.ico" />
                 </MenuItem.Icon>
