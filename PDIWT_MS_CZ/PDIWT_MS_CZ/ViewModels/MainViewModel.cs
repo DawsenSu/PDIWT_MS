@@ -91,7 +91,7 @@ namespace PDIWT_MS_CZ.ViewModels
                 LH_CulvertChoosenIndex = 1,
                 LH_ShortCulvert = new ShortCulvert()
                 {
-                    Culvert_Pier_BackDis = 1800,
+                    Culvert_Pier_RightDis = 1800,
                     Culvert_Width = 3500,
                     Culvert_A = 700,
                     Culvert_B = 300,
@@ -130,24 +130,24 @@ namespace PDIWT_MS_CZ.ViewModels
                         Grille_TwolineInterval = 500,
                         GrilleWidthList = new ObservableCollection<GrillInterval>()
                         {
-                            new GrillInterval() {Interval = 250, RoundChamferRadius = 0},
-                            new GrillInterval() {Interval =300 ,RoundChamferRadius = 150},
-                            new GrillInterval() {Interval = 500, RoundChamferRadius = 0},
-                            new GrillInterval() {Interval =300 ,RoundChamferRadius = 150},
-                            new GrillInterval() {Interval = 500, RoundChamferRadius = 0},
-                            new GrillInterval() {Interval =300 ,RoundChamferRadius = 150},
-                            new GrillInterval() {Interval = 500, RoundChamferRadius = 0},
-                            new GrillInterval() {Interval = 500 ,RoundChamferRadius = 250},
-                            new GrillInterval() {Interval = 500, RoundChamferRadius = 0},
-                            new GrillInterval() {Interval = 500 ,RoundChamferRadius = 250},
-                            new GrillInterval() {Interval = 500, RoundChamferRadius = 0},
-                            new GrillInterval() {Interval = 800 ,RoundChamferRadius = 400},
-                            new GrillInterval() {Interval = 800, RoundChamferRadius = 0},
-                            new GrillInterval() {Interval = 800 ,RoundChamferRadius = 400},
-                            new GrillInterval() {Interval = 800, RoundChamferRadius = 0},
-                            new GrillInterval() {Interval = 800 ,RoundChamferRadius = 400},
-                            new GrillInterval() {Interval = 800, RoundChamferRadius = 0},
-                            new GrillInterval() {Interval = 1000, RoundChamferRadius = 500}
+                            new GrillInterval() {Interval = 250, RoundChamferRadius = 250},
+                            new GrillInterval() {Interval =300 ,RoundChamferRadius = 0},
+                            new GrillInterval() {Interval = 500, RoundChamferRadius = 250},
+                            new GrillInterval() {Interval =300 ,RoundChamferRadius = 0},
+                            new GrillInterval() {Interval = 500, RoundChamferRadius = 250},
+                            new GrillInterval() {Interval =300 ,RoundChamferRadius = 0},
+                            new GrillInterval() {Interval = 500, RoundChamferRadius = 250},
+                            new GrillInterval() {Interval = 500 ,RoundChamferRadius = 0},
+                            new GrillInterval() {Interval = 500, RoundChamferRadius = 250},
+                            new GrillInterval() {Interval = 500 ,RoundChamferRadius = 0},
+                            new GrillInterval() {Interval = 500, RoundChamferRadius = 250},
+                            new GrillInterval() {Interval = 800 ,RoundChamferRadius = 0},
+                            new GrillInterval() {Interval = 800, RoundChamferRadius = 400},
+                            new GrillInterval() {Interval = 800 ,RoundChamferRadius = 0},
+                            new GrillInterval() {Interval = 800, RoundChamferRadius = 400},
+                            new GrillInterval() {Interval = 800 ,RoundChamferRadius = 0},
+                            new GrillInterval() {Interval = 800, RoundChamferRadius = 400},
+                            new GrillInterval() {Interval = 1000, RoundChamferRadius = 0}
                         }
                     },
                     IsIncludeBaffle = true,
@@ -174,85 +174,85 @@ namespace PDIWT_MS_CZ.ViewModels
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 0,
-                                ChamferLength = 0,
-                                ChamferWidth = 0
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 1,
-                                ChamferLength = 1,
-                                ChamferWidth = 1
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
-                                IsChamfered = true,
+                                IsChamfered = false,
                                 EdgeIndicator = 2,
-                                ChamferLength = 2,
-                                ChamferWidth = 2
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
-                                IsChamfered = true,
+                                IsChamfered = false,
                                 EdgeIndicator = 3,
-                                ChamferLength = 3,
-                                ChamferWidth = 3
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 4,
-                                ChamferLength = 4,
-                                ChamferWidth = 4
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
-                                IsChamfered = true,
+                                IsChamfered = false,
                                 EdgeIndicator = 5,
-                                ChamferLength = 5,
-                                ChamferWidth = 5
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
-                                IsChamfered = true,
+                                IsChamfered = false,
                                 EdgeIndicator = 6,
-                                ChamferLength = 6,
-                                ChamferWidth = 6
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 7,
-                                ChamferLength = 7,
-                                ChamferWidth = 7
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 8,
-                                ChamferLength = 8,
-                                ChamferWidth = 8
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 9,
-                                ChamferLength = 9,
-                                ChamferWidth = 9
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 10,
-                                ChamferLength = 10,
-                                ChamferWidth = 10
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 11,
-                                ChamferLength = 11,
-                                ChamferWidth = 11
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             }
                         }
                     },
@@ -270,85 +270,85 @@ namespace PDIWT_MS_CZ.ViewModels
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 0,
-                                ChamferLength = 0,
-                                ChamferWidth = 0
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 1,
-                                ChamferLength = 1,
-                                ChamferWidth = 1
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
-                                IsChamfered = true,
+                                IsChamfered = false,
                                 EdgeIndicator = 2,
-                                ChamferLength = 2,
-                                ChamferWidth = 2
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
-                                IsChamfered = true,
+                                IsChamfered = false,
                                 EdgeIndicator = 3,
-                                ChamferLength = 3,
-                                ChamferWidth = 3
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 4,
-                                ChamferLength = 4,
-                                ChamferWidth = 4
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
-                                IsChamfered = true,
+                                IsChamfered = false,
                                 EdgeIndicator = 5,
-                                ChamferLength = 5,
-                                ChamferWidth = 5
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
-                                IsChamfered = true,
+                                IsChamfered = false,
                                 EdgeIndicator = 6,
-                                ChamferLength = 6,
-                                ChamferWidth = 6
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 7,
-                                ChamferLength = 7,
-                                ChamferWidth = 7
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 8,
-                                ChamferLength = 8,
-                                ChamferWidth = 8
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 9,
-                                ChamferLength = 9,
-                                ChamferWidth = 9
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 10,
-                                ChamferLength = 10,
-                                ChamferWidth = 10
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 11,
-                                ChamferLength = 11,
-                                ChamferWidth = 11
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             }
                         }
                     },
@@ -366,85 +366,85 @@ namespace PDIWT_MS_CZ.ViewModels
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 0,
-                                ChamferLength = 0,
-                                ChamferWidth = 0
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 1,
-                                ChamferLength = 1,
-                                ChamferWidth = 1
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
-                                IsChamfered = true,
+                                IsChamfered = false,
                                 EdgeIndicator = 2,
-                                ChamferLength = 2,
-                                ChamferWidth = 2
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
-                                IsChamfered = true,
+                                IsChamfered = false,
                                 EdgeIndicator = 3,
-                                ChamferLength = 3,
-                                ChamferWidth = 3
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 4,
-                                ChamferLength = 4,
-                                ChamferWidth = 4
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
-                                IsChamfered = true,
+                                IsChamfered = false,
                                 EdgeIndicator = 5,
-                                ChamferLength = 5,
-                                ChamferWidth = 5
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
-                                IsChamfered = true,
+                                IsChamfered = false,
                                 EdgeIndicator = 6,
-                                ChamferLength = 6,
-                                ChamferWidth = 6
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 7,
-                                ChamferLength = 7,
-                                ChamferWidth = 7
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 8,
-                                ChamferLength = 8,
-                                ChamferWidth = 8
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 9,
-                                ChamferLength = 9,
-                                ChamferWidth = 9
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 10,
-                                ChamferLength = 10,
-                                ChamferWidth = 10
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 11,
-                                ChamferLength = 11,
-                                ChamferWidth = 11
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             }
                         }
                     },
@@ -456,91 +456,91 @@ namespace PDIWT_MS_CZ.ViewModels
                         EmptyBoxLength = 2700,
                         EmptyBoxWidth = 4800,
                         EmptyBoxHeight = 8400,
-                        ChamferInfos = new ObservableCollection<EmptyBoxEdgeChameferInfo>()
+                       ChamferInfos = new ObservableCollection<EmptyBoxEdgeChameferInfo>()
                         {
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 0,
-                                ChamferLength = 0,
-                                ChamferWidth = 0
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 1,
-                                ChamferLength = 1,
-                                ChamferWidth = 1
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
-                                IsChamfered = true,
+                                IsChamfered = false,
                                 EdgeIndicator = 2,
-                                ChamferLength = 2,
-                                ChamferWidth = 2
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
-                                IsChamfered = true,
+                                IsChamfered = false,
                                 EdgeIndicator = 3,
-                                ChamferLength = 3,
-                                ChamferWidth = 3
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 4,
-                                ChamferLength = 4,
-                                ChamferWidth = 4
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
-                                IsChamfered = true,
+                                IsChamfered = false,
                                 EdgeIndicator = 5,
-                                ChamferLength = 5,
-                                ChamferWidth = 5
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
-                                IsChamfered = true,
+                                IsChamfered = false,
                                 EdgeIndicator = 6,
-                                ChamferLength = 6,
-                                ChamferWidth = 6
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 7,
-                                ChamferLength = 7,
-                                ChamferWidth = 7
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 8,
-                                ChamferLength = 8,
-                                ChamferWidth = 8
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 9,
-                                ChamferLength = 9,
-                                ChamferWidth = 9
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 10,
-                                ChamferLength = 10,
-                                ChamferWidth = 10
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 11,
-                                ChamferLength = 11,
-                                ChamferWidth = 11
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             }
                         }
                     },
@@ -552,91 +552,91 @@ namespace PDIWT_MS_CZ.ViewModels
                         EmptyBoxLength = 5500,
                         EmptyBoxWidth = 4800,
                         EmptyBoxHeight = 8400,
-                        ChamferInfos = new ObservableCollection<EmptyBoxEdgeChameferInfo>()
+                       ChamferInfos = new ObservableCollection<EmptyBoxEdgeChameferInfo>()
                         {
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 0,
-                                ChamferLength = 0,
-                                ChamferWidth = 0
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 1,
-                                ChamferLength = 1,
-                                ChamferWidth = 1
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
-                                IsChamfered = true,
+                                IsChamfered = false,
                                 EdgeIndicator = 2,
-                                ChamferLength = 2,
-                                ChamferWidth = 2
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
-                                IsChamfered = true,
+                                IsChamfered = false,
                                 EdgeIndicator = 3,
-                                ChamferLength = 3,
-                                ChamferWidth = 3
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 4,
-                                ChamferLength = 4,
-                                ChamferWidth = 4
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
-                                IsChamfered = true,
+                                IsChamfered = false,
                                 EdgeIndicator = 5,
-                                ChamferLength = 5,
-                                ChamferWidth = 5
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
-                                IsChamfered = true,
+                                IsChamfered = false,
                                 EdgeIndicator = 6,
-                                ChamferLength = 6,
-                                ChamferWidth = 6
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 7,
-                                ChamferLength = 7,
-                                ChamferWidth = 7
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 8,
-                                ChamferLength = 8,
-                                ChamferWidth = 8
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 9,
-                                ChamferLength = 9,
-                                ChamferWidth = 9
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 10,
-                                ChamferLength = 10,
-                                ChamferWidth = 10
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             },
                             new EmptyBoxEdgeChameferInfo()
                             {
                                 IsChamfered = true,
                                 EdgeIndicator = 11,
-                                ChamferLength = 11,
-                                ChamferWidth = 11
+                                ChamferLength = 500,
+                                ChamferWidth = 500
                             }
                         }
                     }
@@ -665,7 +665,7 @@ namespace PDIWT_MS_CZ.ViewModels
                             },
                             new ZPlanInfo()
                             {
-                                X=4100,
+                                X=6400,
                                 Y=0,
                                 BoxEdgeChamferInfo = new EmptyBoxEdgeChameferInfo()
                                 {
@@ -677,7 +677,7 @@ namespace PDIWT_MS_CZ.ViewModels
                             },
                             new ZPlanInfo()
                             {
-                                X=6400,
+                                X=1000,
                                 Y=3300,
                                 BoxEdgeChamferInfo = new EmptyBoxEdgeChameferInfo()
                                 {
@@ -689,7 +689,7 @@ namespace PDIWT_MS_CZ.ViewModels
                             },
                             new ZPlanInfo()
                             {
-                                X=6400,
+                                X=3100,
                                 Y=4300,
                                 BoxEdgeChamferInfo = new EmptyBoxEdgeChameferInfo()
                                 {

@@ -38,7 +38,10 @@ namespace PDIWT_MS_CZ_CPP {
 		StatusInt CloneMirrorSolidAndUnion(ISolidKernelEntityPtr&, DPoint3dCR);
 		// 画出切角curveVector进行进行切角合并(分别位于1,2,3,4象限)
 		StatusInt DrawRoundChamferCorner(CurveVectorPtr&, DPoint3dCR, double, Quadrant);
+		//绘制格栅中间间隔
+		StatusInt DrawGrillInterval(ISolidKernelEntityPtr&,double, double, double, double,double, DPoint3dCR);
 		StatusInt DebugCurveVector(CurveVectorCR);
+		StatusInt DebugISolidKernelEntity(ISolidKernelEntityCR);
 		//Draw Function
 		StatusInt DrawBaseBoard(ISolidKernelEntityPtr &, DPoint3dCR);
 		StatusInt DrawBaseBoard_Cut(ISolidKernelEntityPtr &, DPoint3dCR); // DrawBaseBoar SubFunction
@@ -48,6 +51,8 @@ namespace PDIWT_MS_CZ_CPP {
 		StatusInt DrawWaterDivision(ISolidKernelEntityPtr&, DPoint3dCR);
 		StatusInt DrawShortCulvert(ISolidKernelEntityPtr&, DPoint3dCR);
 		StatusInt DrawRectEmptyBoxes(bvector<ISolidKernelEntityPtr>&, DPoint3dCR);
+		StatusInt DrawChamfer(ISolidKernelEntityPtr&, int,DPoint3dCR, double, double, double,double,double);
+
 		StatusInt DrawZPlanEmptyBox(bvector<ISolidKernelEntityPtr>&, DPoint3dCR);
 	};
 

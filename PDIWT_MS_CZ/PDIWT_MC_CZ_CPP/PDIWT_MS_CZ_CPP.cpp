@@ -13,52 +13,94 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DoDraw()
 {
 	EditElementHandle _cz_whole;
 	ISolidKernelEntityPtr _cz_whole_SKE;
+	DPoint3d _whole_anchor;
 #pragma region baseboard
 	ISolidKernelEntityPtr _baseboard_SKE;
-	if (DrawBaseBoard(_baseboard_SKE, DPoint3d{ 0,0,0 }))
+	if (DrawBaseBoard(_baseboard_SKE, _whole_anchor))
 		return ERROR;
+	_cz_whole_SKE = _baseboard_SKE;
 #pragma endregion
 
 #pragma region SidePier
-	ISolidKernelEntityPtr _sidepier_SKE;
-	if (DrawSidePier(_sidepier_SKE, DPoint3d{ 0,0,0 }))
+	DPoint3d _sidepier_anchor = DPoint3d::FromSumOf(_whole_anchor, DPoint3d::From(-LH_LockHeadParameter->LH_BaseBoard->BaseBoardWidth / 2, 0, LH_LockHeadParameter->LH_BaseBoard->BaseBoardHeight));
+	ISolidKernelEntityPtr _left_sidepier_SKE;
+	if (DrawSidePier(_left_sidepier_SKE, _sidepier_anchor))
+		return ERROR;
+
+	//Mirror right 
+	ISolidKernelEntityPtr _right_sidepier_SKE;
+	if (SolidUtil::CopyEntity(_right_sidepier_SKE, *_left_sidepier_SKE))
+		return ERROR;
+	Transform _xymirrortrans;
+	_xymirrortrans.InitFromMirrorPlane(_whole_anchor, DVec3d::UnitX());
+	if (SolidUtil::Modify::TransformBody(_right_sidepier_SKE, _xymirrortrans))
+		return ERROR;
+	bvector<ISolidKernelEntityPtr> _sidepier_SKE{ _left_sidepier_SKE ,_right_sidepier_SKE };
+	if (SolidUtil::Modify::BooleanUnion(_cz_whole_SKE, &_sidepier_SKE[0], _sidepier_SKE.size()))
 		return ERROR;
 #pragma endregion
 
 #pragma region DoorSill
+	DPoint3d _doorsill_anchor = DPoint3d::FromSumOf(_whole_anchor, DPoint3d::From(0, 0, LH_LockHeadParameter->LH_BaseBoard->BaseBoardHeight));
 	ISolidKernelEntityPtr _doorsill_SKE;
-	if (DrawDoorSill(_doorsill_SKE, DPoint3d{ 0,0,0 }))
+	if (DrawDoorSill(_doorsill_SKE, _doorsill_anchor))
+		return ERROR;
+	if (SolidUtil::Modify::BooleanUnion(_cz_whole_SKE, &_doorsill_SKE, 1))
 		return ERROR;
 #pragma endregion
 
+	if (LH_LockHeadParameter->LH_CulvertChoosenIndex == 1)
+	{
 #pragma region LocalConcerationCulvert
-	ISolidKernelEntityPtr _localconculvert_SKE;
-	if (DrawLocalConcertationCulvert(_localconculvert_SKE, DPoint3d{ 0,0,0 }))
-		return ERROR;
-
-	ISolidKernelEntityPtr _waterdiv_SKE;
-	if (DrawWaterDivision(_waterdiv_SKE, DPoint3d{ 0,0,0 }))
-		return ERROR;
+		DPoint3d _localconculvert_anchor = DPoint3d::FromSumOf(_whole_anchor, DPoint3d::From(0, LH_LockHeadParameter->LH_LocalConcertationCulvert->Culvert_Pier_BackDis, LH_LockHeadParameter->LH_BaseBoard->BaseBoardHeight));
+		ISolidKernelEntityPtr _localconculvert_SKE;
+		if (DrawLocalConcertationCulvert(_localconculvert_SKE, _localconculvert_anchor))
+			return ERROR;
+		if (SolidUtil::Modify::BooleanSubtract(_cz_whole_SKE, &_localconculvert_SKE, 1))
+			return ERROR;
 #pragma endregion
-
+	}
+	else
+	{
 #pragma region ShortCulvert
-	ISolidKernelEntityPtr _shortculvert_SKE;
-	if (DrawShortCulvert(_shortculvert_SKE, DPoint3d{ 0,0,0 }))
-		return ERROR;
+		DPoint3d _shortculvert_anchor = DPoint3d::FromSumOf(_whole_anchor, DPoint3d::From( -(LH_LockHeadParameter->LH_BaseBoard->BaseBoardWidth / 2 - LH_LockHeadParameter->LH_ShortCulvert->Culvert_Pier_RightDis),0, LH_LockHeadParameter->LH_BaseBoard->BaseBoardHeight));
+		ISolidKernelEntityPtr _left_shortculvert_SKE;
+		if (DrawShortCulvert(_left_shortculvert_SKE, _shortculvert_anchor))
+			return ERROR;
+
+		//Mirror right 
+		ISolidKernelEntityPtr _right_shortculvert_SKE;
+		if (SolidUtil::CopyEntity(_right_shortculvert_SKE, *_left_shortculvert_SKE))
+			return ERROR;
+		Transform _xymirrortrans;
+		_xymirrortrans.InitFromMirrorPlane(_whole_anchor, DVec3d::UnitX());
+		if (SolidUtil::Modify::TransformBody(_right_shortculvert_SKE, _xymirrortrans))
+			return ERROR;
+
+		bvector<ISolidKernelEntityPtr> _shortculvert_SKE{ _left_shortculvert_SKE ,_right_shortculvert_SKE };
+		if (SolidUtil::Modify::BooleanSubtract(_cz_whole_SKE, &_shortculvert_SKE[0], _shortculvert_SKE.size()))
+			return ERROR;
 #pragma endregion
+	}
 
 #pragma region RectEmptyBox
+	DPoint3d _rectemptybox_anchor = DPoint3d::FromSumOf(_sidepier_anchor, DPoint3d::From(0, 0, LH_LockHeadParameter->LH_SidePier->PierHeight));
 	bvector<ISolidKernelEntityPtr> _rectemptyboxes;
-	if (DrawRectEmptyBoxes(_rectemptyboxes, DPoint3d{ 0,0,0 }))
+	if (DrawRectEmptyBoxes(_rectemptyboxes, _rectemptybox_anchor))
 		return ERROR;
-#pragma endregion
-#pragma region ZPlanEmptyBox
-	bvector<ISolidKernelEntityPtr> _zplanemptyboxes;
-	if (DrawZPlanEmptyBox(_zplanemptyboxes, DPoint3d{ 0,0,0 }))
+	if (SolidUtil::Modify::BooleanSubtract(_cz_whole_SKE, &_rectemptyboxes[0], _rectemptyboxes.size()))
 		return ERROR;
 #pragma endregion
 
-	_cz_whole_SKE = _localconculvert_SKE;
+#pragma region ZPlanEmptyBox
+	bvector<ISolidKernelEntityPtr> _zplanemptyboxes;
+	if (DrawZPlanEmptyBox(_zplanemptyboxes, _rectemptybox_anchor))
+		return ERROR;
+	if (SolidUtil::Modify::BooleanSubtract(_cz_whole_SKE, &_zplanemptyboxes[0], _zplanemptyboxes.size()))
+		return ERROR;
+#pragma endregion
+
+	//_cz_whole_SKE = _rectemptyboxes.at(0);
 
 	if ((SolidUtil::Modify::TransformBody(_cz_whole_SKE, GetModelTransform(DPoint3d::FromZero())) != SUCCESS)
 		||
@@ -136,11 +178,20 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawRoundChamferCorner(CurveVectorPt
 }
 
 
+
 StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DebugCurveVector(CurveVectorCR _cv)
 {
 	EditElementHandle _eeh;
 	if (DraftingElementSchema::ToElement(_eeh, _cv, nullptr, true, *ACTIVEMODEL))
 		return ERROR;
+	_eeh.AddToModel();
+	return SUCCESS;
+}
+
+StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DebugISolidKernelEntity(ISolidKernelEntityCR _SKE)
+{
+	EditElementHandle _eeh;
+	DraftingElementSchema::ToElement(_eeh, _SKE, nullptr, *ACTIVEMODEL);
 	_eeh.AddToModel();
 	return SUCCESS;
 }
@@ -370,20 +421,28 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawLocalConcertationCulvert(ISolidK
 		_bottom_section_cv = CurveVector::AreaUnion(*_bottom_section_cv, *_r4_cv);
 		_bottom_section_cv = CurveVector::AreaDifference(*_bottom_section_cv, *_r1_cv);
 		_bottom_section_cv = CurveVector::AreaDifference(*_bottom_section_cv, *_r3_cv);
-
 	}
 
 	_bottom_section_cv->SimplifyLinestrings(0.01, true, true);
 	ISolidPrimitivePtr _localconculvert_bottom_section_SP = ISolidPrimitive::CreateDgnExtrusion(DgnExtrusionDetail(_bottom_section_cv, DVec3d::FromScale(DVec3d::UnitZ(), _localconculvertparam->Culvert_Height), true));
 	if (SolidUtil::Create::BodyFromSolidPrimitive(_outconcertationculvert, *_localconculvert_bottom_section_SP, *ACTIVEMODEL))
 		return ERROR;
+	if (_localconculvertparam->IsIncludeWaterDivision)
+	{
+		ISolidKernelEntityPtr _waterdiv_SKE;
+		if (DrawWaterDivision(_waterdiv_SKE, DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(-(_localconculvertparam->Culvert_A - _localconculvertparam->Culvert_Chamfer_R1), _localconculvertparam->Culvert_D / 2))))
+			return ERROR;
+		if (SolidUtil::Modify::BooleanSubtract(_outconcertationculvert, &_waterdiv_SKE, 1))
+			return ERROR;
+	}
 
+	//绘制消力坎
 	if (_localconculvertparam->IsIncludeBaffle)
 	{
 		bvector<ISolidKernelEntityPtr> _baffle_vector_SKE;
 		for each (auto _baffle in _localconculvertparam->Culvert_Baffle)
 		{
-			DPoint3d _baseorigin = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From( -_baffle->Baffle_MidMidDis - _baffle->Baffle_Width / 2,0));
+			DPoint3d _baseorigin = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(-_baffle->Baffle_MidMidDis - _baffle->Baffle_Width / 2, 0));
 			DPoint3d _toporigin = DPoint3d::FromSumOf(_baseorigin, DPoint3d::From(0, 0, _baffle->Baffle_Height));
 			DgnBoxDetail _baffle_detail
 			(
@@ -406,6 +465,33 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawLocalConcertationCulvert(ISolidK
 		if (SolidUtil::Modify::BooleanSubtract(_outconcertationculvert, &_baffle_vector_SKE[0], _baffle_vector_SKE.size()))
 			return ERROR;
 	}
+	//绘制格栅
+	if (_localconculvertparam->IsIncludeEnergyDisspater)
+	{
+		ObservableCollection<GrillInterval^>^ _grillwidthlistparam = _localconculvertparam->Culvert_EnergyDisspater->GrilleWidthList;
+		int _grill_width_list_count = _grillwidthlistparam->Count;
+		double _grill_height = LH_LockHeadParameter->LH_DoorSill->DoorSillHeight;
+		double _grill_length = (_localconculvertparam->Culvert_D - _localconculvertparam->Culvert_EnergyDisspater->Grille_TwolineInterval) / 2;
+		DPoint3d _grill_temp_Point = Dpoint3d::FromSumOf(_anchorpoint, Dpoint3d::From(0, 0, _localconculvertparam->Culvert_Height));
+		ISolidKernelEntityPtr _grill_SKE;
+		for (int i = 0; i < _grill_width_list_count; i += 2)
+		{
+			double _radius_right = _grillwidthlistparam[i]->RoundChamferRadius;
+			double _radius_left;
+			if (i == _grill_width_list_count - 2)
+				_radius_left = _radius_right;
+			else
+				_radius_left = _grillwidthlistparam[i + 2]->RoundChamferRadius;
+
+			DPoint3d _offsetvector = DPoint3d::From(-(_grillwidthlistparam[i]->Interval + _grillwidthlistparam[i + 1]->Interval), 0);
+			_grill_temp_Point = DPoint3d::FromSumOf(_grill_temp_Point, _offsetvector);
+			if (DrawGrillInterval(_grill_SKE, _grillwidthlistparam[i + 1]->Interval, _grill_height, _grill_length, _radius_right, _radius_left, _grill_temp_Point))
+				return ERROR;
+			if (SolidUtil::Modify::BooleanUnion(_outconcertationculvert, &_grill_SKE, 1))
+				return ERROR;
+		}
+	}
+
 
 	if (CloneMirrorSolidAndUnion(_outconcertationculvert, _anchorpoint))
 		return ERROR;
@@ -413,6 +499,43 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawLocalConcertationCulvert(ISolidK
 	return SUCCESS;
 
 }
+
+//格栅的anchorpoint为左下角点
+StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawGrillInterval(ISolidKernelEntityPtr & _outgrill, double _width, double _height, double _length, double _radius_right, double _radius_left, DPoint3dCR _anchorpoint)
+{
+	bvector<DPoint3d> _grill_section
+	{
+		DPoint3d::From(_width,0),
+		DPoint3d::From(0,_height),
+		DPoint3d::From(-_width,0)
+	};
+	bvector<DPoint3d> _global_grill_pts = GetAddedPointVector(_anchorpoint, _grill_section);
+	CurveVectorPtr _grill_section_cv = CurveVector::CreateLinear(_global_grill_pts, CurveVector::BOUNDARY_TYPE_Outer);
+	CurveVectorPtr _r1_cv, _r2_cv, _r3_cv, _r4_cv;
+	DrawRoundChamferCorner(_r1_cv, _global_grill_pts[0], _radius_left, Quadrant::Two);
+	DrawRoundChamferCorner(_r2_cv, _global_grill_pts[1], _radius_right, Quadrant::One);
+	DrawRoundChamferCorner(_r3_cv, _global_grill_pts[2], _radius_right, Quadrant::Four);
+	DrawRoundChamferCorner(_r4_cv, _global_grill_pts[3], _radius_left, Quadrant::Three);
+	//_grill_section_cv = CurveVector::AreaUnion(*_grill_section_cv, *_r1_cv);
+	//_grill_section_cv = CurveVector::AreaUnion(*_grill_section_cv, *_r2_cv);
+	//_grill_section_cv = CurveVector::AreaUnion(*_grill_section_cv, *_r3_cv);
+	//_grill_section_cv = CurveVector::AreaUnion(*_grill_section_cv, *_r4_cv);
+	//DebugCurveVector(*_r1_cv);
+	//DebugCurveVector(*_r2_cv);
+	//DebugCurveVector(*_r3_cv);
+	//DebugCurveVector(*_r4_cv);
+
+	_grill_section_cv->SimplifyLinestrings(0.01, true, true);
+	_grill_section_cv->TransformInPlace(Transform::FromAxisAndRotationAngle(DRay3d::FromOriginAndVector(_global_grill_pts[0], DVec3d::UnitX()), fc_piover2));
+	//DebugCurveVector(*_grill_section_cv);
+
+	DgnExtrusionDetail _grill_detai(_grill_section_cv, DVec3d::FromScale(DVec3d::UnitY(), _length), true);
+	ISolidPrimitivePtr _grill_SP = ISolidPrimitive::CreateDgnExtrusion(_grill_detai);
+	if (SolidUtil::Create::BodyFromSolidPrimitive(_outgrill, *_grill_SP, *ACTIVEMODEL))
+		return ERROR;
+	return SUCCESS;
+}
+
 //此模块的anchor point为分流墩右下半圆的圆心
 //	  --
 //   /  \
@@ -573,9 +696,96 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawRectEmptyBoxes(bvector<ISolidKer
 		ISolidKernelEntityPtr _rectbox_SKE;
 		if (SolidUtil::Create::BodyFromSolidPrimitive(_rectbox_SKE, *_rectbox_ptr, *ACTIVEMODEL))
 			return	ERROR;
+		for each (auto _chamfer_info in _rectbox->ChamferInfos)
+		{
+			if (_chamfer_info->IsChamfered)
+			{
+				ISolidKernelEntityPtr _EdgeChamfer_SKE;
+				if (DrawChamfer(_EdgeChamfer_SKE, _chamfer_info->EdgeIndicator, _topOrigin, _chamfer_info->ChamferLength, _chamfer_info->ChamferWidth, _rectbox->EmptyBoxWidth, _rectbox->EmptyBoxLength, _rectbox->EmptyBoxHeight))
+					return ERROR;
 
+				if (SolidUtil::Modify::BooleanSubtract(_rectbox_SKE, &_EdgeChamfer_SKE, 1))
+					return ERROR;
+			}
+		}
 		_outrectemptyboxes.push_back(_rectbox_SKE);
 	}
+	return SUCCESS;
+}
+
+BENTLEY_NAMESPACE_NAME::StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawChamfer(ISolidKernelEntityPtr& _outchamfer, int _edgeindex, DPoint3dCR _anchorpoint, double _front, double _back, double _xlen, double _ylen, double _zlen)
+{
+	bvector<DPoint3d> _pts;
+	DPoint3d _drawpoint;
+	DVec3d _extrusion_vec;
+
+	switch (_edgeindex)
+	{
+	case 0:
+		_pts = { DPoint3d::From(0,_front),DPoint3d::From(0,-_front,_back) };
+		_extrusion_vec = DVec3d::FromScale(DVec3d::UnitX(), _xlen);
+		_drawpoint = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(0, 0, -_zlen));
+		break;
+	case 1:
+		_pts = { DPoint3d::From(0,0,_front),DPoint3d::From(0,-_back ,-_front) };
+		_extrusion_vec = DVec3d::FromScale(DVec3d::UnitX(), _xlen);
+		_drawpoint = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(0, _ylen, -_zlen));
+		break;
+	case 2:
+		_pts = { DPoint3d::From(0,-_front),DPoint3d::From(0,_front,-_back) };
+		_extrusion_vec = DVec3d::FromScale(DVec3d::UnitX(), _xlen);
+		_drawpoint = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(0, _ylen, 0));
+		break;
+	case 3:
+		_pts = { DPoint3d::From(0,0,-_front),DPoint3d::From(0,_back ,_front) };
+		_extrusion_vec = DVec3d::FromScale(DVec3d::UnitX(), _xlen);
+		_drawpoint = _anchorpoint;
+		break;
+	case 4:
+		_pts = { DPoint3d::From(0,0,_front),DPoint3d::From(_back,0, -_front) };
+		_extrusion_vec = DVec3d::FromScale(DVec3d::UnitY(), _ylen);
+		_drawpoint = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(0, 0, -_zlen));
+		break;
+	case 5:
+		_pts = { DPoint3d::From(_front,0),DPoint3d::From(-_front,0,-_back) };
+		_extrusion_vec = DVec3d::FromScale(DVec3d::UnitY(), _ylen);
+		_drawpoint = _anchorpoint;
+		break;
+	case 6:
+		_pts = { DPoint3d::From(0,0,-_front),DPoint3d::From(-_back,0, _front) };
+		_extrusion_vec = DVec3d::FromScale(DVec3d::UnitY(), _ylen);
+		_drawpoint = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(_xlen, 0, 0));
+		break;
+	case 7:
+		_pts = { DPoint3d::From(-_front,0),DPoint3d::From(_front,0,_back) };
+		_extrusion_vec = DVec3d::FromScale(DVec3d::UnitY(), _ylen);
+		_drawpoint = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(_xlen, 0, -_zlen));
+		break;
+	case 8:
+		_pts = { DPoint3d::From(_front,0),DPoint3d::From(-_front,_back) };
+		_extrusion_vec = DVec3d::FromScale(DVec3d::UnitZ(), _zlen);
+		_drawpoint = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(0, 0, -_zlen));
+		break;
+	case 9:
+		_pts = { DPoint3d::From(0,_front),DPoint3d::From(-_back,-_front) };
+		_extrusion_vec = DVec3d::FromScale(DVec3d::UnitZ(), _zlen);
+		_drawpoint = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(_xlen, 0, -_zlen));
+		break;
+	case 10:
+		_pts = { DPoint3d::From(-_front,0),DPoint3d::From(_front,-_back) };
+		_extrusion_vec = DVec3d::FromScale(DVec3d::UnitZ(), _zlen);
+		_drawpoint = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(_xlen, _ylen, -_zlen));
+		break;
+	case 11:
+		_pts = { DPoint3d::From(0,-_front),DPoint3d::From(_back,_front) };
+		_extrusion_vec = DVec3d::FromScale(DVec3d::UnitZ(), _zlen);
+		_drawpoint = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(0, _ylen, -_zlen));
+		break;
+	}
+	bvector<Dpoint3d> _global_pts = GetAddedPointVector(_drawpoint, _pts);
+	ISolidPrimitivePtr _chamfer_SP = ISolidPrimitive::CreateDgnExtrusion(DgnExtrusionDetail(CurveVector::CreateLinear(_global_pts, CurveVector::BOUNDARY_TYPE_Outer), _extrusion_vec, true));
+	if (SolidUtil::Create::BodyFromSolidPrimitive(_outchamfer, *_chamfer_SP, *ACTIVEMODEL))
+		return ERROR;
 	return SUCCESS;
 }
 

@@ -307,7 +307,7 @@ namespace PDIWT_MS_CZ.Models
         public double Culvert_R2 { get; set; }
         //位置参数
 
-        public double Culvert_Pier_BackDis { get; set; }
+        public double Culvert_Pier_RightDis { get; set; }
     }
     #endregion
 

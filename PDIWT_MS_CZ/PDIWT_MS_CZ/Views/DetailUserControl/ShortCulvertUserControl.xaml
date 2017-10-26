@@ -48,7 +48,7 @@
                 <TextBox
                     Grid.Row="1"
                     Grid.Column="1"
-                    Text="{Binding Culvert_Pier_BackDis}" />
+                    Text="{Binding Culvert_Pier_RightDis}" />
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Header="侧视图参数">
