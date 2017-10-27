@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\..\..\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\</OutputPath>
+    <OutputPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -204,6 +204,7 @@
   <ItemGroup>
     <Compile Include="Converters\EdgeToForegroundConverter.cs" />
     <Compile Include="Converters\IndexToContentConverter.cs" />
+    <Compile Include="Converters\StatusToPicConverter.cs" />
     <Compile Include="Models\BitmapHelper.cs" />
     <Compile Include="Models\GetCZQuantityTable.cs" />
     <Compile Include="Models\LockHeadParameters.cs" />
@@ -343,7 +344,7 @@
     <Resource Include="Image\Illustration\WaterDivision.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Image\Icons\Cancel.ico" />
+    <Resource Include="Image\Icons\Error.ico" />
     <Resource Include="Image\Icons\Info.ico" />
     <Resource Include="Image\Icons\Ok.ico" />
     <Resource Include="Image\Icons\Prompt.ico" />

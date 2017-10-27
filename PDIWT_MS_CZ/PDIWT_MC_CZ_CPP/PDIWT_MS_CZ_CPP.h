@@ -53,9 +53,7 @@ namespace PDIWT_MS_CZ_CPP {
 		StatusInt DrawShortCulvert(ISolidKernelEntityPtr&, DPoint3dCR);
 		StatusInt DrawRectEmptyBoxes(bvector<ISolidKernelEntityPtr>&, DPoint3dCR);
 		StatusInt DrawChamfer(ISolidKernelEntityPtr&, int,DPoint3dCR, double, double, double,double,double);
-
+		StatusInt DrawChamferCorner(bvector<ISolidKernelEntityPtr>&,RectEmptyBox^,DPoint3dCR);
 		StatusInt DrawZPlanEmptyBox(bvector<ISolidKernelEntityPtr>&, DPoint3dCR);
 	};
-
-
 }

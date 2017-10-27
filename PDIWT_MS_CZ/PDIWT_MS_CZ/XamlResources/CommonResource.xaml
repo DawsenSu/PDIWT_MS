@@ -23,7 +23,13 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Margin" Value="2,1" />
     </Style>
-    <SolidColorBrush x:Key="DisabledBackgroud" Color="{x:Static SystemColors.ControlDarkColor}" />
+    <SolidColorBrush x:Key="DisabledBackgroud" Color="#FFCFC6C6" />
+    <Style x:Key="ReadOnly_textbox" TargetType="{x:Type TextBox}">
+        <Setter Property="Background" Value="{StaticResource DisabledBackgroud}" />
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Margin" Value="2,1" />
+    </Style>
     <!--  DataGrid  -->
     <Style TargetType="{x:Type DataGrid}">
         <Setter Property="AutoGenerateColumns" Value="False" />

@@ -62,8 +62,7 @@
                     <TextBox
                         Grid.Row="0"
                         Grid.Column="1"
-                        Background="{StaticResource DisabledBackgroud}"
-                        IsReadOnly="True"
+                        Style="{StaticResource ReadOnly_textbox}"
                         Text="{Binding DoorSill_A}" />
                     <TextBlock
                         Grid.Row="1"
@@ -88,8 +87,6 @@
                     <TextBox
                         Grid.Row="3"
                         Grid.Column="1"
-                        Background="{StaticResource DisabledBackgroud}"
-                        IsReadOnly="True"
                         Text="{Binding DoorSill_D}" />
                     <TextBlock
                         Grid.Row="4"

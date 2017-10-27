@@ -13,7 +13,7 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DoDraw()
 {
 	EditElementHandle _cz_whole;
 	ISolidKernelEntityPtr _cz_whole_SKE;
-	DPoint3d _whole_anchor;
+	DPoint3d _whole_anchor{0,0,0};
 #pragma region baseboard
 	ISolidKernelEntityPtr _baseboard_SKE;
 	if (DrawBaseBoard(_baseboard_SKE, _whole_anchor))
@@ -63,7 +63,7 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DoDraw()
 	else
 	{
 #pragma region ShortCulvert
-		DPoint3d _shortculvert_anchor = DPoint3d::FromSumOf(_whole_anchor, DPoint3d::From( -(LH_LockHeadParameter->LH_BaseBoard->BaseBoardWidth / 2 - LH_LockHeadParameter->LH_ShortCulvert->Culvert_Pier_RightDis),0, LH_LockHeadParameter->LH_BaseBoard->BaseBoardHeight));
+		DPoint3d _shortculvert_anchor = DPoint3d::FromSumOf(_whole_anchor, DPoint3d::From( -(LH_LockHeadParameter->LH_BaseBoard->BaseBoardWidth / 2 - LH_LockHeadParameter->LH_ShortCulvert->Culvert_Pier_RightDis),0, LH_LockHeadParameter->LH_ShortCulvert->Culvert_Baseboard_BottomDis));
 		ISolidKernelEntityPtr _left_shortculvert_SKE;
 		if (DrawShortCulvert(_left_shortculvert_SKE, _shortculvert_anchor))
 			return ERROR;
@@ -128,10 +128,11 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DoDraw()
 
 StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DoTest()
 {
-	ISolidKernelEntityPtr _localconculvert_SKE;
-	if (DrawLocalConcertationCulvert(_localconculvert_SKE, DPoint3d{ 0,0,0 }))
+	DPoint3d _rectemptybox_anchor = DPoint3d::FromSumOf(DPoint3d{0,0,0}, DPoint3d::From(0, 0, LH_LockHeadParameter->LH_SidePier->PierHeight));
+	bvector<ISolidKernelEntityPtr> _rectemptyboxes;
+	if (DrawRectEmptyBoxes(_rectemptyboxes, _rectemptybox_anchor))
 		return ERROR;
-	DebugISolidKernelEntity(*_localconculvert_SKE);
+	DebugISolidKernelEntity(*_rectemptyboxes.at(0));
 	return SUCCESS;
 }
 
@@ -736,6 +737,14 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawRectEmptyBoxes(bvector<ISolidKer
 					return ERROR;
 			}
 		}
+
+		bvector<ISolidKernelEntityPtr> _EdgeChamfer_Coner_SKE;
+		if (DrawChamferCorner(_EdgeChamfer_Coner_SKE, _rectbox, _topOrigin))
+			return ERROR;
+		if (_EdgeChamfer_Coner_SKE.size() > 0)
+			if (SolidUtil::Modify::BooleanSubtract(_rectbox_SKE, &_EdgeChamfer_Coner_SKE[0], _EdgeChamfer_Coner_SKE.size()))
+				return ERROR;
+
 		_outrectemptyboxes.push_back(_rectbox_SKE);
 	}
 	return SUCCESS;
@@ -814,6 +823,114 @@ BENTLEY_NAMESPACE_NAME::StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawChamfer(
 	ISolidPrimitivePtr _chamfer_SP = ISolidPrimitive::CreateDgnExtrusion(DgnExtrusionDetail(CurveVector::CreateLinear(_global_pts, CurveVector::BOUNDARY_TYPE_Outer), _extrusion_vec, true));
 	if (SolidUtil::Create::BodyFromSolidPrimitive(_outchamfer, *_chamfer_SP, *ACTIVEMODEL))
 		return ERROR;
+	return SUCCESS;
+}
+
+StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawChamferCorner(bvector<ISolidKernelEntityPtr>& _outchamfercorner, RectEmptyBox ^ _rectbox, DPoint3dCR _anchorpoint)
+{
+	ISolidKernelEntityPtr _temp;
+	ObservableCollection<EmptyBoxEdgeChameferInfo^>^ _chamferinfos = _rectbox->ChamferInfos;
+	DPoint3d _basePoint{0,0,0};
+	bvector<bvector<DPoint3d>> _all_pts;
+	if (_chamferinfos[0]->IsChamfered && _chamferinfos[4]->IsChamfered && _chamferinfos[8]->IsChamfered) //0
+	{
+		_basePoint = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(0, 0, -_rectbox->EmptyBoxHeight));
+		bvector<Dpoint3d> _v_pts
+		{
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(_chamferinfos[4]->ChamferWidth,_chamferinfos[0]->ChamferLength,0)),
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(_chamferinfos[8]->ChamferLength,0,_chamferinfos[0]->ChamferWidth)),
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(0,_chamferinfos[8]->ChamferWidth,_chamferinfos[4]->ChamferLength))
+		};
+		_all_pts.push_back(_v_pts);
+	}
+	if (_chamferinfos[0]->IsChamfered && _chamferinfos[7]->IsChamfered && _chamferinfos[9]->IsChamfered) //1
+	{
+		_basePoint = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(_rectbox->EmptyBoxWidth, 0, -_rectbox->EmptyBoxHeight));
+		bvector<Dpoint3d> _v_pts
+		{
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(-_chamferinfos[9]->ChamferWidth,0,_chamferinfos[0]->ChamferWidth)),
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(-_chamferinfos[7]->ChamferLength,_chamferinfos[0]->ChamferLength,0)),
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(0,_chamferinfos[9]->ChamferLength,_chamferinfos[7]->ChamferWidth))
+		};
+		_all_pts.push_back(_v_pts);
+	}
+	if (_chamferinfos[1]->IsChamfered && _chamferinfos[7]->IsChamfered && _chamferinfos[10]->IsChamfered) //2
+	{
+		_basePoint = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(_rectbox->EmptyBoxWidth, _rectbox->EmptyBoxLength, -_rectbox->EmptyBoxHeight));
+		bvector<Dpoint3d> _v_pts
+		{
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(-_chamferinfos[7]->ChamferLength,-_chamferinfos[1]->ChamferWidth,0)),
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(-_chamferinfos[10]->ChamferLength,0,_chamferinfos[1]->ChamferLength)),
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(0,-_chamferinfos[10]->ChamferWidth,_chamferinfos[7]->ChamferWidth))
+		};
+		_all_pts.push_back(_v_pts);
+	}
+	if (_chamferinfos[1]->IsChamfered && _chamferinfos[4]->IsChamfered && _chamferinfos[11]->IsChamfered) //3
+	{
+		_basePoint = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(0, _rectbox->EmptyBoxLength, -_rectbox->EmptyBoxHeight));
+		bvector<Dpoint3d> _v_pts
+		{
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(_chamferinfos[4]->ChamferWidth,-_chamferinfos[1]->ChamferWidth,0)),
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(0,-_chamferinfos[11]->ChamferLength,_chamferinfos[4]->ChamferLength)),
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(_chamferinfos[11]->ChamferWidth,0,_chamferinfos[1]->ChamferLength)),
+		};
+		_all_pts.push_back(_v_pts);
+	}
+	if (_chamferinfos[3]->IsChamfered && _chamferinfos[5]->IsChamfered && _chamferinfos[8]->IsChamfered) //4
+	{
+		_basePoint = _anchorpoint;
+		bvector<Dpoint3d> _v_pts
+		{
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(_chamferinfos[5]->ChamferLength,_chamferinfos[3]->ChamferWidth)),
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(0,_chamferinfos[8]->ChamferWidth,-_chamferinfos[5]->ChamferWidth)),
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(_chamferinfos[8]->ChamferLength,0,-_chamferinfos[3]->ChamferLength))
+		};
+		_all_pts.push_back(_v_pts);
+	}
+	if (_chamferinfos[3]->IsChamfered && _chamferinfos[6]->IsChamfered && _chamferinfos[9]->IsChamfered) //5
+	{
+		_basePoint = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(_rectbox->EmptyBoxWidth,0,0));
+		bvector<Dpoint3d> _v_pts
+		{
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(-_chamferinfos[6]->ChamferWidth,_chamferinfos[3]->ChamferWidth,0)),
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(-_chamferinfos[9]->ChamferWidth,0,-_chamferinfos[3]->ChamferLength)),
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(0,_chamferinfos[9]->ChamferLength,-_chamferinfos[6]->ChamferLength))
+		};
+		_all_pts.push_back(_v_pts);
+	}
+	if (_chamferinfos[2]->IsChamfered && _chamferinfos[6]->IsChamfered && _chamferinfos[10]->IsChamfered) //6
+	{
+		_basePoint = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(_rectbox->EmptyBoxWidth, _rectbox->EmptyBoxLength, 0));
+		bvector<Dpoint3d> _v_pts
+		{
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(-_chamferinfos[6]->ChamferWidth,-_chamferinfos[2]->ChamferLength,0)),
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(0,-_chamferinfos[10]->ChamferWidth,-_chamferinfos[6]->ChamferLength)),
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(-_chamferinfos[10]->ChamferLength,0,-_chamferinfos[2]->ChamferWidth))
+		};
+		_all_pts.push_back(_v_pts);
+	}
+	if (_chamferinfos[2]->IsChamfered && _chamferinfos[5]->IsChamfered && _chamferinfos[11]->IsChamfered) //7
+	{
+		_basePoint = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(0,_rectbox->EmptyBoxLength, 0));
+		bvector<Dpoint3d> _v_pts
+		{
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(_chamferinfos[5]->ChamferLength,-_chamferinfos[2]->ChamferLength,0)),
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(_chamferinfos[11]->ChamferWidth,0,-_chamferinfos[2]->ChamferWidth)),
+			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(0,-_chamferinfos[11]->ChamferLength,-_chamferinfos[5]->ChamferWidth))
+		};
+		_all_pts.push_back(_v_pts);
+	}
+	for each (auto _pt in _all_pts)
+	{
+		CurveVectorPtr _cv = CurveVector::CreateLinear(_pt, CurveVector::BOUNDARY_TYPE_Outer);
+		DVec3d _normal = DVec3d::FromCrossProductToPoints(_pt[0], _pt[1], _pt[2]);
+		_normal.Normalize();
+		_normal.Scale(_cv->Length());
+		ISolidPrimitivePtr _sp = ISolidPrimitive::CreateDgnExtrusion(DgnExtrusionDetail(_cv, _normal, true));
+		if (SolidUtil::Create::BodyFromSolidPrimitive(_temp, *_sp, *ACTIVEMODEL))
+			return ERROR;
+		_outchamfercorner.push_back(_temp);
+	}
 	return SUCCESS;
 }
 

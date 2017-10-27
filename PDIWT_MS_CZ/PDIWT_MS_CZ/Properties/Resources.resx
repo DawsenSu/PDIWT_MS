@@ -126,6 +126,9 @@
   <data name="Status_Success" xml:space="preserve">
     <value>成功</value>
   </data>
+  <data name="Verified" xml:space="preserve">
+    <value>参数集验证通过！</value>
+  </data>
   <data name="XMLFilter" xml:space="preserve">
     <value>XML文件|*.xml</value>
   </data>

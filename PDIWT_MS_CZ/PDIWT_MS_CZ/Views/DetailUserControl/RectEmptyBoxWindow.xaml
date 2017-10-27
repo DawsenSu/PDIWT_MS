@@ -90,7 +90,6 @@
                     HorizontalContentAlignment="Stretch"
                     Background="White"
                     ItemsSource="{Binding ChamferInfos}">
-                    <!--  todo 模板第一列应与整行联动  -->
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="{x:Type ListBoxItem}">
                             <Setter Property="Margin" Value="2" />

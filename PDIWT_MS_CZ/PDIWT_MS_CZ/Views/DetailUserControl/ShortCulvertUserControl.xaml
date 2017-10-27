@@ -28,6 +28,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -49,6 +50,14 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     Text="{Binding Culvert_Pier_RightDis}" />
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Text="廊道底边面与底板底面距离=" />
+                <TextBox
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    Text="{Binding Culvert_Baseboard_BottomDis}" />
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Header="侧视图参数">

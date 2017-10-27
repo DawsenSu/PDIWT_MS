@@ -9,7 +9,7 @@ using Bentley.DgnPlatformNET;
 using Bentley.GeometryNET;
 
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.CommandWpf;
 
 using ExtendedXmlSerialization;
 
@@ -43,8 +43,24 @@ namespace PDIWT_MS_CZ.ViewModels
             get { return _cz_lockheadparameters; }
             set { Set(ref _cz_lockheadparameters, value); }
         }
+        private bool _IsVerified;
+        public bool IsVerified
+        {
+            get { return _IsVerified; }
+            set { Set(ref _IsVerified, value); }
+        }
+
 
         public MainViewModel()
+        {
+            InitialzeParameters();
+            IsVerified = false;
+            Prompt = "模块加载成功";
+            Status = Resources.Status_Success;
+        }
+
+        //船闸模块参数CZ_LockHeadParameters赋初值
+        private void InitialzeParameters()
         {
             CZ_LockHeadParameters = new LockHeadParameters()
             {
@@ -59,7 +75,7 @@ namespace PDIWT_MS_CZ.ViewModels
                     {
                         GroovingHeight = 2000,
                         GroovingBackLength = 8000,
-                        GroovingFrontLength =8000,
+                        GroovingFrontLength = 8000,
                         GroovingWidth = 22000,
                         GroovingGradient = 1
                     }
@@ -80,7 +96,7 @@ namespace PDIWT_MS_CZ.ViewModels
                 },
                 LH_DoorSill = new DoorSill()
                 {
-                    DoorSillHeight =4300,
+                    DoorSillHeight = 4300,
                     DoorSill_A = 23000,
                     DoorSill_B = 2260,
                     DoorSill_C = 6650,
@@ -92,6 +108,7 @@ namespace PDIWT_MS_CZ.ViewModels
                 LH_ShortCulvert = new ShortCulvert()
                 {
                     Culvert_Pier_RightDis = 1800,
+                    Culvert_Baseboard_BottomDis = 2000,
                     Culvert_Width = 3500,
                     Culvert_A = 700,
                     Culvert_B = 300,
@@ -130,23 +147,23 @@ namespace PDIWT_MS_CZ.ViewModels
                         Grille_TwolineInterval = 500,
                         GrilleWidthList = new ObservableCollection<GrillInterval>()
                         {
-                            new GrillInterval() {Interval = 250, RoundChamferRadius = 50},
+                            new GrillInterval() {Interval = 250, RoundChamferRadius = 100},
                             new GrillInterval() {Interval =300 ,RoundChamferRadius = 0},
-                            new GrillInterval() {Interval = 500, RoundChamferRadius = 50},
+                            new GrillInterval() {Interval = 500, RoundChamferRadius = 100},
                             new GrillInterval() {Interval =300 ,RoundChamferRadius = 0},
-                            new GrillInterval() {Interval = 500, RoundChamferRadius = 50},
+                            new GrillInterval() {Interval = 500, RoundChamferRadius = 100},
                             new GrillInterval() {Interval =300 ,RoundChamferRadius = 0},
-                            new GrillInterval() {Interval = 500, RoundChamferRadius = 50},
+                            new GrillInterval() {Interval = 500, RoundChamferRadius = 100},
                             new GrillInterval() {Interval = 500 ,RoundChamferRadius = 0},
-                            new GrillInterval() {Interval = 500, RoundChamferRadius = 50},
+                            new GrillInterval() {Interval = 500, RoundChamferRadius = 100},
                             new GrillInterval() {Interval = 500 ,RoundChamferRadius = 0},
-                            new GrillInterval() {Interval = 500, RoundChamferRadius = 50},
+                            new GrillInterval() {Interval = 500, RoundChamferRadius = 100},
                             new GrillInterval() {Interval = 800 ,RoundChamferRadius = 0},
-                            new GrillInterval() {Interval = 800, RoundChamferRadius = 50},
+                            new GrillInterval() {Interval = 800, RoundChamferRadius = 100},
                             new GrillInterval() {Interval = 800 ,RoundChamferRadius = 0},
-                            new GrillInterval() {Interval = 800, RoundChamferRadius = 50},
+                            new GrillInterval() {Interval = 800, RoundChamferRadius = 100},
                             new GrillInterval() {Interval = 800 ,RoundChamferRadius = 0},
-                            new GrillInterval() {Interval = 800, RoundChamferRadius = 50},
+                            new GrillInterval() {Interval = 800, RoundChamferRadius = 100},
                             new GrillInterval() {Interval = 1000, RoundChamferRadius = 0}
                         }
                     },
@@ -715,12 +732,62 @@ namespace PDIWT_MS_CZ.ViewModels
                     }
                 }
             };
-            Prompt = "模块加载成功";
-            Status = Resources.Status_Success;
         }
 
+        #region 验证参数
+        private RelayCommand _VerifyParam;
+        public RelayCommand VerifyParam => _VerifyParam ?? (_VerifyParam = new RelayCommand(ExecuteVerifyParam));
+        public void ExecuteVerifyParam()
+        {
+            CZ_LockHeadParameters.LH_SidePier.PierXY_E = CZ_LockHeadParameters.LH_BaseBoard.BaseBoardLength - CZ_LockHeadParameters.LH_SidePier.PierXY_D - CZ_LockHeadParameters.LH_SidePier.PierXY_F;
+            CZ_LockHeadParameters.LH_DoorSill.DoorSill_A = CZ_LockHeadParameters.LH_BaseBoard.BaseBoardWidth - 2 * CZ_LockHeadParameters.LH_SidePier.PierXY_A;
+            
+            IsVerified = true;
+            if (IsVerified)
+            {
+                Prompt = Resources.Verified;
+                Status = Resources.Status_Success;
+            }
+            else
+            {
+                Status = Resources.Status_Fail;
+            }
+            
+        }
+        #endregion
+
+        #region 绘图
+        private RelayCommand _DrawAll;
+        public RelayCommand DrawAll => _DrawAll ?? ( _DrawAll = new RelayCommand(ExecuteDrawAll, ()=>IsVerified));
+        public void ExecuteDrawAll()
+        {
+            PDIWT_MS_CZ_CPP.LockHeadDrawing Drawing = new PDIWT_MS_CZ_CPP.LockHeadDrawing(CZ_LockHeadParameters);
+            if (Drawing.DoDraw() == 0)
+            {
+                Prompt = "绘制成功";
+                Status = Resources.Status_Success;
+            }
+            else
+            {
+                Prompt = "绘制过程出现错误,请检查参数是否有误";
+                Status = Resources.Status_Fail;
+            }
+
+
+        }
+
+        private RelayCommand _ResetParam;
+        public RelayCommand ResetParam => _ResetParam ?? (_ResetParam = new RelayCommand(ExecuteResetParam));
+        public void ExecuteResetParam()
+        {
+            InitialzeParameters();
+        }
+        #endregion
+
+
+        #region 模板输入输出
         private RelayCommand _inputtemplate;
-        public RelayCommand InputTemplate => _inputtemplate?? (_inputtemplate = new RelayCommand(ExecuteInputTemplate));
+        public RelayCommand InputTemplate => _inputtemplate ?? (_inputtemplate = new RelayCommand(ExecuteInputTemplate));
         private void ExecuteInputTemplate()
         {
             try
@@ -776,6 +843,8 @@ namespace PDIWT_MS_CZ.ViewModels
             }
 
         }
+        #endregion
+
 
         private RelayCommand _test;
         public RelayCommand Test => _test ?? (_test = new RelayCommand(ExecuteTest));
@@ -785,13 +854,7 @@ namespace PDIWT_MS_CZ.ViewModels
             Drawing.DoTest();
         }
 
-        private RelayCommand _DrawAll;
-        public RelayCommand DrawAll => _DrawAll ?? (_DrawAll = new RelayCommand(ExecuteDrawAll));
-        public void ExecuteDrawAll()
-        {
-            PDIWT_MS_CZ_CPP.LockHeadDrawing Drawing = new PDIWT_MS_CZ_CPP.LockHeadDrawing(CZ_LockHeadParameters);
-            Drawing.DoDraw();
-        }
+
 
     }
 }

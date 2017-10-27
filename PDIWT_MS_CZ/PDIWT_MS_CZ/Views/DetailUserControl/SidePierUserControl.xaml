@@ -37,19 +37,27 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    Margin="6,0"
+                    FontSize="10"
+                    Foreground="PaleVioletRed"
+                    Text="*图示以闸首左侧为例" />
                 <Image
+                    Grid.Row="1"
                     Grid.RowSpan="2"
                     Grid.Column="0"
                     Width="200"
                     Source="../../Image/Illustration/SidePier.png" />
                 <GroupBox
-                    Grid.Row="0"
+                    Grid.Row="1"
                     Grid.Column="1"
                     Header="外形轮廓参数">
                     <Grid>
@@ -71,8 +79,6 @@
                         <TextBox
                             Grid.Row="0"
                             Grid.Column="1"
-                            Background="{StaticResource DisabledBackgroud}"
-                            IsReadOnly="True"
                             Text="{Binding PierXY_A}" />
                         <TextBlock
                             Grid.Row="0"
@@ -97,8 +103,6 @@
                         <TextBox
                             Grid.Row="1"
                             Grid.Column="3"
-                            Background="{StaticResource DisabledBackgroud}"
-                            IsReadOnly="True"
                             Text="{Binding PierXY_D}" />
                         <TextBlock
                             Grid.Row="2"
@@ -107,6 +111,7 @@
                         <TextBox
                             Grid.Row="2"
                             Grid.Column="1"
+                            Style="{StaticResource ReadOnly_textbox}"
                             Text="{Binding PierXY_E}" />
                         <TextBlock
                             Grid.Row="2"
@@ -118,7 +123,7 @@
                             Text="{Binding PierXY_F}" />
                     </Grid>
                 </GroupBox>
-                <GroupBox Grid.Row="1" Grid.Column="1">
+                <GroupBox Grid.Row="2" Grid.Column="1">
                     <GroupBox.Header>
                         <CheckBox
                             Name="CheckBox_SidePier"

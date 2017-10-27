@@ -88,6 +88,15 @@ namespace PDIWT_MS_CZ.Properties {
         }
         
         /// <summary>
+        ///   查找类似 参数集验证通过！ 的本地化字符串。
+        /// </summary>
+        internal static string Verified {
+            get {
+                return ResourceManager.GetString("Verified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 XML文件|*.xml 的本地化字符串。
         /// </summary>
         internal static string XMLFilter {
