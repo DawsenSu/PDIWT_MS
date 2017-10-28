@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace PDIWT_MS_CZ.Models
 {
@@ -57,21 +58,48 @@ namespace PDIWT_MS_CZ.Models
         private ObservableCollection<RectEmptyBox> _LH_EmptyRectBoxs;
         public ObservableCollection<RectEmptyBox> LH_EmptyRectBoxs
         {
-            get { return _LH_EmptyRectBoxs ?? new ObservableCollection<RectEmptyBox>(); }
+            get { SendChangedMessage(); return _LH_EmptyRectBoxs ?? new ObservableCollection<RectEmptyBox>();  }
             set { Set(ref _LH_EmptyRectBoxs, value); }
         }
 
         private ObservableCollection<ZPlanEmptyBox> _LH_EmptyZPlanBoxs;
         public ObservableCollection<ZPlanEmptyBox> LH_EmptyZPlanBoxs
         {
-            get { return _LH_EmptyZPlanBoxs ?? new ObservableCollection<ZPlanEmptyBox>(); }
-            set { Set(ref _LH_EmptyZPlanBoxs, value); }
+            get { SendChangedMessage(); return _LH_EmptyZPlanBoxs ?? new ObservableCollection<ZPlanEmptyBox>(); }
+            set { Set(ref _LH_EmptyZPlanBoxs, value);  }
         }
 
-        public bool IsParametersValid()
+        public string IsParametersValid()
         {
             //todo: 添加参数合理性判断
-            return true;
+            for (int i = 0; i < LH_EmptyRectBoxs.Count; i++)
+            {
+                if (LH_EmptyRectBoxs[i].EmptyBoxWidth + LH_EmptyRectBoxs[i].XDis >= LH_SidePier.PierXY_A)
+                    return $"{i+1}号长方体空箱宽度{LH_EmptyRectBoxs[i].EmptyBoxWidth}与X向距离{LH_EmptyRectBoxs[i].XDis}超过边墩参数a";
+                foreach (var chamefer in LH_EmptyRectBoxs[i].ChamferInfos)
+                {
+                    if (chamefer.IsChamfered && (chamefer.ChamferLength <= 0 || chamefer.ChamferWidth <= 0))
+                        return $"{i+1}号长方体空箱的{chamefer.EdgeIndicator}边倒角为0值或负值";
+                }
+            }
+            for (int i = 0; i < LH_EmptyZPlanBoxs.Count; i++)
+            {
+                if (LH_EmptyZPlanBoxs[i].ZPlanInfos.Count <= 2)
+                    return $"{i+1}号棱柱形空箱的平面几何点数小于2";
+            }
+            double _sumofedgriilwidth=0;
+            foreach (var interval in LH_LocalConcertationCulvert.Culvert_EnergyDisspater.GrilleWidthList)
+            {
+                _sumofedgriilwidth += interval.Interval;
+            }
+            if (_sumofedgriilwidth > LH_DoorSill.DoorSill_A / 2)
+                return "出水格栅总宽度超过门槛宽度";
+
+            return Properties.Resources.Verified;
+        }
+        private void SendChangedMessage()
+        {
+            Messenger.Default.Send<bool>(true, "ParameterChanged");
         }
     }
 

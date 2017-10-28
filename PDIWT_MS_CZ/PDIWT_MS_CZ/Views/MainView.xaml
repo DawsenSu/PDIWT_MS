@@ -32,6 +32,11 @@
                                 </DataTemplate>
                             </Setter.Value>
                         </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="LightGray" />
+                            </Trigger>
+                        </Style.Triggers>
                     </Style>
                     <Style x:Key="{x:Static MenuItem.SeparatorStyleKey}" TargetType="Separator">
                         <Setter Property="OverridesDefaultStyle" Value="true" />
@@ -122,13 +127,13 @@
             KeyboardNavigation.TabNavigation="Cycle"
             TabStripPlacement="Left">
             <TabItem Header="底板">
-                <DetailUC:BaseBoardUserControl DataContext="{Binding CZ_LockHeadParameters.LH_BaseBoard, Mode=TwoWay}" />
+                <DetailUC:BaseBoardUserControl />
             </TabItem>
             <TabItem Header="边墩">
-                <DetailUC:SidePierUserControl DataContext="{Binding CZ_LockHeadParameters.LH_SidePier, Mode=TwoWay}" />
+                <DetailUC:SidePierUserControl />
             </TabItem>
             <TabItem Header="门槛">
-                <DetailUC:DoorSillUserControl DataContext="{Binding CZ_LockHeadParameters.LH_DoorSill, Mode=TwoWay}" />
+                <DetailUC:DoorSillUserControl />
             </TabItem>
             <TabItem Header="输水系统">
                 <DetailUC:WaterConveySysUserControl DataContext="{Binding CZ_LockHeadParameters, Mode=TwoWay}" />

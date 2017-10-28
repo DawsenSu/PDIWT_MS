@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PDIWT_MS_CZ.Models;
 using System.Collections.ObjectModel;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace PDIWT_MS_CZ.Views.DetailUserControl
 {
@@ -25,6 +26,19 @@ namespace PDIWT_MS_CZ.Views.DetailUserControl
         public ZPlanEmptyBoxWindow()
         {
             InitializeComponent();
+            this.AddHandler(System.Windows.Controls.Primitives.TextBoxBase.TextChangedEvent, new TextChangedEventHandler(TextBoxes_Changed), true);
+            this.AddHandler(System.Windows.Controls.Primitives.ButtonBase.ClickEvent, new RoutedEventHandler(Button_click), true);
+        }
+        private void TextBoxes_Changed(object sender, TextChangedEventArgs e) => SendChangedMessage();
+
+        private void Button_click(object sender, RoutedEventArgs e)
+        {
+            if (e.OriginalSource is CheckBox)
+                SendChangedMessage();
+        }
+        private void SendChangedMessage()
+        {
+            Messenger.Default.Send<bool>(true, "ParameterChanged");
         }
 
         private void DrawZPlanShape()

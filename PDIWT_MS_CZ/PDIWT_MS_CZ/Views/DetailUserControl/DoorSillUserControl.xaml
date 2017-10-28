@@ -5,7 +5,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
-    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     xmlns:local="clr-namespace:PDIWT_MS_CZ.Views.DetailUserControl"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="400"
@@ -29,7 +28,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="门槛厚度=" />
-                <TextBox Grid.Column="1" Text="{Binding DoorSillHeight}" />
+                <TextBox Grid.Column="1" Text="{Binding CZ_LockHeadParameters.LH_DoorSill.DoorSillHeight}" />
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Header="平面形状参数">
@@ -63,7 +62,7 @@
                         Grid.Row="0"
                         Grid.Column="1"
                         Style="{StaticResource ReadOnly_textbox}"
-                        Text="{Binding DoorSill_A}" />
+                        Text="{Binding CZ_LockHeadParameters.LH_DoorSill.DoorSill_A}" />
                     <TextBlock
                         Grid.Row="1"
                         Grid.Column="0"
@@ -71,7 +70,7 @@
                     <TextBox
                         Grid.Row="1"
                         Grid.Column="1"
-                        Text="{Binding DoorSill_B}" />
+                        Text="{Binding CZ_LockHeadParameters.LH_DoorSill.DoorSill_B}" />
                     <TextBlock
                         Grid.Row="2"
                         Grid.Column="0"
@@ -79,7 +78,7 @@
                     <TextBox
                         Grid.Row="2"
                         Grid.Column="1"
-                        Text="{Binding DoorSill_C}" />
+                        Text="{Binding CZ_LockHeadParameters.LH_DoorSill.DoorSill_C}" />
                     <TextBlock
                         Grid.Row="3"
                         Grid.Column="0"
@@ -87,7 +86,7 @@
                     <TextBox
                         Grid.Row="3"
                         Grid.Column="1"
-                        Text="{Binding DoorSill_D}" />
+                        Text="{Binding CZ_LockHeadParameters.LH_DoorSill.DoorSill_D}" />
                     <TextBlock
                         Grid.Row="4"
                         Grid.Column="0"
@@ -95,7 +94,7 @@
                     <TextBox
                         Grid.Row="4"
                         Grid.Column="1"
-                        Text="{Binding DoorSill_E}" />
+                        Text="{Binding CZ_LockHeadParameters.LH_DoorSill.DoorSill_E}" />
                     <TextBlock
                         Grid.Row="5"
                         Grid.Column="0"
@@ -103,7 +102,7 @@
                     <TextBox
                         Grid.Row="5"
                         Grid.Column="1"
-                        Text="{Binding DoorSill_F}" />
+                        Text="{Binding CZ_LockHeadParameters.LH_DoorSill.DoorSill_F}" />
                 </Grid>
             </Grid>
         </GroupBox>

@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
 using BMWPF = Bentley.MstnPlatformNET.WPF;
 
 namespace PDIWT_MS_CZ.Views
@@ -27,6 +29,8 @@ namespace PDIWT_MS_CZ.Views
             this.DataContext = locator.MainVM;
             m_wpfHelper = new BMWPF.WPFInteropHelper(this);
             m_wpfHelper.Attach(Program.Addin, true, "MainView");
+            this.AddHandler(System.Windows.Controls.Primitives.TextBoxBase.TextChangedEvent, new TextChangedEventHandler(TextBoxes_Changed), true);
+            this.AddHandler(System.Windows.Controls.Primitives.ButtonBase.ClickEvent, new RoutedEventHandler(Button_click), true);
         }
 
         static MainView m_windowhost;
@@ -56,6 +60,19 @@ namespace PDIWT_MS_CZ.Views
             m_wpfHelper.Detach();
             m_wpfHelper.Dispose();
             m_windowhost = null;
+        }
+
+        private void TextBoxes_Changed(object sender, TextChangedEventArgs e) => SendChangedMessage();
+
+        private void Button_click(object sender, RoutedEventArgs e)
+        {
+            if (e.OriginalSource is CheckBox)
+                SendChangedMessage();
+        }
+
+        private void SendChangedMessage()
+        {
+            Messenger.Default.Send<bool>(true, "ParameterChanged");
         }
     }
 }

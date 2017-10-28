@@ -9,6 +9,7 @@ using Bentley.DgnPlatformNET;
 using Bentley.GeometryNET;
 
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.CommandWpf;
 
 using ExtendedXmlSerialization;
@@ -57,6 +58,11 @@ namespace PDIWT_MS_CZ.ViewModels
             IsVerified = false;
             Prompt = "模块加载成功";
             Status = Resources.Status_Success;
+            Messenger.Default.Register<bool>(this, "ParameterChanged", _ => IsVerified = false);
+        }
+        ~MainViewModel()
+        {
+            Messenger.Default.Unregister(this);
         }
 
         //船闸模块参数CZ_LockHeadParameters赋初值
@@ -739,20 +745,26 @@ namespace PDIWT_MS_CZ.ViewModels
         public RelayCommand VerifyParam => _VerifyParam ?? (_VerifyParam = new RelayCommand(ExecuteVerifyParam));
         public void ExecuteVerifyParam()
         {
-            CZ_LockHeadParameters.LH_SidePier.PierXY_E = CZ_LockHeadParameters.LH_BaseBoard.BaseBoardLength - CZ_LockHeadParameters.LH_SidePier.PierXY_D - CZ_LockHeadParameters.LH_SidePier.PierXY_F;
-            CZ_LockHeadParameters.LH_DoorSill.DoorSill_A = CZ_LockHeadParameters.LH_BaseBoard.BaseBoardWidth - 2 * CZ_LockHeadParameters.LH_SidePier.PierXY_A;
-            
-            IsVerified = true;
-            if (IsVerified)
+            string _verifyresult = CZ_LockHeadParameters.IsParametersValid();
+            if (Resources.Verified == _verifyresult)
             {
-                Prompt = Resources.Verified;
+                IsVerified = true;
                 Status = Resources.Status_Success;
             }
             else
             {
                 Status = Resources.Status_Fail;
             }
+            Prompt = _verifyresult;
             
+        }
+
+        private RelayCommand _UpdateParam;
+        public RelayCommand UpdateParam=> _UpdateParam ?? (_UpdateParam = new RelayCommand(ExecuteUpdateParam));
+        public void ExecuteUpdateParam()
+        {
+            CZ_LockHeadParameters.LH_SidePier.PierXY_E = CZ_LockHeadParameters.LH_BaseBoard.BaseBoardLength - CZ_LockHeadParameters.LH_SidePier.PierXY_D - CZ_LockHeadParameters.LH_SidePier.PierXY_F;
+            CZ_LockHeadParameters.LH_DoorSill.DoorSill_A = CZ_LockHeadParameters.LH_BaseBoard.BaseBoardWidth - 2 * CZ_LockHeadParameters.LH_SidePier.PierXY_A;
         }
         #endregion
 

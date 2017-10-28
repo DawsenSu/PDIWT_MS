@@ -6,6 +6,7 @@
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:local="clr-namespace:PDIWT_MS_CZ.Views.DetailUserControl"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="500"
@@ -29,7 +30,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="边墩高度=" />
-                <TextBox Grid.Column="1" Text="{Binding PierHeight}" />
+                <TextBox Grid.Column="1" Text="{Binding CZ_LockHeadParameters.LH_SidePier.PierHeight}" />
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Header="平面形状参数">
@@ -79,7 +80,13 @@
                         <TextBox
                             Grid.Row="0"
                             Grid.Column="1"
-                            Text="{Binding PierXY_A}" />
+                            Text="{Binding CZ_LockHeadParameters.LH_SidePier.PierXY_A}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:InvokeCommandAction Command="{Binding UpdateParam}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
                         <TextBlock
                             Grid.Row="0"
                             Grid.Column="2"
@@ -87,7 +94,7 @@
                         <TextBox
                             Grid.Row="0"
                             Grid.Column="3"
-                            Text="{Binding PierXY_B}" />
+                            Text="{Binding CZ_LockHeadParameters.LH_SidePier.PierXY_B}" />
                         <TextBlock
                             Grid.Row="1"
                             Grid.Column="0"
@@ -95,7 +102,7 @@
                         <TextBox
                             Grid.Row="1"
                             Grid.Column="1"
-                            Text="{Binding PierXY_C}" />
+                            Text="{Binding CZ_LockHeadParameters.LH_SidePier.PierXY_C}" />
                         <TextBlock
                             Grid.Row="1"
                             Grid.Column="2"
@@ -103,7 +110,13 @@
                         <TextBox
                             Grid.Row="1"
                             Grid.Column="3"
-                            Text="{Binding PierXY_D}" />
+                            Text="{Binding CZ_LockHeadParameters.LH_SidePier.PierXY_D}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:InvokeCommandAction Command="{Binding UpdateParam}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
                         <TextBlock
                             Grid.Row="2"
                             Grid.Column="0"
@@ -112,7 +125,7 @@
                             Grid.Row="2"
                             Grid.Column="1"
                             Style="{StaticResource ReadOnly_textbox}"
-                            Text="{Binding PierXY_E}" />
+                            Text="{Binding CZ_LockHeadParameters.LH_SidePier.PierXY_E}" />
                         <TextBlock
                             Grid.Row="2"
                             Grid.Column="2"
@@ -120,7 +133,13 @@
                         <TextBox
                             Grid.Row="2"
                             Grid.Column="3"
-                            Text="{Binding PierXY_F}" />
+                            Text="{Binding CZ_LockHeadParameters.LH_SidePier.PierXY_F}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:InvokeCommandAction Command="{Binding UpdateParam}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
                     </Grid>
                 </GroupBox>
                 <GroupBox Grid.Row="2" Grid.Column="1">
@@ -129,7 +148,7 @@
                             Name="CheckBox_SidePier"
                             VerticalAlignment="Top"
                             Content="包含倒角"
-                            IsChecked="{Binding IsChamfered}" />
+                            IsChecked="{Binding CZ_LockHeadParameters.LH_SidePier.IsChamfered}" />
                     </GroupBox.Header>
                     <Grid Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=CheckBox_SidePier}">
                         <Grid.RowDefinitions>
@@ -148,7 +167,7 @@
                         <TextBox
                             Grid.Row="0"
                             Grid.Column="1"
-                            Text="{Binding PierChamfer_Tx}" />
+                            Text="{Binding CZ_LockHeadParameters.LH_SidePier.PierChamfer_Tx}" />
                         <TextBlock
                             Grid.Row="1"
                             Grid.Column="0"
@@ -156,7 +175,7 @@
                         <TextBox
                             Grid.Row="1"
                             Grid.Column="1"
-                            Text="{Binding PierChamfer_Ty}" />
+                            Text="{Binding CZ_LockHeadParameters.LH_SidePier.PierChamfer_Ty}" />
                         <TextBlock
                             Grid.Row="2"
                             Grid.Column="0"
@@ -164,7 +183,7 @@
                         <TextBox
                             Grid.Row="2"
                             Grid.Column="1"
-                            Text="{Binding PierChamfer_R}" />
+                            Text="{Binding CZ_LockHeadParameters.LH_SidePier.PierChamfer_R}" />
                     </Grid>
                 </GroupBox>
             </Grid>

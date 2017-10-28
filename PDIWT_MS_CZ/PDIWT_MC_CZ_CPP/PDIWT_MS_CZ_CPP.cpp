@@ -13,7 +13,7 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DoDraw()
 {
 	EditElementHandle _cz_whole;
 	ISolidKernelEntityPtr _cz_whole_SKE;
-	DPoint3d _whole_anchor{0,0,0};
+	DPoint3d _whole_anchor{ 0,0,0 };
 #pragma region baseboard
 	ISolidKernelEntityPtr _baseboard_SKE;
 	if (DrawBaseBoard(_baseboard_SKE, _whole_anchor))
@@ -63,7 +63,7 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DoDraw()
 	else
 	{
 #pragma region ShortCulvert
-		DPoint3d _shortculvert_anchor = DPoint3d::FromSumOf(_whole_anchor, DPoint3d::From( -(LH_LockHeadParameter->LH_BaseBoard->BaseBoardWidth / 2 - LH_LockHeadParameter->LH_ShortCulvert->Culvert_Pier_RightDis),0, LH_LockHeadParameter->LH_ShortCulvert->Culvert_Baseboard_BottomDis));
+		DPoint3d _shortculvert_anchor = DPoint3d::FromSumOf(_whole_anchor, DPoint3d::From(-(LH_LockHeadParameter->LH_BaseBoard->BaseBoardWidth / 2 - LH_LockHeadParameter->LH_ShortCulvert->Culvert_Pier_RightDis), 0, LH_LockHeadParameter->LH_ShortCulvert->Culvert_Baseboard_BottomDis));
 		ISolidKernelEntityPtr _left_shortculvert_SKE;
 		if (DrawShortCulvert(_left_shortculvert_SKE, _shortculvert_anchor))
 			return ERROR;
@@ -80,42 +80,49 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DoDraw()
 			return ERROR;
 #pragma endregion
 	}
-
+	if (LH_LockHeadParameter->LH_EmptyRectBoxs->Count > 0)
+	{
 #pragma region RectEmptyBox
-	DPoint3d _rectemptybox_anchor = DPoint3d::FromSumOf(_sidepier_anchor, DPoint3d::From(0, 0, LH_LockHeadParameter->LH_SidePier->PierHeight));
-	bvector<ISolidKernelEntityPtr> _rectemptyboxes;
-	if (DrawRectEmptyBoxes(_rectemptyboxes, _rectemptybox_anchor))
-		return ERROR;
-	size_t _rectemptybox_count = _rectemptyboxes.size();
-	ISolidKernelEntityPtr _temp;
-	for (size_t i = 0; i < _rectemptybox_count; i++)
-	{
-		if (SolidUtil::CopyEntity(_temp, *_rectemptyboxes[i]))
+		DPoint3d _rectemptybox_anchor = DPoint3d::FromSumOf(_sidepier_anchor, DPoint3d::From(0, 0, LH_LockHeadParameter->LH_SidePier->PierHeight));
+		bvector<ISolidKernelEntityPtr> _rectemptyboxes;
+		if (DrawRectEmptyBoxes(_rectemptyboxes, _rectemptybox_anchor))
 			return ERROR;
-		_temp->PreMultiplyEntityTransformInPlace(_xymirrortrans);
-		_rectemptyboxes.push_back(_temp);
-	}
-	if (SolidUtil::Modify::BooleanSubtract(_cz_whole_SKE, &_rectemptyboxes[0], _rectemptyboxes.size()))
-		return ERROR;
-
+		size_t _rectemptybox_count = _rectemptyboxes.size();
+		ISolidKernelEntityPtr _temp;
+		for (size_t i = 0; i < _rectemptybox_count; i++)
+		{
+			if (SolidUtil::CopyEntity(_temp, *_rectemptyboxes[i]))
+				return ERROR;
+			_temp->PreMultiplyEntityTransformInPlace(_xymirrortrans);
+			_rectemptyboxes.push_back(_temp);
+		}
+		if (SolidUtil::Modify::BooleanSubtract(_cz_whole_SKE, &_rectemptyboxes[0], _rectemptyboxes.size()))
+			return ERROR;
 
 #pragma endregion
-
+	}
+	if (LH_LockHeadParameter->LH_EmptyZPlanBoxs->Count > 0)
+	{
 #pragma region ZPlanEmptyBox
-	bvector<ISolidKernelEntityPtr> _zplanemptyboxes;
-	if (DrawZPlanEmptyBox(_zplanemptyboxes, _rectemptybox_anchor))
-		return ERROR;
-	size_t _zplanemptybox_count = _zplanemptyboxes.size();
-	for (size_t i = 0; i < _zplanemptybox_count; i++)
-	{
-		if (SolidUtil::CopyEntity(_temp, *_zplanemptyboxes[i]))
+		DPoint3d _zplanmptybox_anchor = DPoint3d::FromSumOf(_sidepier_anchor, DPoint3d::From(0, 0, LH_LockHeadParameter->LH_SidePier->PierHeight));
+		bvector<ISolidKernelEntityPtr> _zplanemptyboxes;
+		if (DrawZPlanEmptyBox(_zplanemptyboxes, _zplanmptybox_anchor))
 			return ERROR;
-		_temp->PreMultiplyEntityTransformInPlace(_xymirrortrans);
-		_zplanemptyboxes.push_back(_temp);
-	}
-	if (SolidUtil::Modify::BooleanSubtract(_cz_whole_SKE, &_zplanemptyboxes[0], _zplanemptyboxes.size()))
-		return ERROR;
+		size_t _zplanemptybox_count = _zplanemptyboxes.size();
+		ISolidKernelEntityPtr _temp;
+		for (size_t i = 0; i < _zplanemptybox_count; i++)
+		{
+			if (SolidUtil::CopyEntity(_temp, *_zplanemptyboxes[i]))
+				return ERROR;
+			_temp->PreMultiplyEntityTransformInPlace(_xymirrortrans);
+			_zplanemptyboxes.push_back(_temp);
+		}
+		if (SolidUtil::Modify::BooleanSubtract(_cz_whole_SKE, &_zplanemptyboxes[0], _zplanemptyboxes.size()))
+			return ERROR;
 #pragma endregion
+	}
+
+
 
 	if ((SolidUtil::Modify::TransformBody(_cz_whole_SKE, GetModelTransform(DPoint3d::FromZero())) != SUCCESS)
 		||
@@ -128,7 +135,7 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DoDraw()
 
 StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DoTest()
 {
-	DPoint3d _rectemptybox_anchor = DPoint3d::FromSumOf(DPoint3d{0,0,0}, DPoint3d::From(0, 0, LH_LockHeadParameter->LH_SidePier->PierHeight));
+	DPoint3d _rectemptybox_anchor = DPoint3d::FromSumOf(DPoint3d{ 0,0,0 }, DPoint3d::From(0, 0, LH_LockHeadParameter->LH_SidePier->PierHeight));
 	bvector<ISolidKernelEntityPtr> _rectemptyboxes;
 	if (DrawRectEmptyBoxes(_rectemptyboxes, _rectemptybox_anchor))
 		return ERROR;
@@ -495,7 +502,7 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawLocalConcertationCulvert(ISolidK
 	{
 		ObservableCollection<GrillInterval^>^ _grillwidthlistparam = _localconculvertparam->Culvert_EnergyDisspater->GrilleWidthList;
 		int _grill_width_list_count = _grillwidthlistparam->Count;
-		double _grill_height = LH_LockHeadParameter->LH_DoorSill->DoorSillHeight-_localconculvertparam->Culvert_Height;
+		double _grill_height = LH_LockHeadParameter->LH_DoorSill->DoorSillHeight - _localconculvertparam->Culvert_Height;
 		double _grill_length = (_localconculvertparam->Culvert_D - _localconculvertparam->Culvert_EnergyDisspater->Grille_TwolineInterval) / 2;
 		DPoint3d _grill_temp_Point = Dpoint3d::FromSumOf(_anchorpoint, Dpoint3d::From(0, 0, _localconculvertparam->Culvert_Height));
 		ISolidKernelEntityPtr _grill_SKE[2];
@@ -830,7 +837,7 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawChamferCorner(bvector<ISolidKern
 {
 	ISolidKernelEntityPtr _temp;
 	ObservableCollection<EmptyBoxEdgeChameferInfo^>^ _chamferinfos = _rectbox->ChamferInfos;
-	DPoint3d _basePoint{0,0,0};
+	DPoint3d _basePoint{ 0,0,0 };
 	bvector<bvector<DPoint3d>> _all_pts;
 	if (_chamferinfos[0]->IsChamfered && _chamferinfos[4]->IsChamfered && _chamferinfos[8]->IsChamfered) //0
 	{
@@ -889,7 +896,7 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawChamferCorner(bvector<ISolidKern
 	}
 	if (_chamferinfos[3]->IsChamfered && _chamferinfos[6]->IsChamfered && _chamferinfos[9]->IsChamfered) //5
 	{
-		_basePoint = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(_rectbox->EmptyBoxWidth,0,0));
+		_basePoint = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(_rectbox->EmptyBoxWidth, 0, 0));
 		bvector<Dpoint3d> _v_pts
 		{
 			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(-_chamferinfos[6]->ChamferWidth,_chamferinfos[3]->ChamferWidth,0)),
@@ -911,7 +918,7 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawChamferCorner(bvector<ISolidKern
 	}
 	if (_chamferinfos[2]->IsChamfered && _chamferinfos[5]->IsChamfered && _chamferinfos[11]->IsChamfered) //7
 	{
-		_basePoint = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(0,_rectbox->EmptyBoxLength, 0));
+		_basePoint = DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(0, _rectbox->EmptyBoxLength, 0));
 		bvector<Dpoint3d> _v_pts
 		{
 			DPoint3d::FromSumOf(_basePoint,DPoint3d::From(_chamferinfos[5]->ChamferLength,-_chamferinfos[2]->ChamferLength,0)),
