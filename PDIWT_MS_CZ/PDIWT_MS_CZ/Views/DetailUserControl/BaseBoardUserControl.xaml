@@ -46,13 +46,16 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     Text="船闸长(顺河向)=" />
-                <TextBox
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Text="{Binding CZ_LockHeadParameters.LH_BaseBoard.BaseBoardLength, ValidatesOnDataErrors=True}">
+                <TextBox Grid.Row="0" Grid.Column="1">
+                    <TextBox.Text>
+                        <Binding Path="CZ_LockHeadParameters.LH_BaseBoard.BaseBoardLength">
+                            <Binding.ValidationRules>
+                                <val:Grate0Rule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="LostFocus">
-                            <!--<mvvm:EventToCommand Command="{Binding UpdateParam}" />-->
                             <i:InvokeCommandAction Command="{Binding UpdateParam}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
@@ -61,10 +64,14 @@
                     Grid.Row="0"
                     Grid.Column="2"
                     Text="船闸宽(横河向)=" />
-                <TextBox
-                    Grid.Row="0"
-                    Grid.Column="3"
-                    Text="{Binding CZ_LockHeadParameters.LH_BaseBoard.BaseBoardWidth, ValidatesOnDataErrors=True}">
+                <TextBox Grid.Row="0" Grid.Column="3">
+                    <TextBox.Text>
+                        <Binding Path="CZ_LockHeadParameters.LH_BaseBoard.BaseBoardWidth">
+                            <Binding.ValidationRules>
+                                <val:Grate0Rule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="LostFocus">
                             <i:InvokeCommandAction Command="{Binding UpdateParam}" />
@@ -75,18 +82,28 @@
                     Grid.Row="1"
                     Grid.Column="0"
                     Text="高度=" />
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Text="{Binding CZ_LockHeadParameters.LH_BaseBoard.BaseBoardHeight, ValidatesOnDataErrors=True}" />
+                <TextBox Grid.Row="1" Grid.Column="1">
+                    <TextBox.Text>
+                        <Binding Path="CZ_LockHeadParameters.LH_BaseBoard.BaseBoardHeight">
+                            <Binding.ValidationRules>
+                                <val:Grate0Rule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <TextBlock
                     Grid.Row="1"
                     Grid.Column="2"
                     Text="口门宽度=" />
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="3"
-                    Text="{Binding CZ_LockHeadParameters.LH_BaseBoard.EntranceWidth, ValidatesOnDataErrors=True}" />
+                <TextBox Grid.Row="1" Grid.Column="3">
+                    <TextBox.Text>
+                        <Binding Path="CZ_LockHeadParameters.LH_BaseBoard.EntranceWidth">
+                            <Binding.ValidationRules>
+                                <val:Grate0Rule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1">
@@ -133,34 +150,54 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     Text="切槽长度a=" />
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Text="{Binding CZ_LockHeadParameters.LH_BaseBoard.TGrooving.GroovingWidth}" />
+                <TextBox Grid.Row="1" Grid.Column="2">
+                    <TextBox.Text>
+                        <Binding Path="CZ_LockHeadParameters.LH_BaseBoard.TGrooving.GroovingWidth">
+                            <Binding.ValidationRules>
+                                <val:Grate0Rule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <TextBlock
                     Grid.Row="2"
                     Grid.Column="1"
                     Text="切槽长度b=" />
-                <TextBox
-                    Grid.Row="2"
-                    Grid.Column="2"
-                    Text="{Binding CZ_LockHeadParameters.LH_BaseBoard.TGrooving.GroovingBackLength}" />
+                <TextBox Grid.Row="2" Grid.Column="2">
+                    <TextBox.Text>
+                        <Binding Path="CZ_LockHeadParameters.LH_BaseBoard.TGrooving.GroovingBackLength">
+                            <Binding.ValidationRules>
+                                <val:Grate0Rule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <TextBlock
                     Grid.Row="3"
                     Grid.Column="1"
                     Text="切槽宽度c=" />
-                <TextBox
-                    Grid.Row="3"
-                    Grid.Column="2"
-                    Text="{Binding CZ_LockHeadParameters.LH_BaseBoard.TGrooving.GroovingFrontLength}" />
+                <TextBox Grid.Row="3" Grid.Column="2">
+                    <TextBox.Text>
+                        <Binding Path="CZ_LockHeadParameters.LH_BaseBoard.TGrooving.GroovingFrontLength">
+                            <Binding.ValidationRules>
+                                <val:Grate0Rule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <TextBlock
                     Grid.Row="4"
                     Grid.Column="1"
                     Text="坡度n=" />
-                <TextBox
-                    Grid.Row="4"
-                    Grid.Column="2"
-                    Text="{Binding CZ_LockHeadParameters.LH_BaseBoard.TGrooving.GroovingGradient}" />
+                <TextBox Grid.Row="4" Grid.Column="2">
+                    <TextBox.Text>
+                        <Binding Path="CZ_LockHeadParameters.LH_BaseBoard.TGrooving.GroovingGradient">
+                            <Binding.ValidationRules>
+                                <val:Grate0Rule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
             </Grid>
         </GroupBox>
         <!--<dxlc:LayoutGroup Grid.Row="1" View="Tabs">

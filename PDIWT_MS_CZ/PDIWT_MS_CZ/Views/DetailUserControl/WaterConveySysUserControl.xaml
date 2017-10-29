@@ -15,17 +15,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../XamlResources/CommonResource.xaml" />
-                <ResourceDictionary>
-                    <viewd:ShortCulvertUserControl x:Key="ShortCulvertUserControl" DataContext="{Binding LH_ShortCulvert, Mode=TwoWay}" />
-                    <viewd:LocalConcertationCulvertUserControl x:Key="LocalConcertationCulvertUserControl" DataContext="{Binding LH_LocalConcertationCulvert, Mode=TwoWay}" />
-                    <viewd:ShortCulvertUserControl x:Key="shortculvertuc" />
-                    <viewd:LocalConcertationCulvertUserControl x:Key="localconculvertuc" />
-                    <con:IndexToContentConverter
-                        x:Key="IndexToContentConverter"
-                        UserControl1="{StaticResource shortculvertuc}"
-                        UserControl2="{StaticResource localconculvertuc}" />
-
-                </ResourceDictionary>
+                <ResourceDictionary />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -48,7 +38,8 @@
         <ComboBox
             Grid.Row="0"
             Grid.Column="1"
-            SelectedIndex="{Binding LH_CulvertChoosenIndex}">
+            SelectedIndex="{Binding LH_CulvertChoosenIndex}"
+            SelectionChanged="ComboBox_SelectionChanged">
             <ComboBoxItem Content="短廊道输水" />
             <ComboBoxItem Content="局部集中输水" />
         </ComboBox>
@@ -59,9 +50,9 @@
             Foreground="PaleVioletRed"
             Text="*图示以闸首左侧为例" />
         <ContentControl
+            Name="CulvertContent"
             Grid.Row="2"
             Grid.ColumnSpan="2"
-            Margin="5"
-            Content="{Binding LH_CulvertChoosenIndex, Converter={StaticResource IndexToContentConverter}, Mode=OneWay}" />
+            Margin="5" />
     </Grid>
 </UserControl>

@@ -15,7 +15,7 @@ namespace PDIWT_MS_CZ.ValidationRules
             if (value == null)
                 return new ValidationResult(false, "该字段不能为空值！");
             if (string.IsNullOrEmpty(value.ToString()))
-                return new ValidationResult(false, "该字段不能为字符串！");
+                return new ValidationResult(false, "该字段不能为空字符串！");
             double _reuslt;
             if (!double.TryParse(value.ToString(), out _reuslt))
                 return new ValidationResult(false, "该字段不能转换为浮点数！");
