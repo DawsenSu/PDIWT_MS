@@ -70,7 +70,7 @@
                 <TextBlock
                     Grid.Row="0"
                     Grid.Column="1"
-                    Text="宽度=" />
+                    Text="高度=" />
                 <TextBox
                     Grid.Row="0"
                     Grid.Column="2"
@@ -98,7 +98,7 @@
                                 Binding="{Binding Y, Mode=TwoWay}"
                                 Header="Y坐标" />
                             <!--  todo 数据绑定似乎没效果,不能及时反映  -->
-                            <DataGridCheckBoxColumn
+                            <!--<DataGridCheckBoxColumn
                                 Width="auto"
                                 Binding="{Binding BoxEdgeChamferInfo.IsChamfered, Mode=TwoWay}"
                                 Header="是否倒角" />
@@ -109,7 +109,7 @@
                             <DataGridTextColumn
                                 Width="*"
                                 Binding="{Binding BoxEdgeChamferInfo.ChamferWidth, Mode=TwoWay}"
-                                Header="倒角宽度" />
+                                Header="倒角宽度" />-->
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button

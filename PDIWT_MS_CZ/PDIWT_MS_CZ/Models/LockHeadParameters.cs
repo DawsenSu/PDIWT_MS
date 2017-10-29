@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
+using System.ComponentModel;
 
 namespace PDIWT_MS_CZ.Models
 {
@@ -151,7 +152,6 @@ namespace PDIWT_MS_CZ.Models
             get { return _TGrooving; }
             set { Set(ref _TGrooving, value); }
         }
-
     }
     ///// <summary>
     ///// I型切槽

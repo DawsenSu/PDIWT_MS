@@ -202,9 +202,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converters\EdgeToForegroundConverter.cs" />
-    <Compile Include="Converters\IndexToContentConverter.cs" />
-    <Compile Include="Converters\StatusToPicConverter.cs" />
     <Compile Include="Models\BitmapHelper.cs" />
     <Compile Include="Models\GetCZQuantityTable.cs" />
     <Compile Include="Models\LockHeadParameters.cs" />
@@ -256,7 +253,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
@@ -358,6 +355,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\Icons\Reset.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PDIWT_MS_CZ.Extension\PDIWT_MS_CZ.Extension.csproj">
+      <Project>{37b7c531-575c-4ea6-b968-5fcb1e6f1c80}</Project>
+      <Name>PDIWT_MS_CZ.Extension</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

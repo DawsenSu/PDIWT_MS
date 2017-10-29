@@ -10,13 +10,17 @@ namespace PDIWT_MS_CZ.Converters
 {
     public class StatusToPicConverter : IValueConverter
     {
+        public string Success { get; set; }
+        public string Error { get; set; }
+        public string Success_picpath { get; set; }
+        public string Error_picpath { get; set; }
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string _status = (string)value;
-            if (_status == PDIWT_MS_CZ.Properties.Resources.Status_Success)
-                return @"../Image/Icons/Ok.ico";
-            if(_status == Properties.Resources.Status_Fail)
-                return @"../Image/Icons/Error.ico";
+            if (_status == Success)
+                return Success_picpath;
+            if(_status == Error)
+                return Error_picpath;
             return null;
         }
 

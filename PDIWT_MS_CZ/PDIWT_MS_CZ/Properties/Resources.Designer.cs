@@ -19,10 +19,10 @@ namespace PDIWT_MS_CZ.Properties {
     // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
     // 若要添加或移除成员，请编辑 .ResX 文件，然后重新运行 ResGen
     // (以 /str 作为命令选项)，或重新生成 VS 项目。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace PDIWT_MS_CZ.Properties {
         ///   返回此类使用的缓存的 ResourceManager 实例。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PDIWT_MS_CZ.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace PDIWT_MS_CZ.Properties {
         ///   重写当前线程的 CurrentUICulture 属性。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace PDIWT_MS_CZ.Properties {
         /// <summary>
         ///   查找类似 Excel2007-2016文件|*.xlsx 的本地化字符串。
         /// </summary>
-        internal static string ExcelFilter {
+        public static string ExcelFilter {
             get {
                 return ResourceManager.GetString("ExcelFilter", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace PDIWT_MS_CZ.Properties {
         /// <summary>
         ///   查找类似 失败 的本地化字符串。
         /// </summary>
-        internal static string Status_Fail {
+        public static string Status_Fail {
             get {
                 return ResourceManager.GetString("Status_Fail", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace PDIWT_MS_CZ.Properties {
         /// <summary>
         ///   查找类似 成功 的本地化字符串。
         /// </summary>
-        internal static string Status_Success {
+        public static string Status_Success {
             get {
                 return ResourceManager.GetString("Status_Success", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace PDIWT_MS_CZ.Properties {
         /// <summary>
         ///   查找类似 参数集验证通过！ 的本地化字符串。
         /// </summary>
-        internal static string Verified {
+        public static string Verified {
             get {
                 return ResourceManager.GetString("Verified", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace PDIWT_MS_CZ.Properties {
         /// <summary>
         ///   查找类似 XML文件|*.xml 的本地化字符串。
         /// </summary>
-        internal static string XMLFilter {
+        public static string XMLFilter {
             get {
                 return ResourceManager.GetString("XMLFilter", resourceCulture);
             }

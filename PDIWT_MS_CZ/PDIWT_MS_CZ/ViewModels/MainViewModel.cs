@@ -58,7 +58,11 @@ namespace PDIWT_MS_CZ.ViewModels
             IsVerified = false;
             Prompt = "模块加载成功";
             Status = Resources.Status_Success;
-            Messenger.Default.Register<bool>(this, "ParameterChanged", _ => IsVerified = false);
+            Messenger.Default.Register<bool>(this, "ParameterChanged", _ => 
+            {
+                Prompt = "参数集设置发生变化，请重新验证参数";
+                IsVerified = false;
+            });
         }
         ~MainViewModel()
         {
@@ -826,7 +830,7 @@ namespace PDIWT_MS_CZ.ViewModels
         }
 
         private RelayCommand _outputtemplate;
-        public RelayCommand OutputTemplate => _outputtemplate ?? (_outputtemplate = new RelayCommand(ExecuteOutputTemplate));
+        public RelayCommand OutputTemplate => _outputtemplate ?? (_outputtemplate = new RelayCommand(ExecuteOutputTemplate,()=>IsVerified));
         public void ExecuteOutputTemplate()
         {
             try

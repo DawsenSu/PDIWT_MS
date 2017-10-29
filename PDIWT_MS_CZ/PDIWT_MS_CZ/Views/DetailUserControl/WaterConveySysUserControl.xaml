@@ -2,7 +2,7 @@
     x:Class="PDIWT_MS_CZ.Views.DetailUserControl.WaterConveySysUserControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:con="clr-namespace:PDIWT_MS_CZ.Converters"
+    xmlns:con="clr-namespace:PDIWT_MS_CZ.Converters;assembly=PDIWT_MS_CZ.Extension"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:PDIWT_MS_CZ.Views.DetailUserControl"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -18,7 +18,13 @@
                 <ResourceDictionary>
                     <viewd:ShortCulvertUserControl x:Key="ShortCulvertUserControl" DataContext="{Binding LH_ShortCulvert, Mode=TwoWay}" />
                     <viewd:LocalConcertationCulvertUserControl x:Key="LocalConcertationCulvertUserControl" DataContext="{Binding LH_LocalConcertationCulvert, Mode=TwoWay}" />
-                    <con:IndexToContentConverter x:Key="IndexToContentConverter" />
+                    <viewd:ShortCulvertUserControl x:Key="shortculvertuc" />
+                    <viewd:LocalConcertationCulvertUserControl x:Key="localconculvertuc" />
+                    <con:IndexToContentConverter
+                        x:Key="IndexToContentConverter"
+                        UserControl1="{StaticResource shortculvertuc}"
+                        UserControl2="{StaticResource localconculvertuc}" />
+
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -56,7 +62,6 @@
             Grid.Row="2"
             Grid.ColumnSpan="2"
             Margin="5"
-            Content="{Binding LH_CulvertChoosenIndex, Converter={StaticResource IndexToContentConverter}, Mode=OneWay}"
-            DataContext="{Binding}" />
+            Content="{Binding LH_CulvertChoosenIndex, Converter={StaticResource IndexToContentConverter}, Mode=OneWay}" />
     </Grid>
 </UserControl>

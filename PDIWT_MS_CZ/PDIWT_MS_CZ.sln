@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDIWT_MS_CZ", "PDIWT_MS_CZ\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PDIWT_MS_CZ_CPP", "PDIWT_MC_CZ_CPP\PDIWT_MC_CZ_CPP.vcxproj", "{0F2B43F7-2364-43A5-A87A-9F14B3B5CB37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDIWT_MS_CZ.Extension", "PDIWT_MS_CZ.Extension\PDIWT_MS_CZ.Extension.csproj", "{37B7C531-575C-4EA6-B968-5FCB1E6F1C80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,18 @@ Global
 		{0F2B43F7-2364-43A5-A87A-9F14B3B5CB37}.Release|x64.Build.0 = Release|x64
 		{0F2B43F7-2364-43A5-A87A-9F14B3B5CB37}.Release|x86.ActiveCfg = Release|Win32
 		{0F2B43F7-2364-43A5-A87A-9F14B3B5CB37}.Release|x86.Build.0 = Release|Win32
+		{37B7C531-575C-4EA6-B968-5FCB1E6F1C80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37B7C531-575C-4EA6-B968-5FCB1E6F1C80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37B7C531-575C-4EA6-B968-5FCB1E6F1C80}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{37B7C531-575C-4EA6-B968-5FCB1E6F1C80}.Debug|x64.Build.0 = Debug|Any CPU
+		{37B7C531-575C-4EA6-B968-5FCB1E6F1C80}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{37B7C531-575C-4EA6-B968-5FCB1E6F1C80}.Debug|x86.Build.0 = Debug|Any CPU
+		{37B7C531-575C-4EA6-B968-5FCB1E6F1C80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37B7C531-575C-4EA6-B968-5FCB1E6F1C80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37B7C531-575C-4EA6-B968-5FCB1E6F1C80}.Release|x64.ActiveCfg = Release|Any CPU
+		{37B7C531-575C-4EA6-B968-5FCB1E6F1C80}.Release|x64.Build.0 = Release|Any CPU
+		{37B7C531-575C-4EA6-B968-5FCB1E6F1C80}.Release|x86.ActiveCfg = Release|Any CPU
+		{37B7C531-575C-4EA6-B968-5FCB1E6F1C80}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
