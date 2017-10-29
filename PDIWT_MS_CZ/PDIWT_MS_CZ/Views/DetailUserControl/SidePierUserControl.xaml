@@ -9,6 +9,7 @@
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:local="clr-namespace:PDIWT_MS_CZ.Views.DetailUserControl"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:val="clr-namespace:PDIWT_MS_CZ.ValidationRules;assembly=PDIWT_MS_CZ.Extension"
     d:DesignHeight="500"
     d:DesignWidth="500"
     Background="White"
@@ -30,7 +31,15 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="边墩高度=" />
-                <TextBox Grid.Column="1" Text="{Binding CZ_LockHeadParameters.LH_SidePier.PierHeight}" />
+                <TextBox Grid.Column="1">
+                    <TextBox.Text>
+                        <Binding Path="CZ_LockHeadParameters.LH_SidePier.PierHeight">
+                            <Binding.ValidationRules>
+                                <val:Grate0Rule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Header="平面形状参数">
@@ -77,10 +86,14 @@
                             Grid.Row="0"
                             Grid.Column="0"
                             Text="a=" />
-                        <TextBox
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            Text="{Binding CZ_LockHeadParameters.LH_SidePier.PierXY_A}">
+                        <TextBox Grid.Row="0" Grid.Column="1">
+                            <TextBox.Text>
+                                <Binding Path="CZ_LockHeadParameters.LH_SidePier.PierXY_A">
+                                    <Binding.ValidationRules>
+                                        <val:Grate0Rule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="LostFocus">
                                     <i:InvokeCommandAction Command="{Binding UpdateParam}" />
@@ -91,26 +104,40 @@
                             Grid.Row="0"
                             Grid.Column="2"
                             Text="b=" />
-                        <TextBox
-                            Grid.Row="0"
-                            Grid.Column="3"
-                            Text="{Binding CZ_LockHeadParameters.LH_SidePier.PierXY_B}" />
+                        <TextBox Grid.Row="0" Grid.Column="3">
+                            <TextBox.Text>
+                                <Binding Path="CZ_LockHeadParameters.LH_SidePier.PierXY_B">
+                                    <Binding.ValidationRules>
+                                        <val:Grate0Rule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <TextBlock
                             Grid.Row="1"
                             Grid.Column="0"
                             Text="c=" />
-                        <TextBox
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            Text="{Binding CZ_LockHeadParameters.LH_SidePier.PierXY_C}" />
+                        <TextBox Grid.Row="1" Grid.Column="1">
+                            <TextBox.Text>
+                                <Binding Path="CZ_LockHeadParameters.LH_SidePier.PierXY_C">
+                                    <Binding.ValidationRules>
+                                        <val:Grate0Rule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <TextBlock
                             Grid.Row="1"
                             Grid.Column="2"
                             Text="d=" />
-                        <TextBox
-                            Grid.Row="1"
-                            Grid.Column="3"
-                            Text="{Binding CZ_LockHeadParameters.LH_SidePier.PierXY_D}">
+                        <TextBox Grid.Row="1" Grid.Column="3">
+                            <TextBox.Text>
+                                <Binding Path="CZ_LockHeadParameters.LH_SidePier.PierXY_D">
+                                    <Binding.ValidationRules>
+                                        <val:Grate0Rule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="LostFocus">
                                     <i:InvokeCommandAction Command="{Binding UpdateParam}" />
@@ -124,16 +151,27 @@
                         <TextBox
                             Grid.Row="2"
                             Grid.Column="1"
-                            Style="{StaticResource ReadOnly_textbox}"
-                            Text="{Binding CZ_LockHeadParameters.LH_SidePier.PierXY_E}" />
+                            Style="{StaticResource ReadOnly_textbox}">
+                            <TextBox.Text>
+                                <Binding Path="CZ_LockHeadParameters.LH_SidePier.PierXY_E">
+                                    <Binding.ValidationRules>
+                                        <val:Grate0Rule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <TextBlock
                             Grid.Row="2"
                             Grid.Column="2"
                             Text="f=" />
-                        <TextBox
-                            Grid.Row="2"
-                            Grid.Column="3"
-                            Text="{Binding CZ_LockHeadParameters.LH_SidePier.PierXY_F}">
+                        <TextBox Grid.Row="2" Grid.Column="3">
+                            <TextBox.Text>
+                                <Binding Path="CZ_LockHeadParameters.LH_SidePier.PierXY_F">
+                                    <Binding.ValidationRules>
+                                        <val:Grate0Rule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="LostFocus">
                                     <i:InvokeCommandAction Command="{Binding UpdateParam}" />
@@ -164,26 +202,41 @@
                             Grid.Row="0"
                             Grid.Column="0"
                             Text="Tx=" />
-                        <TextBox
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            Text="{Binding CZ_LockHeadParameters.LH_SidePier.PierChamfer_Tx}" />
+                        <TextBox Grid.Row="0" Grid.Column="1">
+                            <TextBox.Text>
+                                <Binding Path="CZ_LockHeadParameters.LH_SidePier.PierChamfer_Tx">
+                                    <Binding.ValidationRules>
+                                        <val:Grate0Rule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <TextBlock
                             Grid.Row="1"
                             Grid.Column="0"
                             Text="Ty=" />
-                        <TextBox
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            Text="{Binding CZ_LockHeadParameters.LH_SidePier.PierChamfer_Ty}" />
+                        <TextBox Grid.Row="1" Grid.Column="1">
+                            <TextBox.Text>
+                                <Binding Path="CZ_LockHeadParameters.LH_SidePier.PierChamfer_Ty">
+                                    <Binding.ValidationRules>
+                                        <val:Grate0Rule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <TextBlock
                             Grid.Row="2"
                             Grid.Column="0"
                             Text="R1=" />
-                        <TextBox
-                            Grid.Row="2"
-                            Grid.Column="1"
-                            Text="{Binding CZ_LockHeadParameters.LH_SidePier.PierChamfer_R}" />
+                        <TextBox Grid.Row="2" Grid.Column="1">
+                            <TextBox.Text>
+                                <Binding Path="CZ_LockHeadParameters.LH_SidePier.PierChamfer_R">
+                                    <Binding.ValidationRules>
+                                        <val:Grate0Rule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                     </Grid>
                 </GroupBox>
             </Grid>

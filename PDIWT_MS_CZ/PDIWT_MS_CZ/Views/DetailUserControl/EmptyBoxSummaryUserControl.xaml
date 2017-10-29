@@ -5,7 +5,6 @@
     xmlns:converters="clr-namespace:PDIWT_MS_CZ.Converters;assembly=PDIWT_MS_CZ.Extension"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:PDIWT_MS_CZ.Views.DetailUserControl"
-    xmlns:localCon="clr-namespace:PDIWT_MS_CZ.Converters"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Name="EmptyBoxSummaryUC"
     d:DesignHeight="400"

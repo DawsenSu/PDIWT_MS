@@ -7,6 +7,7 @@
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:local="clr-namespace:PDIWT_MS_CZ.Views.DetailUserControl"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:val="clr-namespace:PDIWT_MS_CZ.ValidationRules;assembly=PDIWT_MS_CZ.Extension"
     d:DesignHeight="400"
     d:DesignWidth="500"
     Background="White"
@@ -28,7 +29,15 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="门槛厚度=" />
-                <TextBox Grid.Column="1" Text="{Binding CZ_LockHeadParameters.LH_DoorSill.DoorSillHeight}" />
+                <TextBox Grid.Column="1">
+                    <TextBox.Text>
+                        <Binding Path="CZ_LockHeadParameters.LH_DoorSill.DoorSillHeight">
+                            <Binding.ValidationRules>
+                                <val:Grate0Rule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Header="平面形状参数">
@@ -61,51 +70,82 @@
                     <TextBox
                         Grid.Row="0"
                         Grid.Column="1"
-                        Style="{StaticResource ReadOnly_textbox}"
-                        Text="{Binding CZ_LockHeadParameters.LH_DoorSill.DoorSill_A}" />
+                        Style="{StaticResource ReadOnly_textbox}">
+                        <TextBox.Text>
+                            <Binding Path="CZ_LockHeadParameters.LH_DoorSill.DoorSill_A">
+                                <Binding.ValidationRules>
+                                    <val:Grate0Rule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock
                         Grid.Row="1"
                         Grid.Column="0"
                         Text="b=" />
-                    <TextBox
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Text="{Binding CZ_LockHeadParameters.LH_DoorSill.DoorSill_B}" />
+                    <TextBox Grid.Row="1" Grid.Column="1">
+                        <TextBox.Text>
+                            <Binding Path="CZ_LockHeadParameters.LH_DoorSill.DoorSill_B">
+                                <Binding.ValidationRules>
+                                    <val:Grate0Rule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock
                         Grid.Row="2"
                         Grid.Column="0"
                         Text="c=" />
-                    <TextBox
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        Text="{Binding CZ_LockHeadParameters.LH_DoorSill.DoorSill_C}" />
+                    <TextBox Grid.Row="2" Grid.Column="1">
+                        <TextBox.Text>
+                            <Binding Path="CZ_LockHeadParameters.LH_DoorSill.DoorSill_C">
+                                <Binding.ValidationRules>
+                                    <val:Grate0Rule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock
                         Grid.Row="3"
                         Grid.Column="0"
                         Text="d=" />
-                    <TextBox
-                        Grid.Row="3"
-                        Grid.Column="1"
-                        Text="{Binding CZ_LockHeadParameters.LH_DoorSill.DoorSill_D}" />
+                    <TextBox Grid.Row="3" Grid.Column="1">
+                        <TextBox.Text>
+                            <Binding Path="CZ_LockHeadParameters.LH_DoorSill.DoorSill_D">
+                                <Binding.ValidationRules>
+                                    <val:Grate0Rule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock
                         Grid.Row="4"
                         Grid.Column="0"
                         Text="e=" />
-                    <TextBox
-                        Grid.Row="4"
-                        Grid.Column="1"
-                        Text="{Binding CZ_LockHeadParameters.LH_DoorSill.DoorSill_E}" />
+                    <TextBox Grid.Row="4" Grid.Column="1">
+                        <TextBox.Text>
+                            <Binding Path="CZ_LockHeadParameters.LH_DoorSill.DoorSill_E">
+                                <Binding.ValidationRules>
+                                    <val:Grate0Rule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock
                         Grid.Row="5"
                         Grid.Column="0"
                         Text="f=" />
-                    <TextBox
-                        Grid.Row="5"
-                        Grid.Column="1"
-                        Text="{Binding CZ_LockHeadParameters.LH_DoorSill.DoorSill_F}" />
+                    <TextBox Grid.Row="5" Grid.Column="1">
+                        <TextBox.Text>
+                            <Binding Path="CZ_LockHeadParameters.LH_DoorSill.DoorSill_F">
+                                <Binding.ValidationRules>
+                                    <val:Grate0Rule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </Grid>
             </Grid>
         </GroupBox>
     </Grid>
-
 </UserControl>

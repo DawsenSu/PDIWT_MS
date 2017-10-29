@@ -8,6 +8,7 @@
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     xmlns:local="clr-namespace:PDIWT_MS_CZ.Views.DetailUserControl"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:val="clr-namespace:PDIWT_MS_CZ.ValidationRules;assembly=PDIWT_MS_CZ.Extension"
     d:DesignHeight="400"
     d:DesignWidth="500"
     Background="White"
@@ -38,26 +39,41 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     Text="廊道宽度=" />
-                <TextBox
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Text="{Binding Culvert_Width}" />
+                <TextBox Grid.Row="0" Grid.Column="1">
+                    <TextBox.Text>
+                        <Binding Path="Culvert_Width">
+                            <Binding.ValidationRules>
+                                <val:Grate0Rule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <TextBlock
                     Grid.Row="1"
                     Grid.Column="0"
                     Text="廊道边壁距边墩距离=" />
-                <TextBox
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Text="{Binding Culvert_Pier_RightDis}" />
+                <TextBox Grid.Row="1" Grid.Column="1">
+                    <TextBox.Text>
+                        <Binding Path="Culvert_Pier_RightDis">
+                            <Binding.ValidationRules>
+                                <val:Grate0Rule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <TextBlock
                     Grid.Row="2"
                     Grid.Column="0"
                     Text="廊道底边面与底板底面距离=" />
-                <TextBox
-                    Grid.Row="2"
-                    Grid.Column="2"
-                    Text="{Binding Culvert_Baseboard_BottomDis}" />
+                <TextBox Grid.Row="2" Grid.Column="2">
+                    <TextBox.Text>
+                        <Binding Path="Culvert_Baseboard_BottomDis">
+                            <Binding.ValidationRules>
+                                <val:Grate0Rule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Header="侧视图参数">
@@ -87,34 +103,54 @@
                                 Grid.Row="0"
                                 Grid.Column="0"
                                 Text="a=" />
-                            <TextBox
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                Text="{Binding Culvert_A}" />
+                            <TextBox Grid.Row="0" Grid.Column="1">
+                                <TextBox.Text>
+                                    <Binding Path="Culvert_A">
+                                        <Binding.ValidationRules>
+                                            <val:Grate0Rule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <TextBlock
                                 Grid.Row="1"
                                 Grid.Column="0"
                                 Text="b=" />
-                            <TextBox
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                Text="{Binding Culvert_B}" />
+                            <TextBox Grid.Row="1" Grid.Column="1">
+                                <TextBox.Text>
+                                    <Binding Path="Culvert_B">
+                                        <Binding.ValidationRules>
+                                            <val:Grate0Rule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <TextBlock
                                 Grid.Row="2"
                                 Grid.Column="0"
                                 Text="c=" />
-                            <TextBox
-                                Grid.Row="2"
-                                Grid.Column="1"
-                                Text="{Binding Culvert_C}" />
+                            <TextBox Grid.Row="2" Grid.Column="1">
+                                <TextBox.Text>
+                                    <Binding Path="Culvert_C">
+                                        <Binding.ValidationRules>
+                                            <val:Grate0Rule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <TextBlock
                                 Grid.Row="3"
                                 Grid.Column="0"
                                 Text="d=" />
-                            <TextBox
-                                Grid.Row="3"
-                                Grid.Column="1"
-                                Text="{Binding Culvert_D}" />
+                            <TextBox Grid.Row="3" Grid.Column="1">
+                                <TextBox.Text>
+                                    <Binding Path="Culvert_D">
+                                        <Binding.ValidationRules>
+                                            <val:Grate0Rule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="半径">
@@ -131,18 +167,28 @@
                                 Grid.Row="0"
                                 Grid.Column="0"
                                 Text="R1=" />
-                            <TextBox
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                Text="{Binding Culvert_R1}" />
+                            <TextBox Grid.Row="0" Grid.Column="1">
+                                <TextBox.Text>
+                                    <Binding Path="Culvert_R1">
+                                        <Binding.ValidationRules>
+                                            <val:Grate0Rule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <TextBlock
                                 Grid.Row="1"
                                 Grid.Column="0"
                                 Text="R2=" />
-                            <TextBox
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                Text="{Binding Culvert_R2}" />
+                            <TextBox Grid.Row="1" Grid.Column="1">
+                                <TextBox.Text>
+                                    <Binding Path="Culvert_R2">
+                                        <Binding.ValidationRules>
+                                            <val:Grate0Rule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </Grid>
                     </GroupBox>
                 </StackPanel>

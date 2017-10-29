@@ -9,6 +9,7 @@
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:local="clr-namespace:PDIWT_MS_CZ.Views.DetailUserControl"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:val="clr-namespace:PDIWT_MS_CZ.ValidationRules;assembly=PDIWT_MS_CZ.Extension"
     Title="编辑棱柱空箱"
     Width="600"
     Height="450"
@@ -71,10 +72,15 @@
                     Grid.Row="0"
                     Grid.Column="1"
                     Text="高度=" />
-                <TextBox
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    Text="{Binding EmptyBoxHeight}" />
+                <TextBox Grid.Row="0" Grid.Column="2">
+                    <TextBox.Text>
+                        <Binding Path="EmptyBoxHeight">
+                            <Binding.ValidationRules>
+                                <val:Grate0Rule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <Grid
                     Grid.Row="1"
                     Grid.Column="1"

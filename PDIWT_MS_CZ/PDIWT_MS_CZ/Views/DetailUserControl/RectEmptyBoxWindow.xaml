@@ -9,6 +9,7 @@
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     xmlns:local="clr-namespace:PDIWT_MS_CZ.Views.DetailUserControl"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:val="clr-namespace:PDIWT_MS_CZ.ValidationRules;assembly=PDIWT_MS_CZ.Extension"
     Title="编辑长方体空箱参数"
     Width="600"
     Height="400"
@@ -68,11 +69,35 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="长度=" />
-                <TextBox Grid.Column="1" Text="{Binding EmptyBoxLength}" />
+                <TextBox Grid.Column="1">
+                    <TextBox.Text>
+                        <Binding Path="EmptyBoxLength">
+                            <Binding.ValidationRules>
+                                <val:Grate0Rule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <TextBlock Grid.Column="2" Text="宽度=" />
-                <TextBox Grid.Column="3" Text="{Binding EmptyBoxWidth}" />
+                <TextBox Grid.Column="3">
+                    <TextBox.Text>
+                        <Binding Path="EmptyBoxWidth">
+                            <Binding.ValidationRules>
+                                <val:Grate0Rule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <TextBlock Grid.Column="4" Text="高度=" />
-                <TextBox Grid.Column="5" Text="{Binding EmptyBoxHeight}" />
+                <TextBox Grid.Column="5">
+                    <TextBox.Text>
+                        <Binding Path="EmptyBoxHeight">
+                            <Binding.ValidationRules>
+                                <val:Grate0Rule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="2" Header="各边倒角">
