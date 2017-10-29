@@ -21,15 +21,6 @@
     <Style TargetType="{x:Type TextBox}">
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Margin" Value="2,1" />
-        <Setter Property="Validation.ErrorTemplate">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Border BorderBrush="Red" BorderThickness="1">
-                        <AdornedElementPlaceholder />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
         <Style.Triggers>
             <Trigger Property="Validation.HasError" Value="True">
                 <Setter Property="Background" Value="Red" />
