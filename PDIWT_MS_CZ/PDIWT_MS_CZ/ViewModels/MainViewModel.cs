@@ -60,6 +60,20 @@ namespace PDIWT_MS_CZ.ViewModels
                 this._IsLogicalVerified = false;
             }));
             Messenger.Default.Register<bool>(this, "UIVerify", _uiver => _IsUIVerified = _uiver);
+            Messenger.Default.Register<bool>(this,"DrawMessage",
+                _drawValid =>
+                {
+                    if (_drawValid)
+                    {
+                        Prompt = "绘制成功";
+                        Status = Resources.Status_Success;
+                    }
+                    else
+                    {
+                        Prompt = "绘制过程出现错误,请检查参数是否有误";
+                        Status = Resources.Status_Fail;
+                    }
+                });
         }
         ~MainViewModel()
         {
@@ -787,17 +801,9 @@ namespace PDIWT_MS_CZ.ViewModels
         public RelayCommand DrawAll => _DrawAll ?? ( _DrawAll = new RelayCommand(ExecuteDrawAll, ()=>_IsLogicalVerified&&_IsUIVerified));
         public void ExecuteDrawAll()
         {
-            PDIWT_MS_CZ_CPP.LockHeadDrawing Drawing = new PDIWT_MS_CZ_CPP.LockHeadDrawing(CZ_LockHeadParameters);
-            if (Drawing.DoDraw() == 0)
-            {
-                Prompt = "绘制成功";
-                Status = Resources.Status_Success;
-            }
-            else
-            {
-                Prompt = "绘制过程出现错误,请检查参数是否有误";
-                Status = Resources.Status_Fail;
-            }
+            //PDIWT_MS_CZ_CPP.LockHeadDrawing Drawing = new PDIWT_MS_CZ_CPP.LockHeadDrawing(CZ_LockHeadParameters);
+            LockHeaderCreateTool _tool = new LockHeaderCreateTool(0, 0, CZ_LockHeadParameters);
+            _tool.InstallTool();
         }
 
         private RelayCommand _ResetParam;

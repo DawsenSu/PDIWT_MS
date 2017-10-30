@@ -202,10 +202,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\BitmapHelper.cs" />
-    <Compile Include="Models\GetCZQuantityTable.cs" />
+    <Compile Include="Models\LockHeaderCreateTool.cs" />
     <Compile Include="Models\LockHeadParameters.cs" />
-    <Compile Include="Models\SmartSoildExtentsions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="KeyinCommands.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -361,6 +359,9 @@
       <Project>{37b7c531-575c-4ea6-b968-5fcb1e6f1c80}</Project>
       <Name>PDIWT_MS_CZ.Extension</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="更新说明.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

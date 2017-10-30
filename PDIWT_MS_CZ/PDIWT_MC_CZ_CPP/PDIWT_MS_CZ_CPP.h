@@ -27,7 +27,7 @@ namespace PDIWT_MS_CZ_CPP {
 	public:
 		LockHeadDrawing(LockHeadParameters^);
 		property LockHeadParameters^ LH_LockHeadParameter;
-		StatusInt DoDraw();
+		StatusInt DoDraw(const double, const double, const double);
 		StatusInt DoTest();
 	private:
 		//Utilities Function

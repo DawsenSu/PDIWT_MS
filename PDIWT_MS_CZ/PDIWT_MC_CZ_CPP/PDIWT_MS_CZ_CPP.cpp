@@ -9,11 +9,11 @@ PDIWT_MS_CZ_CPP::LockHeadDrawing::LockHeadDrawing(LockHeadParameters^ lockheadpa
 	LH_LockHeadParameter = lockheadparam;
 }
 
-StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DoDraw()
+StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DoDraw(const double x, const double y,const double z)
 {
 	EditElementHandle _cz_whole;
 	ISolidKernelEntityPtr _cz_whole_SKE;
-	DPoint3d _whole_anchor{ 0,0,0 };
+	DPoint3d _whole_anchor{ x,y,z };
 #pragma region baseboard
 	ISolidKernelEntityPtr _baseboard_SKE;
 	if (DrawBaseBoard(_baseboard_SKE, _whole_anchor))
