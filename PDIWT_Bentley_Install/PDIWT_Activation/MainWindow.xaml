@@ -1,0 +1,78 @@
+﻿<Window
+    x:Class="PDIWT_Encrypt.Activation.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PDIWT_Activation"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="中交水规院MicroStation插件激活程序"
+    Width="400"
+    Height="160"
+    Icon="Key.ico"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Height" Value="20" />
+            <Setter Property="Width" Value="50" />
+            <Setter Property="Margin" Value="3" />
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Margin" Value="0,3" />
+        </Style>
+    </Window.Resources>
+    <Grid Margin="4">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            Text="激活序列号：" />
+        <TextBox
+            Name="textbox_ComputerRelated"
+            Grid.Row="1"
+            Grid.Column="0"
+            Background="#FFE8E8E8"
+            Foreground="Brown"
+            IsReadOnly="True"
+            ToolTip="将此序列号发送给管理员 或 发送邮件到sudongsheng@pdiwt.con.cn进行咨询" />
+        <Button
+            Grid.Row="1"
+            Grid.Column="1"
+            Click="CopyButton_Click"
+            Content="复制" />
+        <TextBlock
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Text="激活秘钥：" />
+        <TextBox
+            Name="textbox_ActivationKey"
+            Grid.Row="3"
+            Grid.Column="0" />
+        <Button
+            Grid.Row="3"
+            Grid.Column="1"
+            Click="PasteButton_Click"
+            Content="粘贴" />
+        <StackPanel
+            Grid.Row="4"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Button
+                x:Name="btn_Activate"
+                Click="ActivateButton_OnClick"
+                Content="激活" />
+            <Button Click="CancelButton_OnClick" Content="取消" />
+        </StackPanel>
+    </Grid>
+</Window>

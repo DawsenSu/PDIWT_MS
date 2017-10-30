@@ -1,0 +1,60 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:PDIWT_MS_CZ.ViewModels">
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <Style TargetType="{x:Type GroupBox}">
+        <Setter Property="Margin" Value="5" />
+    </Style>
+    <Style x:Key="MidTextBlock" TargetType="{x:Type TextBlock}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="MaxHeight" Value="20" />
+        <Setter Property="Margin" Value="3" />
+    </Style>
+    <Style TargetType="{x:Type TextBlock}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="2,0" />
+    </Style>
+    <Style TargetType="{x:Type TextBox}">
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Margin" Value="2,1" />
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="Background" Value="Red" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <SolidColorBrush x:Key="DisabledBackgroud" Color="#FFCFC6C6" />
+    <Style x:Key="ReadOnly_textbox" TargetType="{x:Type TextBox}">
+        <Setter Property="Background" Value="{StaticResource DisabledBackgroud}" />
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Margin" Value="2,1" />
+    </Style>
+    <!--  DataGrid  -->
+    <Style TargetType="{x:Type DataGrid}">
+        <Setter Property="AutoGenerateColumns" Value="False" />
+        <Setter Property="Margin" Value="3" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="CanUserSortColumns" Value="False" />
+        <Setter Property="CanUserAddRows" Value="True" />
+        <Setter Property="CanUserDeleteRows" Value="True" />
+        <Setter Property="CanUserReorderColumns" Value="False" />
+        <Setter Property="ContextMenu">
+            <Setter.Value>
+                <ContextMenu StaysOpen="true">
+                    <MenuItem Command="Delete" Header="删行">
+                        <MenuItem.Icon>
+                            <Image Source="../Image/Icons/Delete.ico" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

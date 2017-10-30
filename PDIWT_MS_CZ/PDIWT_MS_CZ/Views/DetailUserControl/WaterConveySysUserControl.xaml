@@ -1,0 +1,58 @@
+﻿<UserControl
+    x:Class="PDIWT_MS_CZ.Views.DetailUserControl.WaterConveySysUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:con="clr-namespace:PDIWT_MS_CZ.Converters;assembly=PDIWT_MS_CZ.Extension"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PDIWT_MS_CZ.Views.DetailUserControl"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewd="clr-namespace:PDIWT_MS_CZ.Views.DetailUserControl"
+    d:DesignHeight="400"
+    d:DesignWidth="600"
+    Background="White"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../XamlResources/CommonResource.xaml" />
+                <ResourceDictionary />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="5,0"
+            VerticalAlignment="Center"
+            Text="输水系统类型:" />
+        <ComboBox
+            Grid.Row="0"
+            Grid.Column="1"
+            SelectedIndex="{Binding LH_CulvertChoosenIndex}"
+            SelectionChanged="ComboBox_SelectionChanged">
+            <ComboBoxItem Content="短廊道输水" />
+            <ComboBoxItem Content="局部集中输水" />
+        </ComboBox>
+        <TextBlock
+            Grid.Row="1"
+            Margin="6,0"
+            FontSize="10"
+            Foreground="PaleVioletRed"
+            Text="*图示以闸首左侧为例" />
+        <ContentControl
+            Name="CulvertContent"
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Margin="5" />
+    </Grid>
+</UserControl>
