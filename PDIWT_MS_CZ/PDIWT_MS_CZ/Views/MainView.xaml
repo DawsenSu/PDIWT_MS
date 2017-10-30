@@ -5,6 +5,8 @@
     xmlns:DetailUC="clr-namespace:PDIWT_MS_CZ.Views.DetailUserControl"
     xmlns:con="clr-namespace:PDIWT_MS_CZ.Converters;assembly=PDIWT_MS_CZ.Extension"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:PDIWT_MS_CZ.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prop="clr-namespace:PDIWT_MS_CZ.Properties"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
@@ -60,10 +62,16 @@
                         FirstBackground="#FF007ACC"
                         FristString="{x:Static prop:Resources.Status_Success}"
                         SecondBackground="PaleVioletRed" />
+
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction Command="{Binding WindowClosed}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -76,6 +84,7 @@
             Grid.ColumnSpan="2"
             Background="White">
             <MenuItem
+                Click="MenuItem_Click"
                 Command="{Binding VerifyParam}"
                 Header="验证参数"
                 Style="{StaticResource MenuItemStyle}">
@@ -84,11 +93,11 @@
                 </MenuItem.Icon>
             </MenuItem>
             <Separator />
-            <MenuItem Header="预览图形" Style="{StaticResource MenuItemStyle}">
+            <!--<MenuItem Header="预览图形" Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Icon>
                     <Image Source="../Image/Icons/Preview Pane.ico" />
                 </MenuItem.Icon>
-            </MenuItem>
+            </MenuItem>-->
             <MenuItem
                 Command="{Binding DrawAll}"
                 Header="绘制"
@@ -105,11 +114,11 @@
                     <Image Source="../Image/Icons/Reset.ico" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="输出工程量" Style="{StaticResource MenuItemStyle}">
+            <!--<MenuItem Header="输出工程量" Style="{StaticResource MenuItemStyle}">
                 <MenuItem.Icon>
                     <Image Source="../Image/Icons/Microsoft Excel.ico" />
                 </MenuItem.Icon>
-            </MenuItem>
+            </MenuItem>-->
             <Separator />
             <MenuItem
                 Command="{Binding InputTemplate}"
@@ -127,8 +136,8 @@
                     <Image Source="../Image/Icons/Export.ico" />
                 </MenuItem.Icon>
             </MenuItem>
-            <Separator />
-            <MenuItem Command="{Binding Test}" Header="Test" />
+            <!--<Separator />
+            <MenuItem Command="{Binding Test}" Header="Test" />-->
         </Menu>
         <!--  主面板 todo:针对此控件进行美化  -->
         <TabControl

@@ -18,7 +18,9 @@ using PDIWT_MS_CZ.Models;
 using PDIWT_MS_CZ.Properties;
 
 using MessageBox = System.Windows.MessageBox;
-
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace PDIWT_MS_CZ.ViewModels
 {
@@ -44,25 +46,20 @@ namespace PDIWT_MS_CZ.ViewModels
             get { return _cz_lockheadparameters; }
             set { Set(ref _cz_lockheadparameters, value); }
         }
-        private bool _IsVerified;
-        public bool IsVerified
-        {
-            get { return _IsVerified; }
-            set { Set(ref _IsVerified, value); }
-        }
+        private bool _IsLogicalVerified;
+        private bool _IsUIVerified;
 
 
         public MainViewModel()
         {
             InitialzeParameters();
-            IsVerified = false;
-            Prompt = "模块加载成功";
-            Status = Resources.Status_Success;
-            Messenger.Default.Register<bool>(this, "ParameterChanged", _ => 
+
+            Messenger.Default.Register<bool>(this, "ParameterChanged", (Action<bool>)(_ => 
             {
                 Prompt = "参数集设置发生变化，请重新验证参数";
-                IsVerified = false;
-            });
+                this._IsLogicalVerified = false;
+            }));
+            Messenger.Default.Register<bool>(this, "UIVerify", _uiver => _IsUIVerified = _uiver);
         }
         ~MainViewModel()
         {
@@ -118,12 +115,12 @@ namespace PDIWT_MS_CZ.ViewModels
                 LH_ShortCulvert = new ShortCulvert()
                 {
                     Culvert_Pier_RightDis = 1800,
-                    Culvert_Baseboard_BottomDis = 2000,
+                    Culvert_Baseboard_BottomDis = 1000,
                     Culvert_Width = 3500,
-                    Culvert_A = 700,
-                    Culvert_B = 300,
+                    Culvert_A = 3000,
+                    Culvert_B = 9000,
                     Culvert_C = 16000,
-                    Culvert_D = 2000,
+                    Culvert_D = 4000,
                     Culvert_R1 = 2000,
                     Culvert_R2 = 4600
                 },
@@ -742,6 +739,11 @@ namespace PDIWT_MS_CZ.ViewModels
                     }
                 }
             };
+
+            _IsLogicalVerified = false;
+            _IsUIVerified = false;
+            Prompt = "模块加载成功";
+            Status = Resources.Status_Success;
         }
 
         #region 验证参数
@@ -749,20 +751,28 @@ namespace PDIWT_MS_CZ.ViewModels
         public RelayCommand VerifyParam => _VerifyParam ?? (_VerifyParam = new RelayCommand(ExecuteVerifyParam));
         public void ExecuteVerifyParam()
         {
-            string _verifyresult = CZ_LockHeadParameters.IsParametersValid();
-            if (Resources.Verified == _verifyresult)
+            // UI test
+            if (!_IsUIVerified)
             {
-                IsVerified = true;
+                Prompt = "窗体中存在非法输入,请检查!";
+                Status = Resources.Status_Fail;
+                return;
+            }
+            //logical test
+            string _verifyresult = CZ_LockHeadParameters.IsParametersValid();
+            if (Resources.Verified == _verifyresult )
+            {
+                _IsLogicalVerified = true;
                 Status = Resources.Status_Success;
             }
             else
             {
                 Status = Resources.Status_Fail;
             }
-            Prompt = _verifyresult;
-            
-        }
+                Prompt = _verifyresult;
 
+        }
+        //完成参数修改联动
         private RelayCommand _UpdateParam;
         public RelayCommand UpdateParam=> _UpdateParam ?? (_UpdateParam = new RelayCommand(ExecuteUpdateParam));
         public void ExecuteUpdateParam()
@@ -774,7 +784,7 @@ namespace PDIWT_MS_CZ.ViewModels
 
         #region 绘图
         private RelayCommand _DrawAll;
-        public RelayCommand DrawAll => _DrawAll ?? ( _DrawAll = new RelayCommand(ExecuteDrawAll, ()=>IsVerified));
+        public RelayCommand DrawAll => _DrawAll ?? ( _DrawAll = new RelayCommand(ExecuteDrawAll, ()=>_IsLogicalVerified&&_IsUIVerified));
         public void ExecuteDrawAll()
         {
             PDIWT_MS_CZ_CPP.LockHeadDrawing Drawing = new PDIWT_MS_CZ_CPP.LockHeadDrawing(CZ_LockHeadParameters);
@@ -788,8 +798,6 @@ namespace PDIWT_MS_CZ.ViewModels
                 Prompt = "绘制过程出现错误,请检查参数是否有误";
                 Status = Resources.Status_Fail;
             }
-
-
         }
 
         private RelayCommand _ResetParam;
@@ -830,7 +838,7 @@ namespace PDIWT_MS_CZ.ViewModels
         }
 
         private RelayCommand _outputtemplate;
-        public RelayCommand OutputTemplate => _outputtemplate ?? (_outputtemplate = new RelayCommand(ExecuteOutputTemplate,()=>IsVerified));
+        public RelayCommand OutputTemplate => _outputtemplate ?? (_outputtemplate = new RelayCommand(ExecuteOutputTemplate,()=> _IsLogicalVerified && _IsUIVerified));
         public void ExecuteOutputTemplate()
         {
             try
@@ -870,6 +878,13 @@ namespace PDIWT_MS_CZ.ViewModels
             Drawing.DoTest();
         }
 
+        private RelayCommand _WindowClosed;
+        public RelayCommand WindowClosed => _WindowClosed ?? (_WindowClosed = new RelayCommand(ExecuteWindowClosed));
+        public void ExecuteWindowClosed()
+        {
+            if (!_IsUIVerified || !_IsLogicalVerified)
+                InitialzeParameters();
+        }
 
 
     }

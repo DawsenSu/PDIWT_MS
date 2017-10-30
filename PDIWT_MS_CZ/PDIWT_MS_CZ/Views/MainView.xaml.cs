@@ -62,17 +62,49 @@ namespace PDIWT_MS_CZ.Views
             m_windowhost = null;
         }
 
-        private void TextBoxes_Changed(object sender, TextChangedEventArgs e) => SendChangedMessage();
+        private void TextBoxes_Changed(object sender, TextChangedEventArgs e) => SendMessage();
+
 
         private void Button_click(object sender, RoutedEventArgs e)
         {
             if (e.OriginalSource is CheckBox)
-                SendChangedMessage();
+                SendMessage();
         }
-
-        private void SendChangedMessage()
+        private void SendMessage()
         {
             Messenger.Default.Send<bool>(true, "ParameterChanged");
+        }
+        bool IsInputValid(DependencyObject node)
+        {
+            if (node != null)
+            {
+                bool _isValid = !Validation.GetHasError(node);
+                if (!_isValid)
+                {
+                    if (node is IInputElement) Keyboard.Focus((IInputElement)node);
+                    return false;
+                }
+            }
+            for(int i=0;i< VisualTreeHelper.GetChildrenCount(node);i++)
+            {
+                var subnode = VisualTreeHelper.GetChild(node, i);
+                if (subnode is DependencyObject)
+                {
+                    if (IsInputValid((DependencyObject)subnode) == false) return false;
+
+                }
+                else
+                    continue;
+            }
+            return true;
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (IsInputValid(this))
+                Messenger.Default.Send<bool>(true, "UIVerify");
+            else
+                Messenger.Default.Send<bool>(false, "UIVerify");
         }
     }
 }

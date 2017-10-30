@@ -385,14 +385,24 @@
                         AlternatingRowBackground="{StaticResource AlterRowBgBrush}"
                         ItemsSource="{Binding Culvert_EnergyDisspater.GrilleWidthList}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding Interval}"
-                                Header="距离" />
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding RoundChamferRadius}"
-                                Header="格栅圆倒角半径" />
+                            <DataGridTextColumn Width="*" Header="距离">
+                                <DataGridTextColumn.Binding>
+                                    <Binding Path="Interval">
+                                        <Binding.ValidationRules>
+                                            <val:Grate0Rule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </DataGridTextColumn.Binding>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Width="*" Header="格栅圆倒角半径">
+                                <DataGridTextColumn.Binding>
+                                    <Binding Path="RoundChamferRadius">
+                                        <Binding.ValidationRules>
+                                            <val:Grate0Rule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </DataGridTextColumn.Binding>
+                            </DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel
@@ -423,18 +433,29 @@
                 </TabItem.Header>
                 <DataGrid ItemsSource="{Binding Culvert_Baffle}" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=CheckBox_Baffle}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn
-                            Width="*"
-                            Binding="{Binding Baffle_MidMidDis}"
-                            Header="距闸首中轴线的距离" />
-                        <DataGridTextColumn
-                            Width="*"
-                            Binding="{Binding Baffle_Width}"
-                            Header="消力坎宽度" />
-                        <DataGridTextColumn
-                            Width="*"
-                            Binding="{Binding Baffle_Height}"
-                            Header="消力坎高度" />
+                        <DataGridTextColumn Width="*" Header="距闸首中轴线的距离">
+                            <DataGridTextColumn.Binding>
+                                <Binding Path="Baffle_MidMidDis" />
+                            </DataGridTextColumn.Binding>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Width="*" Header="消力坎宽度">
+                            <DataGridTextColumn.Binding>
+                                <Binding Path="Baffle_Width">
+                                    <Binding.ValidationRules>
+                                        <val:Grate0Rule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </DataGridTextColumn.Binding>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Width="*" Header="消力坎高度">
+                            <DataGridTextColumn.Binding>
+                                <Binding Path="Baffle_Height">
+                                    <Binding.ValidationRules>
+                                        <val:Grate0Rule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </DataGridTextColumn.Binding>
+                        </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>

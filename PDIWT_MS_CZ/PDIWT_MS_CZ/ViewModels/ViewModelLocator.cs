@@ -27,6 +27,7 @@ namespace PDIWT_MS_CZ.ViewModels
         public static void Cleanup()
         {
             //TODO Clear the viewmodels
+            
         }
 
 
