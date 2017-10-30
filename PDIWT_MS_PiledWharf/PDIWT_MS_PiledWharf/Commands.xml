@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+
+  <RootKeyinTable ID="root">
+    <Keyword SubtableRef="PDIWT_MS_PiledWharf" CommandClass="MacroCommand" CommandWord="PDIWT_MS_PiledWharf">
+      <Options Required="true" />
+    </Keyword>
+  </RootKeyinTable>
+
+  <SubKeyinTables>
+    <KeyinTable ID="PDIWT_MS_PiledWharf">
+      <Keyword CommandWord="Command"></Keyword>
+    </KeyinTable>
+  </SubKeyinTables>
+
+  <KeyinHandlers>
+    <KeyinHandler Keyin="PDIWT_MS_PiledWharf Command" Function="PDIWT_MS_PiledWharf.KeyinCommands.Command"/>
+  </KeyinHandlers>
+</KeyinTree>
