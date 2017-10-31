@@ -816,7 +816,6 @@ namespace PDIWT_MS_CZ.ViewModels
         }
         #endregion
 
-
         #region 模板输入输出
         private RelayCommand _inputtemplate;
         public RelayCommand InputTemplate => _inputtemplate ?? (_inputtemplate = new RelayCommand(ExecuteInputTemplate));
@@ -834,9 +833,20 @@ namespace PDIWT_MS_CZ.ViewModels
                     ExtendedXmlSerializer serializer = new ExtendedXmlSerializer();
                     string xmlstring = File.ReadAllText(ofDialog.FileName);
                     var _deseriliaze = serializer.Deserialize<LockHeadParameters>(xmlstring);
-                    CZ_LockHeadParameters = _deseriliaze;
-                    Prompt = ofDialog.FileName + "导入成功";
-                    Status = Resources.Status_Success;
+                    string _validatestr = _deseriliaze.IsParametersValid();
+                    if(_validatestr != Resources.Status_Success)
+                    {
+                        Prompt = "导入失败->" +  _validatestr ;
+                        Status = Resources.Status_Fail;                        
+                    }
+                    else
+                    {
+                        CZ_LockHeadParameters = _deseriliaze;
+                        ExecuteUpdateParam(); //更新关联参数
+                        Prompt = ofDialog.FileName + "导入成功";
+                        Status = Resources.Status_Success;
+                    }
+               
                 }
             }
             catch (Exception e)

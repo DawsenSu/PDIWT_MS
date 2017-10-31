@@ -547,20 +547,23 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawGrillInterval(ISolidKernelEntity
 	};
 	bvector<DPoint3d> _global_grill_pts = GetAddedPointVector(_anchorpoint, _grill_section);
 	CurveVectorPtr _grill_section_cv = CurveVector::CreateLinear(_global_grill_pts, CurveVector::BOUNDARY_TYPE_Outer);
-	CurveVectorPtr _r1_cv, _r2_cv, _r3_cv, _r4_cv;
-	DrawRoundChamferCorner(_r1_cv, _global_grill_pts[0], _radius_left, Quadrant::Two);
-	DrawRoundChamferCorner(_r2_cv, _global_grill_pts[1], _radius_right, Quadrant::One);
-	DrawRoundChamferCorner(_r3_cv, _global_grill_pts[2], _radius_right, Quadrant::Four);
-	DrawRoundChamferCorner(_r4_cv, _global_grill_pts[3], _radius_left, Quadrant::Three);
-	_grill_section_cv = CurveVector::AreaUnion(*_grill_section_cv, *_r1_cv);
-	_grill_section_cv = CurveVector::AreaUnion(*_grill_section_cv, *_r2_cv);
-	_grill_section_cv = CurveVector::AreaUnion(*_grill_section_cv, *_r3_cv);
-	_grill_section_cv = CurveVector::AreaUnion(*_grill_section_cv, *_r4_cv);
-	//DebugCurveVector(*_r1_cv);
-	//DebugCurveVector(*_r2_cv);
-	//DebugCurveVector(*_r3_cv);
-	//DebugCurveVector(*_r4_cv);
+	if (_radius_left >= 0 && _radius_right)
+	{
+		CurveVectorPtr _r1_cv, _r2_cv, _r3_cv, _r4_cv;
+		DrawRoundChamferCorner(_r1_cv, _global_grill_pts[0], _radius_left, Quadrant::Two);
+		DrawRoundChamferCorner(_r2_cv, _global_grill_pts[1], _radius_right, Quadrant::One);
+		DrawRoundChamferCorner(_r3_cv, _global_grill_pts[2], _radius_right, Quadrant::Four);
+		DrawRoundChamferCorner(_r4_cv, _global_grill_pts[3], _radius_left, Quadrant::Three);
+		_grill_section_cv = CurveVector::AreaUnion(*_grill_section_cv, *_r1_cv);
+		_grill_section_cv = CurveVector::AreaUnion(*_grill_section_cv, *_r2_cv);
+		_grill_section_cv = CurveVector::AreaUnion(*_grill_section_cv, *_r3_cv);
+		_grill_section_cv = CurveVector::AreaUnion(*_grill_section_cv, *_r4_cv);
 
+		//DebugCurveVector(*_r1_cv);
+		//DebugCurveVector(*_r2_cv);
+		//DebugCurveVector(*_r3_cv);
+		//DebugCurveVector(*_r4_cv);
+	}
 	_grill_section_cv->SimplifyLinestrings(0.01, true, true);
 	_grill_section_cv->TransformInPlace(Transform::FromAxisAndRotationAngle(DRay3d::FromOriginAndVector(_global_grill_pts[0], DVec3d::UnitX()), fc_piover2));
 	//DebugCurveVector(*_grill_section_cv);

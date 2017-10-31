@@ -21,18 +21,18 @@ namespace PDIWT_MS_CZ.Models
             set { Set(ref _LH_BaseBoard, value); }
         }
 
-        private DoorSill _LH_DoorSill;
-        public DoorSill LH_DoorSill
-        {
-            get { return _LH_DoorSill; }
-            set { Set(ref _LH_DoorSill, value); }
-        }
-
         private SidePier _LH_SidePier;
         public SidePier LH_SidePier
         {
             get { return _LH_SidePier; }
             set { Set(ref _LH_SidePier, value); }
+        }
+
+        private DoorSill _LH_DoorSill;
+        public DoorSill LH_DoorSill
+        {
+            get { return _LH_DoorSill; }
+            set { Set(ref _LH_DoorSill, value); }
         }
 
         private byte _LH_CulvertChoosenIndex;//0-> short; 1->local
@@ -176,11 +176,11 @@ namespace PDIWT_MS_CZ.Models
             set { Set(ref _GroovingHeight, value); }
         }
 
-        private double _GroovingFrontLength;
-        public double GroovingFrontLength
+        private double _GroovingWidth;
+        public double GroovingWidth
         {
-            get { return _GroovingFrontLength; }
-            set { Set(ref _GroovingFrontLength, value); }
+            get { return _GroovingWidth; }
+            set { Set(ref _GroovingWidth, value); }
         }
 
         private double _GroovingBackLength;
@@ -190,11 +190,11 @@ namespace PDIWT_MS_CZ.Models
             set { Set(ref _GroovingBackLength, value); }
         }
 
-        private double _GroovingWidth;
-        public double GroovingWidth
+        private double _GroovingFrontLength;
+        public double GroovingFrontLength
         {
-            get { return _GroovingWidth; }
-            set { Set(ref _GroovingWidth, value); }
+            get { return _GroovingFrontLength; }
+            set { Set(ref _GroovingFrontLength, value); }
         }
 
         private double _GroovingGradient;
@@ -289,189 +289,6 @@ namespace PDIWT_MS_CZ.Models
     }
     #endregion
 
-    #region 闸首空箱参数集（1.长方形空箱 2.Z平面任意形状空箱）
-    /// <summary>
-    /// 长方形空箱
-    /// </summary>
-    public class RectEmptyBox : ObservableObject
-    {
-        // 位置参数
-        private double _XDis;
-        public double XDis
-        {
-            get { return _XDis; }
-            set { Set(ref _XDis, value); }
-        }
-
-        private double _YDis;
-        public double YDis
-        {
-            get { return _YDis; }
-            set { Set(ref _YDis, value); }
-        }
-
-        private double _ZDis;
-        public double ZDis
-        {
-            get { return _ZDis; }
-            set { Set(ref _ZDis, value); }
-        }
-        //形状参数
-
-        private double _EmptyBoxLength;
-        public double EmptyBoxLength
-        {
-            get { return _EmptyBoxLength; }
-            set { Set(ref _EmptyBoxLength, value); }
-        }
-
-        private double _EmptyBoxWidth;
-        public double EmptyBoxWidth
-        {
-            get { return _EmptyBoxWidth; }
-            set { Set(ref _EmptyBoxWidth, value); }
-        }
-
-        private double _EmptyBoxHeight;
-        public double EmptyBoxHeight
-        {
-            get { return _EmptyBoxHeight; }
-            set { Set(ref _EmptyBoxHeight, value); }
-        }
-
-        private ObservableCollection<EmptyBoxEdgeChameferInfo> _ChamferInfos;
-        public ObservableCollection<EmptyBoxEdgeChameferInfo> ChamferInfos
-        {
-            get { return _ChamferInfos; }
-            set { Set(ref _ChamferInfos, value); }
-        }
-    }
-
-    /// <summary>
-    /// Z平面任意形状空箱
-    /// </summary>
-    public class ZPlanEmptyBox : ObservableObject
-    {
-        // 位置参数
-        private double _XDis;
-        public double XDis
-        {
-            get { return _XDis; }
-            set { Set(ref _XDis, value); }
-        }
-
-        private double _YDis;
-        public double YDis
-        {
-            get { return _YDis; }
-            set { Set(ref _YDis, value); }
-        }
-        private double _ZDis;
-        public double ZDis
-        {
-            get { return _ZDis; }
-            set { Set(ref _ZDis, value); }
-        }
-        //形状参数
-
-        private double _EmptyBoxHeight;
-        public double EmptyBoxHeight
-        {
-            get { return _EmptyBoxHeight; }
-            set { Set(ref _EmptyBoxHeight, value); }
-        }
-
-        private ObservableCollection<ZPlanInfo> _ZPlanInfos;
-        public ObservableCollection<ZPlanInfo> ZPlanInfos
-        {
-            get { return _ZPlanInfos; }
-            set { Set(ref _ZPlanInfos, value); }
-        }
-    }
-
-    public class ZPlanInfo : ObservableObject
-    {
-        private double _X;
-        public double X
-        {
-            get { return _X; }
-            set { Set(ref _X, value); }
-        }
-        private double _Y;
-        public double Y
-        {
-            get { return _Y; }
-            set { Set(ref _Y, value); }
-        }
-
-        private EmptyBoxEdgeChameferInfo _BoxEdgeChamferInfo;
-        public EmptyBoxEdgeChameferInfo BoxEdgeChamferInfo
-        {
-            get { return _BoxEdgeChamferInfo; }
-            set { Set(ref _BoxEdgeChamferInfo, value); }
-        }
-    }
-    /// <summary>
-    /// 空箱倒角信息（倒角边标识，是否倒角，倒角长度，倒角宽度）
-    /// </summary>
-    public class EmptyBoxEdgeChameferInfo : ObservableObject
-    {
-        private int _EdgeIndicator;
-        public int EdgeIndicator
-        {
-            get { return _EdgeIndicator; }
-            set { Set(ref _EdgeIndicator, value); }
-        }
-        private bool _IsChamfered;
-        public bool IsChamfered
-        {
-            get { return _IsChamfered; }
-            set { Set(ref _IsChamfered, value); }
-        }
-
-        private double _ChamferLength;
-        public double ChamferLength
-        {
-            get { return _ChamferLength; }
-            set { Set(ref _ChamferLength, value); }
-        }
-
-        private double _ChamferWidth;
-        public double ChamferWidth
-        {
-            get { return _ChamferWidth; }
-            set { Set(ref _ChamferWidth, value); }
-        }
-    }
-    [Flags]
-    public enum EdgeIndicator
-    {
-        x0,
-        x1,
-        x2,
-        x3,
-        y4,
-        y5,
-        y6,
-        y7,
-        z8,
-        z9,
-        z10,
-        z11,
-        xplan = x0 | x1 | x2 | x3,
-        yplan = y4 | y5 | y6 | y7,
-        zplan = z8 | z9 | z10 | z11,
-        front = x0 | x3 | z8 | z9,
-        back = x1 | x2 | z10 | z11,
-        right = y6 | y7 | z9 | z10,
-        left = y4 | y5 | z8 | z11,
-        top = x2 | x3 | y5 | y6,
-        bottom = x0 | x1 | y4 | y7,
-        all = xplan | yplan | zplan,
-        none
-    }
-    #endregion
-
     #region 门槛参数
     /// <summary>
     /// 门槛平面参数a-f，及门槛高度
@@ -530,10 +347,89 @@ namespace PDIWT_MS_CZ.Models
 
     #region 输水廊道参数：1.包括短廊道输水 2.局部集中输水
     /// <summary>
+    /// 短廊道参数
+    /// </summary>
+    public class ShortCulvert : ObservableObject
+    {
+        private double _Culvert_Width;
+        public double Culvert_Width
+        {
+            get { return _Culvert_Width; }
+            set { Set(ref _Culvert_Width, value); }
+        }
+        //位置参数
+
+        private double _Culvert_Pier_RightDis;
+        public double Culvert_Pier_RightDis
+        {
+            get { return _Culvert_Pier_RightDis; }
+            set { Set(ref _Culvert_Pier_RightDis, value); }
+        }
+
+        private double _Culvert_Baseboard_BottomDis;
+        public double Culvert_Baseboard_BottomDis
+        {
+            get { return _Culvert_Baseboard_BottomDis; }
+            set { Set(ref _Culvert_Baseboard_BottomDis, value); }
+        }
+
+        private double _Culvert_A;
+        public double Culvert_A
+        {
+            get { return _Culvert_A; }
+            set { Set(ref _Culvert_A, value); }
+        }
+
+        private double _Culvert_B;
+        public double Culvert_B
+        {
+            get { return _Culvert_B; }
+            set { Set(ref _Culvert_B, value); }
+        }
+
+        private double _Culvert_C;
+        public double Culvert_C
+        {
+            get { return _Culvert_C; }
+            set { Set(ref _Culvert_C, value); }
+        }
+
+        private double _Culvert_D;
+        public double Culvert_D
+        {
+            get { return _Culvert_D; }
+            set { Set(ref _Culvert_D, value); }
+        }
+
+        private double _Culvert_R1;
+        public double Culvert_R1
+        {
+            get { return _Culvert_R1; }
+            set { Set(ref _Culvert_R1, value); }
+        }
+
+        private double _Culvert_R2;
+        public double Culvert_R2
+        {
+            get { return _Culvert_R2; }
+            set { Set(ref _Culvert_R2, value); }
+        }
+
+    }
+
+    /// <summary>
     /// 局部集中输水
     /// </summary>
     public class LocalConcertationCulvert : ObservableObject
     {
+        //形状参数
+        private double _Culvert_Height;
+        public double Culvert_Height
+        {
+            get { return _Culvert_Height; }
+            set { Set(ref _Culvert_Height, value); }
+        }
+
         //位置参数
 
         private double _Culvert_Pier_BackDis;
@@ -542,13 +438,7 @@ namespace PDIWT_MS_CZ.Models
             get { return _Culvert_Pier_BackDis; }
             set { Set(ref _Culvert_Pier_BackDis, value); }
         }
-        //形状参数
-        private double _Culvert_Height;
-        public double Culvert_Height
-        {
-            get { return _Culvert_Height; }
-            set { Set(ref _Culvert_Height, value); }
-        }
+
 
         private double _Culvert_A;
         public double Culvert_A
@@ -670,75 +560,7 @@ namespace PDIWT_MS_CZ.Models
             set { Set(ref _Culvert_Baffle, value); }
         }
     }
-    /// <summary>
-    /// 短廊道参数
-    /// </summary>
-    public class ShortCulvert : ObservableObject
-    {
-        private double _Culvert_Width;
-        public double Culvert_Width
-        {
-            get { return _Culvert_Width; }
-            set { Set(ref _Culvert_Width, value); }
-        }
 
-        private double _Culvert_A;
-        public double Culvert_A
-        {
-            get { return _Culvert_A; }
-            set { Set(ref _Culvert_A, value); }
-        }
-
-        private double _Culvert_B;
-        public double Culvert_B
-        {
-            get { return _Culvert_B; }
-            set { Set(ref _Culvert_B, value); }
-        }
-
-        private double _Culvert_C;
-        public double Culvert_C
-        {
-            get { return _Culvert_C; }
-            set { Set(ref _Culvert_C, value); }
-        }
-
-        private double _Culvert_D;
-        public double Culvert_D
-        {
-            get { return _Culvert_D; }
-            set { Set(ref _Culvert_D, value); }
-        }
-
-        private double _Culvert_R1;
-        public double Culvert_R1
-        {
-            get { return _Culvert_R1; }
-            set { Set(ref _Culvert_R1, value); }
-        }
-
-        private double _Culvert_R2;
-        public double Culvert_R2
-        {
-            get { return _Culvert_R2; }
-            set { Set(ref _Culvert_R2, value); }
-        }
-        //位置参数
-
-        private double _Culvert_Pier_RightDis;
-        public double Culvert_Pier_RightDis
-        {
-            get { return _Culvert_Pier_RightDis; }
-            set { Set(ref _Culvert_Pier_RightDis, value); }
-        }
-
-        private double _Culvert_Baseboard_BottomDis;
-        public double Culvert_Baseboard_BottomDis
-        {
-            get { return _Culvert_Baseboard_BottomDis; }
-            set { Set(ref _Culvert_Baseboard_BottomDis, value); }
-        }
-    }
     #endregion
 
     #region 消能工参数
@@ -748,6 +570,20 @@ namespace PDIWT_MS_CZ.Models
     /// </summary>
     public class WaterDivision : ObservableObject
     {
+        private double _WaterDivision_A;
+        public double WaterDivision_A
+        {
+            get { return _WaterDivision_A; }
+            set { Set(ref _WaterDivision_A, value); }
+        }
+
+        private double _WaterDivision_B;
+        public double WaterDivision_B
+        {
+            get { return _WaterDivision_B; }
+            set { Set(ref _WaterDivision_B, value); }
+        }
+
         private double _WaterDivision_R1;
         public double WaterDivision_R1
         {
@@ -768,21 +604,6 @@ namespace PDIWT_MS_CZ.Models
             get { return _WaterDivision_R3; }
             set { Set(ref _WaterDivision_R3, value); }
         }
-
-        private double _WaterDivision_A;
-        public double WaterDivision_A
-        {
-            get { return _WaterDivision_A; }
-            set { Set(ref _WaterDivision_A, value); }
-        }
-
-        private double _WaterDivision_B;
-        public double WaterDivision_B
-        {
-            get { return _WaterDivision_B; }
-            set { Set(ref _WaterDivision_B, value); }
-        }
-
     }
 
     public class EnergyDisspater : ObservableObject
@@ -847,6 +668,192 @@ namespace PDIWT_MS_CZ.Models
         }
     }
     #endregion
+
+    #region 闸首空箱参数集（1.长方形空箱 2.Z平面任意形状空箱）
+    /// <summary>
+    /// 长方形空箱
+    /// </summary>
+    public class RectEmptyBox : ObservableObject
+    {
+        // 位置参数
+        private double _XDis;
+        public double XDis
+        {
+            get { return _XDis; }
+            set { Set(ref _XDis, value); }
+        }
+
+        private double _YDis;
+        public double YDis
+        {
+            get { return _YDis; }
+            set { Set(ref _YDis, value); }
+        }
+
+        private double _ZDis;
+        public double ZDis
+        {
+            get { return _ZDis; }
+            set { Set(ref _ZDis, value); }
+        }
+        //形状参数
+
+        private double _EmptyBoxLength;
+        public double EmptyBoxLength
+        {
+            get { return _EmptyBoxLength; }
+            set { Set(ref _EmptyBoxLength, value); }
+        }
+
+        private double _EmptyBoxWidth;
+        public double EmptyBoxWidth
+        {
+            get { return _EmptyBoxWidth; }
+            set { Set(ref _EmptyBoxWidth, value); }
+        }
+
+        private double _EmptyBoxHeight;
+        public double EmptyBoxHeight
+        {
+            get { return _EmptyBoxHeight; }
+            set { Set(ref _EmptyBoxHeight, value); }
+        }
+
+        private ObservableCollection<EmptyBoxEdgeChameferInfo> _ChamferInfos;
+        public ObservableCollection<EmptyBoxEdgeChameferInfo> ChamferInfos
+        {
+            get { return _ChamferInfos; }
+            set { Set(ref _ChamferInfos, value); }
+        }
+    }
+    /// <summary>
+    /// 空箱倒角信息（倒角边标识，是否倒角，倒角长度，倒角宽度）
+    /// </summary>
+    public class EmptyBoxEdgeChameferInfo : ObservableObject
+    {
+        private int _EdgeIndicator;
+        public int EdgeIndicator
+        {
+            get { return _EdgeIndicator; }
+            set { Set(ref _EdgeIndicator, value); }
+        }
+        private bool _IsChamfered;
+        public bool IsChamfered
+        {
+            get { return _IsChamfered; }
+            set { Set(ref _IsChamfered, value); }
+        }
+
+        private double _ChamferLength;
+        public double ChamferLength
+        {
+            get { return _ChamferLength; }
+            set { Set(ref _ChamferLength, value); }
+        }
+
+        private double _ChamferWidth;
+        public double ChamferWidth
+        {
+            get { return _ChamferWidth; }
+            set { Set(ref _ChamferWidth, value); }
+        }
+    }
+
+    /// <summary>
+    /// Z平面任意形状空箱
+    /// </summary>
+    public class ZPlanEmptyBox : ObservableObject
+    {
+        // 位置参数
+        private double _XDis;
+        public double XDis
+        {
+            get { return _XDis; }
+            set { Set(ref _XDis, value); }
+        }
+
+        private double _YDis;
+        public double YDis
+        {
+            get { return _YDis; }
+            set { Set(ref _YDis, value); }
+        }
+        private double _ZDis;
+        public double ZDis
+        {
+            get { return _ZDis; }
+            set { Set(ref _ZDis, value); }
+        }
+        //形状参数
+
+        private double _EmptyBoxHeight;
+        public double EmptyBoxHeight
+        {
+            get { return _EmptyBoxHeight; }
+            set { Set(ref _EmptyBoxHeight, value); }
+        }
+
+        private ObservableCollection<ZPlanInfo> _ZPlanInfos;
+        public ObservableCollection<ZPlanInfo> ZPlanInfos
+        {
+            get { return _ZPlanInfos; }
+            set { Set(ref _ZPlanInfos, value); }
+        }
+    }
+
+    public class ZPlanInfo : ObservableObject
+    {
+        private double _X;
+        public double X
+        {
+            get { return _X; }
+            set { Set(ref _X, value); }
+        }
+        private double _Y;
+        public double Y
+        {
+            get { return _Y; }
+            set { Set(ref _Y, value); }
+        }
+
+        private EmptyBoxEdgeChameferInfo _BoxEdgeChamferInfo;
+        public EmptyBoxEdgeChameferInfo BoxEdgeChamferInfo
+        {
+            get { return _BoxEdgeChamferInfo; }
+            set { Set(ref _BoxEdgeChamferInfo, value); }
+        }
+    }
+
+    [Flags]
+    public enum EdgeIndicator
+    {
+        x0,
+        x1,
+        x2,
+        x3,
+        y4,
+        y5,
+        y6,
+        y7,
+        z8,
+        z9,
+        z10,
+        z11,
+        xplan = x0 | x1 | x2 | x3,
+        yplan = y4 | y5 | y6 | y7,
+        zplan = z8 | z9 | z10 | z11,
+        front = x0 | x3 | z8 | z9,
+        back = x1 | x2 | z10 | z11,
+        right = y6 | y7 | z9 | z10,
+        left = y4 | y5 | z8 | z11,
+        top = x2 | x3 | y5 | y6,
+        bottom = x0 | x1 | y4 | y7,
+        all = xplan | yplan | zplan,
+        none
+    }
+    #endregion
+    
+
     public static class SolveEqution
     {
         public static void GetAlphaAndL(double a, double b, double c, double d, double R1, double R2, out double alpha, out double l)

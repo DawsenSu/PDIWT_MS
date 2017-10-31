@@ -91,7 +91,7 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-                <TextBlock
+                <!--<TextBlock
                     Grid.Row="1"
                     Grid.Column="2"
                     Text="口门宽度=" />
@@ -103,7 +103,7 @@
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
-                </TextBox>
+                </TextBox>-->
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1">
