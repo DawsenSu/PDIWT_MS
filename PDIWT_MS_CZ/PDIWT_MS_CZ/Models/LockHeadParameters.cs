@@ -59,14 +59,14 @@ namespace PDIWT_MS_CZ.Models
         private ObservableCollection<RectEmptyBox> _LH_EmptyRectBoxs;
         public ObservableCollection<RectEmptyBox> LH_EmptyRectBoxs
         {
-            get { SendChangedMessage(); return _LH_EmptyRectBoxs ?? new ObservableCollection<RectEmptyBox>();  }
+            get { return _LH_EmptyRectBoxs;  }
             set { Set(ref _LH_EmptyRectBoxs, value); }
         }
 
         private ObservableCollection<ZPlanEmptyBox> _LH_EmptyZPlanBoxs;
         public ObservableCollection<ZPlanEmptyBox> LH_EmptyZPlanBoxs
         {
-            get { SendChangedMessage(); return _LH_EmptyZPlanBoxs ?? new ObservableCollection<ZPlanEmptyBox>(); }
+            get { return _LH_EmptyZPlanBoxs; }
             set { Set(ref _LH_EmptyZPlanBoxs, value);  }
         }
 
@@ -98,10 +98,7 @@ namespace PDIWT_MS_CZ.Models
 
             return Properties.Resources.Verified;
         }
-        private void SendChangedMessage()
-        {
-            Messenger.Default.Send<bool>(true, "ParameterChanged");
-        }
+
     }
 
 
@@ -345,7 +342,7 @@ namespace PDIWT_MS_CZ.Models
         private ObservableCollection<EmptyBoxEdgeChameferInfo> _ChamferInfos;
         public ObservableCollection<EmptyBoxEdgeChameferInfo> ChamferInfos
         {
-            get { return _ChamferInfos ?? new ObservableCollection<EmptyBoxEdgeChameferInfo>(); }
+            get { return _ChamferInfos; }
             set { Set(ref _ChamferInfos, value); }
         }
     }
@@ -387,7 +384,7 @@ namespace PDIWT_MS_CZ.Models
         private ObservableCollection<ZPlanInfo> _ZPlanInfos;
         public ObservableCollection<ZPlanInfo> ZPlanInfos
         {
-            get { return _ZPlanInfos ?? new ObservableCollection<ZPlanInfo>(); }
+            get { return _ZPlanInfos; }
             set { Set(ref _ZPlanInfos, value); }
         }
     }
@@ -669,7 +666,7 @@ namespace PDIWT_MS_CZ.Models
         private ObservableCollection<Baffle> _Culvert_Baffle;
         public ObservableCollection<Baffle> Culvert_Baffle
         {
-            get { return _Culvert_Baffle ?? new ObservableCollection<Baffle>(); }
+            get { return _Culvert_Baffle; }
             set { Set(ref _Culvert_Baffle, value); }
         }
     }
@@ -801,7 +798,7 @@ namespace PDIWT_MS_CZ.Models
         private ObservableCollection<GrillInterval> _GrilleWidthList;
         public ObservableCollection<GrillInterval> GrilleWidthList
         {
-            get { return _GrilleWidthList ?? new ObservableCollection<GrillInterval>(); }
+            get { return _GrilleWidthList; }
             set { Set(ref _GrilleWidthList, value); }
         }
 

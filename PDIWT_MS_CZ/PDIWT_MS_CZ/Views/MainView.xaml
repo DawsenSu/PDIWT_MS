@@ -160,7 +160,7 @@
                 <DetailUC:WaterConveySysUserControl DataContext="{Binding CZ_LockHeadParameters, Mode=TwoWay}" />
             </TabItem>
             <TabItem Header="空箱">
-                <DetailUC:EmptyBoxSummaryUserControl DataContext="{Binding CZ_LockHeadParameters, Mode=TwoWay}" />
+                <DetailUC:EmptyBoxSummaryUserControl />
             </TabItem>
             <!--<TabItem Header="Test">
                 <DockPanel>
@@ -175,17 +175,33 @@
             Grid.Row="2"
             Background="{Binding Path=Status, Converter={StaticResource StatusToBackgroundConverter}}"
             Foreground="White">
-            <StatusBarItem Width="400">
-                <StackPanel Orientation="Horizontal">
-                    <Image Height="15" Source="../Image/Icons/Info.ico" />
-                    <TextBlock Text="{Binding Prompt, Mode=TwoWay, StringFormat=提示：{0}}" />
-                </StackPanel>
-            </StatusBarItem>
-            <StatusBarItem Width="200">
-                <StackPanel Orientation="Horizontal">
-                    <Image Height="15" Source="../Image/Icons/Prompt.ico" />
-                    <TextBlock Text="{Binding Status, Mode=TwoWay, StringFormat=状态：{0}}" />
-                </StackPanel>
+            <StatusBarItem HorizontalAlignment="Left">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        Grid.Column="0"
+                        Height="15"
+                        Source="../Image/Icons/Info.ico" />
+                    <TextBlock Grid.Column="1" Text="{Binding Prompt, Mode=TwoWay, StringFormat=提示：{0}}" />
+                    <GridSplitter
+                        Grid.Column="2"
+                        Width="3"
+                        Margin="5,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Stretch"
+                        Background="LightGray" />
+                    <Image
+                        Grid.Column="3"
+                        Height="15"
+                        Source="../Image/Icons/Prompt.ico" />
+                    <TextBlock Grid.Column="4" Text="{Binding Status, Mode=TwoWay, StringFormat=状态：{0}}" />
+                </Grid>
             </StatusBarItem>
             <StatusBarItem HorizontalAlignment="Right">
                 <Image Height="15" Source="{Binding Path=Status, Converter={StaticResource StatusToPicConverter}, Mode=OneWay}" />

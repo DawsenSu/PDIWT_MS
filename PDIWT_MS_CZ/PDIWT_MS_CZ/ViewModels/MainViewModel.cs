@@ -54,11 +54,7 @@ namespace PDIWT_MS_CZ.ViewModels
         {
             InitialzeParameters();
 
-            Messenger.Default.Register<bool>(this, "ParameterChanged", (Action<bool>)(_ => 
-            {
-                Prompt = "参数集设置发生变化，请重新验证参数";
-                this._IsLogicalVerified = false;
-            }));
+            Messenger.Default.Register<bool>(this, "ParameterChanged", ParameterChanged);
             Messenger.Default.Register<bool>(this, "UIVerify", _uiver => _IsUIVerified = _uiver);
             Messenger.Default.Register<bool>(this,"DrawMessage",
                 _drawValid =>
@@ -760,6 +756,12 @@ namespace PDIWT_MS_CZ.ViewModels
             Status = Resources.Status_Success;
         }
 
+        private void ParameterChanged(bool ischanged)
+        {
+            Prompt = "参数集设置发生变化，请重新验证参数";
+            this._IsLogicalVerified = false;
+        }
+
         #region 验证参数
         private RelayCommand _VerifyParam;
         public RelayCommand VerifyParam => _VerifyParam ?? (_VerifyParam = new RelayCommand(ExecuteVerifyParam));
@@ -831,7 +833,8 @@ namespace PDIWT_MS_CZ.ViewModels
                 {
                     ExtendedXmlSerializer serializer = new ExtendedXmlSerializer();
                     string xmlstring = File.ReadAllText(ofDialog.FileName);
-                    CZ_LockHeadParameters = serializer.Deserialize<LockHeadParameters>(xmlstring);
+                    var _deseriliaze = serializer.Deserialize<LockHeadParameters>(xmlstring);
+                    CZ_LockHeadParameters = _deseriliaze;
                     Prompt = ofDialog.FileName + "导入成功";
                     Status = Resources.Status_Success;
                 }
@@ -891,7 +894,146 @@ namespace PDIWT_MS_CZ.ViewModels
             if (!_IsUIVerified || !_IsLogicalVerified)
                 InitialzeParameters();
         }
+        #region EmptyBoxSummaryUC 命令
 
+        private RectEmptyBox _SelectedRectEmptyBox;
+        public RectEmptyBox SelectedRectEmptyBox
+        {
+            get { return _SelectedRectEmptyBox; }
+            set { Set(ref _SelectedRectEmptyBox, value); }
+        }
+
+
+        private RelayCommand _AddRectEmptyBox;
+        public RelayCommand AddRectEmptyBox => _AddRectEmptyBox ?? (_AddRectEmptyBox = new RelayCommand(ExecuteAddRectEmptyBox));
+        public void ExecuteAddRectEmptyBox()
+        {
+            var temp = new RectEmptyBox()
+            {
+                ChamferInfos = new ObservableCollection<EmptyBoxEdgeChameferInfo>()
+                {
+                    new EmptyBoxEdgeChameferInfo()
+                    {
+                        IsChamfered = true,
+                        EdgeIndicator = 0
+                    },
+                    new EmptyBoxEdgeChameferInfo()
+                    {
+                        EdgeIndicator = 1,
+                        IsChamfered = true,
+                    },
+                    new EmptyBoxEdgeChameferInfo()
+                    {
+                        EdgeIndicator = 2,
+                        IsChamfered = false,
+                    },
+                    new EmptyBoxEdgeChameferInfo()
+                    {
+                        IsChamfered = false,
+                        EdgeIndicator = 3
+                    },
+                    new EmptyBoxEdgeChameferInfo()
+                    {
+                        IsChamfered = true,
+                        EdgeIndicator = 4
+
+                    },
+                    new EmptyBoxEdgeChameferInfo()
+                    {
+                        IsChamfered = false,
+                        EdgeIndicator = 5
+
+                    },
+                    new EmptyBoxEdgeChameferInfo()
+                    {
+                        IsChamfered = false,
+                        EdgeIndicator = 6
+
+                    },
+                    new EmptyBoxEdgeChameferInfo()
+                    {
+                        IsChamfered = true,
+                        EdgeIndicator = 7
+
+                    },
+                    new EmptyBoxEdgeChameferInfo()
+                    {
+                        IsChamfered = true,
+                        EdgeIndicator = 8
+
+                    },
+                    new EmptyBoxEdgeChameferInfo()
+                    {
+                        IsChamfered = true,
+                        EdgeIndicator = 9
+
+                    },
+                    new EmptyBoxEdgeChameferInfo()
+                    {
+                        IsChamfered = true,
+                        EdgeIndicator = 10
+
+                    },
+                    new EmptyBoxEdgeChameferInfo()
+                    {
+                        IsChamfered = true,
+                        EdgeIndicator = 11
+                    }
+                }
+            };
+            CZ_LockHeadParameters.LH_EmptyRectBoxs.Add(temp);
+            ParameterChanged(true);
+        }
+
+
+        private RelayCommand _DeleteRectEmptyBox;
+        public RelayCommand DeleteRectEmptyBox => _DeleteRectEmptyBox ?? (_DeleteRectEmptyBox = new RelayCommand(ExecuteDeleteRectEmptyBox, () => SelectedRectEmptyBox != null));
+        public void ExecuteDeleteRectEmptyBox()
+        {
+            if(SelectedRectEmptyBox != null)
+            {
+                CZ_LockHeadParameters.LH_EmptyRectBoxs.Remove(SelectedRectEmptyBox);
+                ParameterChanged(true);
+            }
+        }
+
+
+        private ZPlanEmptyBox _SelectedZPlanEmptyBox;
+        public ZPlanEmptyBox SelectedZPlanEmptyBox
+        {
+            get { return _SelectedZPlanEmptyBox; }
+            set { Set(ref _SelectedZPlanEmptyBox, value); }
+        }
+
+        private RelayCommand _AddZPlanEmptyBox;
+        public RelayCommand AddZPlanEmptyBox => _AddZPlanEmptyBox ?? (_AddZPlanEmptyBox = new RelayCommand(ExecuteAddZPlanEmptyBox));
+        public void ExecuteAddZPlanEmptyBox()
+        {
+            CZ_LockHeadParameters.LH_EmptyZPlanBoxs.Add(
+               new ZPlanEmptyBox()
+               {
+                    ZPlanInfos = new ObservableCollection<ZPlanInfo>()
+                    {
+                        new ZPlanInfo()
+                        {
+                            X=0,Y=0, BoxEdgeChamferInfo =  new EmptyBoxEdgeChameferInfo()
+                        }
+                    }
+               });
+            ParameterChanged(true);
+        }
+
+        private RelayCommand _DeleteZPlanEmptyBox;
+        public RelayCommand DeleteZPlanEmptyBox => _DeleteZPlanEmptyBox ?? (_DeleteZPlanEmptyBox = new RelayCommand(ExecuteDeleteZPlanEmptyBox,()=>SelectedZPlanEmptyBox!=null));
+        public void ExecuteDeleteZPlanEmptyBox()
+        {
+            if(SelectedRectEmptyBox != null)
+            {
+                CZ_LockHeadParameters.LH_EmptyZPlanBoxs.Remove(SelectedZPlanEmptyBox);
+                ParameterChanged(true);
+            }
+        }
+        #endregion
 
     }
 }

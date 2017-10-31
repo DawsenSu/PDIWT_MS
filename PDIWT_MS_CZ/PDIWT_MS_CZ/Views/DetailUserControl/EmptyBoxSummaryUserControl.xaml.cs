@@ -20,6 +20,7 @@ namespace PDIWT_MS_CZ.Views.DetailUserControl
     /// <summary>
     /// EmptyBoxSummaryUserControl.xaml 的交互逻辑
     /// </summary>
+    // todo: 改成MVVM模式
     public partial class EmptyBoxSummaryUserControl : UserControl
     {
         public EmptyBoxSummaryUserControl()
@@ -43,117 +44,6 @@ namespace PDIWT_MS_CZ.Views.DetailUserControl
                 DataContext = ((Button) sender).DataContext
             };
             zPlanEmptyBoxWindow.ShowDialog();
-        }
-
-        private void AppendRectEmptyBox_ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            var temp = new RectEmptyBox()
-            {
-                ChamferInfos = new ObservableCollection<EmptyBoxEdgeChameferInfo>()
-                {
-                    new EmptyBoxEdgeChameferInfo()
-                    {
-                        IsChamfered = true,
-                        EdgeIndicator = 0
-                    },
-                    new EmptyBoxEdgeChameferInfo()
-                    {
-                        EdgeIndicator = 1,
-                        IsChamfered = true,
-                    },
-                    new EmptyBoxEdgeChameferInfo()
-                    {
-                        EdgeIndicator = 2,
-                        IsChamfered = false,
-                    },
-                    new EmptyBoxEdgeChameferInfo()
-                    {
-                        IsChamfered = false,
-                        EdgeIndicator = 3
-                    },
-                    new EmptyBoxEdgeChameferInfo()
-                    {
-                        IsChamfered = true,
-                        EdgeIndicator = 4
-
-                    },
-                    new EmptyBoxEdgeChameferInfo()
-                    {
-                        IsChamfered = false,
-                        EdgeIndicator = 5
-
-                    },
-                    new EmptyBoxEdgeChameferInfo()
-                    {
-                        IsChamfered = false,
-                        EdgeIndicator = 6
-
-                    },
-                    new EmptyBoxEdgeChameferInfo()
-                    {
-                        IsChamfered = true,
-                        EdgeIndicator = 7
-
-                    },
-                    new EmptyBoxEdgeChameferInfo()
-                    {
-                        IsChamfered = true,
-                        EdgeIndicator = 8
-
-                    },
-                    new EmptyBoxEdgeChameferInfo()
-                    {
-                        IsChamfered = true,
-                        EdgeIndicator = 9
-
-                    },
-                    new EmptyBoxEdgeChameferInfo()
-                    {
-                        IsChamfered = true,
-                        EdgeIndicator = 10
-
-                    },
-                    new EmptyBoxEdgeChameferInfo()
-                    {
-                        IsChamfered = true,
-                        EdgeIndicator = 11
-                    }
-                }
-            };
-            ((LockHeadParameters)EmptyBoxSummaryUC.DataContext).LH_EmptyRectBoxs.Add(temp);
-        }
-
-        private void AppendZPlanEmptyBox_ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            ((LockHeadParameters)EmptyBoxSummaryUC.DataContext).LH_EmptyZPlanBoxs.Add(new ZPlanEmptyBox()
-            {
-                ZPlanInfos = new ObservableCollection<ZPlanInfo>()
-                {
-                    new ZPlanInfo()
-                    {
-                        X=0,Y=0, BoxEdgeChamferInfo =  new EmptyBoxEdgeChameferInfo()
-                    }
-                }
-            });
-        }
-
-        private void DeleteZPlanEmptyBox_ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (ListBox_ZPlanEmpty.SelectedItem != null)
-            {
-
-                ((LockHeadParameters) EmptyBoxSummaryUC.DataContext).LH_EmptyZPlanBoxs.Remove(
-                    (ZPlanEmptyBox)ListBox_ZPlanEmpty.SelectedItem);
-            }
-        }
-
-        private void DeleteRectEmptyBox_ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (ListBox_RectEmpty.SelectedItem != null)
-            {
-                ((LockHeadParameters)EmptyBoxSummaryUC.DataContext).LH_EmptyRectBoxs.Remove(
-                    (RectEmptyBox)ListBox_RectEmpty.SelectedItem);
-            }
         }
     }
 }

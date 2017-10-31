@@ -462,7 +462,7 @@ StatusInt PDIWT_MS_CZ_CPP::LockHeadDrawing::DrawLocalConcertationCulvert(ISolidK
 	if (_localconculvertparam->IsIncludeWaterDivision)
 	{
 		ISolidKernelEntityPtr _waterdiv_SKE;
-		if (DrawWaterDivision(_waterdiv_SKE, DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(-(_localconculvertparam->Culvert_A - _localconculvertparam->Culvert_Chamfer_R1), _localconculvertparam->Culvert_D / 2))))
+		if (DrawWaterDivision(_waterdiv_SKE, DPoint3d::FromSumOf(_anchorpoint, DPoint3d::From(-LH_LockHeadParameter->LH_DoorSill->DoorSill_A / 2, _localconculvertparam->Culvert_D / 2))))
 			return ERROR;
 		if (SolidUtil::Modify::BooleanSubtract(_outconcertationculvert, &_waterdiv_SKE, 1))
 			return ERROR;

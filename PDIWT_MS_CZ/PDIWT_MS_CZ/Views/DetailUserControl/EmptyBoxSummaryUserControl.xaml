@@ -138,14 +138,15 @@
                     Name="ListBox_RectEmpty"
                     Grid.Row="0"
                     ItemContainerStyle="{StaticResource ItemConatinerStyle_RectBox}"
-                    ItemsSource="{Binding LH_EmptyRectBoxs, Mode=TwoWay}"
+                    ItemsSource="{Binding CZ_LockHeadParameters.LH_EmptyRectBoxs, Mode=TwoWay}"
+                    SelectedItem="{Binding SelectedRectEmptyBox}"
                     Style="{StaticResource ListBoxStyle_EmptyBox}" />
                 <StackPanel
                     Grid.Row="1"
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
-                    <Button Click="AppendRectEmptyBox_ButtonBase_OnClick" Content="插入长方体空箱" />
-                    <Button Click="DeleteRectEmptyBox_ButtonBase_OnClick" Content="删除所选" />
+                    <Button Command="{Binding AddRectEmptyBox}" Content="插入长方体空箱" />
+                    <Button Command="{Binding DeleteRectEmptyBox}" Content="删除所选" />
                 </StackPanel>
             </Grid>
         </GroupBox>
@@ -159,14 +160,15 @@
                     Name="ListBox_ZPlanEmpty"
                     Grid.Row="0"
                     ItemContainerStyle="{StaticResource ItemConatinerStyle_ZPlanBox}"
-                    ItemsSource="{Binding LH_EmptyZPlanBoxs, Mode=TwoWay}"
+                    ItemsSource="{Binding CZ_LockHeadParameters.LH_EmptyZPlanBoxs, Mode=TwoWay}"
+                    SelectedItem="{Binding SelectedZPlanEmptyBox}"
                     Style="{StaticResource ListBoxStyle_EmptyBox}" />
                 <StackPanel
                     Grid.Row="1"
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
-                    <Button Click="AppendZPlanEmptyBox_ButtonBase_OnClick" Content="插入棱柱空箱" />
-                    <Button Click="DeleteZPlanEmptyBox_ButtonBase_OnClick" Content="删除所选" />
+                    <Button Command="{Binding AddZPlanEmptyBox}" Content="插入棱柱空箱" />
+                    <Button Command="{Binding DeleteZPlanEmptyBox}" Content="删除所选" />
                 </StackPanel>
             </Grid>
         </GroupBox>
