@@ -24,7 +24,9 @@ namespace PDIWT_MS_Tool.Views
         private LevelExportView()
         {
             InitializeComponent();
-            this.DataContext = new ViewModels.LevelExportViewModel();
+            var _locator = new ViewModels.ViewModelLocator();
+
+            this.DataContext = _locator.LevelExportVM;
             m_wpfHelper = new BMWPF.WPFInteropHelper(this);
             m_wpfHelper.Attach(Program.Addin, true, "LevelExportView");
         }

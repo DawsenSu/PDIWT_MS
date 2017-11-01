@@ -13,7 +13,7 @@ using BDE = Bentley.DgnPlatformNET.Elements;
 
 namespace PDIWT_MS_Tool
 {
-    class KeyinCommands
+    public class KeyinCommands
     {
         #region Measure
         public static void LinestringArea(string unparsed)
@@ -125,46 +125,46 @@ namespace PDIWT_MS_Tool
             }
         }
         #endregion
-        #region  EC Schema and instance
-        public static void CmdFindSchema(string unparsed)
-        {
-            Views.SchemaListView.ShowWindow();
-        }
+        //#region  EC Schema and instance
+        //public static void CmdFindSchema(string unparsed)
+        //{
+        //    Views.SchemaListView.ShowWindow();
+        //}
 
-        public static void CmdImportSchema(string unparsed)
-        {
-            Views.CreateAndImportSchemaView.ShowWindow();
-        }
-        public static void CmdFindAllInstance(string unparsed)
-        {
-            Views.FindnstancesView.ShowWindow();
-        }
-        public static void CmdWirteInstance(string unparsed)
-        {
-            Models.WriteInstanceOnElementTool tool = new Models.WriteInstanceOnElementTool(0, 0);
-            tool.InstallNewInstance();
-        }
-        public static void CmdFindAllOnElement(string unparsed)
-        {
-            Models.FindInstancesOnElementTool.InstallNewInstance();
-        }
-        #endregion
+        //public static void CmdImportSchema(string unparsed)
+        //{
+        //    Views.CreateAndImportSchemaView.ShowWindow();
+        //}
+        //public static void CmdFindAllInstance(string unparsed)
+        //{
+        //    Views.FindnstancesView.ShowWindow();
+        //}
+        //public static void CmdWirteInstance(string unparsed)
+        //{
+        //    Models.WriteInstanceOnElementTool tool = new Models.WriteInstanceOnElementTool(0, 0);
+        //    tool.InstallNewInstance();
+        //}
+        //public static void CmdFindAllOnElement(string unparsed)
+        //{
+        //    Models.FindInstancesOnElementTool.InstallNewInstance();
+        //}
+        //#endregion
         #region Level export
         public static void ExportRGBColorTable(string unparsed)
         {
-            Views.LevelExportView.ShowWindow();
+            PDIWT_Encrypt.Entrance.VerifyActivationState(Views.LevelExportView.ShowWindow);
         }
         #endregion
 
         #region Cells
         public static void CellsFastPut(string unparsed)
         {
-            Views.CellFastPutView.ShowWindow();
+            PDIWT_Encrypt.Entrance.VerifyActivationState(Views.CellFastPutView.ShowWindow);
         }
 
         public static void CellsArmorPut(string unparsed)
         {
-            Views.CellsArmorPutView.ShowWindow();
+            PDIWT_Encrypt.Entrance.VerifyActivationState(Views.CellsArmorPutView.ShowWindow);
         }
         #endregion
 
@@ -172,7 +172,7 @@ namespace PDIWT_MS_Tool
 
         public static void ModelsCreateFromExcel(string unparsed)
         {
-            Views.ModelCreatorView.ShowWindow();
+            PDIWT_Encrypt.Entrance.VerifyActivationState(Views.ModelCreatorView.ShowWindow);
         }
         #endregion
     }

@@ -43,7 +43,7 @@
         <Button
             Grid.Row="2"
             Grid.ColumnSpan="2"
-            Command="{Binding ExportToExcelCommand}"
+            Command="{Binding ExportToExcel}"
             Content="输出至Excel文件" />
         <!--<Button
             Grid.Row="2"

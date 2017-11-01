@@ -11,7 +11,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DevExpress.Xpf.Grid;
 using BMWPF = Bentley.MstnPlatformNET.WPF;
 
 namespace PDIWT_MS_Tool.Views
@@ -24,7 +23,8 @@ namespace PDIWT_MS_Tool.Views
         private CellFastPutView()
         {
             InitializeComponent();
-            this.DataContext = new ViewModels.CellFastPutViewModel();
+            var _locator = new ViewModels.ViewModelLocator();
+            this.DataContext = _locator.CellFastPutVM;
             m_wpfHelper = new BMWPF.WPFInteropHelper(this);
             m_wpfHelper.Attach(Program.Addin, true, "CellFastPutView");
         }

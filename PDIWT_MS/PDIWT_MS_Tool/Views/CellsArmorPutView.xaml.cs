@@ -23,7 +23,8 @@ namespace PDIWT_MS_Tool.Views
         private CellsArmorPutView()
         {
             InitializeComponent();
-            this.DataContext = new ViewModels.CellsArmorPutViewModel();
+            var _locator = new ViewModels.ViewModelLocator();
+            this.DataContext = _locator.CellSArmorPutVM;
             m_wpfHelper = new BMWPF.WPFInteropHelper(this);
             m_wpfHelper.Attach(Program.Addin, true, "CellsArmorPutView");
         }

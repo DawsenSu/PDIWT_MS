@@ -51,121 +51,117 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Bentley.DgnDisplayNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9bfed12b64a9b7df, processorArchitecture=AMD64">
-      <HintPath>..\packages\BentleyCore.1.0.0\lib\Bentley.DgnDisplayNet.dll</HintPath>
+      <HintPath>..\packages\BentleyCore.1.2.0\lib\net461\Bentley.DgnDisplayNet.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.DgnPlatformNET, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
-      <HintPath>..\packages\BentleyCore.1.0.0\lib\Bentley.DgnPlatformNET.dll</HintPath>
+      <HintPath>..\packages\BentleyCore.1.2.0\lib\net461\Bentley.DgnPlatformNET.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.EC.Persistence3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
-      <HintPath>..\packages\BentleyECFramework.1.0.0\lib\Bentley.EC.Persistence3.dll</HintPath>
+      <HintPath>..\packages\BentleyECFramework.1.2.0\lib\net461\Bentley.EC.Persistence3.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.EC.Presentation3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
-      <HintPath>..\packages\BentleyECFramework.1.0.0\lib\Bentley.EC.Presentation3.dll</HintPath>
+      <HintPath>..\packages\BentleyECFramework.1.2.0\lib\net461\Bentley.EC.Presentation3.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.ECObjects.MixedMode3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
-      <HintPath>..\packages\BentleyECFramework.1.0.0\lib\Bentley.ECObjects.MixedMode3.dll</HintPath>
+      <HintPath>..\packages\BentleyECFramework.1.2.0\lib\net461\Bentley.ECObjects.MixedMode3.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.ECObjects3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
-      <HintPath>..\packages\BentleyECFramework.1.0.0\lib\Bentley.ECObjects3.dll</HintPath>
+      <HintPath>..\packages\BentleyECFramework.1.2.0\lib\net461\Bentley.ECObjects3.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.ECSystem3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
-      <HintPath>..\packages\BentleyECFramework.1.0.0\lib\Bentley.ECSystem3.dll</HintPath>
+      <HintPath>..\packages\BentleyECFramework.1.2.0\lib\net461\Bentley.ECSystem3.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Bentley.General.1.0, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
-      <HintPath>..\packages\BentleyCore.1.0.0\lib\Bentley.General.1.0.dll</HintPath>
+    <Reference Include="Bentley.ECXAttributes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
+      <HintPath>..\packages\BentleyECFramework.1.2.0\lib\net461\Bentley.ECXAttributes.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Bentley.General.1.0, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\BentleyCore.1.2.0\lib\net461\Bentley.General.1.0.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.GeometryNET, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
-      <HintPath>..\packages\BentleyCore.1.0.0\lib\Bentley.GeometryNET.dll</HintPath>
+      <HintPath>..\packages\BentleyCore.1.2.0\lib\net461\Bentley.GeometryNET.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.GeometryNET.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=MSIL">
-      <HintPath>..\packages\BentleyCore.1.0.0\lib\Bentley.GeometryNET.Common.dll</HintPath>
+      <HintPath>..\packages\BentleyCore.1.2.0\lib\net461\Bentley.GeometryNET.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.GeometryNET.Structs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=MSIL">
-      <HintPath>..\packages\BentleyCore.1.0.0\lib\Bentley.GeometryNET.Structs.dll</HintPath>
+      <HintPath>..\packages\BentleyCore.1.2.0\lib\net461\Bentley.GeometryNET.Structs.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Bentley.Interop.MicroStationDGN">
-      <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Assemblies\Bentley.Interop.MicroStationDGN.dll</HintPath>
+    <Reference Include="Bentley.Interop.MicroStationDGN, Version=8.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
+      <HintPath>..\packages\BentleyCore.1.2.0\lib\net461\Bentley.Interop.MicroStationDGN.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.MicroStation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
-      <HintPath>..\packages\BentleyCore.1.0.0\lib\Bentley.MicroStation.dll</HintPath>
+      <HintPath>..\packages\BentleyCore.1.2.0\lib\net461\Bentley.MicroStation.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.MicroStation.Interfaces.1.0, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
-      <HintPath>..\packages\BentleyWPF.1.0.0\lib\Bentley.MicroStation.Interfaces.1.0.dll</HintPath>
+      <HintPath>..\packages\BentleyCore.1.2.0\lib\net461\Bentley.MicroStation.Interfaces.1.0.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.MicroStation.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
-      <HintPath>..\packages\BentleyWPF.1.0.0\lib\Bentley.MicroStation.WPF.dll</HintPath>
+      <HintPath>..\packages\BentleyWPF.1.2.0\lib\net461\Bentley.MicroStation.WPF.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.MicroStation.WPF.Controls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9bfed12b64a9b7df, processorArchitecture=AMD64">
-      <HintPath>..\packages\BentleyWPF.1.0.0\lib\Bentley.MicroStation.WPF.Controls.dll</HintPath>
+      <HintPath>..\packages\BentleyWPF.1.2.0\lib\net461\Bentley.MicroStation.WPF.Controls.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.Platform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=MSIL">
-      <HintPath>..\packages\BentleyCore.1.0.0\lib\Bentley.Platform.dll</HintPath>
+      <HintPath>..\packages\BentleyCore.1.2.0\lib\net461\Bentley.Platform.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
-      <HintPath>..\packages\BentleyWPF.1.0.0\lib\Bentley.UI.dll</HintPath>
+      <HintPath>..\packages\BentleyWPF.1.2.0\lib\net461\Bentley.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Bentley.Windowing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bf6c96a266e58d4, processorArchitecture=AMD64">
-      <HintPath>..\packages\BentleyWPF.1.0.0\lib\Bentley.Windowing.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DevExpress.Data.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DevExpress.Images.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DevExpress.Mvvm.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DevExpress.Printing.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DevExpress.Xpf.Core.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DevExpress.Xpf.Grid.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DevExpress.Xpf.Grid.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DevExpress.Xpf.LayoutControl.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DevExpress.Xpf.Ribbon.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\packages\BentleyCore.1.2.0\lib\net461\Bentley.Windowing.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="EPPlus, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EPPlus.DataExtractor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.DataExtractor.1.3.1\lib\EPPlus.DataExtractor.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PDIWT_Encrypt, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\PDIWT_Encrypt.dll</HintPath>
+    </Reference>
     <Reference Include="PDIWT_MS_CPP, Version=1.0.6443.28112, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\PDIWT_MS_CPP.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -173,6 +169,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -183,7 +183,7 @@
     <Reference Include="UIAutomationProvider" />
     <Reference Include="UIAutomationTypes" />
     <Reference Include="ustation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9bfed12b64a9b7df, processorArchitecture=AMD64">
-      <HintPath>..\packages\BentleyCore.1.0.0\lib\ustation.dll</HintPath>
+      <HintPath>..\packages\BentleyCore.1.2.0\lib\net461\ustation.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase" />
@@ -194,9 +194,7 @@
     <Compile Include="Extension\Utilities.cs" />
     <Compile Include="KeyinCommands.cs" />
     <Compile Include="Models\DgnModelCreator.cs" />
-    <Compile Include="Models\FindInstancesOnElementTool.cs" />
     <Compile Include="Models\PutArmorTool.cs" />
-    <Compile Include="Models\WriteInstanceOnElementTool.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -205,25 +203,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CellFastPutViewModel.cs" />
-    <Compile Include="ViewModels\CreateAndImportSchemaViewModel.cs" />
-    <Compile Include="ViewModels\FindInstancesOnElementViewModel.cs" />
-    <Compile Include="ViewModels\FindnstancesViewModel.cs" />
     <Compile Include="ViewModels\LevelExportViewModel.cs" />
-    <Compile Include="ViewModels\ModelCreatorViewModel.cs" />
-    <Compile Include="ViewModels\SchemaListViewModel.cs" />
     <Compile Include="ViewModels\CellsArmorPutViewModel.cs" />
-    <Compile Include="ViewModels\WriteInstanceOnElementViewModel.cs" />
+    <Compile Include="ViewModels\ModelCreatorViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\CellFastPutView.xaml.cs">
       <DependentUpon>CellFastPutView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\CreateAndImportSchemaView.xaml.cs">
-      <DependentUpon>CreateAndImportSchemaView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FindInstancesOnElementView.xaml.cs">
-      <DependentUpon>FindInstancesOnElementView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FindnstancesView.xaml.cs">
-      <DependentUpon>FindnstancesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LevelExportView.xaml.cs">
       <DependentUpon>LevelExportView.xaml</DependentUpon>
@@ -231,27 +216,21 @@
     <Compile Include="Views\ModelCreatorView.xaml.cs">
       <DependentUpon>ModelCreatorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SchemaListView.xaml.cs">
-      <DependentUpon>SchemaListView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\CellsArmorPutView.xaml.cs">
       <DependentUpon>CellsArmorPutView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Test.xaml.cs">
       <DependentUpon>Test.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WriteInstanceOnElementView.xaml.cs">
-      <DependentUpon>WriteInstanceOnElementView.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -265,27 +244,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CreateAndImportSchemaView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\FindInstancesOnElementView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\FindnstancesView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\LevelExportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ModelCreatorView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SchemaListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -297,14 +260,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\WriteInstanceOnElementView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Resource Include="Resources\Images\Microsoft Excel.ico" />
+    <Resource Include="Resources\Icons\FolderOpen.ico" />
+    <Resource Include="Resources\Icons\Play.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Excel.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

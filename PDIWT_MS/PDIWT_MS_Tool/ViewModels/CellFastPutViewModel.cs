@@ -8,9 +8,10 @@ using System.Text.RegularExpressions;
 using PDIWT_MS_Tool.Properties;
 using System.Windows.Forms;
 using Bentley.EC.Persistence.Query;
-using DevExpress.Mvvm;
-using DevExpress.Mvvm.DataAnnotations;
-using DevExpress.Xpf.Editors.Helpers;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
+
 using EPPlus.DataExtractor;
 using PDIWT_MS_CPP;
 using OfficeOpenXml;
@@ -22,36 +23,41 @@ namespace PDIWT_MS_Tool.ViewModels
 {
     public class CellFastPutViewModel : ViewModelBase
     {
+        private ObservableCollection<ElementProp> _ElementProps;
         public ObservableCollection<ElementProp> ElementProps
         {
-            get { return GetProperty(() => ElementProps); }
-            set { SetProperty(() => ElementProps, value); }
+            get { return _ElementProps; }
+            set { Set(ref _ElementProps, value); }
         }
+        private ObservableCollection<string> _CellNameTypes;
         public ObservableCollection<string> CellNameTypes
         {
-            get { return GetProperty(() => CellNameTypes); }
-            set { SetProperty(() => CellNameTypes, value); }
+            get { return _CellNameTypes; }
+            set { Set(ref _CellNameTypes, value); }
         }
+
+        private int _PutCellProgress;
         public int PutCellProgress
         {
-            get { return GetProperty(() => PutCellProgress); }
-            set { SetProperty(() => PutCellProgress, value); }
+            get { return _PutCellProgress; }
+            set { Set(ref _PutCellProgress, value); }
         }
-
+        private string _Prompt;
         public string Prompt
         {
-            get { return GetProperty(() => Prompt); }
-            set { SetProperty(() => Prompt, value); }
-        }
-        public string Status
-        {
-            get { return GetProperty(() => Status); }
-            set { SetProperty(() => Status, value); }
+            get { return _Prompt; }
+            set { Set(ref _Prompt, value); }
         }
 
-        protected override void OnInitializeInRuntime()
+        private string _Status;
+        public string Status
         {
-            base.OnInitializeInRuntime();
+            get { return _Status; }
+            set { Set(ref _Status, value); }
+        }
+
+        public CellFastPutViewModel()
+        {
             ElementProps = new ObservableCollection<ElementProp>();
             CellNameTypes = new ObservableCollection<string>();
             Prompt = Resources.PromptHeader;
@@ -59,8 +65,9 @@ namespace PDIWT_MS_Tool.ViewModels
             PutCellProgress = 0;
         }
 
-        [Command]
-        public void OpenCellLib()
+        private RelayCommand _OpenCellLib;
+        public RelayCommand OpenCellLib => _OpenCellLib ?? (_OpenCellLib = new RelayCommand(ExecuteOpenCellLib));
+        public void ExecuteOpenCellLib()
         {
             OpenFileDialog cellFileDialog = new OpenFileDialog()
             {
@@ -114,9 +121,9 @@ namespace PDIWT_MS_Tool.ViewModels
             }
         }
 
-
-        [Command]
-        public void ImportFromFile()
+        private RelayCommand _ImportFromFile;
+        public RelayCommand ImportFromFile => _ImportFromFile ?? (_ImportFromFile = new RelayCommand(ExecuteImportFromFile, CanExecuteImportFromFile));
+        public void ExecuteImportFromFile()
         {
             OpenFileDialog excelOpenFileDialog = new OpenFileDialog()
             {
@@ -136,9 +143,9 @@ namespace PDIWT_MS_Tool.ViewModels
                             .WithProperty(p => p.X, "B")
                             .WithProperty(p => p.Y, "C")
                             .WithProperty(p => p.Z, "D")
-                            .WithProperty(p => p.AngelX, "E")
-                            .WithProperty(p => p.AngelY, "F")
-                            .WithProperty(p => p.AngelZ, "G")
+                            .WithProperty(p => p.AngleX, "E")
+                            .WithProperty(p => p.AngleY, "F")
+                            .WithProperty(p => p.AngleZ, "G")
                             .GetData(2, row => row != sheet.Dimension.Rows + 1)
                             .ToList();
 
@@ -162,9 +169,9 @@ namespace PDIWT_MS_Tool.ViewModels
                                     X = elementProp.X * uor,
                                     Y = elementProp.Y * uor,
                                     Z = elementProp.Z * uor,
-                                    AngelX = elementProp.AngelX,
-                                    AngelY = elementProp.AngelY,
-                                    AngelZ = elementProp.AngelZ
+                                    AngleX = elementProp.AngleX,
+                                    AngleY= elementProp.AngleY,
+                                    AngleZ = elementProp.AngleZ
                                 });
                             }
                         }
@@ -181,13 +188,14 @@ namespace PDIWT_MS_Tool.ViewModels
 
             }
         }
-
-        public bool CanImportFromFile()
+        public bool CanExecuteImportFromFile()
         {
             return CellNameTypes.Count != 0;
         }
-        [Command]
-        public void FastPut()
+
+        private RelayCommand _FastPut;
+        public RelayCommand FastPut => _FastPut ?? (_FastPut = new RelayCommand(ExecuteFastPut, CanExecuteFastPut));
+        public void ExecuteFastPut()
         {
             PutCellProgress = 0;
             foreach (ElementProp t in ElementProps)
@@ -205,21 +213,21 @@ namespace PDIWT_MS_Tool.ViewModels
             Prompt = Resources.PromptHeader + $"{PutCellProgress}个单元放置完成";
             Status = Resources.StatusHeader + Resources.SuccessString;
         }
-        public bool CanFastPut()
+        public bool CanExecuteFastPut()
         {
             return ElementProps.Count != 0;
         }
 
-        [Command]
-        public void DeleteAllRows()
-        {
-            ElementProps.Clear();
-        }
+        //[Command]
+        //public void DeleteAllRows()
+        //{
+        //    ElementProps.Clear();
+        //}
 
-        public bool CanDeleteAllRows()
-        {
-            return ElementProps.Count != 0;
-        }
+        //public bool CanDeleteAllRows()
+        //{
+        //    return ElementProps.Count != 0;
+        //}
     }
 
     public static class BentleyMarshal
@@ -235,8 +243,8 @@ namespace PDIWT_MS_Tool.ViewModels
         public double X { get; set; }
         public double Y { get; set; }
         public double Z { get; set; }
-        public double AngelX { get; set; }
-        public double AngelY { get; set; }
-        public double AngelZ { get; set; }
+        public double AngleX { get; set; }
+        public double AngleY { get; set; }
+        public double AngleZ { get; set; }
     }
 }

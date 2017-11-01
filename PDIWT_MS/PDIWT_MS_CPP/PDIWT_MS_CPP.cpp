@@ -20,7 +20,7 @@ unsigned int CellFunction::PlaceCell(ElementProp ^ eleProp)
 	String^ tempCellName = eleProp->CellName;
 	pin_ptr<const WChar> pCellName = PtrToStringChars(tempCellName->Split('(')[0]);
 	const DPoint3d rOrigin = DPoint3d::From(eleProp->X, eleProp->Y, eleProp->Z);
-	RotMatrix rotMatrix = RotMatrix::FromPrincipleAxisRotations(RotMatrix::FromIdentity(), fc_piover180*eleProp->AngelX, fc_piover180*eleProp->AngelY, fc_piover180*eleProp->AngelZ);
+	RotMatrix rotMatrix = RotMatrix::FromPrincipleAxisRotations(RotMatrix::FromIdentity(), fc_piover180*eleProp->AngleX, fc_piover180*eleProp->AngleY, fc_piover180*eleProp->AngleZ);
 	return mdlCell_placeCell(&rOrigin, nullptr, true, &rotMatrix, nullptr, 0, false, 0, 1, pCellName, nullptr);
 }
 

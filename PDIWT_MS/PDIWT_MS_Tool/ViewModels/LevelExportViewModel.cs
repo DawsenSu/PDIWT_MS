@@ -9,29 +9,38 @@ using OfficeOpenXml;
 using BD = Bentley.DgnPlatformNET;
 using PDIWT_MS_Tool.Properties;
 
-using DevExpress.Mvvm.DataAnnotations;
-using DevExpress.Mvvm;
-using DevExpress.Mvvm.Native;
-using DevExpress.Utils.Design;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using OfficeOpenXml.Style;
 
 namespace PDIWT_MS_Tool.ViewModels
 {
     public class LevelExportViewModel : ViewModelBase
     {
-        public bool IsOnlyUsedLevel
+
+        public LevelExportViewModel()
         {
-            get { return GetProperty(() => IsOnlyUsedLevel); }
-            set { SetProperty(() => IsOnlyUsedLevel, value); }
-        }
-        public bool IsIncludeRefLevel
-        {
-            get { return GetProperty(() => IsIncludeRefLevel); }
-            set { SetProperty(() => IsIncludeRefLevel, value); }
+            IsOnlyUsedLevel = true;
+            IsIncludeRefLevel = false;
         }
 
-        [Command]
-        public void ExportToExcel()
+        private bool _IsOnlyUsedLevel;
+        public bool IsOnlyUsedLevel
+        {
+            get { return _IsOnlyUsedLevel; }
+            set { Set(ref _IsOnlyUsedLevel, value); }
+        }
+
+        private bool _IsIncludeRefLevel;
+        public bool IsIncludeRefLevel
+        {
+            get { return _IsIncludeRefLevel; }
+            set { Set(ref _IsIncludeRefLevel, value); }
+        }
+
+        private RelayCommand _ExportToExcel;
+        public RelayCommand ExportToExcel => _ExportToExcel ?? (_ExportToExcel = new RelayCommand(ExecuteExportToExcel));
+        public void ExecuteExportToExcel()
         {
             string activeFileName = Program.GetActiveDgnFile().GetFileName();
             string defaultFileName = Path.GetDirectoryName(activeFileName);
@@ -158,12 +167,6 @@ namespace PDIWT_MS_Tool.ViewModels
             }
         }
 
-        protected override void OnInitializeInRuntime()
-        {
-            IsOnlyUsedLevel = true;
-            IsIncludeRefLevel = false;
-            base.OnInitializeInRuntime();
-        }
     }
 
     public class LevelInfo

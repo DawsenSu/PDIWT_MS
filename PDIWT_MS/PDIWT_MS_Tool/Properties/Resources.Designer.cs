@@ -22,7 +22,7 @@ namespace PDIWT_MS_Tool.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace PDIWT_MS_Tool.Properties {
         ///   返回此类使用的缓存的 ResourceManager 实例。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PDIWT_MS_Tool.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace PDIWT_MS_Tool.Properties {
         ///   重写当前线程的 CurrentUICulture 属性。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace PDIWT_MS_Tool.Properties {
         /// <summary>
         ///   查找类似 Cell Library (*.cell) | *.cel|Dgn File(*.dng) | *.dgn|All Files (*.*) | *.* 的本地化字符串。
         /// </summary>
-        internal static string CellLibraryFilter {
+        public static string CellLibraryFilter {
             get {
                 return ResourceManager.GetString("CellLibraryFilter", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace PDIWT_MS_Tool.Properties {
         /// <summary>
         ///   查找类似 失败 的本地化字符串。
         /// </summary>
-        internal static string ErrorString {
+        public static string ErrorString {
             get {
                 return ResourceManager.GetString("ErrorString", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace PDIWT_MS_Tool.Properties {
         /// <summary>
         ///   查找类似 Excel 2007-2017文件(*.xlsx)|*.xlsx 的本地化字符串。
         /// </summary>
-        internal static string ExcelFilter {
+        public static string ExcelFilter {
             get {
                 return ResourceManager.GetString("ExcelFilter", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace PDIWT_MS_Tool.Properties {
         /// <summary>
         ///   查找类似 提示： 的本地化字符串。
         /// </summary>
-        internal static string PromptHeader {
+        public static string PromptHeader {
             get {
                 return ResourceManager.GetString("PromptHeader", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace PDIWT_MS_Tool.Properties {
         /// <summary>
         ///   查找类似 选择要放置的四边平面(或右键退出) 的本地化字符串。
         /// </summary>
-        internal static string PutArmorToolChoosePlan {
+        public static string PutArmorToolChoosePlan {
             get {
                 return ResourceManager.GetString("PutArmorToolChoosePlan", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace PDIWT_MS_Tool.Properties {
         /// <summary>
         ///   查找类似 确认放置 的本地化字符串。
         /// </summary>
-        internal static string PutArmorToolConfirm {
+        public static string PutArmorToolConfirm {
             get {
                 return ResourceManager.GetString("PutArmorToolConfirm", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace PDIWT_MS_Tool.Properties {
         /// <summary>
         ///   查找类似 按平面放置单元 的本地化字符串。
         /// </summary>
-        internal static string PutArmorToolName {
+        public static string PutArmorToolName {
             get {
                 return ResourceManager.GetString("PutArmorToolName", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace PDIWT_MS_Tool.Properties {
         /// <summary>
         ///   查找类似 所选元素类型不是&lt;Shape&gt; 的本地化字符串。
         /// </summary>
-        internal static string PutArmorToolRejectReason {
+        public static string PutArmorToolRejectReason {
             get {
                 return ResourceManager.GetString("PutArmorToolRejectReason", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace PDIWT_MS_Tool.Properties {
         /// <summary>
         ///   查找类似 所选Shape不是平面Shape 的本地化字符串。
         /// </summary>
-        internal static string PutArmorToolRejectReason2 {
+        public static string PutArmorToolRejectReason2 {
             get {
                 return ResourceManager.GetString("PutArmorToolRejectReason2", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace PDIWT_MS_Tool.Properties {
         /// <summary>
         ///   查找类似 所选平面shape不是矩形 的本地化字符串。
         /// </summary>
-        internal static string PutArmorToolRejectReason3 {
+        public static string PutArmorToolRejectReason3 {
             get {
                 return ResourceManager.GetString("PutArmorToolRejectReason3", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace PDIWT_MS_Tool.Properties {
         /// <summary>
         ///   查找类似 状态： 的本地化字符串。
         /// </summary>
-        internal static string StatusHeader {
+        public static string StatusHeader {
             get {
                 return ResourceManager.GetString("StatusHeader", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace PDIWT_MS_Tool.Properties {
         /// <summary>
         ///   查找类似 成功 的本地化字符串。
         /// </summary>
-        internal static string SuccessString {
+        public static string SuccessString {
             get {
                 return ResourceManager.GetString("SuccessString", resourceCulture);
             }

@@ -15,8 +15,9 @@ using BD = Bentley.DgnPlatformNET;
 using BM = Bentley.MstnPlatformNET;
 using BG = Bentley.GeometryNET;
 
-using DevExpress.Mvvm;
-using DevExpress.Mvvm.DataAnnotations;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
+
 using PDIWT_MS_CPP;
 using PDIWT_MS_Tool.Models;
 
@@ -24,45 +25,54 @@ namespace PDIWT_MS_Tool.ViewModels
 {
     public class CellsArmorPutViewModel : ViewModelBase
     {
+        private string _CellLibPath;
         public string CellLibPath
         {
-            get { return GetProperty(() => CellLibPath); }
-            set { SetProperty(() => CellLibPath, value); }
+            get { return _CellLibPath; }
+            set { Set(ref _CellLibPath, value); }
         }
+        private ObservableCollection<string> _CellNames;
         public ObservableCollection<string> CellNames
         {
-            get { return GetProperty(() => CellNames); }
-            set { SetProperty(() => CellNames, value); }
-        }
-        public string SelectCellName
-        {
-            get { return GetProperty(() => SelectCellName); }
-            set { SetProperty(() => SelectCellName, value); }
-        }
-        public double UAxisOffset
-        {
-            get { return GetProperty(() => UAxisOffset); }
-            set { SetProperty(() => UAxisOffset, value); }
-        }
-        public double VAxisOffset
-        {
-            get { return GetProperty(() => VAxisOffset); }
-            set { SetProperty(() => VAxisOffset, value); }
-        }
-        public string MasterUnitTooltip
-        {
-            get { return GetProperty(() => MasterUnitTooltip); }
-            set { SetProperty(() => MasterUnitTooltip, value); }
-        }
-        public bool IsOutRectangle
-        {
-            get { return GetProperty(() => IsOutRectangle); }
-            set { SetProperty(() => IsOutRectangle, value); }
+            get { return _CellNames; }
+            set { Set(ref _CellNames, value); }
         }
 
-        protected override void OnInitializeInRuntime()
+        private string _SelectCellName;
+        public string SelectCellName
         {
-            base.OnInitializeInRuntime();
+            get { return _SelectCellName; }
+            set { Set(ref _SelectCellName, value); }
+        }
+        private double _UAxisOffset;
+        public double UAxisOffset
+        {
+            get { return _UAxisOffset; }
+            set { Set(ref _UAxisOffset, value); }
+        }
+        private double _VAxisOffset;
+        public double VAxisOffset
+        {
+            get { return _VAxisOffset; }
+            set { Set(ref _VAxisOffset, value); }
+        }
+
+        private string _MasterUnitTooltip;
+        public string MasterUnitTooltip
+        {
+            get { return _MasterUnitTooltip; }
+            set { Set(ref _MasterUnitTooltip, value); }
+        }
+
+        private bool _IsOutRectangle;
+        public bool IsOutRectangle
+        {
+            get { return _IsOutRectangle; }
+            set { Set(ref _IsOutRectangle, value); }
+        }
+
+        public CellsArmorPutViewModel()
+        {
             CellLibPath = string.Empty;
             CellNames = new ObservableCollection<string>();
             UAxisOffset = VAxisOffset = 0;
@@ -75,8 +85,9 @@ namespace PDIWT_MS_Tool.ViewModels
             //dgnuorMaster = Program.GetActiveDgnModel().GetModelInfo().UorPerMaster;
         }
 
-        [Command]
-        public void BrowseCellLib()
+        private RelayCommand _BrowseCellLib;
+        public RelayCommand BrowseCellLib => _BrowseCellLib ?? (_BrowseCellLib = new RelayCommand(ExecuteBrowseCellLib));
+        public void ExecuteBrowseCellLib()
         {
             OpenFileDialog cellFileDialog = new OpenFileDialog()
             {
@@ -127,8 +138,9 @@ namespace PDIWT_MS_Tool.ViewModels
             }
         }
 
-        [Command]
-        public void SelectedCellNameChanged()
+        private RelayCommand _SelectedCellNameChanged;
+        public RelayCommand SelectedCellNameChanged => _SelectedCellNameChanged ?? (_SelectedCellNameChanged = new RelayCommand(ExecuteSelectedCellNameChanged));
+        public void ExecuteSelectedCellNameChanged()
         {
             if (cellDgnFile == null)
             {
@@ -156,15 +168,15 @@ namespace PDIWT_MS_Tool.ViewModels
             VAxisOffset = selectedModelDRange3D.YSize / celluor;
         }
 
-
-        [Command]
-        public void PutArmor()
+        private RelayCommand _PutArmor;
+        public RelayCommand PutArmor => _PutArmor ?? (_PutArmor = new RelayCommand(ExecutePutArmor, CanExecutePutArmor));
+        public void ExecutePutArmor()
         {
             double tempuor = celluor * dgnuorMeter / celluorMeter;
             PutArmorTool.InstallNewInstance(SelectCellName, UAxisOffset * tempuor, VAxisOffset * tempuor, IsOutRectangle);
         }
 
-        public bool CanPutArmor()
+        public bool CanExecutePutArmor()
         {
             return !string.IsNullOrEmpty(SelectCellName);
         }

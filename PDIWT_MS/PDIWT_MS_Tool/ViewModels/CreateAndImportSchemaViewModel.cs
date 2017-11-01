@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Forms;
 
-using DevExpress.Mvvm.DataAnnotations;
-using DevExpress.Mvvm;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 
 using BDEC = Bentley.DgnPlatformNET.DgnEC;
 using BD = Bentley.DgnPlatformNET;

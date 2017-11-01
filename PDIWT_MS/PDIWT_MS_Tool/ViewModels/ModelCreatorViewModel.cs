@@ -2,8 +2,8 @@
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.IO;
-using DevExpress.Mvvm;
-using DevExpress.Mvvm.DataAnnotations;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 using OfficeOpenXml;
 using BM = Bentley.MstnPlatformNET;
 using PDIWT_MS_Tool.Models;
@@ -12,31 +12,35 @@ namespace PDIWT_MS_Tool.ViewModels
 {
     public class ModelCreatorViewModel : ViewModelBase
     {
+        private string _LoadInfo;
         public string LoadInfo
         {
-            get { return GetProperty(() => LoadInfo); }
-            set { SetProperty(() => LoadInfo, value); }
+            get { return _LoadInfo; }
+            set { Set(ref _LoadInfo, value); }
         }
+
+        private string _OutputInfo;
         public string OutputInfo
         {
-            get { return GetProperty(() => OutputInfo); }
-            set { SetProperty(() => OutputInfo, value); }
+            get { return _OutputInfo; }
+            set { Set(ref _OutputInfo, value); }
         }
+
 
 
         private BM.MessageCenter mc;
         private List<DgnModelInfo> loadedDgnModelInfos;
 
-        protected override void OnInitializeInRuntime()
+        public ModelCreatorViewModel()
         {
             LoadInfo = OutputInfo = string.Empty;
             mc = BM.MessageCenter.Instance;
             loadedDgnModelInfos = new List<DgnModelInfo>();
-            base.OnInitializeInRuntime();
         }
 
-        [Command]
-        public void LoadExcel()
+        private RelayCommand _LoadExcel;
+        public RelayCommand LoadExcel => _LoadExcel ?? (_LoadExcel = new RelayCommand(ExecuteLoadExcel));
+        public void ExecuteLoadExcel()
         {
             OpenFileDialog openExcelFileDialog = new OpenFileDialog()
             {
@@ -61,8 +65,9 @@ namespace PDIWT_MS_Tool.ViewModels
             }
         }
 
-        [Command]
-        public void CreateModels()
+        private RelayCommand _CreateModels;
+        public RelayCommand CreateModels => _CreateModels ?? (_CreateModels = new RelayCommand(ExecuteCreateModels, CanExecuteCreateModels));
+        public void ExecuteCreateModels()
         {
             try
             {
@@ -76,13 +81,14 @@ namespace PDIWT_MS_Tool.ViewModels
             }
         }
 
-        public bool CanCreateModels()
+        public bool CanExecuteCreateModels()
         {
             return loadedDgnModelInfos.Count != 0;
         }
 
-        [Command]
-        public void OutputExcel()
+        private RelayCommand _OutputExcel;
+        public RelayCommand OutputExcel => _OutputExcel ?? (_OutputExcel = new RelayCommand(ExecuteOutputExcel));
+        public void ExecuteOutputExcel()
         {
             SaveFileDialog sfDialog = new SaveFileDialog() {Filter = Resources.ExcelFilter, Title = "要保存模型信息的Excel文件"};
             try

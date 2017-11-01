@@ -23,7 +23,8 @@ namespace PDIWT_MS_Tool.Views
         private ModelCreatorView()
         {
             InitializeComponent();
-            this.DataContext = new ViewModels.ModelCreatorViewModel();
+            var _locator = new ViewModels.ViewModelLocator();
+            this.DataContext = _locator.ModelCreatorVM;
             m_wpfHelper = new BMWPF.WPFInteropHelper(this);
             m_wpfHelper.Attach(Program.Addin, true, "ModelCreatorView");
         }
