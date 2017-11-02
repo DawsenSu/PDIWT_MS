@@ -12,12 +12,12 @@
       <Keyword SubtableRef="Measure" CommandClass="MacroCommand" CommandWord="AREA">
         <Options Required="true" />
       </Keyword>
-      <!--<Keyword SubtableRef="SchemaCmd" CommandClass="MacroCommand" CommandWord="SCHEMA">
+      <Keyword SubtableRef="SchemaCmd" CommandClass="MacroCommand" CommandWord="SCHEMA">
         <Options Required="true" />
       </Keyword>
       <Keyword SubtableRef="InstanceCmd" CommandClass="MacroCommand" CommandWord="INSTANCE">
         <Options Required="true" />
-      </Keyword>-->
+      </Keyword>
       <Keyword SubtableRef="LevelCmd" CommandClass="MacroCommand" CommandWord ="LEVEL">
         <Options Required="true"/>
       </Keyword>
@@ -37,7 +37,7 @@
       <Keyword CommandWord="UNITE"/>
     </KeyinTable>
 
-    <!--<KeyinTable ID="SchemaCmd">
+    <KeyinTable ID="SchemaCmd">
       <Keyword CommandWord="FIND"/>
       <Keyword CommandWord="IMPORT"/>
     </KeyinTable>
@@ -46,7 +46,7 @@
       <Keyword CommandWord="FINDALL"/>
       <Keyword CommandWord="WRITE"/>
       <Keyword CommandWord="FINDALLONELEMENT"/>
-    </KeyinTable>-->
+    </KeyinTable>
 
     <KeyinTable ID="LevelCmd">
       <Keyword CommandWord="EXPORTRGBCOLORTABLE"/>
@@ -66,13 +66,13 @@
     <!--MEASURE-->
     <KeyinHandler Keyin="PDIWT_MS_Tool AREA LINESTRINGAREA" Function="PDIWT_MS_Tool.KeyinCommands.LinestringArea"/>
     <KeyinHandler Keyin="PDIWT_MS_Tool AREA UNITE" Function="PDIWT_MS_Tool.KeyinCommands.LinestringUnite"/>
-    <!--SCHEMA--><!--
+    <!--SCHEMA-->
     <KeyinHandler Keyin="PDIWT_MS_Tool SCHEMA FIND" Function="PDIWT_MS_Tool.KeyinCommands.CmdFindSchema"/>
     <KeyinHandler Keyin="PDIWT_MS_Tool SCHEMA IMPORT" Function="PDIWT_MS_Tool.KeyinCommands.CmdImportSchema"/>
-    --><!--INSTANCE--><!--
+    <!--INSTANCE-->
     <KeyinHandler Keyin="PDIWT_MS_Tool INSTANCE FINDALL" Function="PDIWT_MS_Tool.KeyinCommands.CmdFindAllInstance"/>
     <KeyinHandler Keyin="PDIWT_MS_Tool INSTANCE WRITE" Function="PDIWT_MS_Tool.KeyinCommands.CmdWirteInstance"/>
-    <KeyinHandler Keyin="PDIWT_MS_Tool INSTANCE FINDALLONELEMENT" Function="PDIWT_MS_Tool.KeyinCommands.CmdFindAllOnElement"/>-->
+    <KeyinHandler Keyin="PDIWT_MS_Tool INSTANCE FINDALLONELEMENT" Function="PDIWT_MS_Tool.KeyinCommands.CmdFindAllOnElement"/>
     <!--LEVEL-->
     <KeyinHandler Keyin="PDIWT_MS_Tool LEVEL EXPORTRGBCOLORTABLE" Function="PDIWT_MS_Tool.KeyinCommands.ExportRGBColorTable"/>
     <!--CELLS-->

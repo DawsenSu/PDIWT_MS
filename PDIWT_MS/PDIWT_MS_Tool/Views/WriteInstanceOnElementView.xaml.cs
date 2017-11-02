@@ -25,7 +25,8 @@ namespace PDIWT_MS_Tool.Views
         private WriteInstanceOnElementView(BM.AddIn addIn)
         {
             InitializeComponent();
-            this.DataContext = new ViewModels.WriteInstanceOnElementViewModel();
+            var _locator = new ViewModels.ViewModelLocator();
+            this.DataContext = _locator.WriteIstanceOnEleVm;
             m_addIn = addIn;
             this.Unloaded += WriteInstanceView_Unloaded;
         }

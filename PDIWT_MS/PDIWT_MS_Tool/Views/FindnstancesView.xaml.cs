@@ -23,7 +23,8 @@ namespace PDIWT_MS_Tool.Views
         private FindnstancesView()
         {
             InitializeComponent();
-            this.DataContext = new ViewModels.FindnstancesViewModel();
+            var _locator = new ViewModels.ViewModelLocator();
+            this.DataContext = _locator.FindInstanceVM;
             m_wpfHelper = new BMWPF.WPFInteropHelper(this);
             m_wpfHelper.Attach(Program.Addin, true, "FindnstancesView");
         }

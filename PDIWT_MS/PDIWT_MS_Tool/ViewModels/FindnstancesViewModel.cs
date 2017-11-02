@@ -3,8 +3,8 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-using DevExpress.Mvvm;
-using DevExpress.Mvvm.DataAnnotations;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 
 using Bentley.DgnPlatformNET.DgnEC;
 using Bentley.EC.Persistence.Query;
@@ -16,13 +16,22 @@ namespace PDIWT_MS_Tool.ViewModels
 {
     public class FindnstancesViewModel : ViewModelBase
     {
+        public FindnstancesViewModel()
+        {
+            _Instances = new ObservableCollection<Instance>();
+
+        }
+
+        private ObservableCollection<Instance> _Instances;
         public ObservableCollection<Instance> Instances
         {
-            get { return GetProperty(() => Instances); }
-            set { SetProperty(() => Instances, value); }
+            get { return _Instances; }
+            set { Set(ref _Instances, value); }
         }
-        [Command]
-        public void FindInstances()
+
+        private RelayCommand _FindInstances;
+        public RelayCommand FindInstances => _FindInstances ?? (_FindInstances = new RelayCommand(ExecuteFindInstances));
+        public void ExecuteFindInstances()
         {
             DgnECManager manager = DgnECManager.Manager;
             FindInstancesScope scope = FindInstancesScope.CreateScope(Program.GetActiveDgnFile(), new FindInstancesScopeOption(DgnECHostType.Element, true));
@@ -83,11 +92,6 @@ namespace PDIWT_MS_Tool.ViewModels
         //    return classes.ToArray();
         //}
 
-        protected override void OnInitializeInRuntime()
-        {
-            base.OnInitializeInRuntime();
-            Instances = new ObservableCollection<Instance>();
-        }
     }
     public class Instance
     {

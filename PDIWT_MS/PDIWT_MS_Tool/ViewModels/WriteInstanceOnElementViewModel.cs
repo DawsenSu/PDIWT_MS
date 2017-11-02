@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-using DevExpress.Mvvm;
-using DevExpress.Mvvm.DataAnnotations;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 
 using BDE = Bentley.DgnPlatformNET.DgnEC;
 using BES = Bentley.ECObjects.Schema;
@@ -13,34 +13,51 @@ namespace PDIWT_MS_Tool.ViewModels
 {
     public class WriteInstanceOnElementViewModel : ViewModelBase
     {
-        public ObservableCollection<string> ImportedSchemas
+        public  WriteInstanceOnElementViewModel()
         {
-            get { return GetProperty(() => ImportedSchemas); }
-            set { SetProperty(() => ImportedSchemas, value); }
-        }
-        public string SelectedSchema
-        {
-            get { return GetProperty(() => SelectedSchema); }
-            set { SetProperty(() => SelectedSchema, value); }
-        }
-        public ObservableCollection<string> ImportedClasses
-        {
-            get { return GetProperty(() => ImportedClasses); }
-            set { SetProperty(() => ImportedClasses, value); }
-        }
-        public string SelectedClass
-        {
-            get { return GetProperty(() => SelectedClass); }
-            set { SetProperty(() => SelectedClass, value); }
-        }
-        public ObservableCollection<PropertyToWrite> PropsToWrite
-        {
-            get { return GetProperty(() => PropsToWrite); }
-            set { SetProperty(() => PropsToWrite, value); }
+            var schemalistviewmodel = new SchemaListViewModel();
+            schemalistviewmodel.ExecuteFindSchema();
+            ImportedSchemas = schemalistviewmodel.SchemaList;
+            ImportedClasses = new ObservableCollection<string>();
+            PropsToWrite = new ObservableCollection<PropertyToWrite>();
         }
 
-        [Command]
-        public void SchemaSelectionChanged()
+        private ObservableCollection<string> _ImportedSchemas;
+        public ObservableCollection<string> ImportedSchemas
+        {
+            get { return _ImportedSchemas; }
+            set { Set(ref _ImportedSchemas, value); }
+        }
+
+        private string _SelectedSchema;
+        public string SelectedSchema
+        {
+            get { return _SelectedSchema; }
+            set { Set(ref _SelectedSchema, value); }
+        }
+        private ObservableCollection<string> _ImportedClasses;
+        public ObservableCollection<string> ImportedClasses
+        {
+            get { return _ImportedClasses; }
+            set { Set(ref _ImportedClasses, value); }
+        }
+        private string _SelectedClass;
+        public string SelectedClass
+        {
+            get { return _SelectedClass; }
+            set { Set(ref _SelectedClass, value); }
+        }
+
+        private ObservableCollection<PropertyToWrite> _PropsToWrite;
+        public ObservableCollection<PropertyToWrite> PropsToWrite
+        {
+            get { return _PropsToWrite; }
+            set { Set(ref _PropsToWrite, value); }
+        }
+
+        private RelayCommand _SchemaSelectionChanged;
+        public RelayCommand SchemaSelectionChanged => _SchemaSelectionChanged ?? (_SchemaSelectionChanged = new RelayCommand(ExecuteSchemaSelectionChanged));
+        public void ExecuteSchemaSelectionChanged()
         {
             ImportedClasses = new ObservableCollection<string>();
             SelectedClass = string.Empty;
@@ -58,8 +75,9 @@ namespace PDIWT_MS_Tool.ViewModels
                 ImportedClasses.Add(ecClass.Name);
             }
         }
-        [Command]
-        public void ClassSelectionChanged()
+        private RelayCommand _ClassSelectionChanged;
+        public RelayCommand ClassSelectionChanged => _ClassSelectionChanged ?? (_ClassSelectionChanged = new RelayCommand(ExecuteClassSelectionChanged));
+        public void ExecuteClassSelectionChanged()
         {
             PropsToWrite.Clear();
             if (string.IsNullOrEmpty(SelectedClass))
@@ -85,16 +103,6 @@ namespace PDIWT_MS_Tool.ViewModels
             if (!Extension.Utilities.TryParseSchemaString(SelectedSchema, out schemaName, out majornum, out minornum))
                 throw new InvalidOperationException($"{SelectedSchema}无法转化");
             return new InstanceToWrite() { SchemaName = schemaName, MajorVersion = majornum, MinorVersion = minornum, ClassName = SelectedClass, Properties = PropsToWrite.ToList() };
-        }
-        protected override void OnInitializeInRuntime()
-        {
-            var schemalistviewmodel = new SchemaListViewModel();
-            schemalistviewmodel.FindSchema();
-            ImportedSchemas = schemalistviewmodel.SchemaList;
-            ImportedClasses = new ObservableCollection<string>();
-            PropsToWrite = new ObservableCollection<PropertyToWrite>();
-            base.OnInitializeInRuntime();
-
         }
 
     }

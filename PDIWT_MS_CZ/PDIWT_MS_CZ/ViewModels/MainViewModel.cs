@@ -834,7 +834,7 @@ namespace PDIWT_MS_CZ.ViewModels
                     string xmlstring = File.ReadAllText(ofDialog.FileName);
                     var _deseriliaze = serializer.Deserialize<LockHeadParameters>(xmlstring);
                     string _validatestr = _deseriliaze.IsParametersValid();
-                    if(_validatestr != Resources.Status_Success)
+                    if(_validatestr != Resources.Verified)
                     {
                         Prompt = "导入失败->" +  _validatestr ;
                         Status = Resources.Status_Fail;                        

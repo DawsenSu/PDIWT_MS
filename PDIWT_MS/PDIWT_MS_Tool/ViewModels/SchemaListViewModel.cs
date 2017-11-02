@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-using DevExpress.Mvvm;
-using DevExpress.Mvvm.DataAnnotations;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 
 using BDEC = Bentley.DgnPlatformNET.DgnEC;
 
@@ -14,25 +14,22 @@ namespace PDIWT_MS_Tool.ViewModels
     {
         public SchemaListViewModel()
         {
-            SchemaList = new ObservableCollection<string>();
-
+            _SchemaList = new ObservableCollection<string>();
         }
 
+        private ObservableCollection<string> _SchemaList;
         public ObservableCollection<string> SchemaList
         {
-            get { return GetProperty(() => SchemaList); }
-            set { SetProperty(() => SchemaList, value); }
-        }
-        [Command]
-        public void FindSchema()
-        {
-            BDEC.DgnECManager manager = BDEC.DgnECManager.Manager;
-            SchemaList = manager.DiscoverSchemasForModel(Program.GetActiveDgnModel(), Bentley.DgnPlatformNET.DgnEC.ReferencedModelScopeOption.All, false).ToObservableCollection();
+            get { return _SchemaList; }
+            set { Set(ref _SchemaList, value); }
         }
 
-        protected override void OnInitializeInRuntime()
+        private RelayCommand _FindSchema;
+        public RelayCommand FindSchema => _FindSchema ?? (_FindSchema = new RelayCommand(ExecuteFindSchema));
+        public void ExecuteFindSchema()
         {
-            base.OnInitializeInRuntime();
+            BDEC.DgnECManager manager = BDEC.DgnECManager.Manager;
+            SchemaList = manager.DiscoverSchemasForModel(Program.GetActiveDgnModel(), BDEC.ReferencedModelScopeOption.All, false).ToObservableCollection();
         }
     }
 }

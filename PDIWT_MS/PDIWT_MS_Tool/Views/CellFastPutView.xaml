@@ -13,6 +13,23 @@
         <Style x:Key="WhiteStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="White" />
         </Style>
+        <Style TargetType="{x:Type MenuItem}">
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            Text="{Binding}"
+                            TextAlignment="Center" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="LightGray" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -143,12 +160,12 @@
                     HorizontalHeaderContentAlignment="Center" />
             </dxg:GridControl>-->
         <StatusBar Grid.Row="2" Background="#FF0072C6">
-            <StatusBarItem Width="300">
+            <StatusBarItem HorizontalAlignment="Left">
                 <Grid>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
                         <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock
                         Grid.Column="0"
@@ -157,7 +174,7 @@
                     <GridSplitter
                         Grid.Column="1"
                         Width="3"
-                        HorizontalAlignment="Left"
+                        Margin="5,0"
                         VerticalAlignment="Stretch"
                         Background="LightGray" />
                     <TextBlock

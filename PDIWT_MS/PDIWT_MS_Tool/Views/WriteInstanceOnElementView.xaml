@@ -5,11 +5,11 @@
     xmlns:ViewModels="clr-namespace:PDIWT_MS_Tool.ViewModels"
     xmlns:bwpf="clr-namespace:Bentley.MstnPlatformNET.WPF;assembly=Bentley.MicroStation.WPF"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
-    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="300"
     d:DesignWidth="300"
+    Background="White"
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
@@ -18,52 +18,58 @@
         </Grid.RowDefinitions>
         <GroupBox Grid.Row="0" Header="导入的Schemas">
             <ComboBox ItemsSource="{Binding ImportedSchemas}" SelectedItem="{Binding SelectedSchema}">
-                <dxmvvm:Interaction.Behaviors>
-                    <dxmvvm:EventToCommand Command="{Binding SchemaSelectionChangedCommand}" EventName="SelectionChanged" />
-                </dxmvvm:Interaction.Behaviors>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SchemaSelectionChanged}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </ComboBox>
         </GroupBox>
         <GroupBox Grid.Row="1" Header="Classes">
-            <dxlc:LayoutGroup Orientation="Vertical">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
                 <ComboBox
+                    Grid.Row="0"
                     VerticalAlignment="Top"
                     ItemsSource="{Binding ImportedClasses}"
                     SelectedItem="{Binding SelectedClass}">
-                    <dxmvvm:Interaction.Behaviors>
-                        <dxmvvm:EventToCommand Command="{Binding ClassSelectionChangedCommand}" EventName="SelectionChanged" />
-                    </dxmvvm:Interaction.Behaviors>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding ClassSelectionChanged}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </ComboBox>
-                <dxlc:LayoutItem
-                    VerticalAlignment="Stretch"
-                    Label="属性"
-                    LabelPosition="Top">
-                    <DataGrid
-                        AlternatingRowBackground="AliceBlue"
-                        AutoGenerateColumns="False"
-                        Background="White"
-                        CanUserAddRows="False"
-                        CanUserDeleteRows="False"
-                        ItemsSource="{Binding PropsToWrite}"
-                        SelectionMode="Single">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding PropertyName}"
-                                Header="属性"
-                                IsReadOnly="True" />
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding PropertyType}"
-                                Header="属性类型"
-                                IsReadOnly="True" />
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding PropertyValue}"
-                                Header="属性值 " />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </dxlc:LayoutItem>
-            </dxlc:LayoutGroup>
+                <DataGrid
+                    Grid.Row="1"
+                    Margin="0,5"
+                    AlternatingRowBackground="AliceBlue"
+                    AutoGenerateColumns="False"
+                    Background="White"
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False"
+                    ItemsSource="{Binding PropsToWrite}"
+                    SelectionMode="Single">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding PropertyName}"
+                            Header="属性"
+                            IsReadOnly="True" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding PropertyType}"
+                            Header="属性类型"
+                            IsReadOnly="True" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding PropertyValue}"
+                            Header="属性值 " />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
         </GroupBox>
     </Grid>
 </UserControl>

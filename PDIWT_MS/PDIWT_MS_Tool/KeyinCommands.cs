@@ -126,28 +126,32 @@ namespace PDIWT_MS_Tool
         }
         #endregion
         //#region  EC Schema and instance
-        //public static void CmdFindSchema(string unparsed)
-        //{
-        //    Views.SchemaListView.ShowWindow();
-        //}
+        public static void CmdFindSchema(string unparsed)
+        {
+            PDIWT_Encrypt.Entrance.VerifyActivationState(Views.SchemaListView.ShowWindow);
+        }
 
-        //public static void CmdImportSchema(string unparsed)
-        //{
-        //    Views.CreateAndImportSchemaView.ShowWindow();
-        //}
-        //public static void CmdFindAllInstance(string unparsed)
-        //{
-        //    Views.FindnstancesView.ShowWindow();
-        //}
-        //public static void CmdWirteInstance(string unparsed)
-        //{
-        //    Models.WriteInstanceOnElementTool tool = new Models.WriteInstanceOnElementTool(0, 0);
-        //    tool.InstallNewInstance();
-        //}
-        //public static void CmdFindAllOnElement(string unparsed)
-        //{
-        //    Models.FindInstancesOnElementTool.InstallNewInstance();
-        //}
+        public static void CmdImportSchema(string unparsed)
+        {
+            PDIWT_Encrypt.Entrance.VerifyActivationState(Views.CreateAndImportSchemaView.ShowWindow);
+        }
+        public static void CmdFindAllInstance(string unparsed)
+        {
+            PDIWT_Encrypt.Entrance.VerifyActivationState(Views.FindnstancesView.ShowWindow);
+        }
+        public static void CmdWirteInstance(string unparsed)
+        {
+            PDIWT_Encrypt.Entrance.VerifyActivationState(() =>
+            {
+                Models.WriteInstanceOnElementTool tool = new Models.WriteInstanceOnElementTool(0, 0);
+                tool.InstallNewInstance();
+            });
+
+        }
+        public static void CmdFindAllOnElement(string unparsed)
+        {
+            PDIWT_Encrypt.Entrance.VerifyActivationState(Models.FindInstancesOnElementTool.InstallNewInstance);
+        }
         //#endregion
         #region Level export
         public static void ExportRGBColorTable(string unparsed)

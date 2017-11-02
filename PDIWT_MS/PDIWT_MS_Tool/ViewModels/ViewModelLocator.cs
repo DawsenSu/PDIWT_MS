@@ -27,15 +27,28 @@ namespace PDIWT_MS_Tool.ViewModels
                 // SimpleIoc.Default.Register<IDataService, DataService>();
             }
 
+            SimpleIoc.Default.Register < SchemaListViewModel>();
+            SimpleIoc.Default.Register<CreateAndImportSchemaViewModel>();
+            SimpleIoc.Default.Register<FindnstancesViewModel>();
+            SimpleIoc.Default.Register<WriteInstanceOnElementViewModel>();
+
             SimpleIoc.Default.Register<CellFastPutViewModel>();
             SimpleIoc.Default.Register<CellsArmorPutViewModel>();
             SimpleIoc.Default.Register<ModelCreatorViewModel>();
             SimpleIoc.Default.Register<LevelExportViewModel>();
+
+
         }
 
         /// <summary>
         /// Gets the Main property.
         /// </summary>
+        /// 
+
+        public SchemaListViewModel SchemaListVM => ServiceLocator.Current.GetInstance<SchemaListViewModel>();
+        public CreateAndImportSchemaViewModel ImportSchemaVM => ServiceLocator.Current.GetInstance<CreateAndImportSchemaViewModel>();
+        public FindnstancesViewModel FindInstanceVM => ServiceLocator.Current.GetInstance<FindnstancesViewModel>();
+        public WriteInstanceOnElementViewModel WriteIstanceOnEleVm => ServiceLocator.Current.GetInstance<WriteInstanceOnElementViewModel>();
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]

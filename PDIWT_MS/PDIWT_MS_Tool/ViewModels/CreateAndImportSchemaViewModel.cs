@@ -17,56 +17,79 @@ namespace PDIWT_MS_Tool.ViewModels
 {
     public class CreateAndImportSchemaViewModel : ViewModelBase
     {
+        public CreateAndImportSchemaViewModel()
+        {
+            SchemaTreeViewItems = new ObservableCollection<SchemaNode>();
+            PropertyTypes = new ObservableCollection<string>() { "String", "Boolean", "Integer", "Double" };
+            SelectedPropertyType = PropertyTypes.First();
+        }
+        private ObservableCollection<SchemaNode> _SchemaTreeViewItems;
         public ObservableCollection<SchemaNode> SchemaTreeViewItems
         {
-            get { return GetProperty(() => SchemaTreeViewItems); }
-            set { SetProperty(() => SchemaTreeViewItems, value); }
+            get { return _SchemaTreeViewItems; }
+            set { Set(ref _SchemaTreeViewItems, value); }
         }
+
+        private string _SchemaName;
         public string SchemaName
         {
-            get { return GetProperty(() => SchemaName); }
-            set { SetProperty(() => SchemaName, value); }
+            get { return _SchemaName; }
+            set { Set(ref _SchemaName, value); }
         }
+
+        private string _ClassName;
         public string ClassName
         {
-            get { return GetProperty(() => ClassName); }
-            set { SetProperty(() => ClassName, value); }
+            get { return _ClassName; }
+            set { Set(ref _ClassName, value); }
         }
+
+        private string _PropertyName;
         public string PropertyName
         {
-            get { return GetProperty(() => PropertyName); }
-            set { SetProperty(() => PropertyName, value); }
+            get { return _PropertyName; }
+            set { Set(ref _PropertyName, value); }
         }
+
+        private string _SelectedPropertyType;
         public string SelectedPropertyType
         {
-            get { return GetProperty(() => SelectedPropertyType); }
-            set { SetProperty(() => SelectedPropertyType, value); }
+            get { return _SelectedPropertyType; }
+            set { Set(ref _SelectedPropertyType, value); }
         }
+
+        private ObservableCollection<string> _PropertyTypes;
         public ObservableCollection<string> PropertyTypes
         {
-            get { return GetProperty(() => PropertyTypes); }
-            set { SetProperty(() => PropertyTypes, value); }
+            get { return _PropertyTypes; }
+            set { Set(ref _PropertyTypes, value); }
         }
-        [Command]
-        public void CreateSchema()
+
+        private RelayCommand _CreateSchema;
+        public RelayCommand CreateSchema => _CreateSchema ?? (_CreateSchema = new RelayCommand(ExecuteCreateSchema,()=> !string.IsNullOrEmpty(SchemaName)));
+        public void ExecuteCreateSchema()
         {
             SchemaTreeViewItems.Add(new SchemaNode() { Name = SchemaName, ClassNodes = new ObservableCollection<ClassNode>() });
         }
-        public bool CanCreateSchema() => !string.IsNullOrEmpty(SchemaName);
-        [Command]
-        public void CreateClass()
+
+        private RelayCommand _CreateClass;
+        public RelayCommand CreateClass => _CreateClass ?? (_CreateClass = new RelayCommand(ExecuteCreateClass,()=> !string.IsNullOrEmpty(ClassName) && SchemaTreeViewItems.Count > 0));
+        public void ExecuteCreateClass()
         {
             SchemaTreeViewItems.Last().ClassNodes.Add(new ClassNode() { Name = ClassName, PropertyNodes = new ObservableCollection<PropertyNode>() });
         }
-        public bool CanCreateClass() =>  !string.IsNullOrEmpty(ClassName) && SchemaTreeViewItems.Count > 0 ;
-        [Command]
-        public void CreateProperty()
+
+        private RelayCommand _CreateProperty;
+        public RelayCommand CreateProperty => _CreateProperty ?? (_CreateProperty = new RelayCommand(ExecuteCreateProperty, CanCreateProperty));
+        public void ExecuteCreateProperty()
         {
             SchemaTreeViewItems.Last().ClassNodes.Last().PropertyNodes.Add(new PropertyNode() { Name = PropertyName, PropertyType = SelectedPropertyType });
         }
         public bool CanCreateProperty() => !string.IsNullOrEmpty(PropertyName) && SchemaTreeViewItems.Count > 0 && SchemaTreeViewItems.Last().ClassNodes.Count > 0;
-        [Command]
-        public void CreateAndImport()
+
+        private RelayCommand _CreateAndImport;
+        public RelayCommand CreateAndImport => _CreateAndImport ?? (_CreateAndImport = new RelayCommand(ExecuteCreateAndImport, CanCreateAndImport));
+        public void ExecuteCreateAndImport()
         {
             ECSchema schema = new ECSchema(SchemaTreeViewItems.Last().Name, 1, 0, "PDIWT");
             foreach (var classnode in SchemaTreeViewItems.Last().ClassNodes)
@@ -87,8 +110,10 @@ namespace PDIWT_MS_Tool.ViewModels
             }
         }
         public bool CanCreateAndImport() => SchemaTreeViewItems.Count > 0 && SchemaTreeViewItems.Last().ClassNodes.Count > 0 && SchemaTreeViewItems.Last().ClassNodes.Last().PropertyNodes.Count > 0;
-        [Command]
-        public void Clear()
+
+        private RelayCommand _Clear;
+        public RelayCommand Clear => _Clear ?? (_Clear = new RelayCommand(ExecuteClear));
+        public void ExecuteClear()
         {
             if (MessageBox.Show("你确定要丢弃当前的Schema吗？", "水规院", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
@@ -115,53 +140,54 @@ namespace PDIWT_MS_Tool.ViewModels
             }
             return ECObjects.StringType;
         }
-
-        protected override void OnInitializeInRuntime()
-        {
-            base.OnInitializeInRuntime();
-            SchemaTreeViewItems = new ObservableCollection<SchemaNode>();
-            PropertyTypes = new ObservableCollection<string>() { "String", "Boolean", "Integer", "Double" };
-            SelectedPropertyType = PropertyTypes.First();
-        }
     }
-    public class SchemaNode:BindableBase
+
+    public class SchemaNode:ObservableObject
     {
+        private string _Name;
         public string Name
         {
-            get { return GetProperty(() => Name); }
-            set { SetProperty(() => Name, value); }
+            get { return _Name; }
+            set { Set(ref _Name, value); }
         }
+
+        private ObservableCollection<ClassNode> _ClassNodes;
         public ObservableCollection<ClassNode> ClassNodes
         {
-            get { return GetProperty(() => ClassNodes); }
-            set { SetProperty(() => ClassNodes, value); }
+            get { return _ClassNodes; }
+            set { Set(ref _ClassNodes, value); }
         }
     }
-    public class ClassNode:BindableBase
+    public class ClassNode: ObservableObject
     {
+        private string _Name;
         public string Name
         {
-            get { return GetProperty(() => Name); }
-            set { SetProperty(() => Name, value); }
+            get { return _Name; }
+            set { Set(ref _Name, value); }
         }
+
+        private ObservableCollection<PropertyNode> _PropertyNodes;
         public ObservableCollection<PropertyNode> PropertyNodes
         {
-            get { return GetProperty(() => PropertyNodes); }
-            set { SetProperty(() => PropertyNodes, value); }
+            get { return _PropertyNodes; }
+            set { Set(ref _PropertyNodes, value); }
         }
 
     }
-    public class PropertyNode:BindableBase
+    public class PropertyNode:ObservableObject
     {
+        private string _Name;
         public string Name
         {
-            get { return GetProperty(() => Name); }
-            set { SetProperty(() => Name, value); }
+            get { return _Name; }
+            set { Set(ref _Name, value); }
         }
+        private string _PropertyType;
         public string PropertyType
         {
-            get { return GetProperty(() => PropertyType); }
-            set { SetProperty(() => PropertyType, value); }
+            get { return _PropertyType; }
+            set { Set(ref _PropertyType, value); }
         }
     }
 }

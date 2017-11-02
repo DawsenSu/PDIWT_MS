@@ -4,8 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ViewModels="clr-namespace:PDIWT_MS_Tool.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
-    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodel="clr-namespace:PDIWT_MS_Tool.ViewModels"
     Title="创建并导入schema"
@@ -14,6 +12,10 @@
     mc:Ignorable="d">
     <Window.Resources>
         <Style TargetType="Button">
+            <Setter Property="Margin" Value="2,0" />
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Margin" Value="2,0" />
         </Style>
         <HierarchicalDataTemplate DataType="{x:Type viewmodel:SchemaNode}" ItemsSource="{Binding ClassNodes}">
@@ -29,80 +31,153 @@
             </StackPanel>
         </HierarchicalDataTemplate>
     </Window.Resources>
-    <dxlc:LayoutControl>
-        <dxlc:LayoutGroup>
-            <TreeView ItemsSource="{Binding SchemaTreeViewItems}" />
-        </dxlc:LayoutGroup>
-        <dxlc:LayoutGroup Orientation="Vertical">
-            <GroupBox VerticalAlignment="Top" Header="Schmea">
-                <dxlc:LayoutItem Label="名称：">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox
-                            Grid.Column="0"
-                            VerticalContentAlignment="Center"
-                            Text="{Binding SchemaName}" />
-                        <Button
-                            Grid.Column=" 1"
-                            HorizontalAlignment="Right"
-                            Command="{Binding CreateSchemaCommand}"
-                            Content="创建" />
-                    </Grid>
-                </dxlc:LayoutItem>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <TreeView
+            Grid.Column="0"
+            Margin="2"
+            ItemsSource="{Binding SchemaTreeViewItems}" />
+        <Grid Grid.Column="1" Margin="2">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <GroupBox
+                Grid.Row="0"
+                VerticalAlignment="Top"
+                Header="Schmea">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Left"
+                        Text="名称：" />
+                    <TextBox
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        VerticalContentAlignment="Center"
+                        Text="{Binding SchemaName}" />
+                    <Button
+                        Grid.Row="1"
+                        Grid.Column=" 1"
+                        HorizontalAlignment="Right"
+                        Command="{Binding CreateSchema}"
+                        Content="创建" />
+                </Grid>
             </GroupBox>
-            <GroupBox VerticalAlignment="Top" Header="Classes">
-                <dxlc:LayoutItem Label="名称：">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox
-                            Grid.Column="0"
-                            VerticalContentAlignment="Center"
-                            Text="{Binding ClassName}" />
-                        <Button
-                            Grid.Column=" 1"
-                            HorizontalAlignment="Right"
-                            Command="{Binding CreateClassCommand}"
-                            Content="创建" />
-                    </Grid>
-                </dxlc:LayoutItem>
+
+            <GroupBox
+                Grid.Row="1"
+                VerticalAlignment="Top"
+                Header="Classes">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Left"
+                        Text="名称：" />
+
+                    <TextBox
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        VerticalContentAlignment="Center"
+                        Text="{Binding ClassName}" />
+                    <Button
+                        Grid.Row="1"
+                        Grid.Column=" 1"
+                        HorizontalAlignment="Right"
+                        Command="{Binding CreateClass}"
+                        Content="创建" />
+                </Grid>
             </GroupBox>
-            <GroupBox VerticalAlignment="Top" Header="Properties">
-                <dxlc:LayoutGroup Orientation="Vertical">
-                    <dxlc:LayoutItem Label="名称：">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="auto" />
-                            </Grid.ColumnDefinitions>
-                            <TextBox
-                                Grid.Column="0"
-                                VerticalContentAlignment="Center"
-                                Text="{Binding PropertyName}" />
-                            <Button
-                                Grid.Column=" 1"
-                                HorizontalAlignment="Right"
-                                Command="{Binding CreatePropertyCommand}"
-                                Content="创建" />
-                        </Grid>
-                    </dxlc:LayoutItem>
-                    <dxlc:LayoutItem Label="类型">
-                        <ComboBox ItemsSource="{Binding PropertyTypes}" SelectedItem="{Binding SelectedPropertyType}" />
-                    </dxlc:LayoutItem>
-                </dxlc:LayoutGroup>
+
+            <GroupBox
+                Grid.Row="2"
+                VerticalAlignment="Top"
+                Header="Properties">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Left"
+                        Text="名称：" />
+
+                    <TextBox
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        VerticalContentAlignment="Center"
+                        Text="{Binding PropertyName}" />
+                    <Button
+                        Grid.Row="1"
+                        Grid.Column=" 1"
+                        HorizontalAlignment="Right"
+                        Command="{Binding CreateProperty}"
+                        Content="创建" />
+                    <DockPanel
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2">
+                        <TextBlock Text="类型" />
+                        <ComboBox
+                            Margin="2"
+                            HorizontalAlignment="Stretch"
+                            ItemsSource="{Binding PropertyTypes}"
+                            SelectedItem="{Binding SelectedPropertyType}" />
+                    </DockPanel>
+                </Grid>
             </GroupBox>
+
             <StackPanel
+                Grid.Row="3"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Orientation="Horizontal">
-                <Button Command="{Binding CreateAndImportCommand}" Content="创建并导入" />
-                <Button Command="{Binding ClearCommand}" Content="清除" />
+                <Button
+                    Width="80"
+                    Command="{Binding CreateAndImport}"
+                    Content="创建并导入" />
+                <Button
+                    Width="80"
+                    Command="{Binding Clear}"
+                    Content="清除" />
             </StackPanel>
-        </dxlc:LayoutGroup>
-    </dxlc:LayoutControl>
+        </Grid>
+    </Grid>
 </Window>

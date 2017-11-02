@@ -135,8 +135,8 @@
       <HintPath>..\packages\BentleyWPF.1.2.0\lib\net461\Bentley.Windowing.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="EPPlus, Version=4.1.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPPlus.4.1.1\lib\net40\EPPlus.dll</HintPath>
+    <Reference Include="EPPlus, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EPPlus.DataExtractor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

@@ -1,5 +1,4 @@
-﻿using DevExpress.Mvvm;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +24,8 @@ namespace PDIWT_MS_Tool.Views
         private SchemaListView()
         {
             InitializeComponent();
-            this.DataContext = new ViewModels.SchemaListViewModel();
+            var _locator = new ViewModels.ViewModelLocator();
+            this.DataContext = _locator.SchemaListVM;
             m_wpfHelper = new BMWPF.WPFInteropHelper(this);
             m_wpfHelper.Attach(Program.Addin, true, "SchemaListViewHost");
         }
