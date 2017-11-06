@@ -88,6 +88,24 @@ namespace PDIWT_MS_Tool.Properties {
         }
         
         /// <summary>
+        ///   查找类似 点击鼠标左键确认 的本地化字符串。
+        /// </summary>
+        public static string PROMPT_AceeptCreatePoint {
+            get {
+                return ResourceManager.GetString("PROMPT_AceeptCreatePoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 框选要提取的表格 的本地化字符串。
+        /// </summary>
+        public static string PROMPT_BoxSelectPoint {
+            get {
+                return ResourceManager.GetString("PROMPT_BoxSelectPoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 提示： 的本地化字符串。
         /// </summary>
         public static string PromptHeader {

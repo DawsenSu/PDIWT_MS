@@ -60,6 +60,7 @@
     <KeyinTable ID="ModelCmd">
       <Keyword CommandWord="CREATEFROMEXCEL"/>
     </KeyinTable>
+
   </SubKeyinTables>
   
   <KeyinHandlers>
@@ -78,7 +79,7 @@
     <!--CELLS-->
     <KeyinHandler Keyin="PDIWT_MS_Tool CELLS FASTPUT" Function="PDIWT_MS_Tool.KeyinCommands.CellsFastPut"/>
     <KeyinHandler Keyin="PDIWT_MS_Tool CELLS ARMORPUT" Function="PDIWT_MS_Tool.KeyinCommands.CellsArmorPut"/>
-<!--MODELS-->
+    <!--MODELS-->
     <KeyinHandler Keyin="PDIWT_MS_Tool MODELS CREATEFROMEXCEL" Function="PDIWT_MS_Tool.KeyinCommands.ModelsCreateFromExcel"/>
   </KeyinHandlers>
 </KeyinTree>

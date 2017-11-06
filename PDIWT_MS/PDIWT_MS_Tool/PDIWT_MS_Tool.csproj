@@ -158,11 +158,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\PDIWT_Encrypt.dll</HintPath>
     </Reference>
-    <Reference Include="PDIWT_MS_CPP, Version=1.0.6443.28112, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\PDIWT_MS_CPP.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -309,6 +304,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\Excel.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PDIWT_MS_CPP\PDIWT_MS_CPP.vcxproj">
+      <Project>{90410a07-16ee-46f7-9418-9e5a1d866994}</Project>
+      <Name>PDIWT_MS_Tool_CPP</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

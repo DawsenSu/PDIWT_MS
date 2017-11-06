@@ -161,6 +161,7 @@
             </TabItem>
             <TabItem Header="空箱">
                 <DetailUC:EmptyBoxSummaryUserControl />
+                <!--  todo 添加闸门检修空箱  -->
             </TabItem>
             <!--<TabItem Header="Test">
                 <DockPanel>
@@ -175,7 +176,7 @@
             Grid.Row="2"
             Background="{Binding Path=Status, Converter={StaticResource StatusToBackgroundConverter}}"
             Foreground="White">
-            <StatusBarItem HorizontalAlignment="Left">
+            <StatusBarItem HorizontalAlignment="Stretch">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />

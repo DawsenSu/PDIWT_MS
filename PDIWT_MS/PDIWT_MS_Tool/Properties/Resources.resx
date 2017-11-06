@@ -129,6 +129,12 @@
   <data name="PromptHeader" xml:space="preserve">
     <value>提示：</value>
   </data>
+  <data name="PROMPT_AceeptCreatePoint" xml:space="preserve">
+    <value>点击鼠标左键确认</value>
+  </data>
+  <data name="PROMPT_BoxSelectPoint" xml:space="preserve">
+    <value>框选要提取的表格</value>
+  </data>
   <data name="PutArmorToolChoosePlan" xml:space="preserve">
     <value>选择要放置的四边平面(或右键退出)</value>
   </data>

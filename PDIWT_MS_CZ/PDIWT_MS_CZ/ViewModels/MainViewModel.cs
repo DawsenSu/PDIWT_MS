@@ -21,6 +21,7 @@ using MessageBox = System.Windows.MessageBox;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Bentley.MstnPlatformNET;
 
 namespace PDIWT_MS_CZ.ViewModels
 {
@@ -806,6 +807,8 @@ namespace PDIWT_MS_CZ.ViewModels
             //PDIWT_MS_CZ_CPP.LockHeadDrawing Drawing = new PDIWT_MS_CZ_CPP.LockHeadDrawing(CZ_LockHeadParameters);
             LockHeaderCreateTool _tool = new LockHeaderCreateTool(0, 0, CZ_LockHeadParameters);
             _tool.InstallTool();
+            MessageCenter.Instance.StatusCommand = "创建闸首";
+            MessageCenter.Instance.StatusPrompt = "选择插入点";
         }
 
         private RelayCommand _ResetParam;

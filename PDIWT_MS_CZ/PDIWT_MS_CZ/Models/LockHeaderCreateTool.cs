@@ -17,8 +17,7 @@ namespace PDIWT_MS_CZ.Models
     {
         public LockHeaderCreateTool(int toolName, int toolPrompt, LockHeadParameters lhparam) : base(toolName, toolPrompt)
         {
-            MessageCenter.Instance.StatusCommand = "创建闸首";
-            MessageCenter.Instance.StatusPrompt = "选择插入点";
+
 
             _scale = Session.Instance.GetActiveDgnModel().GetModelInfo().UorPerMeter / 1000;
             _DrawingValid = StatusInt.Error;
