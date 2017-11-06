@@ -6,16 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using Bentley.ECObjects.Instance;
-using DevExpress.Mvvm.Native;
+
 using BD = Bentley.DgnPlatformNET;
 using BG = Bentley.GeometryNET;
 using BDE = Bentley.DgnPlatformNET.Elements;
 using BM = Bentley.MstnPlatformNET;
-using PDIWT_MS_ZJCZL_Re.Properties;
+using PDIWT_MS_PiledWharf.Properties;
 
 using OfficeOpenXml;
 using EPPlus.DataExtractor;
-namespace PDIWT_MS_ZJCZL_Re.Models
+namespace PDIWT_MS_PiledWharf.Models
 {
     class DrawLineElementFromExcelFile
     {

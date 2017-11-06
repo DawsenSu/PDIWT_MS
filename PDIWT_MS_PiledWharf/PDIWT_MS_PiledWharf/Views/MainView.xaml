@@ -4,28 +4,36 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     Title="桩基承载力分析工具"
     Width="700"
     Height="500">
     <Window.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Margin" Value="10,2" />
-        </Style>
-        <Style x:Key="RedFont" TargetType="{x:Type TextBox}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Text}" Value="-1">
-                    <Setter Property="FontStyle" Value="Italic" />
-                    <Setter Property="Foreground" Value="Red" />
-                    <Setter Property="FontWeight" Value="DemiBold" />
-                    <Setter Property="ToolTip" Value="请点击&lt;计算桩基承载力&gt;按钮获得计算值" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/Xaml/CommonResource.xaml" />
+                <ResourceDictionary>
+                    <Style x:Key="RedFont" TargetType="{x:Type TextBox}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Text}" Value="-1">
+                                <Setter Property="FontStyle" Value="Italic" />
+                                <Setter Property="Foreground" Value="Red" />
+                                <Setter Property="FontWeight" Value="DemiBold" />
+                                <Setter Property="ToolTip" Value="请点击&lt;计算桩基承载力&gt;按钮获得计算值" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+
         </Grid.RowDefinitions>
         <!--  Menu  -->
         <Menu Grid.Row="0">
@@ -64,9 +72,118 @@
                     <Image Source="../Resources/Icons/DrawPilePosition.ico" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="test" />
+            <MenuItem Command="{Binding Test}" Header="test" />
         </Menu>
         <!--  Main Layout  -->
+        <DockPanel Grid.Row="1">
+            <!--  桩信息面板  -->
+            <Grid DockPanel.Dock="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <GroupBox Grid.Row="0" Header="桩信息">
+                        <ListBox
+                            MinWidth="120"
+                            Background="White"
+                            ItemsSource="{Binding Piles}"
+                            SelectedItem="{Binding CurrentPile}" />
+                    </GroupBox>
+                    <DockPanel Grid.Row="1" HorizontalAlignment="Center">
+                        <Button Command="{Binding RemovePileCommand}" Content="删除所选桩" />
+                        <Button Command="{Binding RemoveAllPileCommand}" Content="删除所有桩" />
+                    </DockPanel>
+                </Grid>
+            </Grid>
+            <!--  土层信息面板  -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <GroupBox Grid.Row="0" Header="土层信息">
+                    <DataGrid>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding SoilLayerName}"
+                                Header="土层名称" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding SoilLayerNum}"
+                                Header="土层编号" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding PileInSoilLayerTopZ}"
+                                Header="层顶高程" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding PileInSoilLayerLength}"
+                                Header="土层内长度" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding Qfi}"
+                                Header="极限侧摩阻qfi" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding Xii}"
+                                Header="折减系数ξi" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </GroupBox>
+                <GroupBox Grid.Row="1" Header="桩端参数">
+                    <DockPanel>
+                        <TextBlock>
+                            <Run Text="q" />
+                            <Run
+                                BaselineAlignment="Subscript"
+                                FontSize="8"
+                                Text="R" />
+                            <Run Text="=" />
+                        </TextBlock>
+                        <TextBox Text="{Binding Qr}" />
+                    </DockPanel>
+                </GroupBox>
+            </Grid>
+        </DockPanel>
+        <!--  计算结果  -->
+        <GroupBox Grid.Row="2" Header="计算结果">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Text="单桩垂直极限承载力设计值（kN）：" />
+                <xctk:WatermarkTextBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Text="{Binding CalculateQd}"
+                    Watermark="未定义" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Text="单桩抗拔极限承载力设计值（kN）：" />
+                <xctk:WatermarkTextBox
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Text="{Binding CalculateTd}"
+                    Watermark="未定义" />
+            </Grid>
+        </GroupBox>
+
         <!--<dxlc:LayoutControl Grid.Row="1" Orientation="Vertical">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -206,7 +323,7 @@
                             MaskType="Numeric"
                             MaskUseAsDisplayFormat="True"
                             NullText="未定义"
-                            Text="{DXBinding 'CurrentPile.CalculateTd()',
+                            Text="{DXBinding 'CurrentPile.',
                                              Mode=OneWay,
                                              ValidatesOnExceptions=True}"
                             TextWrapping="WrapWithOverflow" />

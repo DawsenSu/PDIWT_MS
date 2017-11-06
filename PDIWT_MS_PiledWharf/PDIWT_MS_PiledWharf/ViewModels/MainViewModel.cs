@@ -47,9 +47,13 @@ namespace PDIWT_MS_PiledWharf.ViewModels
             //view.ShowDialog();
         }
 
-        public void Test()
+        private RelayCommand _Test;
+        public RelayCommand Test => _Test ?? (_Test = new RelayCommand(ExecuteTest));
+        public void ExecuteTest()
         {
-            
+            Models.IntersectionPointQuery _test = new Models.IntersectionPointQuery();
+            var _list = _test.FindBSElement();
+            MessageBox.Show(_list.Count.ToString());
         }
     }
 }
