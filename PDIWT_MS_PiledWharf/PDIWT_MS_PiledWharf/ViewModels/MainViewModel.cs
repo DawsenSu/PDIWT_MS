@@ -11,12 +11,36 @@ namespace PDIWT_MS_PiledWharf.ViewModels
 {
     using Interface;
     using Models;
+    using Models.Soil;
     using Models.Piles;
+    using Models.Piles.CrossSection;
     public class MainViewModel : ViewModelBase
     {
         public MainViewModel()
         {
-
+            _Piles = new ObservableCollection<PileBase>()
+            {
+                new SolidPile()
+                {
+                    TopPoint = new Bentley.GeometryNET.DPoint3d(0, 0, 0),
+                    BottomPoint = new Bentley.GeometryNET.DPoint3d(0, 0, -100),
+                    Code = "Pile1",
+                    ID = 2120,
+                    GammaR = 1.2,
+                    ICrossSection = new SquareCrossSection(0.5)
+                },
+                new SolidPile()
+                {
+                    TopPoint = new Bentley.GeometryNET.DPoint3d(10, 15, 0),
+                    BottomPoint = new Bentley.GeometryNET.DPoint3d(10, 10, -80),
+                    Code = "Pile2",
+                    ID = 333,
+                    GammaR = 1.5,
+                    ICrossSection = new SquareCrossSection(0.6)
+                },
+            };
+            if (_Piles.Count > 0)
+                _SelectedPile = _Piles.First();
         }
 
         private ObservableCollection<PileBase> _Piles;
@@ -30,11 +54,44 @@ namespace PDIWT_MS_PiledWharf.ViewModels
         public PileBase SelectedPile
         {
             get { return _SelectedPile; }
-            set { Set(ref _SelectedPile, value); }
+            set
+            {
+                Set(ref _SelectedPile, value);
+                RaisePropertyChanged(() => SelectedPile_pilepiecesoilinfo);
+                RaisePropertyChanged(() => SelectedPile_Qr);
+                RaisePropertyChanged(() => SelectedPile_Qd);
+                RaisePropertyChanged(() => SelectedPile_Td);
+            }
         }
 
+        public ObservableCollection<PilePieceInSoilLayerInfo> SelectedPile_pilepiecesoilinfo
+        {
+            get { return _SelectedPile?.GetPilePieceInEachSoilLayerInfos(); }
+        }
 
+        public double? SelectedPile_Qr
+        {
+            get
+            {
+                    return _SelectedPile?.GetPilePieceInEachSoilLayerInfos().Last().CurrentSoilLayerInfo.Qri;
+            }
+        }
 
+        public double? SelectedPile_Qd
+        {
+            get
+            {
+                    return _SelectedPile?.CalculateQd();
+            }
+        }
+
+        public double? SelectedPile_Td
+        {
+            get
+            { 
+                return _SelectedPile?.CalculateTd(1.2, -15);
+            }
+        }
 
 
         public void DrawPileLineFromFile()
@@ -73,10 +130,11 @@ namespace PDIWT_MS_PiledWharf.ViewModels
         {
             //Models.IntersectionPointQuery _test = new Models.IntersectionPointQuery();
             //var _list = _test.FindBSElement();
-            var _pointquery = new  PDIWT_MS_PiledWharf_CPP.PointQuery();
-            var _pileinfo = _pointquery.GetPilePieceSoilLayerInfos(new Bentley.GeometryNET.DPoint3d(0, 0, 0), new Bentley.GeometryNET.DPoint3d(0, 0, -1e8));
-            var _res = _pointquery.QueryResult;
-            MessageBox.Show(Enum.GetName(typeof(PDIWT_MS_PiledWharf_CPP.QueryResultStatus), _res));
+            //var _pointquery = new  PDIWT_MS_PiledWharf_CPP.PointQuery();
+            //var _pileinfo = _pointquery.GetPilePieceSoilLayerInfos(new Bentley.GeometryNET.DPoint3d(0, 0, 0), new Bentley.GeometryNET.DPoint3d(0, 0, -1e8));
+            //var _res = _pointquery.QueryResult;
+            //MessageBox.Show(Enum.GetName(typeof(PDIWT_MS_PiledWharf_CPP.QueryResultStatus), _res));
+            var _pileinfo = _SelectedPile.GetPilePieceInEachSoilLayerInfos();
             StringBuilder _sb = new StringBuilder();
             foreach (var _pile in _pileinfo)
             {

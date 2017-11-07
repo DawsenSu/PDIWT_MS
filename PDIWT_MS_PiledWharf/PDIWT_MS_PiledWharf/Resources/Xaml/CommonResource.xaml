@@ -73,8 +73,8 @@
         <Setter Property="Margin" Value="3" />
         <Setter Property="Background" Value="White" />
         <Setter Property="CanUserSortColumns" Value="False" />
-        <Setter Property="CanUserAddRows" Value="True" />
-        <Setter Property="CanUserDeleteRows" Value="True" />
+        <Setter Property="CanUserAddRows" Value="False" />
+        <Setter Property="CanUserDeleteRows" Value="False" />
         <Setter Property="CanUserReorderColumns" Value="False" />
         <Setter Property="ColumnHeaderStyle">
             <Setter.Value>
@@ -83,15 +83,7 @@
                 </Style>
             </Setter.Value>
         </Setter>
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
     </Style>
-    <Style TargetType="{x:Type DataGridTextColumn}">
-        <Setter Property="ElementStyle">
-            <Setter.Value>
-                <Style TargetType="TextBox">
-                    <Setter Property="HorizontalContentAlignment" Value="Center" />
-                </Style>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="IsReadOnly" Value="True" />
-    </Style>
+
 </ResourceDictionary>

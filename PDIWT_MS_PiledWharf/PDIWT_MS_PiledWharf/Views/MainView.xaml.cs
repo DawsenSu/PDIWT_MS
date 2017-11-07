@@ -30,6 +30,16 @@ namespace PDIWT_MS_PiledWharf.Views
             this.DataContext = locator.MainVM;
             m_wpfHelper = new BMWPF.WPFInteropHelper(this);
             m_wpfHelper.Attach(Program.Addin, true, "MainView");
+
+            //ObjectDataProvider _soilinfo_odp = new ObjectDataProvider();
+            //_soilinfo_odp.ObjectInstance = this.listbox_piles.SelectedItem;
+            //_soilinfo_odp.MethodName = "GetPilePieceInEachSoilLayerInfos";
+            //Binding _binding_selecteditem_to_soilinfo = new Binding(".")
+            //{
+            //    Source = _soilinfo_odp,
+            //};
+
+            //BindingOperations.SetBinding(this.datagrid_soilinfo, DataGrid.ItemsSourceProperty, _binding_selecteditem_to_soilinfo);
         }
 
         static MainView m_windowhost;

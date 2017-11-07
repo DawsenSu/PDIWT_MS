@@ -83,8 +83,7 @@ PDIWT_MS_PiledWharf_CPP::QueryResultStatus PDIWT_MS_PiledWharf_CPP::Intersection
 				_pilesoilinfo->PileBottomZ_InCurrentSoilLayer = _nextitr->first.z / _uorpermeter;
 				_pilesoilinfo->PilePieceLength = (_itr->first - _nextitr->first).Magnitude() / _uorpermeter;
 				_result->Add(_pilesoilinfo);
-			}
-			
+			}			
 		}
 	}
 	return _queryresult;
