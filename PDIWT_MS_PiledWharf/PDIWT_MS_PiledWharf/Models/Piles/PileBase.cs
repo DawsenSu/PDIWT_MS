@@ -99,10 +99,12 @@ namespace PDIWT_MS_PiledWharf.Models.Piles
             return _pileVec.AngleTo(DVector3d.FromXYZ(0, 0, -1)).Cos;
         }
 
-        // todo 需要编写程序从模型中提取 (返回数据需要从上到下排序)
+        //! 通过C++/CLI编写托管与非托管混合程序
         public virtual ObservableCollection<PilePieceInSoilLayerInfo> GetPilePieceInEachSoilLayerInfos()
         {
-            return new ObservableCollection<PilePieceInSoilLayerInfo>();
+            var _query = new PDIWT_MS_PiledWharf_CPP.PointQuery();
+            double _uorpermeter = Program.GetActiveDgnModel().GetModelInfo().UorPerMeter; ;
+            return _query.GetPilePieceSoilLayerInfos(DPoint3d.Multiply(_TopPoint, _uorpermeter), DPoint3d.Multiply(_BottomPoint, _uorpermeter));
         }
 
     }

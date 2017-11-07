@@ -1,0 +1,2257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="PowerGeo" nameSpacePrefix="HCHX" version="1.0" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECSchemaReference name="Bentley_Standard_CustomAttributes" version="01.00" prefix="bsca" />
+    <ECSchemaReference name="EditorCustomAttributes" version="01.00" prefix="beca" />
+    <ECCustomAttributes>
+        <SchemaChangeTrackingState xmlns="Bentley_Standard_CustomAttributes.01.00">
+            <FinalizationHistory />
+            <TrackingEnabled>True</TrackingEnabled>
+            <SchemaFullNameAtEditingStart>PowerGeo.01.00</SchemaFullNameAtEditingStart>
+        </SchemaChangeTrackingState>
+    </ECCustomAttributes>
+    <ECClass typeName="AttributeModify" displayLabel="属性修改信息" isDomainClass="True">
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="ModifyAttributeId" typeName="int" displayLabel="修改属性Id">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>3000</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ModifyAttributeName" typeName="string" displayLabel="修改属性名称">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>2999</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ModifyUsageStatus" typeName="int">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>2998</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If3D>True</If3D>
+                    <If2D>True</If2D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ModifyUsageStatusDescription" typeName="string" displayLabel="状态">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>2997</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ModifyBoundaryType" typeName="int">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>2996</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ModifyBoundaryTypeDescription" typeName="string" displayLabel="边界">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>2995</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ModifyCategoryName" typeName="string" displayLabel="修改属性名称">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ModifyCategoryId" typeName="int" displayLabel="修改类型Id">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="PowerGeoBase" isDomainClass="True">
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="CategoryName" typeName="string" displayLabel="地质类型" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>5000</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="CategoryId" typeName="int" displayLabel="地质类型ID" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4900</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                    <If xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CoverlayerBottomData" displayLabel="覆盖层底面" isDomainClass="True">
+        <BaseClass>PowerGeoBase</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="Id" typeName="int">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECArrayProperty propertyName="InnerId" typeName="int" minOccurs="0" maxOccurs="unbounded">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+    </ECClass>
+    <ECClass typeName="CoverLayerBoundaryLine" displayLabel="地质界面边界线" isDomainClass="True">
+        <BaseClass>PowerGeoBase</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="Id" typeName="int" displayLabel="标示Id">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4801</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ParentCategoryName" typeName="string" displayLabel="地质界面类型">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4600</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ParentCategoryId" typeName="int" displayLabel="父地质类型Id">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4700</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ParentId" typeName="int" description="符类型" displayLabel="父标示Id">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4800</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If3D>True</If3D>
+                    <If2D>True</If2D>
+                </HideProperty>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ParentCategory" typeName="string" displayLabel="地质界面名称">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4500</Priority>
+                </PropertyPriority>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CoverlayerTopData" displayLabel="地质界面顶面" isDomainClass="True">
+        <BaseClass>PowerGeoBase</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="Id" typeName="int">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECArrayProperty propertyName="InnerId" typeName="int" minOccurs="0" maxOccurs="unbounded">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+    </ECClass>
+    <ECClass typeName="Drill" displayLabel="钻孔" isDomainClass="True">
+        <BaseClass>PowerGeoBase</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="UserId" typeName="string" displayLabel="编号" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>3000</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Id" typeName="string" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>2000</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TopElevation" typeName="double" displayLabel="顶面高程" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>2900</Priority>
+                </PropertyPriority>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="BottomElevation" typeName="double" displayLabel="底面高程" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>2800</Priority>
+                </PropertyPriority>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TopDepth" typeName="double" displayLabel="顶面埋深" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>2700</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="BottomDepth" typeName="double" displayLabel="底面埋深" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>2600</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Depth" typeName="double" displayLabel="层厚" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>2500</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="DrillDescription" typeName="string" displayLabel="描述" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>2400</Priority>
+                </PropertyPriority>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="DirllGeotechnicalLithology" displayLabel="钻孔岩性信息" isDomainClass="True">
+        <BaseClass>Drill</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="GeotechnicalLithologyId" typeName="int" displayLabel="岩性标示ID" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>1900</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="GeotechnicalLithologyUserId" typeName="string" displayLabel="岩性编号" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>2950</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="DrapeData" displayLabel="褶皱界面" isDomainClass="True">
+        <BaseClass>PowerGeoBase</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="UserId" typeName="string" description="编号" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4800</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Id" typeName="int" description="标示Id">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4700</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="DrillGeologicalLargeLayer" displayLabel="钻孔地层信息" isDomainClass="True">
+        <BaseClass>Drill</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="GeologicalLargeLayerId" typeName="int" displayLabel="大层标示ID" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>1900</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If3D>True</If3D>
+                    <If2D>True</If2D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="GeologicalLargeLayerUserId" typeName="string" displayLabel="分层编号" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>2950</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="DrillWeatherLevel" displayLabel="钻孔风化信息" isDomainClass="True">
+        <BaseClass>Drill</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="WeatheredLevel" typeName="int" displayLabel="风化等级Id" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>1950</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="WeatheredName" typeName="string" displayLabel="风化名称" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>2950</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="DrillWhole" displayLabel="整段钻孔信息" isDomainClass="True">
+        <BaseClass>Drill</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="ExploratoryLine" displayLabel="勘探线" isDomainClass="True">
+        <BaseClass>PowerGeoBase</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="UserId" typeName="string" displayLabel="编号" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4800</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Id" typeName="int" displayLabel="标示Id" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4700</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="FaultData" displayLabel="断层" isDomainClass="True">
+        <BaseClass>PowerGeoBase</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="Id" typeName="int" description="标示Id" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4800</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="UserId" typeName="string" displayLabel="编号" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4700</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="FootrillData" displayLabel="平硐" isDomainClass="True">
+        <BaseClass>PowerGeoBase</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="Id" typeName="int" description="标示Id" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4800</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="UserId" typeName="string" displayLabel="名称" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4700</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="FootrillDetailData" displayLabel="平硐信息" isDomainClass="True">
+        <BaseClass>PowerGeoBase</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="ParentId" typeName="int" displayLabel="地质界面Id" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4800</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ParentCategoryName" typeName="string" displayLabel="地质界面类型" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4600</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Trend" typeName="string" displayLabel="倾向" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4300</Priority>
+                </PropertyPriority>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TrendAngle" typeName="double" displayLabel="倾角" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4200</Priority>
+                </PropertyPriority>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Id" typeName="int" displayLabel="编号" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4850</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="PositionX" typeName="double" displayLabel="X坐标" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4500</Priority>
+                </PropertyPriority>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="PositionY" typeName="double" displayLabel="Y坐标" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4450</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="DipAngle" typeName="double" displayLabel="走向" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4350</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ParentName" typeName="string" displayLabel="地质界面名称" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4550</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ParentCategory" typeName="int" displayLabel="地质界面编号" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4700</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="PositionZ" typeName="double" displayLabel="Z坐标" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4400</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="GeologicalLayer" displayLabel="地层界面" isDomainClass="True">
+        <BaseClass>PowerGeoBase</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="UserId" typeName="string" displayLabel="编号" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4800</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Id" typeName="int" displayLabel="标示Id">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4700</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="GeotechnicalLithology" displayLabel="岩性界面" isDomainClass="True">
+        <BaseClass>PowerGeoBase</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="Id" typeName="string" displayLabel="标示Id" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4800</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                    <If xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="UserId" typeName="string" displayLabel="编号" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4700</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="InterLayerData" displayLabel="夹层" isDomainClass="True">
+        <BaseClass>PowerGeoBase</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="UserId" typeName="string" displayLabel="编号" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4800</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Id" typeName="string" displayLabel="标示Id">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4900</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="PermeateSurfaceData" displayLabel="渗透界面" isDomainClass="True">
+        <BaseClass>PowerGeoBase</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="Id" typeName="int" displayLabel="标示Id">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4800</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="UserId" typeName="string" displayLabel="编号" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4700</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="Probe" displayLabel="探针" isDomainClass="True">
+        <BaseClass>PowerGeoBase</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="Id" typeName="int" displayLabel="标示ID" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4800</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ParentCategory" typeName="string" displayLabel="父地质类型" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4700</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ParentUserId" typeName="string" displayLabel="父编号">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4600</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Position" typeName="point2d" displayLabel="位置" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4500</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Height" typeName="double" displayLabel="深度">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4400</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ParentCategoryId" typeName="int" displayLabel="父地质类型Id" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4300</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ParentId" typeName="string" displayLabel="父标示Id" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4200</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="SectionLine" displayLabel="剖面线" isDomainClass="True">
+        <BaseClass>PowerGeoBase</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="Id" typeName="int" displayLabel="标示Id">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="UserId" typeName="string" displayLabel="编号">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="CategoryName" typeName="string" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="CategoryId" typeName="int" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="SectionResult" displayLabel="剖切结果" isDomainClass="True">
+        <BaseClass>PowerGeoBase</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="ParentCategory" typeName="string" displayLabel="父地质类型" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4800</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Id" typeName="int" displayLabel="标示Id" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4700</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="IsUserDefined" typeName="boolean" displayLabel="是否为用户修改" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4600</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ParentCategoryId" typeName="int" displayLabel="父地质类型Id" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4801</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ParentId" typeName="int" displayLabel="父标示Id" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If3D>True</If3D>
+                    <If2D>True</If2D>
+                </HideProperty>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4802</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ParentCategoryName" typeName="string" displayLabel="地质界面名称" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4799</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="Spot" displayLabel="地质点" isDomainClass="True">
+        <BaseClass>PowerGeoBase</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="UserId" typeName="string" displayLabel="编码" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4800</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="XPosition" typeName="double" displayLabel="X坐标">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4600</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="YPosition" typeName="double" displayLabel="Y坐标">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4500</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Altitude" typeName="double" displayLabel="高程">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4400</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="EffectBroadband" typeName="double" displayLabel="影响半径">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4300</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="radius" typeName="double" displayLabel="显示半径">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4200</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Dip" typeName="string" displayLabel="产状倾向">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4100</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="DipAngle" typeName="double" displayLabel="产状倾角">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4000</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Trend" typeName="string" displayLabel="产状走向">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>3900</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TrendAngle" typeName="double" displayLabel="产状走向角">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>3800</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="UsageStatus" typeName="string" displayLabel="使用状态">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>3700</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Boundary" typeName="string" displayLabel="边界类型">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>3600</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Id" typeName="int" displayLabel="标示Id">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>5001</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="SpotTrip" displayLabel="地质点地质解释" isDomainClass="True">
+        <BaseClass>PowerGeoBase</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="Id" typeName="int" displayLabel="标示Id">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="IsBoundary" typeName="int" displayLabel="是否为边界点">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="TraceLineData" displayLabel="迹线" isDomainClass="True">
+        <BaseClass>PowerGeoBase</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="ParentCategoryId" typeName="int" displayLabel="地质界面Id">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Id" typeName="int" displayLabel="标示Id">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4700</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ParentCategory" typeName="string" displayLabel="地质界面名称">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ParentId" typeName="int">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="UnderWaterData" displayLabel="地下水" isDomainClass="True">
+        <BaseClass>PowerGeoBase</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="Id" typeName="string" displayLabel="标示Id">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4900</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="UserId" typeName="string" displayLabel="编号" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4800</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="UnloadingData" displayLabel="卸荷界面" isDomainClass="True">
+        <BaseClass>PowerGeoBase</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="UserId" typeName="string" description="编号" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4800</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Id" typeName="int" description="标示Id">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4700</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="WeatherSurfaceData" displayLabel="风化界面" isDomainClass="True">
+        <BaseClass>PowerGeoBase</BaseClass>
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="Id" typeName="int" displayLabel="标示Id">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4800</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="UserId" typeName="string" displayLabel="编号" readOnly="True">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>PowerGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4700</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+</ECSchema>

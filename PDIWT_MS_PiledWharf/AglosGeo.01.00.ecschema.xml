@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="AglosGeo" nameSpacePrefix="HS" version="1.0" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECSchemaReference name="Bentley_Standard_CustomAttributes" version="01.00" prefix="bsca" />
+    <ECSchemaReference name="EditorCustomAttributes" version="01.00" prefix="beca" />
+    <ECCustomAttributes>
+        <SchemaChangeTrackingState xmlns="Bentley_Standard_CustomAttributes.01.00">
+            <FinalizationHistory />
+            <TrackingEnabled>True</TrackingEnabled>
+            <SchemaFullNameAtEditingStart>AglosGeo.01.00</SchemaFullNameAtEditingStart>
+        </SchemaChangeTrackingState>
+    </ECCustomAttributes>
+    <ECClass typeName="AglosGeo" description="地层性质参数" isDomainClass="True">
+        <ECCustomAttributes>
+            <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                <PreviousNames>
+                    <PreviousName>
+                        <OldName />
+                        <SchemaFullNameKey>AglosGeo.01.00</SchemaFullNameKey>
+                        <IsNewInThisVersion>True</IsNewInThisVersion>
+                    </PreviousName>
+                </PreviousNames>
+                <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+            </PreviousNameArray>
+        </ECCustomAttributes>
+        <ECProperty propertyName="Qfi" typeName="double">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>AglosGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>3</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Xii" typeName="double" displayLabel="ξi">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>AglosGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>5</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="PsiSi" typeName="double" displayLabel="ψsi">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>AglosGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>2</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Xifi" typeName="double" displayLabel="ξfi">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>AglosGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>1</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Betasi" typeName="double" displayLabel="βsi">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>AglosGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>1</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Xifi2" typeName="double" displayLabel="ξfi2">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>AglosGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>1</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Qri" typeName="double" displayLabel="qR">
+            <ECCustomAttributes>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>AglosGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>1</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ID" typeName="double">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>4</Priority>
+                </PropertyPriority>
+                <PreviousNameArray xmlns="Bentley_Standard_CustomAttributes.01.00">
+                    <PreviousNames>
+                        <PreviousName>
+                            <OldName />
+                            <SchemaFullNameKey>AglosGeo.01.00</SchemaFullNameKey>
+                            <IsNewInThisVersion>True</IsNewInThisVersion>
+                        </PreviousName>
+                    </PreviousNames>
+                    <PreviousNameAlreadySaved>True</PreviousNameAlreadySaved>
+                </PreviousNameArray>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+</ECSchema>

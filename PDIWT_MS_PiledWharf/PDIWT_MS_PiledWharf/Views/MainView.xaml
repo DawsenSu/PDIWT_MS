@@ -26,14 +26,12 @@
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
-
         </Grid.RowDefinitions>
         <!--  Menu  -->
         <Menu Grid.Row="0">
@@ -75,13 +73,23 @@
             <MenuItem Command="{Binding Test}" Header="test" />
         </Menu>
         <!--  Main Layout  -->
-        <DockPanel Grid.Row="1">
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
             <!--  桩信息面板  -->
-            <Grid DockPanel.Dock="Left">
+            <Grid
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
@@ -93,7 +101,7 @@
                             MinWidth="120"
                             Background="White"
                             ItemsSource="{Binding Piles}"
-                            SelectedItem="{Binding CurrentPile}" />
+                            SelectedItem="{Binding SelectedPile}" />
                     </GroupBox>
                     <DockPanel Grid.Row="1" HorizontalAlignment="Center">
                         <Button Command="{Binding RemovePileCommand}" Content="删除所选桩" />
@@ -102,42 +110,46 @@
                 </Grid>
             </Grid>
             <!--  土层信息面板  -->
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
-                <GroupBox Grid.Row="0" Header="土层信息">
-                    <DataGrid>
-                        <DataGrid.Columns>
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding SoilLayerName}"
-                                Header="土层名称" />
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding SoilLayerNum}"
-                                Header="土层编号" />
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding PileInSoilLayerTopZ}"
-                                Header="层顶高程" />
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding PileInSoilLayerLength}"
-                                Header="土层内长度" />
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding Qfi}"
-                                Header="极限侧摩阻qfi" />
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding Xii}"
-                                Header="折减系数ξi" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </GroupBox>
-                <GroupBox Grid.Row="1" Header="桩端参数">
+            <GroupBox
+                Grid.Row="0"
+                Grid.Column="1"
+                Header="土层信息">
+                <DataGrid>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding SoilLayerName}"
+                            Header="土层名称" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding SoilLayerNum}"
+                            Header="土层编号" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding PileInSoilLayerTopZ, StringFormat={}{0:N2}}"
+                            Header="层顶高程" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding PileInSoilLayerLength, StringFormat={}{0:N2}}"
+                            Header="土层内长度" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding Qfi, StringFormat={}{0:N2}}"
+                            Header="极限侧摩阻qfi" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding Xii, StringFormat={}{0:N2}}"
+                            Header="折减系数ξi" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <GroupBox Grid.Column="0" Header="桩端参数">
                     <DockPanel>
                         <TextBlock>
                             <Run Text="q" />
@@ -150,8 +162,22 @@
                         <TextBox Text="{Binding Qr}" />
                     </DockPanel>
                 </GroupBox>
+                <!--  计算参数面板  -->
+                <GroupBox Grid.Column="1" Header="计算参数">
+                    <DockPanel>
+                        <TextBlock>
+                            <Run Text="γ" />
+                            <Run BaselineAlignment="Subscript" Text="R" />
+                            <Run Text="=" />
+                        </TextBlock>
+                        <TextBox Text="{Binding SelectedPile.GammaR}" />
+                    </DockPanel>
+
+                </GroupBox>
             </Grid>
-        </DockPanel>
+        </Grid>
+        <!--  桩端土层信息  -->
+
         <!--  计算结果  -->
         <GroupBox Grid.Row="2" Header="计算结果">
             <Grid>
