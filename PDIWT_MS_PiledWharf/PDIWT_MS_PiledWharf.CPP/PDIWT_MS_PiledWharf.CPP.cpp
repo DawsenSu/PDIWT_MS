@@ -164,10 +164,25 @@ StatusInt PDIWT_MS_PiledWharf_CPP::IntersectionPointQuery::FindBSElementAttribut
 	ECClassP _power_geobase_ecclassp = _power_ptr->GetClassP(L"GeotechnicalLithology");
 	DgnElementECInstancePtr _power_ecgeobase_instance = _manager.FindInstanceOnElement(_eeh, *_power_geobase_ecclassp,true);
 	if (_power_ecgeobase_instance.IsNull()) return ERROR;
-	if (ECOBJECTS_STATUS_Success == _power_ecgeobase_instance->GetValueAsString(_strval, L"CategoryName", false, 0))
-		_layerinfo->SoilLayerTypeName = marshal_as<String^>(_strval.GetWCharCP());
+	//if (ECOBJECTS_STATUS_Success == _power_ecgeobase_instance->GetValueAsString(_strval, L"CategoryName", false, 0))
+	//	_layerinfo->SoilLayerTypeName = marshal_as<String^>(_strval.GetWCharCP());
 	if (ECOBJECTS_STATUS_Success == _power_ecgeobase_instance->GetValueAsString(_strval, L"UserId", false, 0))
-		_layerinfo->SoilLayerNum = marshal_as<String^>(_strval.GetWCharCP());
+	{
+
+		auto _startwithbracket = _strval.FindI(L"[");
+		auto _endwithbracket = _strval.FindI(L"]");
+		if (_startwithbracket != std::string::npos)
+		{
+			_layerinfo->SoilLayerTypeName = marshal_as<String^>(_strval.substr(0, _startwithbracket).GetWCharCP());
+			_layerinfo->SoilLayerNum = marshal_as<String^>(_strval.substr( _startwithbracket + 1,_endwithbracket-_startwithbracket-1).GetWCharCP());
+		}
+		else
+		{
+			_layerinfo->SoilLayerTypeName = marshal_as<String^>(_strval.GetWCharCP());
+			_layerinfo->SoilLayerNum = marshal_as<String^>(_strval.GetWCharCP());
+		}					
+	}
+
 #pragma endregion
 
 	return SUCCESS;
@@ -188,23 +203,21 @@ PDIWT_MS_PiledWharf_CPP::QueryResultStatus PDIWT_MS_PiledWharf_CPP::Intersection
 	double _pilelength = (_pilebottompt - _piletoppt).Magnitude();
 	bvector<DPoint3d> _tmpintersectionpts;
 
-	int _index = 0;
-	for each (auto _bs in _bsvector)
+	for(size_t i = 0; i < _bsvector.size();i++)
 	{
 		bvector<DPoint3d> _cl_intersectionpts;
 		bvector<double> _rayparamerters;
 		bvector<DPoint2d> _surfaceparameters;
-		_bs->IntersectRay(_cl_intersectionpts, _rayparamerters, _surfaceparameters, _pileray);
+		_bsvector[i]->IntersectRay(_cl_intersectionpts, _rayparamerters, _surfaceparameters, _pileray);
 		if (_cl_intersectionpts.size() == 0) continue;
-		for (size_t i = 0; i < _cl_intersectionpts.size(); i++)
+		for (size_t j = 0; j < _cl_intersectionpts.size(); j++)
 		{
-			if (0 <= _rayparamerters[i] && _rayparamerters[i] <= 1)
+			if (0 <= _rayparamerters[j] && _rayparamerters[j] <= 1)
 			{
-				_tmpintersectionpts.push_back(_cl_intersectionpts[i]);
-				_intersectionlayerinfoindex.push_back(_index);
+				_tmpintersectionpts.push_back(_cl_intersectionpts[j]);
+				_intersectionlayerinfoindex.push_back((int)i);
 			}
 		}
-		_index++;
 	}
 	if (_tmpintersectionpts.size() == 0)
 	{

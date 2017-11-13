@@ -26,7 +26,6 @@ namespace PDIWT_MS_PiledWharf.ViewModels
                     BottomPoint = new Bentley.GeometryNET.DPoint3d(0, 0, -100),
                     Code = "Pile1",
                     ID = 2120,
-                    GammaR = 1.2,
                     ICrossSection = new SquareCrossSection(0.5)
                 },
                 new SolidPile()
@@ -35,14 +34,17 @@ namespace PDIWT_MS_PiledWharf.ViewModels
                     BottomPoint = new Bentley.GeometryNET.DPoint3d(10, 10, -80),
                     Code = "Pile2",
                     ID = 333,
-                    GammaR = 1.5,
                     ICrossSection = new SquareCrossSection(0.6)
                 },
             };
             if (_Piles.Count > 0)
                 _SelectedPile = _Piles.First();
+            _GammaR = 1.2;
+            _Eta = 0;
+            _WaterLevel = 0;
         }
 
+        #region Properties
         private ObservableCollection<PileBase> _Piles;
         public ObservableCollection<PileBase> Piles
         {
@@ -73,26 +75,66 @@ namespace PDIWT_MS_PiledWharf.ViewModels
         {
             get
             {
-                    return _SelectedPile?.GetPilePieceInEachSoilLayerInfos().Last().CurrentSoilLayerInfo.Qri;
+                return _SelectedPile?.GetPilePieceInEachSoilLayerInfos().Last().CurrentSoilLayerInfo.Qri;
             }
         }
-
         public double? SelectedPile_Qd
         {
             get
             {
-                    return _SelectedPile?.CalculateQd();
+                return _SelectedPile?.CalculateQd(_GammaR, _Eta);
             }
         }
 
         public double? SelectedPile_Td
         {
             get
-            { 
-                return _SelectedPile?.CalculateTd(1.2, -15);
-            }
+            {
+                return _SelectedPile?.CalculateTd(_GammaR,_WaterLevel);
+            }            
         }
 
+        private double _GammaR;
+        public double GammaR
+        {
+            get { return _GammaR; }
+            set
+            {
+                Set(ref _GammaR, value);
+                RaisePropertyChanged(() => SelectedPile_Qd);
+                RaisePropertyChanged(() => SelectedPile_Td);
+            }
+        }
+        private double _Eta;
+        public double Eta
+        {
+            get { return _Eta; }
+            set { Set(ref _Eta, value); }
+        }
+
+
+
+        private double _WaterLevel;
+        public double WaterLevel
+        {
+            get { return _WaterLevel; }
+            set
+            {
+                Set(ref _WaterLevel, value);
+                RaisePropertyChanged(() => SelectedPile_Qd);
+                RaisePropertyChanged(() => SelectedPile_Td);
+            }
+        }
+        #endregion
+
+        #region Commands
+        private RelayCommand _DrawAxisFromExcelCommand;
+        public RelayCommand DrawAxisFromExcelCommand => _DrawAxisFromExcelCommand ?? (_DrawAxisFromExcelCommand = new RelayCommand(ExecuteDrawAxisFromExcelCommand));
+        public void ExecuteDrawAxisFromExcelCommand()
+        {
+
+        }
+        #endregion
 
         public void DrawPileLineFromFile()
         {

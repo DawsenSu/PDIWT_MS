@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\..\..\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\</OutputPath>
+    <OutputPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Mdlapps\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -174,6 +174,7 @@
   <ItemGroup>
     <Compile Include="Interface\IPileCrossSection.cs" />
     <Compile Include="KeyinCommands.cs" />
+    <Compile Include="Models\DrawAxisFromExcel.cs" />
     <Compile Include="Models\EnumClasses.cs" />
     <Compile Include="Models\Piles\CrossSection\AnnularCrossSection.cs" />
     <Compile Include="Models\Piles\CrossSection\PolygonCrossSection.cs" />
@@ -238,6 +239,10 @@
     <ProjectReference Include="..\PDIWT_MS_PiledWharf.CPP\PDIWT_MS_PiledWharf.CPP.vcxproj">
       <Project>{145ed664-995b-4b43-b906-b37aa802cedc}</Project>
       <Name>PDIWT_MS_PiledWharf.CPP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PDIWT_MS_PiledWharf.Extension\PDIWT_MS_PiledWharf.Extension.csproj">
+      <Project>{8b479b2a-2fcd-4880-8822-56d1e114138f}</Project>
+      <Name>PDIWT_MS_PiledWharf.Extension</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

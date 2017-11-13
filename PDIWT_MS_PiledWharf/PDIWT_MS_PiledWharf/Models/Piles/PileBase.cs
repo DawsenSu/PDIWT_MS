@@ -52,7 +52,7 @@ namespace PDIWT_MS_PiledWharf.Models.Piles
             set { Set(ref _ICrossSection, value); }
         }
 
-        public abstract double CalculateQd();
+        public abstract double CalculateQd(double gammar,params double[] otherparameters);
 
         public virtual double CalculateTd(double gammar, double waterlevel, double unitweight = 25, double underwaterunitweight = 15)
         {

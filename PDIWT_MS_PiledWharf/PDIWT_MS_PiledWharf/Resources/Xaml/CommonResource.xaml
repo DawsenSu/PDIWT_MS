@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converter="clr-namespace:PDIWT_MS_PiledWharf.Extension.Converter;assembly=PDIWT_MS_PiledWharf.Extension"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <Style TargetType="{x:Type MenuItem}">

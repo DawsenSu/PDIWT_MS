@@ -24,8 +24,9 @@ namespace PDIWT_MS_Tool.Views
         private SchemaListView()
         {
             InitializeComponent();
-            var _locator = new ViewModels.ViewModelLocator();
-            this.DataContext = _locator.SchemaListVM;
+            //var _locator = new ViewModels.ViewModelLocator();
+            //this.DataContext = _locator.SchemaListVM;
+            this.DataContext = new ViewModels.SchemaListViewModel();
             m_wpfHelper = new BMWPF.WPFInteropHelper(this);
             m_wpfHelper.Attach(Program.Addin, true, "SchemaListViewHost");
         }

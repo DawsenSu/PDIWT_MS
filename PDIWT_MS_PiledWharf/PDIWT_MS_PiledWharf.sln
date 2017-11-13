@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDIWT_MS_PiledWharf", "PDIW
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PDIWT_MS_PiledWharf.CPP", "PDIWT_MS_PiledWharf.CPP\PDIWT_MS_PiledWharf.CPP.vcxproj", "{145ED664-995B-4B43-B906-B37AA802CEDC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDIWT_MS_PiledWharf.Extension", "PDIWT_MS_PiledWharf.Extension\PDIWT_MS_PiledWharf.Extension.csproj", "{8B479B2A-2FCD-4880-8822-56D1E114138F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,18 @@ Global
 		{145ED664-995B-4B43-B906-B37AA802CEDC}.Release|x64.Build.0 = Release|x64
 		{145ED664-995B-4B43-B906-B37AA802CEDC}.Release|x86.ActiveCfg = Release|Win32
 		{145ED664-995B-4B43-B906-B37AA802CEDC}.Release|x86.Build.0 = Release|Win32
+		{8B479B2A-2FCD-4880-8822-56D1E114138F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B479B2A-2FCD-4880-8822-56D1E114138F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B479B2A-2FCD-4880-8822-56D1E114138F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8B479B2A-2FCD-4880-8822-56D1E114138F}.Debug|x64.Build.0 = Debug|Any CPU
+		{8B479B2A-2FCD-4880-8822-56D1E114138F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8B479B2A-2FCD-4880-8822-56D1E114138F}.Debug|x86.Build.0 = Debug|Any CPU
+		{8B479B2A-2FCD-4880-8822-56D1E114138F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B479B2A-2FCD-4880-8822-56D1E114138F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B479B2A-2FCD-4880-8822-56D1E114138F}.Release|x64.ActiveCfg = Release|Any CPU
+		{8B479B2A-2FCD-4880-8822-56D1E114138F}.Release|x64.Build.0 = Release|Any CPU
+		{8B479B2A-2FCD-4880-8822-56D1E114138F}.Release|x86.ActiveCfg = Release|Any CPU
+		{8B479B2A-2FCD-4880-8822-56D1E114138F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

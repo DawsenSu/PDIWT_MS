@@ -2,9 +2,11 @@
     x:Class="PDIWT_MS_PiledWharf.Views.MainView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converter="clr-namespace:PDIWT_MS_PiledWharf.Extension.Converter;assembly=PDIWT_MS_PiledWharf.Extension"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pile="clr-namespace:PDIWT_MS_PiledWharf.Models.Piles"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     Title="桩基承载力分析工具"
     Width="700"
@@ -24,6 +26,23 @@
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
+                    <!--<ObjectDataProvider
+                        x:Key="Perimeter_odp"
+                        MethodName="GetOutPerimeter"
+                        ObjectInstance="{Binding ICrossSection}">
+                        <ObjectDataProvider.MethodParameters>
+                            <sys:Double>0</sys:Double>
+                        </ObjectDataProvider.MethodParameters>
+                    </ObjectDataProvider>-->
+                    <converter:InterfaceMethodReusltConverter
+                        x:Key="interface_piermeter"
+                        InterfaceName="PDIWT_MS_PiledWharf.Interface.IPileCrossSection"
+                        MethodName="GetOutPerimeter" />
+                    <converter:InterfaceMethodReusltConverter
+                        x:Key="interface_area"
+                        InterfaceName="PDIWT_MS_PiledWharf.Interface.IPileCrossSection"
+                        MethodName="GetActualSectionArea" />
+                    <converter:PileCrossectionTypeToStringConverter x:Key="crosssectiontypeconverter" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -36,7 +55,10 @@
         </Grid.RowDefinitions>
         <!--  Menu  -->
         <Menu Grid.Row="0">
-            <MenuItem Header="导入中心线" ToolTip="根据Excel文件绘制桩中心线">
+            <MenuItem
+                Command="{Binding DrawAxisFromExcelCommand}"
+                Header="导入中心线"
+                ToolTip="根据Excel文件绘制桩中心线">
                 <MenuItem.Icon>
                     <Image Source="../Resources/Icons/CenterLine.ico" />
                 </MenuItem.Icon>
@@ -56,7 +78,7 @@
                     <Image Source="../Resources/Icons/Recalculation.ico" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="碰桩测试" ToolTip="进行碰桩测试，检查装之间的最小距离">
+            <MenuItem Header="碰桩测试" ToolTip="进行碰桩测试，检查桩之间的最小距离">
                 <MenuItem.Icon>
                     <Image Source="../Resources/Icons/CollisionTest.ico" />
                 </MenuItem.Icon>
@@ -110,6 +132,8 @@
                                         <Grid.RowDefinitions>
                                             <RowDefinition />
                                             <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition />
@@ -118,19 +142,33 @@
                                         <TextBlock
                                             Grid.Row="0"
                                             Grid.Column="0"
-                                            Text="{Binding Code, StringFormat=桩编号：{0}}" />
+                                            Text="{Binding Code, StringFormat=编号：{0}}" />
                                         <TextBlock
                                             Grid.Row="0"
                                             Grid.Column="1"
-                                            Text="{Binding ID, StringFormat=桩轴线ID：{0}}" />
+                                            Text="{Binding ID, StringFormat=轴线ID：{0}}" />
                                         <TextBlock
                                             Grid.Row="1"
                                             Grid.Column="0"
-                                            Text="{Binding TopPoint.Z, StringFormat=桩顶高程：{0:n2}}" />
+                                            Text="{Binding TopPoint.Z, StringFormat=顶高程：{0:n2}}" />
                                         <TextBlock
                                             Grid.Row="1"
                                             Grid.Column="1"
-                                            Text="{Binding BottomPoint.Z, StringFormat=桩顶底程：{0:n2}}" />
+                                            Text="{Binding BottomPoint.Z, StringFormat=顶底程：{0:n2}}" />
+                                        <TextBlock
+                                            Grid.Row="2"
+                                            Grid.Column="0"
+                                            Grid.ColumnSpan="2"
+                                            HorizontalAlignment="Center"
+                                            Text="{Binding ICrossSection, Mode=OneWay, Converter={StaticResource crosssectiontypeconverter}, StringFormat=截面形式：{0}}" />
+                                        <TextBlock
+                                            Grid.Row="3"
+                                            Grid.Column="0"
+                                            Text="{Binding ICrossSection, Mode=OneWay, Converter={StaticResource interface_piermeter}, ConverterParameter=0, StringFormat=截面周长：{0:n2}}" />
+                                        <TextBlock
+                                            Grid.Row="3"
+                                            Grid.Column="1"
+                                            Text="{Binding ICrossSection, Mode=OneWay, Converter={StaticResource interface_area}, ConverterParameter=0, StringFormat=截面面积：{0:n2}}" />
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
@@ -197,19 +235,46 @@
                                 Text="R" />
                             <Run Text="=" />
                         </TextBlock>
-                        <TextBlock Text="{Binding SelectedPile_Qr, Mode=OneWay}" />
+                        <TextBox
+                            Background="{StaticResource DisabledBackgroud}"
+                            IsReadOnly="True"
+                            Text="{Binding SelectedPile_Qr, Mode=OneWay}" />
                     </DockPanel>
                 </GroupBox>
                 <!--  计算参数面板  -->
                 <GroupBox Grid.Column="1" Header="计算参数">
-                    <DockPanel>
-                        <TextBlock>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Text="计算水位" />
+                        <TextBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Text="{Binding WaterLevel}" />
+                        <TextBlock Grid.Row="0" Grid.Column="2">
                             <Run Text="γ" />
-                            <Run BaselineAlignment="Subscript" Text="R" />
+                            <Run
+                                BaselineAlignment="Subscript"
+                                FontSize="8"
+                                Text="R" />
                             <Run Text="=" />
                         </TextBlock>
-                        <TextBox Text="{Binding SelectedPile.GammaR}" />
-                    </DockPanel>
+                        <TextBox
+                            Grid.Row="0"
+                            Grid.Column="3"
+                            Text="{Binding GammaR}" />
+                    </Grid>
 
                 </GroupBox>
             </Grid>
@@ -230,19 +295,23 @@
                 <TextBlock
                     Grid.Row="0"
                     Grid.Column="0"
-                    Text="单桩垂直极限承载力设计值（kN）：" />
-                <TextBlock
+                    Text="单桩垂直极限承载力设计值=" />
+                <TextBox
                     Grid.Row="0"
                     Grid.Column="1"
-                    Text="{Binding SelectedPile_Qd, Mode=OneWay}" />
+                    Background="{StaticResource DisabledBackgroud}"
+                    IsReadOnly="True"
+                    Text="{Binding SelectedPile_Qd, Mode=OneWay, StringFormat={}{0:n2}kN}" />
                 <TextBlock
                     Grid.Row="1"
                     Grid.Column="0"
-                    Text="单桩抗拔极限承载力设计值（kN）：" />
-                <TextBlock
+                    Text="单桩抗拔极限承载力设计值=" />
+                <TextBox
                     Grid.Row="1"
                     Grid.Column="1"
-                    Text="{Binding SelectedPile_Td, Mode=OneWay}" />
+                    Background="{StaticResource DisabledBackgroud}"
+                    IsReadOnly="True"
+                    Text="{Binding SelectedPile_Td, Mode=OneWay, StringFormat={}{0:n2}kN}" />
             </Grid>
         </GroupBox>
 
