@@ -74,51 +74,59 @@ namespace PDIWT_MS_Tool.ViewModels
                 Filter = Resources.CellLibraryFilter,
                 Title = "选择Cell库文件"
             };
-            if (cellFileDialog.ShowDialog() == DialogResult.OK)
+            try
             {
-                BD.DgnDocument cellFileDocument = BD.DgnDocument.CreateForLocalFile(cellFileDialog.FileName);
-                BD.DgnFile cellDgnFile = BD.DgnFile.Create(cellFileDocument, BD.DgnFileOpenMode.ReadOnly).DgnFile;
-                if (cellDgnFile == null)
+                if (cellFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    Prompt = Resources.PromptHeader + $"无法读取{cellFileDialog.FileName}的DgnDocument对象";
-                    Status = Resources.StatusHeader + Resources.ErrorString;
-                    return;
-                }
-                BD.StatusInt loadStatusInt;
-                if (BD.DgnFileStatus.Success != cellDgnFile.LoadDgnFile(out loadStatusInt))
-                {
-                    Prompt = Resources.PromptHeader + "无法载入文件";
-                    Status = Resources.StatusHeader + Resources.ErrorString;
-                    return;
-                }
-                if (cellDgnFile.FillDictionaryModel() != BD.StatusInt.Success)
-                {
-                    Prompt = Resources.PromptHeader + "填充模型失败";
-                    Status = Resources.StatusHeader + Resources.ErrorString;
-                    return;
-                }
-                CellNameTypes.Clear();
-                ElementProps.Clear();
-                int index = 0;
-                foreach (var modelindex in cellDgnFile.GetModelIndexCollection())
-                {
-                    BD.DgnModel model = cellDgnFile.LoadRootModelById(out loadStatusInt, modelindex.Id);
-                    if (model != null && modelindex.CellPlacementOptions == BD.CellPlacementOptions.CanBePlacedAsCell)
+                    BD.DgnDocument cellFileDocument = BD.DgnDocument.CreateForLocalFile(cellFileDialog.FileName);
+                    BD.DgnFile cellDgnFile = BD.DgnFile.Create(cellFileDocument, BD.DgnFileOpenMode.ReadOnly).DgnFile;
+                    if (cellDgnFile == null)
                     {
-                        CellNameTypes.Add(model.ModelName + "(" + model.GetModelInfo().CellType.ToString() + ")");
-                        index++;
+                        Prompt = Resources.PromptHeader + $"无法读取{cellFileDialog.FileName}的DgnDocument对象";
+                        Status = Resources.StatusHeader + Resources.ErrorString;
+                        return;
                     }
+                    BD.StatusInt loadStatusInt;
+                    if (BD.DgnFileStatus.Success != cellDgnFile.LoadDgnFile(out loadStatusInt))
+                    {
+                        Prompt = Resources.PromptHeader + "无法载入文件";
+                        Status = Resources.StatusHeader + Resources.ErrorString;
+                        return;
+                    }
+                    if (cellDgnFile.FillDictionaryModel() != BD.StatusInt.Success)
+                    {
+                        Prompt = Resources.PromptHeader + "填充模型失败";
+                        Status = Resources.StatusHeader + Resources.ErrorString;
+                        return;
+                    }
+                    CellNameTypes.Clear();
+                    ElementProps.Clear();
+                    int index = 0;
+                    foreach (var modelindex in cellDgnFile.GetModelIndexCollection())
+                    {
+                        BD.DgnModel model = cellDgnFile.LoadRootModelById(out loadStatusInt, modelindex.Id);
+                        if (model != null && modelindex.CellPlacementOptions == BD.CellPlacementOptions.CanBePlacedAsCell)
+                        {
+                            CellNameTypes.Add(model.ModelName + "(" + model.GetModelInfo().CellType.ToString() + ")");
+                            index++;
+                        }
+                    }
+                    string filename;
+                    if (CellFunction.AttachLibrary(out filename, cellFileDialog.FileName, "") != BD.StatusInt.Success)
+                    {
+                        Prompt = Resources.PromptHeader + "附加模型失败";
+                        Status = Resources.StatusHeader + Resources.ErrorString;
+                        return;
+                    }
+                    Prompt = Resources.PromptHeader + $"{cellFileDialog.SafeFileName}已载入!";
+                    Status = Resources.StatusHeader + Resources.SuccessString;
                 }
-                string filename;
-                if (CellFunction.AttachLibrary(out filename, cellFileDialog.FileName, "") != BD.StatusInt.Success)
-                {
-                    Prompt = Resources.PromptHeader + "附加模型失败";
-                    Status = Resources.StatusHeader + Resources.ErrorString;
-                    return;
-                }
-                Prompt = Resources.PromptHeader + $"{cellFileDialog.SafeFileName}已载入!";
-                Status = Resources.StatusHeader + Resources.SuccessString;
             }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+            
         }
 
         private RelayCommand _ImportFromFile;

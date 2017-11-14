@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using PDIWT_MS_PiledWharf.Interface;
 using System.Collections.ObjectModel;
+using PDIWT_MS_PiledWharf.Extension.Attribute;
 using Bentley.GeometryNET;
 
 namespace PDIWT_MS_PiledWharf.Models.Piles.CrossSection
 {
+    [EnumDisplayName(DisplayName = "多边形")]
     public class PolygonCrossSection : ObservableObject, IPileCrossSection
     {
         public PolygonCrossSection(ObservableCollection<DPoint3d> points)

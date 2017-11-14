@@ -8,8 +8,10 @@ using System.Globalization;
 using System.Windows;
 using System.Reflection;
 
+
 namespace PDIWT_MS_PiledWharf.Extension.Converter
 {
+    using Extension.Attribute;
     public class InterfaceMethodReusltConverter : IValueConverter
     {
         public string InterfaceName { get; set; }
@@ -35,14 +37,9 @@ namespace PDIWT_MS_PiledWharf.Extension.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Dictionary<string, string> _crossectiontype_name_dic = new Dictionary<string, string>
-            {
-                {"AnnularCrossSection","环形" },
-                {"PolygonCrossSection","多边形" },
-                {"SquareCrossSection","方形" },
-                {"SquareWithRoundHoleCrossSection","方形圆孔" }
-            };
-            return _crossectiontype_name_dic[value.GetType().Name];
+            Type value_type = value.GetType();
+            var attri = value_type.GetCustomAttribute<EnumDisplayNameAttribute>();
+            return attri == null ? value_type.Name : attri.DisplayName;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

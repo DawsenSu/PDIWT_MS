@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 using GalaSoft.MvvmLight;
 using PDIWT_MS_PiledWharf.Interface;
+using PDIWT_MS_PiledWharf.Extension.Attribute;
 
 namespace PDIWT_MS_PiledWharf.Models.Piles.CrossSection
 {
+    [EnumDisplayName(DisplayName = "方形圆孔")]
     public class SquareWithRoundHoleCrossSection : ObservableObject, IPileCrossSection
     {
         public SquareWithRoundHoleCrossSection(double sidelength, double holediameter)

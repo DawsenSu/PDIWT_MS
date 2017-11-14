@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 using PDIWT_MS_PiledWharf.Interface;
 using GalaSoft.MvvmLight;
+using PDIWT_MS_PiledWharf.Extension.Attribute;
+
 namespace PDIWT_MS_PiledWharf.Models.Piles.CrossSection
 {
+    [EnumDisplayName(DisplayName = "环形")]
     public class AnnularCrossSection : ObservableObject, IPileCrossSection
     {
         public AnnularCrossSection(double outdia, double innerdia)

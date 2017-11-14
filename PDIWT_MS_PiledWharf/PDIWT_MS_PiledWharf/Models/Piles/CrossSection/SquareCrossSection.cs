@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 using GalaSoft.MvvmLight;
 using PDIWT_MS_PiledWharf.Interface;
+using PDIWT_MS_PiledWharf.Extension.Attribute;
 
 namespace PDIWT_MS_PiledWharf.Models.Piles.CrossSection
 {
+    [EnumDisplayName(DisplayName = "方形")]
     public class SquareCrossSection : ObservableObject, IPileCrossSection
     {
         public SquareCrossSection(double sidelength)
