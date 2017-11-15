@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
-using System.Windows.Forms;
+using Microsoft.Win32;
 
 using Bentley.DgnPlatformNET;
 using Bentley.GeometryNET;
@@ -831,7 +831,7 @@ namespace PDIWT_MS_CZ.ViewModels
                     Title = "导入参数模板",
                     Filter = Resources.XMLFilter
                 };
-                if (ofDialog.ShowDialog() == DialogResult.OK)
+                if (ofDialog.ShowDialog() == true)
                 {
                     ExtendedXmlSerializer serializer = new ExtendedXmlSerializer();
                     string xmlstring = File.ReadAllText(ofDialog.FileName);
@@ -870,7 +870,7 @@ namespace PDIWT_MS_CZ.ViewModels
                     Title = "导出参数模板",
                     Filter = Resources.XMLFilter
                 };
-                if (sfDialog.ShowDialog() == DialogResult.OK)
+                if (sfDialog.ShowDialog() == true)
                 {
                     if (File.Exists(sfDialog.FileName))
                         File.Delete(sfDialog.FileName);

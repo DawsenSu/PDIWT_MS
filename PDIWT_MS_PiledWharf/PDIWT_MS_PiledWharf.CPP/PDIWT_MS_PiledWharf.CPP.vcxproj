@@ -86,6 +86,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(MSAPP)</OutDir>
+    <IncludePath>$(MSSDKINC);$(IncludePath)</IncludePath>
+    <LibraryPath>$(MSSDKLIB);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -123,11 +126,12 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;winNT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies />
+      <AdditionalDependencies>animcore.lib;BaseGeoCoord.lib;Bentley.GeoCoord.lib;Bentley.imodelconnection.lib;Bentley.imodelmessage.lib;Bentley.lib;Bentley.MicroStation.MaterialControl.lib;Bentley.PrintDefinitions.lib;Bentley.PrintFoundation.lib;BentleyAllocator.lib;BentleyGeom.lib;BentleyGeomSerialization.lib;BeXml.lib;Constraint2dCore.lib;Constraint2dElement.lib;dbpwise.lib;DgnGeoCoord.lib;DgnPlatform.lib;DgnView.lib;ECObjects.lib;ImageLib.lib;InsolationLib.lib;mdlbltin.lib;mdlxmltools.lib;mspsolid.lib;mstntoolsubs.lib;nativewindow.lib;nativewinmfc.lib;PointCloud.lib;PSolidAcisInterop.lib;PSolidCore.lib;Publish.lib;RasterCore.lib;rasterlib.lib;RmgrTools.lib;SmartFeature.lib;splindlm.lib;TerrainModelCore.lib;TerrainModelElementHandler.lib;videolib.lib;VisEdgesLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

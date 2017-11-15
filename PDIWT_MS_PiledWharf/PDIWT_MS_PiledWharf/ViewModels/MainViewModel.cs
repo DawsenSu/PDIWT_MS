@@ -2,7 +2,7 @@
 using System.Text;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Forms;
+using Microsoft.Win32;
 using Bentley.DgnPlatformNET;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -14,6 +14,8 @@ namespace PDIWT_MS_PiledWharf.ViewModels
     using Models.Soil;
     using Models.Piles;
     using Models.Piles.CrossSection;
+    using System.Windows;
+
     public class MainViewModel : ViewModelBase
     {
         public MainViewModel()

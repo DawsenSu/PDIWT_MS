@@ -5,8 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
-using PDIWT_MS_Tool.Properties;
-using System.Windows.Forms;
+using Microsoft.Win32;
+using System.Windows;
+
 using Bentley.EC.Persistence.Query;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -15,6 +16,8 @@ using GalaSoft.MvvmLight.Messaging;
 using EPPlus.DataExtractor;
 using PDIWT_MS_CPP;
 using OfficeOpenXml;
+
+using PDIWT_MS_Tool.Properties;
 
 using BM = Bentley.MstnPlatformNET;
 using BD = Bentley.DgnPlatformNET;
@@ -72,11 +75,12 @@ namespace PDIWT_MS_Tool.ViewModels
             OpenFileDialog cellFileDialog = new OpenFileDialog()
             {
                 Filter = Resources.CellLibraryFilter,
-                Title = "选择Cell库文件"
+                Title = "选择Cell库文件",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
             };
             try
             {
-                if (cellFileDialog.ShowDialog() == DialogResult.OK)
+                if (cellFileDialog.ShowDialog() == true)
                 {
                     BD.DgnDocument cellFileDocument = BD.DgnDocument.CreateForLocalFile(cellFileDialog.FileName);
                     BD.DgnFile cellDgnFile = BD.DgnFile.Create(cellFileDocument, BD.DgnFileOpenMode.ReadOnly).DgnFile;
@@ -138,7 +142,7 @@ namespace PDIWT_MS_Tool.ViewModels
                 Filter = Resources.ExcelFilter,
                 Title = "选择输入Excel文件"
             };
-            if (excelOpenFileDialog.ShowDialog() == DialogResult.OK)
+            if (excelOpenFileDialog.ShowDialog() == true)
             {
                 try
                 {
@@ -217,7 +221,7 @@ namespace PDIWT_MS_Tool.ViewModels
                 }
                 PutCellProgress++;
             }
-            MessageBox.Show($"{PutCellProgress}个单元放置完成", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"{PutCellProgress}个单元放置完成", "成功", MessageBoxButton.OK, MessageBoxImage.Information);
             Prompt = Resources.PromptHeader + $"{PutCellProgress}个单元放置完成";
             Status = Resources.StatusHeader + Resources.SuccessString;
         }

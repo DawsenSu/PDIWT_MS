@@ -83,6 +83,7 @@
         <Menu
             Grid.Row="0"
             Grid.ColumnSpan="2"
+            MaxHeight="25"
             Background="White">
             <MenuItem
                 Click="MenuItem_Click"
@@ -174,6 +175,7 @@
         <!--  状态栏  -->
         <StatusBar
             Grid.Row="2"
+            MaxHeight="25"
             Background="{Binding Path=Status, Converter={StaticResource StatusToBackgroundConverter}}"
             Foreground="White">
             <StatusBarItem HorizontalAlignment="Stretch">

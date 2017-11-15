@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows.Forms;
+//using System.Windows.Forms;
+using Microsoft.Win32;
 using PDIWT_MS_Tool.Properties;
 using System.Linq;
 using System.Windows.Media;
@@ -93,11 +94,12 @@ namespace PDIWT_MS_Tool.ViewModels
             OpenFileDialog cellFileDialog = new OpenFileDialog()
             {
                 Filter = Resources.CellLibraryFilter,
-                Title = "选择Cell库文件"
+                Title = "选择Cell库文件",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
             };
             try
             {
-                if (cellFileDialog.ShowDialog() == DialogResult.OK)
+                if (cellFileDialog.ShowDialog() == true)
                 {
                     BD.DgnDocument cellFileDocument = BD.DgnDocument.CreateForLocalFile(cellFileDialog.FileName);
                     cellDgnFile = BD.DgnFile.Create(cellFileDocument, BD.DgnFileOpenMode.ReadOnly).DgnFile;

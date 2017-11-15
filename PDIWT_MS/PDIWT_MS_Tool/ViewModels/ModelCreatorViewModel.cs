@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Windows.Forms;
+using Microsoft.Win32;
 using System.Collections.Generic;
 using System.IO;
 using GalaSoft.MvvmLight;
@@ -45,23 +45,24 @@ namespace PDIWT_MS_Tool.ViewModels
             OpenFileDialog openExcelFileDialog = new OpenFileDialog()
             {
                 Filter = Resources.ExcelFilter,
-                Title = "选择输入Execel文件"
+                Title = "选择输入Execel文件",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
             };
             try
             {
-                if (openExcelFileDialog.ShowDialog() == DialogResult.OK)
+                if (openExcelFileDialog.ShowDialog() == true)
                 {
                     var excelFilePath = openExcelFileDialog.FileName;
                     DgnModelCreator modelCreator = new DgnModelCreator();
                     loadedDgnModelInfos.Clear();
                     loadedDgnModelInfos = modelCreator.ReadModelInfoFromExcel(excelFilePath);
                     LoadInfo = openExcelFileDialog.SafeFileName + "载入成功";
-                    mc.ShowInfoMessage(LoadInfo,LoadInfo,false);
+                    mc.ShowInfoMessage(LoadInfo, LoadInfo, false);
                 }
             }
             catch (Exception e)
             {
-                mc.ShowErrorMessage(e.Message,e.Message,true);
+                mc.ShowErrorMessage(e.Message, e.Message, true);
             }
         }
 
@@ -73,11 +74,11 @@ namespace PDIWT_MS_Tool.ViewModels
             {
                 DgnModelCreator modelCreator = new DgnModelCreator();
                 int successAddModelsNum = modelCreator.CreateModels(loadedDgnModelInfos);
-                mc.ShowInfoMessage($"成功添加{successAddModelsNum}个模型",$"成功添加{successAddModelsNum}个模型",true);
+                mc.ShowInfoMessage($"成功添加{successAddModelsNum}个模型", $"成功添加{successAddModelsNum}个模型", true);
             }
             catch (Exception e)
             {
-                mc.ShowErrorMessage(e.Message,e.Message,true);
+                mc.ShowErrorMessage(e.Message, e.Message, true);
             }
         }
 
@@ -90,12 +91,12 @@ namespace PDIWT_MS_Tool.ViewModels
         public RelayCommand OutputExcel => _OutputExcel ?? (_OutputExcel = new RelayCommand(ExecuteOutputExcel));
         public void ExecuteOutputExcel()
         {
-            SaveFileDialog sfDialog = new SaveFileDialog() {Filter = Resources.ExcelFilter, Title = "要保存模型信息的Excel文件"};
+            SaveFileDialog sfDialog = new SaveFileDialog() { Filter = Resources.ExcelFilter, Title = "要保存模型信息的Excel文件", InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) };
             try
             {
-                if (sfDialog.ShowDialog() == DialogResult.OK)
+                if (sfDialog.ShowDialog() == true)
                 {
-                    if(File.Exists(sfDialog.FileName)) File.Delete(sfDialog.FileName);
+                    if (File.Exists(sfDialog.FileName)) File.Delete(sfDialog.FileName);
                     DgnModelCreator dgnModelCreator = new DgnModelCreator();
                     dgnModelCreator.OutputModelInfo(sfDialog.FileName);
                     OutputInfo = sfDialog.FileName + "成功";
