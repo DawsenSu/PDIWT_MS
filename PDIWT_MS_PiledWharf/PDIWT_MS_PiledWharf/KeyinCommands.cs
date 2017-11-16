@@ -6,5 +6,10 @@
         {
             Views.MainView.ShowWindow();
         }
+
+        public static void DrawPileAxis(string unparsed)
+        {
+            Views.DrawPileAxisView.ShowWindow();
+        }
     }
 }

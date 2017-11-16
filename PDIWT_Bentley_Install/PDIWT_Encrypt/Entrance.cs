@@ -21,7 +21,7 @@ namespace PDIWT_Encrypt
                 return;
             }
             PDIWTEncrypt _pdiwt = new PDIWTEncrypt();
-            if (RegistryUtilities.GetActivationKeyFromRegistry() != _pdiwt.GenerateActivationCodeString())
+            if (RegistryUtilities.GetActivationKeyFromRegistry() != _pdiwt.GenerateActivationCodeString(RegistryUtilities.GetActivationKeyFromRegistry("ComputerRelated")))
             {
                 Process.Start(activationprogrampath);
             }

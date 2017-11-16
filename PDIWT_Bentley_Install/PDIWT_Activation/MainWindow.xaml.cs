@@ -42,6 +42,7 @@ namespace PDIWT_Encrypt.Activation
                 textbox_ActivationKey.Text = string.Empty;
                 return;
             }
+            RegistryUtilities.WriteActivationKeyToRegistry(_pdiwt.GetComputerRelatedString(), "ComputerRelated");
             RegistryUtilities.WriteActivationKeyToRegistry(textbox_ActivationKey.Text);
             MessageBox.Show("激活成功，请再次运行程序", "激活成功", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();

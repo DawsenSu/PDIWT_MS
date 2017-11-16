@@ -9,6 +9,7 @@ using System.Security.Permissions;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Management;
+using System.Net.NetworkInformation;
 
 namespace PDIWT_StartUp
 {
@@ -23,6 +24,7 @@ namespace PDIWT_StartUp
             }
             else
                 MessageBox.Show("本地计算机未安装MicroStation CONNECT Edition\n程序启动失败", "启动失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //DisplayTypeAndAddress();
             //Console.ReadKey();
 
         }
@@ -60,6 +62,26 @@ namespace PDIWT_StartUp
             }
 
             Process.Start(msprocessStartInfo);            
+        }
+
+        public static void DisplayTypeAndAddress()
+        {
+            IPGlobalProperties computerProperties = IPGlobalProperties.GetIPGlobalProperties();
+            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+            Console.WriteLine("Interface information for {0}.{1}     ",
+                    computerProperties.HostName, computerProperties.DomainName);
+            foreach (NetworkInterface adapter in nics)
+            {
+                IPInterfaceProperties properties = adapter.GetIPProperties();
+                Console.WriteLine(adapter.Description);
+                Console.WriteLine(String.Empty.PadLeft(adapter.Description.Length, '='));
+                Console.WriteLine("  Interface type .......................... : {0}", adapter.NetworkInterfaceType);
+                Console.WriteLine("  Physical Address ........................ : {0}",
+                           adapter.GetPhysicalAddress().ToString());
+                Console.WriteLine("  Is receive only.......................... : {0}", adapter.IsReceiveOnly);
+                Console.WriteLine("  Multicast................................ : {0}", adapter.SupportsMulticast);
+                Console.WriteLine();
+            }
         }
     }
 }

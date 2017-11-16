@@ -48,8 +48,8 @@ namespace PDIWT_Encrypt
         public string GetComputerRelatedString()
         {
             ComputerInfo computerinfo = ComputerInfo.Instance();
-            string cpudiskstring = computerinfo.MacAddress;
-            return GetMd5Hash(MD5.Create(), cpudiskstring).ToUpper();
+            string macstring = computerinfo.MacAddress;
+            return GetMd5Hash(MD5.Create(), macstring).ToUpper();
         }
         
         /// <summary>
@@ -162,17 +162,17 @@ namespace PDIWT_Encrypt
                 ManagementObjectCollection moc = mc.GetInstances();
                 foreach (ManagementObject mo in moc)
                 {
-                    //if ((bool)mo["IPEnabled"])
-                    //{
-                    //    mac = mo["MacAddress"].ToString();
-                    //    break;
-                    //}
-                    var tempmacobj = mo["IPEnabled"];
-                    if(tempmacobj!=null)
+                    if ((bool)mo["IPEnabled"])
                     {
-                        mac = tempmacobj.ToString();
+                        mac = mo["MacAddress"].ToString();
                         break;
                     }
+                    //var tempmacobj = mo["IPEnabled"];
+                    //if(tempmacobj!=null)
+                    //{
+                    //    mac = tempmacobj.ToString();
+                    //    break;
+                    //}
                 }
                 return mac.Replace(':', '-');
             }
