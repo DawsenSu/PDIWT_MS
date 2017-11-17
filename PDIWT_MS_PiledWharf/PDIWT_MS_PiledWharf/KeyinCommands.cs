@@ -9,7 +9,8 @@
 
         public static void DrawPileAxis(string unparsed)
         {
-            Views.DrawPileAxisView.ShowWindow();
+            Models.DrawPileAxisTool tool = new Models.DrawPileAxisTool(0, 0);
+            tool.InstallNewInstance();
         }
     }
 }

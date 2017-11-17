@@ -25,10 +25,13 @@ namespace PDIWT_MS_PiledWharf.Views
         private DrawPileAxisView(BM.AddIn addIn)
         {
             InitializeComponent();
-            this.DataContext = new ViewModels.DrawPileAxisViewModel();
+            var _locator = new ViewModels.ViewModelLocator();
+            this.DataContext = _locator.DrawPileAxisVM;
             m_addIn = addIn;
             this.Unloaded += DrawPileAxisView_Unloaded;
         }
+
+        public static DrawPileAxisView Instance;
         static BMWPF.ToolSettingsHost m_toolHost;
         BM.AddIn m_addIn;
 
@@ -40,11 +43,15 @@ namespace PDIWT_MS_PiledWharf.Views
                 return;
             }
             m_toolHost = new BMWPF.ToolSettingsHost();
+            m_toolHost.Width = 300;
+            m_toolHost.Height = 180;
             m_toolHost.Title = "绘制桩中心线";
-            m_toolHost.Content = new DrawPileAxisView(addIn);
+            Instance = new DrawPileAxisView(addIn);
+            m_toolHost.Content = Instance;
             m_toolHost.Attach(addIn);
             m_toolHost.Show();
         }
+
         private void DrawPileAxisView_Unloaded(object sender, RoutedEventArgs e)
         {
             CloseWindow();
@@ -54,8 +61,9 @@ namespace PDIWT_MS_PiledWharf.Views
             if (m_toolHost != null)
             {
                 m_toolHost.Detach();
-                m_toolHost.Dispose();
+                m_toolHost.Dispose();                
                 m_toolHost = null;
+                Instance = null;
             }
         }
 

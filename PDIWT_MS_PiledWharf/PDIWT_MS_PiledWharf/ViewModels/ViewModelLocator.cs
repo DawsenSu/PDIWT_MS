@@ -17,9 +17,11 @@ namespace PDIWT_MS_PiledWharf.ViewModels
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<DrawPileAxisViewModel>();
         }
         public MainViewModel MainVM => ServiceLocator.Current.GetInstance<MainViewModel>();
 
+        public DrawPileAxisViewModel DrawPileAxisVM => ServiceLocator.Current.GetInstance<DrawPileAxisViewModel>();
         public static void Cleanup()
         {
 

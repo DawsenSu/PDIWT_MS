@@ -382,6 +382,7 @@
                     </Grid>
                     <DataGrid
                         Grid.Row="1"
+                        InitializingNewItem="DataGrid_InitializingNewItem_Grill"
                         AlternatingRowBackground="{StaticResource AlterRowBgBrush}"
                         ItemsSource="{Binding Culvert_EnergyDisspater.GrilleWidthList}">
                         <DataGrid.Columns>
@@ -431,7 +432,9 @@
                         <TextBlock Style="{StaticResource MidTextBlock}" Text="消力坎" />
                     </StackPanel>
                 </TabItem.Header>
-                <DataGrid ItemsSource="{Binding Culvert_Baffle}" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=CheckBox_Baffle}">
+                <DataGrid
+                    InitializingNewItem="DataGrid_InitializingNewItem_Baffle"
+                    ItemsSource="{Binding Culvert_Baffle}" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=CheckBox_Baffle}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="*" Header="距闸首中轴线的距离">
                             <DataGridTextColumn.Binding>

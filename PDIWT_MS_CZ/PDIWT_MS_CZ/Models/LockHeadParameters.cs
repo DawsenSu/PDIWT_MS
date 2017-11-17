@@ -91,6 +91,8 @@ namespace PDIWT_MS_CZ.Models
             double _sumofedgriilwidth=0;
             foreach (var interval in LH_LocalConcertationCulvert.Culvert_EnergyDisspater.GrilleWidthList)
             {
+                if (interval.Interval <= 0)
+                    return "出水格栅中格栅宽度为非正实数";
                 _sumofedgriilwidth += interval.Interval;
             }
             if (_sumofedgriilwidth > LH_DoorSill.DoorSill_A / 2)

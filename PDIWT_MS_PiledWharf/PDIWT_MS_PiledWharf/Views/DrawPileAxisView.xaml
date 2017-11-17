@@ -5,16 +5,120 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:PDIWT_MS_PiledWharf.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Margin="3"
     d:DesignHeight="300"
     d:DesignWidth="300"
     Background="White"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/Xaml/CommonResource.xaml" />
+                <ResourceDictionary>
+                    <Style TargetType="{x:Type ComboBox}">
+                        <Setter Property="Margin" Value="2" />
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Text="桩类型：" />
+        <ComboBox
+            Grid.Row="0"
+            Grid.Column="1"
+            ItemsSource="{Binding PileTypes}"
+            SelectedItem="{Binding SelectedPileType}" />
+
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            Text="桩截面类型:" />
+        <ComboBox
+            Grid.Row="1"
+            Grid.Column="1"
+            ItemsSource="{Binding PileCrossSectionTypes}"
+            SelectedItem="{Binding SelectedCrossSectionType}" />
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="0"
+            Text="轴网横坐标:" />
+        <TextBox
+            Grid.Row="2"
+            Grid.Column="1"
+            Text="{Binding PileGridHorizontal}" />
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="0"
+            Text="轴网纵坐标:" />
+        <TextBox
+            Grid.Row="3"
+            Grid.Column="1"
+            Text="{Binding PileGridVertical}" />
+        <TextBlock
+            Grid.Row="4"
+            Grid.Column="0"
+            Text="桩边长(m):"
+            Visibility="{Binding IsPileSideLengthShow, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <TextBox
+            Grid.Row="4"
+            Grid.Column="1"
+            Text="{Binding PileSideLength}"
+            Visibility="{Binding IsPileSideLengthShow, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <TextBlock
+            Grid.Row="5"
+            Grid.Column="0"
+            Text="桩外径(m):"
+            Visibility="{Binding IsPileOutterDiameterShow, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <TextBox
+            Grid.Row="5"
+            Grid.Column="1"
+            Text="{Binding PileOutterDiameter}"
+            Visibility="{Binding IsPileOutterDiameterShow, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <TextBlock
+            Grid.Row="6"
+            Grid.Column="0"
+            Text="桩内径(m):"
+            Visibility="{Binding IsPileInnerDiameterShow, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <TextBox
+            Grid.Row="6"
+            Grid.Column="1"
+            Text="{Binding PileInnerDiameter}"
+            Visibility="{Binding IsPileInnerDiameterShow, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <TextBlock
+            Grid.Row="7"
+            Grid.Column="0"
+            Text="桩的水上重度(kN/m):" />
+        <TextBox
+            Grid.Row="7"
+            Grid.Column="1"
+            Text="{Binding PileWeight}" />
+        <TextBlock
+            Grid.Row="8"
+            Grid.Column="0"
+            Text="桩的水下重度(kN/m):" />
+        <TextBox
+            Grid.Row="8"
+            Grid.Column="1"
+            Text="{Binding PileUnderWaterWeight}" />
     </Grid>
 </UserControl>

@@ -89,4 +89,21 @@ namespace PDIWT_MS_PiledWharf_CPP {
 			}
 		}
 	};
+
+	public ref class SchmemaHelper
+	{
+	public:
+		bool ImportPDIWTSchema(String^ xmlstring)
+		{
+			DgnECManagerR _manager = DgnECManager::GetManager();
+			pin_ptr<const wchar_t> _xmlstr = PtrToStringChars(xmlstring);
+			ECSchemaPtr _pdiwtschema;
+			if (SchemaReadStatus::SCHEMA_READ_STATUS_Success != _manager.ReadSchemaFromXmlString(_pdiwtschema, _xmlstr, ISessionMgr::GetActiveDgnFile()))
+				return false;
+			auto _importresult = _manager.ImportSchema(*_pdiwtschema, *ISessionMgr::GetActiveDgnFile());
+			if (SchemaImportStatus::SCHEMAIMPORT_Success != _importresult && SchemaImportStatus::SCHEMAIMPORT_SchemaAlreadyStoredInFile != _importresult)
+				return false;			 
+			return true;
+		}
+	};
 }

@@ -176,6 +176,7 @@
     <Compile Include="Interface\IPileCrossSection.cs" />
     <Compile Include="KeyinCommands.cs" />
     <Compile Include="Models\DrawAxisFromExcel.cs" />
+    <Compile Include="Models\DrawPileAxisTool.cs" />
     <Compile Include="Models\EnumClasses.cs" />
     <Compile Include="Models\Piles\CrossSection\AnnularCrossSection.cs" />
     <Compile Include="Models\Piles\CrossSection\PolygonCrossSection.cs" />
