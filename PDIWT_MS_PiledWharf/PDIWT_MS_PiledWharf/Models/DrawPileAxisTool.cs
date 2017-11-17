@@ -162,37 +162,28 @@ namespace PDIWT_MS_PiledWharf.Models
                 return BD.StatusInt.Error;
             BEI.StandaloneECDInstance instance = instanceEnabler.SharedWipInstance;
             instance.MemoryBuffer.SetStringValue("PileType", -1, viewmodel.SelectedPileType);
-
-            var _pilecrosssection = instance.FindPropertyValue("PileCrossSection", false, false, false);
-            _pilecrosssection.StringValue = viewmodel.SelectedPileType;
-            var _pilegridhorizontal = instance.FindPropertyValue("PileGridHorizontal", false, false, false);
-            _pilegridhorizontal.StringValue = viewmodel.PileGridHorizontal;
-            var _pilegridvertical = instance.FindPropertyValue("PileGridVertical", false, false, false);
-            _pilegridvertical.StringValue = viewmodel.PileGridVertical;
-
-            var _sidelength = instance.FindPropertyValue("SideLength", false, false, false);
-            var _pileinnerdiameter = instance.FindPropertyValue("PileInnerDiameter", false, false, false);
+            instance.MemoryBuffer.SetStringValue("PileCrossSection", -1, viewmodel.SelectedCrossSectionType);
+            instance.MemoryBuffer.SetStringValue("PileGridHorizontal", -1, viewmodel.PileGridHorizontal);
+            instance.MemoryBuffer.SetStringValue("PileGridVertical", -1, viewmodel.PileGridVertical);
 
             switch (viewmodel.SelectedCrossSectionType)
             {
                 case "方形截面":
-                    _sidelength.DoubleValue = viewmodel.PileSideLength;
+                    instance.MemoryBuffer.SetDoubleValue("SideLength", -1, viewmodel.PileSideLength);
                     break;
                 case "环形截面":
-                    _sidelength.DoubleValue = viewmodel.PileOutterDiameter;
-                    _pileinnerdiameter.DoubleValue = viewmodel.PileInnerDiameter;
+                    instance.MemoryBuffer.SetDoubleValue("SideLength", -1, viewmodel.PileOutterDiameter);
+                    instance.MemoryBuffer.SetDoubleValue("PileInnerDiameter", -1, viewmodel.PileInnerDiameter);
                     break;
                 case "方形圆孔截面":
-                    _sidelength.DoubleValue = viewmodel.PileSideLength;
-                    _pileinnerdiameter.DoubleValue = viewmodel.PileInnerDiameter;
+                    instance.MemoryBuffer.SetDoubleValue("SideLength", -1, viewmodel.PileSideLength);
+                    instance.MemoryBuffer.SetDoubleValue("PileInnerDiameter", -1, viewmodel.PileInnerDiameter);
                     break;
                 default:
                     break;
             }
-            var _pileweight = instance.FindPropertyValue("PileWeight", false, false, false);
-            _pileweight.DoubleValue = viewmodel.PileWeight;
-            var _pileunderwaterweight = instance.FindPropertyValue("PileUnderWaterWeight", false, false, false);
-            _pileunderwaterweight.DoubleValue = viewmodel.PileUnderWaterWeight;
+            instance.MemoryBuffer.SetDoubleValue("PileWeight", -1, viewmodel.PileWeight);
+            instance.MemoryBuffer.SetDoubleValue("PileUnderWaterWeight", -1, viewmodel.PileUnderWaterWeight);
             instanceEnabler.CreateInstanceOnElement(ele, instance, false);
             return BD.StatusInt.Success;
         }
