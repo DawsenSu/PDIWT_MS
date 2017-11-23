@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using GalaSoft.MvvmLight;
@@ -13,6 +14,8 @@ namespace PDIWT_MS_PiledWharf.ViewModels
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
+    using Models;
+
     public class DrawPileAxisViewModel : ViewModelBase
     {
         /// <summary>
@@ -20,19 +23,9 @@ namespace PDIWT_MS_PiledWharf.ViewModels
         /// </summary>
         public DrawPileAxisViewModel()
         {
-            _PileTypes = new ObservableCollection<string>()
-            {
-                "实心桩或桩端封闭",
-                "钢管桩与预制混凝土管桩"
-            };
+            _PileTypes = EnumDisPlayNameHelper.GetPileTypeNameList().ToObservableCollection();
             _SelectedPileType = _PileTypes[0];
-            _PileCrossSectionTypes = new ObservableCollection<string>()
-            {
-                "环形截面",
-                "方形截面",
-                "方形圆孔截面",
-                "多边形截面"
-            };
+            _PileCrossSectionTypes = EnumDisPlayNameHelper.GetPileCrossSectionTypeNameList().ToObservableCollection();
             _SelectedCrossSectionType = _PileCrossSectionTypes[0];
             _PileWeight = 25;
             _PileUnderWaterWeight = 15;

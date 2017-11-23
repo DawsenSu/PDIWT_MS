@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PDIWT_MS_PiledWharf.Models.Piles
 {
+    using Extension.Attribute;
+
+    [EnumDisplayName(DisplayName = "实心桩或桩端封闭")]
     public class SolidPile : PileBase
     {
         //private double _GammaR;

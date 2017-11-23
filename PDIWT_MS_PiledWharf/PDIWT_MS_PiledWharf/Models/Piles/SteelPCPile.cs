@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace PDIWT_MS_PiledWharf.Models.Piles
 {
+
+    using Extension.Attribute;
+
+    [EnumDisplayName(DisplayName = "钢管桩与预制混凝土管桩")]
     public class SteelPCPile : PileBase
     {
         //private double _GammaR;

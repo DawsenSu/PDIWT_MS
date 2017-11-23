@@ -9,57 +9,14 @@
             <SchemaFullNameAtEditingStart>PDIWT_Wharf.01.00</SchemaFullNameAtEditingStart>
         </SchemaChangeTrackingState>
     </ECCustomAttributes>
-    <ECClass typeName="Class" isDomainClass="True">
-        <ECProperty propertyName="Property" typeName="string" />
-    </ECClass>
     <ECClass typeName="Pile" description="桩基信息" displayLabel="桩基" isDomainClass="True">
-        <ECProperty propertyName="PileType" typeName="string" displayLabel="类型">
-            <ECCustomAttributes>
-                <StandardValues xmlns="EditorCustomAttributes.01.01">
-                    <ValueMap>
-                        <ValueMap>
-                            <DisplayString>实心桩或桩端封闭</DisplayString>
-                            <Value>0</Value>
-                        </ValueMap>
-                        <ValueMap>
-                            <DisplayString>钢管桩与预制混凝土管桩</DisplayString>
-                            <Value>1</Value>
-                        </ValueMap>
-                    </ValueMap>
-                    <MustBeFromList>True</MustBeFromList>
-                </StandardValues>
-            </ECCustomAttributes>
-        </ECProperty>
-        <ECProperty propertyName="PileCrossSection" typeName="string" displayLabel="截面类型">
-            <ECCustomAttributes>
-                <StandardValues xmlns="EditorCustomAttributes.01.01">
-                    <ValueMap>
-                        <ValueMap>
-                            <Value>0</Value>
-                            <DisplayString>环形</DisplayString>
-                        </ValueMap>
-                        <ValueMap>
-                            <DisplayString>方形</DisplayString>
-                            <Value>1</Value>
-                        </ValueMap>
-                        <ValueMap>
-                            <Value>2</Value>
-                            <DisplayString>方形空心</DisplayString>
-                        </ValueMap>
-                        <ValueMap>
-                            <DisplayString>多边形</DisplayString>
-                            <Value>3</Value>
-                        </ValueMap>
-                    </ValueMap>
-                    <MustBeFromList>True</MustBeFromList>
-                </StandardValues>
-            </ECCustomAttributes>
-        </ECProperty>
-        <ECProperty propertyName="PileGridHorizontal" typeName="string" displayLabel="横向轴网坐标" />
-        <ECProperty propertyName="PileGridVertical" typeName="string" displayLabel="纵向轴网坐标" />
-        <ECProperty propertyName="PileWeight" typeName="double" displayLabel="水上重度(kN/m)" />
-        <ECProperty propertyName="PileUnderWaterWeight" typeName="double" displayLabel="水下重度(kN/m)" />
-        <ECProperty propertyName="PileInnerDiameter" typeName="double" displayLabel="内径(m)" />
-        <ECProperty propertyName="SideLength" typeName="double" displayLabel="边长或外径(m)" />
+      <ECProperty propertyName="PileType" typeName="string" displayLabel="类型" readOnly="True"/>
+      <ECProperty propertyName="PileCrossSection" typeName="string" displayLabel="截面类型" readOnly="True"/>
+      <ECProperty propertyName="PileGridHorizontal" typeName="string" displayLabel="横向轴网坐标" />
+      <ECProperty propertyName="PileGridVertical" typeName="string" displayLabel="纵向轴网坐标" />
+      <ECProperty propertyName="SideLength" typeName="double" displayLabel="边长或外径(m)" readOnly="True"/>
+      <ECProperty propertyName="PileInnerDiameter" typeName="double" displayLabel="内径(m)" readOnly="True"/>
+      <ECProperty propertyName="PileWeight" typeName="double" displayLabel="水上重度(kN/m)" />
+      <ECProperty propertyName="PileUnderWaterWeight" typeName="double" displayLabel="水下重度(kN/m)" />
     </ECClass>
 </ECSchema>

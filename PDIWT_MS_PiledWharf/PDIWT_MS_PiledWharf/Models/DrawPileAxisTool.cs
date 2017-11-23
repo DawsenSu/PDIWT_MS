@@ -31,6 +31,28 @@ namespace PDIWT_MS_PiledWharf.Models
         {
             BD.AccuSnap.SnapEnabled = true;
             BD.AccuSnap.LocateEnabled = true;
+
+            switch (PileAxis.ImportPDIWTSchema())
+            {
+                case PDIWT_MS_PiledWharf_CPP.PDIWTSchemaImportSatutes.Failed_ReadxmlString:
+                    _mc.ShowErrorMessage("无法导入PDIWT_Wharf schema", "无法读取PDIWT_Wharf Schema的XML字符串", BM.MessageAlert.Balloon);
+                    ExitTool();
+                    break;
+                case PDIWT_MS_PiledWharf_CPP.PDIWTSchemaImportSatutes.Failed_UpdateSchema:
+                    _mc.ShowErrorMessage("无法更新PDIWT_Wharf schema", "无法更新已存在于文件中的PDIWT_Wharf Schema", BM.MessageAlert.Balloon);
+                    ExitTool();
+                    break;
+                case PDIWT_MS_PiledWharf_CPP.PDIWTSchemaImportSatutes.Failed_ImportSchema:
+                    _mc.ShowErrorMessage("无法导入PDIWT_Wharf schema", "无法向当前Dgn文件中导入PDIWT_Wharf Schema", BM.MessageAlert.Balloon);
+                    ExitTool();
+                    break;
+                case PDIWT_MS_PiledWharf_CPP.PDIWTSchemaImportSatutes.Success_UpdateSchema:
+                    _mc.ShowInfoMessage("成功更新PDIWT_Wharf schema", "成功更新存在于Dgn文件中的PDIWT_Wharf Schema", false);
+                    break;
+                case PDIWT_MS_PiledWharf_CPP.PDIWTSchemaImportSatutes.Success_ImportSchema:
+                    _mc.ShowInfoMessage("成功导入PDIWT_Wharf schema", "成功向Dgn文件中导入PDIWT_Wharf Schema", false);
+                    break;
+            }
             base.OnPostInstall();
         }
 
@@ -48,11 +70,6 @@ namespace PDIWT_MS_PiledWharf.Models
             if (PileAxis.Create(_points, out _lineEle) && _lineEle != null)
             {
                 _lineEle.AddToModel();
-                if (!PileAxis.ImportPDIWTSchema())
-                {
-                    _mc.ShowErrorMessage("无法导入PDIWT_Wharf schema", "无法导入PDIWT_Wharf schema", BM.MessageAlert.Balloon);
-                    return false;
-                }
                 var _loactor = new ViewModels.ViewModelLocator();
                 if( BD.StatusInt.Success != PileAxis.AttachProperty(_lineEle, _loactor.DrawPileAxisVM))
                 {
@@ -91,7 +108,7 @@ namespace PDIWT_MS_PiledWharf.Models
                     _mc.StatusPrompt = "选择第一个点";
                     break;
                 case 1:
-                    _mc.StatusPrompt = "选择第二个点";
+                    _mc.StatusPrompt = "选择第二个点[完成绘制]";
                     break;
                 default:
                     break;
@@ -142,7 +159,7 @@ namespace PDIWT_MS_PiledWharf.Models
             return true;
         }
 
-        public static bool ImportPDIWTSchema()
+        public static PDIWT_MS_PiledWharf_CPP.PDIWTSchemaImportSatutes ImportPDIWTSchema()
         {
             PDIWT_MS_PiledWharf_CPP.SchmemaHelper _schemahelper = new PDIWT_MS_PiledWharf_CPP.SchmemaHelper();
             return _schemahelper.ImportPDIWTSchema(Resources.PDIWT_Wharf_01_00_ecschema);
@@ -165,7 +182,6 @@ namespace PDIWT_MS_PiledWharf.Models
             instance.MemoryBuffer.SetStringValue("PileCrossSection", -1, viewmodel.SelectedCrossSectionType);
             instance.MemoryBuffer.SetStringValue("PileGridHorizontal", -1, viewmodel.PileGridHorizontal);
             instance.MemoryBuffer.SetStringValue("PileGridVertical", -1, viewmodel.PileGridVertical);
-
             switch (viewmodel.SelectedCrossSectionType)
             {
                 case "方形截面":

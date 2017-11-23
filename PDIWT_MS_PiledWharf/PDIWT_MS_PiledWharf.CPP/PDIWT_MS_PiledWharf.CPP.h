@@ -90,20 +90,36 @@ namespace PDIWT_MS_PiledWharf_CPP {
 		}
 	};
 
+	public enum class PDIWTSchemaImportSatutes
+	{
+		Failed_ReadxmlString,
+		Failed_UpdateSchema,
+		Failed_ImportSchema,
+		Success_UpdateSchema,
+		Success_ImportSchema
+	};
+
 	public ref class SchmemaHelper
 	{
 	public:
-		bool ImportPDIWTSchema(String^ xmlstring)
+		PDIWTSchemaImportSatutes ImportPDIWTSchema(String^ xmlstring)
 		{
 			DgnECManagerR _manager = DgnECManager::GetManager();
 			pin_ptr<const wchar_t> _xmlstr = PtrToStringChars(xmlstring);
 			ECSchemaPtr _pdiwtschema;
 			if (SchemaReadStatus::SCHEMA_READ_STATUS_Success != _manager.ReadSchemaFromXmlString(_pdiwtschema, _xmlstr, ISessionMgr::GetActiveDgnFile()))
-				return false;
+				return PDIWTSchemaImportSatutes::Failed_ReadxmlString;
 			auto _importresult = _manager.ImportSchema(*_pdiwtschema, *ISessionMgr::GetActiveDgnFile());
-			if (SchemaImportStatus::SCHEMAIMPORT_Success != _importresult && SchemaImportStatus::SCHEMAIMPORT_SchemaAlreadyStoredInFile != _importresult)
-				return false;			 
-			return true;
+			if (SchemaImportStatus::SCHEMAIMPORT_SchemaAlreadyStoredInFile == _importresult)
+			{
+				if (SchemaUpdateStatus::SCHEMAUPDATE_Success == _manager.UpdateSchema(*_pdiwtschema, *ISessionMgr::GetActiveDgnFile()))
+					return PDIWTSchemaImportSatutes::Success_UpdateSchema;
+				else
+					return PDIWTSchemaImportSatutes::Failed_UpdateSchema;
+			}
+			if (SchemaImportStatus::SCHEMAIMPORT_Success != _importresult)
+				return PDIWTSchemaImportSatutes::Failed_ImportSchema;			 
+			return PDIWTSchemaImportSatutes::Success_ImportSchema;
 		}
 	};
 }
