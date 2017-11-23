@@ -71,7 +71,7 @@ namespace PDIWT_MS_PiledWharf.Models
             {
                 _lineEle.AddToModel();
                 var _loactor = new ViewModels.ViewModelLocator();
-                if( BD.StatusInt.Success != PileAxis.AttachProperty(_lineEle, _loactor.DrawPileAxisVM))
+                if( BD.StatusInt.Success != PileAxis.AttachProperty(_lineEle, _loactor.DrawPileAxisVM.ToInfo()))
                 {
                     _mc.ShowErrorMessage("无法将实例写入元素上", $"无法将实例Pile写入元素{_lineEle.ElementId}上", BM.MessageAlert.Balloon);
                     return false;
@@ -165,9 +165,9 @@ namespace PDIWT_MS_PiledWharf.Models
             return _schemahelper.ImportPDIWTSchema(Resources.PDIWT_Wharf_01_00_ecschema);
         }
 
-        public static BD.StatusInt AttachProperty(BDE.Element ele,ViewModels.DrawPileAxisViewModel viewmodel)
+        public static BD.StatusInt AttachProperty(BDE.Element ele,PileAxisInfo info)
         {
-            BDEC.FindInstancesScope scope = BDEC.FindInstancesScope.CreateScope(Program.GetActiveDgnFile(), new BDEC.FindInstancesScopeOption());
+            BDEC.FindInstancesScope scope = BDEC.FindInstancesScope.CreateScope(Program.GetActiveDgnFile(), new BDEC.FindInstancesScopeOption(BDEC.DgnECHostType.All));
             BES.IECSchema schema = BDEC.DgnECManager.Manager.LocateSchemaInScope(scope, "PDIWT_Wharf", 1, 0, BES.SchemaMatchType.Exact);
             if (schema == null)
                 return BD.StatusInt.Error;
@@ -178,30 +178,36 @@ namespace PDIWT_MS_PiledWharf.Models
             if (instanceEnabler == null)
                 return BD.StatusInt.Error;
             BEI.StandaloneECDInstance instance = instanceEnabler.SharedWipInstance;
-            instance.MemoryBuffer.SetStringValue("PileType", -1, viewmodel.SelectedPileType);
-            instance.MemoryBuffer.SetStringValue("PileCrossSection", -1, viewmodel.SelectedCrossSectionType);
-            instance.MemoryBuffer.SetStringValue("PileGridHorizontal", -1, viewmodel.PileGridHorizontal);
-            instance.MemoryBuffer.SetStringValue("PileGridVertical", -1, viewmodel.PileGridVertical);
-            switch (viewmodel.SelectedCrossSectionType)
-            {
-                case "方形截面":
-                    instance.MemoryBuffer.SetDoubleValue("SideLength", -1, viewmodel.PileSideLength);
-                    break;
-                case "环形截面":
-                    instance.MemoryBuffer.SetDoubleValue("SideLength", -1, viewmodel.PileOutterDiameter);
-                    instance.MemoryBuffer.SetDoubleValue("PileInnerDiameter", -1, viewmodel.PileInnerDiameter);
-                    break;
-                case "方形圆孔截面":
-                    instance.MemoryBuffer.SetDoubleValue("SideLength", -1, viewmodel.PileSideLength);
-                    instance.MemoryBuffer.SetDoubleValue("PileInnerDiameter", -1, viewmodel.PileInnerDiameter);
-                    break;
-                default:
-                    break;
-            }
-            instance.MemoryBuffer.SetDoubleValue("PileWeight", -1, viewmodel.PileWeight);
-            instance.MemoryBuffer.SetDoubleValue("PileUnderWaterWeight", -1, viewmodel.PileUnderWaterWeight);
+            instance.MemoryBuffer.SetStringValue("PileType", -1, info.Type);
+            instance.MemoryBuffer.SetStringValue("PileCrossSection", -1, info.CrossSectionType);
+            instance.MemoryBuffer.SetStringValue("PileGridHorizontal", -1, info.GridHorizontal);
+            instance.MemoryBuffer.SetStringValue("PileGridVertical", -1, info.GridVertical);
+            instance.MemoryBuffer.SetDoubleValue("SideLength", -1, info.SideLength);
+            instance.MemoryBuffer.SetDoubleValue("PileInnerDiameter", -1, info.InnerDiameter);
+            instance.MemoryBuffer.SetDoubleValue("PileWeight", -1, info.Weight);
+            instance.MemoryBuffer.SetDoubleValue("PileUnderWaterWeight", -1, info.UnderWaterWeight);
             instanceEnabler.CreateInstanceOnElement(ele, instance, false);
             return BD.StatusInt.Success;
         }
+    }
+
+    public class PileAxisInfo
+    {
+        public string GridHorizontal { get; set; }
+        public string GridVertical { get; set; }
+        public double TopX { get; set; }
+        public double TopY { get; set; }
+        public double TopZ { get; set; }
+        public double Skewness { get; set; }
+        public double RotationDegree { get; set; }
+        public double Length { get; set; } //unit mm
+
+        public string Type { get; set; }
+        public string CrossSectionType { get; set; }
+
+        public double SideLength { get; set; }
+        public double InnerDiameter { get; set; }
+        public double Weight { get; set; }
+        public double UnderWaterWeight { get; set; }
     }
 }

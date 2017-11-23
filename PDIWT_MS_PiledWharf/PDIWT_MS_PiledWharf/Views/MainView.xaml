@@ -56,14 +56,9 @@
         <!--  Menu  -->
         <Menu Grid.Row="0">
             <MenuItem
-                Command="{Binding DrawAxisFromExcelCommand}"
-                Header="导入中心线"
-                ToolTip="根据Excel文件绘制桩中心线">
-                <MenuItem.Icon>
-                    <Image Source="../Resources/Icons/CenterLine.ico" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Header="提取列表" ToolTip="从模型的中心线中提取设计桩列表">
+                Command="{Binding GetPilesInfoFromDgnCommand}"
+                Header="提取桩轴线"
+                ToolTip="从模型的中心线中提取设计桩列表">
                 <MenuItem.Icon>
                     <Image Source="../Resources/Icons/ExtractList.ico" />
                 </MenuItem.Icon>

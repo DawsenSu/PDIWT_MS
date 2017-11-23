@@ -2,9 +2,12 @@
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Collections.ObjectModel;
+using PDIWT_MS_PiledWharf.Extension.Attribute;
+using PDIWT_MS_PiledWharf.Models.Piles.CrossSection;
 
 namespace PDIWT_MS_PiledWharf.ViewModels
 {
@@ -86,7 +89,7 @@ namespace PDIWT_MS_PiledWharf.ViewModels
             set { Set(ref _PileSideLength, value); }
         }
 
-        public bool IsPileSideLengthShow => _SelectedCrossSectionType == "方形截面" || _SelectedCrossSectionType == "方形圆孔截面";
+        public bool IsPileSideLengthShow => _SelectedCrossSectionType == GetCrossTypeNameString(typeof(SquareCrossSection)) || _SelectedCrossSectionType == GetCrossTypeNameString(typeof(SquareWithRoundHoleCrossSection));
 
 
         private double _PileOutterDiameter;
@@ -96,7 +99,7 @@ namespace PDIWT_MS_PiledWharf.ViewModels
             set { Set(ref _PileOutterDiameter, value); }
         }
 
-        public bool IsPileOutterDiameterShow => _SelectedCrossSectionType == "环形截面";
+        public bool IsPileOutterDiameterShow => _SelectedCrossSectionType == GetCrossTypeNameString(typeof(AnnularCrossSection));
 
         private double _PileInnerDiameter;
         public double PileInnerDiameter
@@ -105,7 +108,7 @@ namespace PDIWT_MS_PiledWharf.ViewModels
             set { Set(ref _PileInnerDiameter, value); }
         }
 
-        public bool IsPileInnerDiameterShow => _SelectedCrossSectionType == "环形截面" || _SelectedCrossSectionType == "方形圆孔截面";
+        public bool IsPileInnerDiameterShow => _SelectedCrossSectionType == GetCrossTypeNameString(typeof(AnnularCrossSection)) || _SelectedCrossSectionType == GetCrossTypeNameString(typeof(SquareWithRoundHoleCrossSection));
 
         private double _PileWeight;
         public double PileWeight
@@ -121,6 +124,38 @@ namespace PDIWT_MS_PiledWharf.ViewModels
             set { Set(ref _PileUnderWaterWeight, value); }
         }
 
+        string GetCrossTypeNameString(Type crosssectiontype)
+        {
+            var attrri = crosssectiontype.GetCustomAttribute<EnumDisplayNameAttribute>();
+           return attrri != null ? attrri.DisplayName : crosssectiontype.Name;
+        }
+
+        public PileAxisInfo ToInfo()
+        {
+            PileAxisInfo info = new PileAxisInfo();
+            info.GridHorizontal = _PileGridHorizontal;
+            info.GridVertical = _PileGridVertical;
+            info.Type = _SelectedPileType;
+            info.CrossSectionType = _SelectedCrossSectionType;
+            if (_SelectedCrossSectionType == GetCrossTypeNameString(typeof(AnnularCrossSection)))
+            {
+                info.SideLength = _PileOutterDiameter;
+                info.InnerDiameter = _PileInnerDiameter;
+            }
+            else if(_SelectedCrossSectionType == GetCrossTypeNameString(typeof(SquareCrossSection)))
+            {
+                info.SideLength = _PileSideLength;
+                info.InnerDiameter = 0;
+            }
+            else if(_SelectedCrossSectionType == GetCrossTypeNameString(typeof(SquareWithRoundHoleCrossSection)))
+            {
+                info.SideLength = _PileSideLength;
+                info.SideLength = _PileInnerDiameter;
+            }
+            info.Weight = _PileWeight;
+            info.UnderWaterWeight = _PileUnderWaterWeight;
+            return info;
+        }
 
     }
 }

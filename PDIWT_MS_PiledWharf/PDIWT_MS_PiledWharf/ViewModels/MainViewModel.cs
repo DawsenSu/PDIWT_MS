@@ -2,8 +2,17 @@
 using System.Text;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using Microsoft.Win32;
+
 using Bentley.DgnPlatformNET;
+using Bentley.DgnPlatformNET.Elements;
+
+using BDDE = Bentley.DgnPlatformNET.DgnEC;
+using BES = Bentley.ECObjects.Schema;
+using BEI = Bentley.ECObjects.Instance;
+using BDEPQ = Bentley.EC.Persistence.Query;
+
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 
@@ -14,7 +23,7 @@ namespace PDIWT_MS_PiledWharf.ViewModels
     using Models.Soil;
     using Models.Piles;
     using Models.Piles.CrossSection;
-    using System.Windows;
+
 
     public class MainViewModel : ViewModelBase
     {
@@ -130,43 +139,33 @@ namespace PDIWT_MS_PiledWharf.ViewModels
         #endregion
 
         #region Commands
-        private RelayCommand _DrawAxisFromExcelCommand;
-        public RelayCommand DrawAxisFromExcelCommand => _DrawAxisFromExcelCommand ?? (_DrawAxisFromExcelCommand = new RelayCommand(ExecuteDrawAxisFromExcelCommand));
-        public void ExecuteDrawAxisFromExcelCommand()
+        private RelayCommand _GetPilesInfoFromDgnCommand;
+        public RelayCommand GetPilesInfoFromDgnCommand => _GetPilesInfoFromDgnCommand ?? (_GetPilesInfoFromDgnCommand = new RelayCommand(ExecuteGetPilesInfoFromDgnCommand));
+        public void ExecuteGetPilesInfoFromDgnCommand()
         {
+            ScanCriteria sc = new ScanCriteria();
+            BitMask bmtype = new BitMask(false);
+            bmtype.Set((uint)MSElementType.Line - 1);
+            bmtype.EnsureCapacity(112);
+            sc.SetElementTypeTest(bmtype);
+            sc.SetModelRef(Program.GetActiveDgnModelRef());
+            sc.SetModelSections(DgnModelSections.GraphicElements);
 
+
+            sc.Scan((ele, model) =>
+            {
+                BDDE.FindInstancesScope scope = BDDE.FindInstancesScope.CreateScope(ele, new BDDE.FindInstancesScopeOption(BDDE.DgnECHostType.Element));
+                BDEPQ.ECQuery query = new BDEPQ.ECQuery(new BES.ECClass("Pile"));
+                query.SelectClause.SelectAllProperties = true;
+                using (BDDE.DgnECInstanceCollection ecInstances = BDDE.DgnECManager.Manager.FindInstances(scope,query))
+                {
+                    if (ecInstances == null) return StatusInt.Error;
+                }
+
+                return StatusInt.Success;
+            });
         }
         #endregion
-
-        public void DrawPileLineFromFile()
-        {
-            //OpenFileDialog ofd = new OpenFileDialog
-            //{
-            //    Filter = Resources.ExcelFileFilter,
-            //    Title = Resources.OpenFileDlgTitle
-            //};
-            //if (ofd.ShowDialog() != DialogResult.OK) return;
-            //try
-            //{
-            //    var dgnlinefromexcel = new DrawLineElementFromExcelFile(ofd.FileName);
-            //    dgnlinefromexcel.DrawLines();
-            //    MessageBox.Show("绘制完成！", "完成", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
-            //catch (Exception e)
-            //{
-            //    MessageBox.Show(e.ToString());
-            //}
-        }
-        public void GetPilesFromLines()
-        {
-            //var view = new Views.GetPilesFromLines();
-            //var viewmodel = new GetPilesFromLinesViewModel();
-            //viewmodel.Piles = this.Piles;
-            //if (viewmodel.CloseAction == null)
-            //    viewmodel.CloseAction = new Action(() => view.Close());
-            //view.DataContext = viewmodel;
-            //view.ShowDialog();
-        }
 
         private RelayCommand _Test;
         public RelayCommand Test => _Test ?? (_Test = new RelayCommand(ExecuteTest));

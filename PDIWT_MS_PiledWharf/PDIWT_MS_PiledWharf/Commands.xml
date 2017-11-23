@@ -11,11 +11,15 @@
     <KeyinTable ID="PDIWT_MS_PiledWharf">
       <Keyword CommandWord="Command"></Keyword>
       <Keyword CommandWord="DrawPileAxis"></Keyword>
+      <Keyword CommandWord="ExtracPileAxisFromExcel"></Keyword>
+
     </KeyinTable>
   </SubKeyinTables>
 
   <KeyinHandlers>
     <KeyinHandler Keyin="PDIWT_MS_PiledWharf Command" Function="PDIWT_MS_PiledWharf.KeyinCommands.Command"/>
     <KeyinHandler Keyin="PDIWT_MS_PiledWharf DrawPileAxis" Function="PDIWT_MS_PiledWharf.KeyinCommands.DrawPileAxis"/>
+    <KeyinHandler Keyin="PDIWT_MS_PiledWharf ExtracPileAxisFromExcel" Function="PDIWT_MS_PiledWharf.KeyinCommands.ExtracPileAxisFromExcel"/>
+
   </KeyinHandlers>
 </KeyinTree>

@@ -61,6 +61,15 @@ namespace PDIWT_MS_PiledWharf.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Excel2007-2016文件|*.xlsx 的本地化字符串。
+        /// </summary>
+        public static string ExcelFilter {
+            get {
+                return ResourceManager.GetString("ExcelFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;ECSchema schemaName=&quot;PDIWT_Wharf&quot; nameSpacePrefix=&quot;PDIWT&quot; version=&quot;1.0&quot; displayLabel=&quot;水规院码头信息&quot; xmlns=&quot;http://www.bentley.com/schemas/Bentley.ECXML.2.0&quot;&gt;
         ///    &lt;ECSchemaReference name=&quot;Bentley_Standard_CustomAttributes&quot; version=&quot;01.00&quot; prefix=&quot;bsca&quot; /&gt;

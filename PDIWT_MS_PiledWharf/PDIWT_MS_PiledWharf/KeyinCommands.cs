@@ -1,4 +1,6 @@
-﻿namespace PDIWT_MS_PiledWharf
+﻿
+
+namespace PDIWT_MS_PiledWharf
 {
     class KeyinCommands
     {
@@ -11,6 +13,11 @@
         {
             Models.DrawPileAxisTool tool = new Models.DrawPileAxisTool(0, 0);
             tool.InstallNewInstance();
+        }
+
+        public static void ExtracPileAxisFromExcel(string unparsed)
+        {
+            Models.DrawAxisFromExcelLogicalWrapper.Do();
         }
     }
 }
