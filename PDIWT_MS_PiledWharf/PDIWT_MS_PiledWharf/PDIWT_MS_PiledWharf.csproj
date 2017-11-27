@@ -178,6 +178,7 @@
     <Compile Include="Models\DrawAxisFromExcel.cs" />
     <Compile Include="Models\DrawPileAxisTool.cs" />
     <Compile Include="Models\HelperClasses.cs" />
+    <Compile Include="Models\PileFactory.cs" />
     <Compile Include="Models\Piles\CrossSection\AnnularCrossSection.cs" />
     <Compile Include="Models\Piles\CrossSection\PolygonCrossSection.cs" />
     <Compile Include="Models\Piles\CrossSection\SquareCrossSection.cs" />
@@ -237,9 +238,7 @@
     <Resource Include="Resources\Images\SquareWithRoundHole_16.png" />
     <Resource Include="Resources\Images\Square_16.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Factory\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="Resources\Xaml\CommonResource.xaml">
       <Generator>MSBuild:Compile</Generator>

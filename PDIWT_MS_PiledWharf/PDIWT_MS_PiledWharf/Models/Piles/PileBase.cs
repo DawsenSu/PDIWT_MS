@@ -105,6 +105,7 @@ namespace PDIWT_MS_PiledWharf.Models.Piles
             var _query = new PDIWT_MS_PiledWharf_CPP.PointQuery();
             double _uorpermeter = Program.GetActiveDgnModel().GetModelInfo().UorPerMeter; ;
             return _query.GetPilePieceSoilLayerInfos(DPoint3d.Multiply(_TopPoint, _uorpermeter), DPoint3d.Multiply(_BottomPoint, _uorpermeter));
+            //return new ObservableCollection<PilePieceInSoilLayerInfo>();
         }
 
     }

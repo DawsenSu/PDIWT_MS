@@ -23,7 +23,7 @@ namespace PDIWT_MS_PiledWharf.ViewModels
     using Models.Soil;
     using Models.Piles;
     using Models.Piles.CrossSection;
-
+    using Bentley.MstnPlatformNET;
 
     public class MainViewModel : ViewModelBase
     {
@@ -143,6 +143,20 @@ namespace PDIWT_MS_PiledWharf.ViewModels
         public RelayCommand GetPilesInfoFromDgnCommand => _GetPilesInfoFromDgnCommand ?? (_GetPilesInfoFromDgnCommand = new RelayCommand(ExecuteGetPilesInfoFromDgnCommand));
         public void ExecuteGetPilesInfoFromDgnCommand()
         {
+            BDDE.FindInstancesScope scope = BDDE.FindInstancesScope.CreateScope(Program.GetActiveDgnFile(), new BDDE.FindInstancesScopeOption(BDDE.DgnECHostType.All));
+            BES.IECSchema schema = BDDE.DgnECManager.Manager.LocateSchemaInScope(scope, "PDIWT_Wharf", 1, 0, BES.SchemaMatchType.Exact);
+            if (schema == null)
+            {
+                MessageCenter.Instance.ShowErrorMessage("无法定位\"PDIWT_Wharfschema\"", "", false);
+                return;
+            }
+            BES.IECClass pileecclass = schema.GetClass("Pile");
+            if (pileecclass == null)
+            {
+                MessageCenter.Instance.ShowErrorMessage("无法定位\"Pile\"Class", "", false);
+                return;
+            }
+
             ScanCriteria sc = new ScanCriteria();
             BitMask bmtype = new BitMask(false);
             bmtype.Set((uint)MSElementType.Line - 1);
@@ -150,22 +164,23 @@ namespace PDIWT_MS_PiledWharf.ViewModels
             sc.SetElementTypeTest(bmtype);
             sc.SetModelRef(Program.GetActiveDgnModelRef());
             sc.SetModelSections(DgnModelSections.GraphicElements);
-
-
+            int Count = 0;
             sc.Scan((ele, model) =>
             {
-                BDDE.FindInstancesScope scope = BDDE.FindInstancesScope.CreateScope(ele, new BDDE.FindInstancesScopeOption(BDDE.DgnECHostType.Element));
-                BDEPQ.ECQuery query = new BDEPQ.ECQuery(new BES.ECClass("Pile"));
+                BDDE.FindInstancesScope ele_scope = BDDE.FindInstancesScope.CreateScope(ele, new BDDE.FindInstancesScopeOption(BDDE.DgnECHostType.Element));
+                BDEPQ.ECQuery query = new BDEPQ.ECQuery(pileecclass);
                 query.SelectClause.SelectAllProperties = true;
-                using (BDDE.DgnECInstanceCollection ecInstances = BDDE.DgnECManager.Manager.FindInstances(scope,query))
+                using (BDDE.DgnECInstanceCollection ecInstances = BDDE.DgnECManager.Manager.FindInstances(ele_scope, query))
                 {
-                    if (ecInstances == null) return StatusInt.Error;
+                    if (ecInstances == null || ecInstances.Count() == 0 ) return StatusInt.Error;
+                    BDDE.IDgnECInstance pileecinstance = ecInstances.First();
+                    
                 }
-
                 return StatusInt.Success;
             });
+            MessageBox.Show($"{Count}");
         }
-        #endregion
+
 
         private RelayCommand _Test;
         public RelayCommand Test => _Test ?? (_Test = new RelayCommand(ExecuteTest));
@@ -185,5 +200,8 @@ namespace PDIWT_MS_PiledWharf.ViewModels
             }
             MessageBox.Show(_sb.ToString());
         }
+        #endregion
+
+
     }
 }

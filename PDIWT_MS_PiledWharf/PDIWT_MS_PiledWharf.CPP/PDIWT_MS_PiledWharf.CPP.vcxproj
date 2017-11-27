@@ -136,7 +136,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Reference Include="Bentley.GeometryNET.Structs">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Bentley.GeometryNET.Structs.dll</HintPath>
+      <HintPath>C:\Program Files\Bentley\MicroStation CONNECT Edition\MicroStation\Bentley.GeometryNET.Structs.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616" />
     <Reference Include="PDIWT_MS_PiledWharf">
