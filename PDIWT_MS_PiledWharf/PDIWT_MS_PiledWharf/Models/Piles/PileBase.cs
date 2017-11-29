@@ -45,6 +45,21 @@ namespace PDIWT_MS_PiledWharf.Models.Piles
             set { Set(ref _ID, value); }
         }
 
+        private double _UnitWeight = 25;
+        public double UnitWeight
+        {
+            get { return _UnitWeight; }
+            set { Set(ref _UnitWeight, value); }
+        }
+
+        private double _UnderWaterUnitWeight = 15;
+        public double UnderWaterUnitWeight
+        {
+            get { return _UnderWaterUnitWeight; }
+            set { Set(ref _UnderWaterUnitWeight, value); }
+        }
+
+
         private IPileCrossSection _ICrossSection;
         public IPileCrossSection ICrossSection
         {
@@ -54,7 +69,7 @@ namespace PDIWT_MS_PiledWharf.Models.Piles
 
         public abstract double CalculateQd(double gammar,params double[] otherparameters);
 
-        public virtual double CalculateTd(double gammar, double waterlevel, double unitweight = 25, double underwaterunitweight = 15)
+        public virtual double CalculateTd(double gammar, double waterlevel)
         {
             // todo 完成计算结果
             var _pilepieceinfos = GetPilePieceInEachSoilLayerInfos();
@@ -63,7 +78,7 @@ namespace PDIWT_MS_PiledWharf.Models.Piles
             foreach (var pilepiece in _pilepieceinfos)
                 _accumlatenum += pilepiece.CurrentSoilLayerInfo.Xii * pilepiece.PilePieceLength * pilepiece.CurrentSoilLayerInfo.Qfi;
             //! 以顶端的周长代替整个桩的周长，如变截面需重新编写代码
-            return (_ICrossSection.GetOutPerimeter(0) * _accumlatenum + GetActualWeight(unitweight, underwaterunitweight, waterlevel) * GetCosAlpha()) / gammar;
+            return (_ICrossSection.GetOutPerimeter(0) * _accumlatenum + GetActualWeight(_UnitWeight, _UnderWaterUnitWeight, waterlevel) * GetCosAlpha()) / gammar;
 
         }
 

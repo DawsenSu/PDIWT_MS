@@ -3,10 +3,14 @@ using System.Text;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Win32;
 
 using Bentley.DgnPlatformNET;
 using Bentley.DgnPlatformNET.Elements;
+using Bentley.GeometryNET;
 
 using BDDE = Bentley.DgnPlatformNET.DgnEC;
 using BES = Bentley.ECObjects.Schema;
@@ -29,34 +33,34 @@ namespace PDIWT_MS_PiledWharf.ViewModels
     {
         public MainViewModel()
         {
-            _Piles = new ObservableCollection<PileBase>()
-            {
-                new SolidPile()
-                {
-                    TopPoint = new Bentley.GeometryNET.DPoint3d(0, 0, 0),
-                    BottomPoint = new Bentley.GeometryNET.DPoint3d(0, 0, -100),
-                    Code = "Pile1",
-                    ID = 2120,
-                    ICrossSection = new SquareCrossSection(0.5)
-                },
-                new SolidPile()
-                {
-                    TopPoint = new Bentley.GeometryNET.DPoint3d(10, 15, 0),
-                    BottomPoint = new Bentley.GeometryNET.DPoint3d(10, 10, -80),
-                    Code = "Pile2",
-                    ID = 333,
-                    ICrossSection = new SquareCrossSection(0.6)
-                },
-            };
-            if (_Piles.Count > 0)
-                _SelectedPile = _Piles.First();
+            //_Piles = new ObservableCollection<PileBase>()
+            //{
+            //    new SolidPile()
+            //    {
+            //        TopPoint = new Bentley.GeometryNET.DPoint3d(0, 0, 0),
+            //        BottomPoint = new DPoint3d(0, 0, -100),
+            //        Code = "Pile1",
+            //        ID = 2120,
+            //        ICrossSection = new SquareCrossSection(0.5)
+            //    },
+            //    new SolidPile()
+            //    {
+            //        TopPoint = new DPoint3d(10, 15, 0),
+            //        BottomPoint = new Bentley.GeometryNET.DPoint3d(10, 10, -80),
+            //        Code = "Pile2",
+            //        ID = 333,
+            //        ICrossSection = new SquareCrossSection(0.6)
+            //    },
+            //};
+            //if (_Piles.Count > 0)
+            //    _SelectedPile = _Piles.First();
             _GammaR = 1.2;
             _Eta = 0;
             _WaterLevel = 0;
         }
 
         #region Properties
-        private ObservableCollection<PileBase> _Piles;
+        private ObservableCollection<PileBase> _Piles = new ObservableCollection<PileBase>();
         public ObservableCollection<PileBase> Piles
         {
             get { return _Piles; }
@@ -101,8 +105,8 @@ namespace PDIWT_MS_PiledWharf.ViewModels
         {
             get
             {
-                return _SelectedPile?.CalculateTd(_GammaR,_WaterLevel);
-            }            
+                return _SelectedPile?.CalculateTd(_GammaR, _WaterLevel);
+            }
         }
 
         private double _GammaR;
@@ -164,23 +168,74 @@ namespace PDIWT_MS_PiledWharf.ViewModels
             sc.SetElementTypeTest(bmtype);
             sc.SetModelRef(Program.GetActiveDgnModelRef());
             sc.SetModelSections(DgnModelSections.GraphicElements);
-            int Count = 0;
+
+            int _count = 0;
             sc.Scan((ele, model) =>
             {
-                BDDE.FindInstancesScope ele_scope = BDDE.FindInstancesScope.CreateScope(ele, new BDDE.FindInstancesScopeOption(BDDE.DgnECHostType.Element));
+                BDDE.FindInstancesScope ele_scope = BDDE.FindInstancesScope.CreateScope(ele, new BDDE.FindInstancesScopeOption(BDDE.DgnECHostType.All));
                 BDEPQ.ECQuery query = new BDEPQ.ECQuery(pileecclass);
                 query.SelectClause.SelectAllProperties = true;
                 using (BDDE.DgnECInstanceCollection ecInstances = BDDE.DgnECManager.Manager.FindInstances(ele_scope, query))
                 {
-                    if (ecInstances == null || ecInstances.Count() == 0 ) return StatusInt.Error;
-                    BDDE.IDgnECInstance pileecinstance = ecInstances.First();
-                    
+                    if (ecInstances != null && ecInstances.Count() != 0)
+                    {
+                        BDDE.IDgnECInstance _pileecinstance = ecInstances.First();
+                        LineElement _line = ele as LineElement;
+                        CurveVector _cv = _line.GetCurveVector();
+                        DPoint3d _top, _bottom;
+                        _cv.GetStartEnd(out _top, out _bottom);
+                        PileFactory _pilefactory = new PileFactory(_top, _bottom, _line.ElementId, _pileecinstance);
+                        _Piles.Add(_pilefactory.Create());
+                        _count++;
+                    }
                 }
                 return StatusInt.Success;
             });
-            MessageBox.Show($"{Count}");
+            if (_count > 0)
+                MessageBox.Show($"共提取{_count}根桩", "提取成功", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+                MessageBox.Show("无法提取当前dgn模型中的桩轴线\n或模型中不存在桩轴线", "提取失败", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
+        private RelayCommand _RemovePileCommand;
+        public RelayCommand RemovePileCommand => _RemovePileCommand ?? (_RemovePileCommand = new RelayCommand(() => _Piles.Remove(_SelectedPile), () => _SelectedPile != null && _Piles.Count > 0));
+
+        private RelayCommand _RemoveAllPileCommand;
+        public RelayCommand RemoveAllPileCommand => _RemoveAllPileCommand ?? (_RemoveAllPileCommand = new RelayCommand(() => _Piles.Clear(), () => _Piles.Count > 0));
+
+        private RelayCommand _OutputCalculationSheetCommand;
+        public RelayCommand OutputCalculationSheetCommand => _OutputCalculationSheetCommand ?? (_OutputCalculationSheetCommand = new RelayCommand(ExecuteOutputCalculationSheetCommand));
+        public void ExecuteOutputCalculationSheetCommand()
+        {
+            SaveFileDialog svdlg = new SaveFileDialog()
+            {
+                Title = "输出计算书",
+                Filter = Properties.Resources.ExcelFilter                
+            };
+            try
+            {
+                if(svdlg.ShowDialog() == true)
+                {
+                    if (File.Exists(svdlg.FileName))
+                        File.Delete(svdlg.FileName);
+                    OutputCalculationSheet outputsheet = new OutputCalculationSheet(_Piles, _GammaR, _Eta, _WaterLevel);
+                    outputsheet.Export(svdlg.FileName);
+                    MessageBox.Show($"计算书保存至{svdlg.FileName}", "计算书生成成功", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+        }
+
+        private RelayCommand _DrawPilePositionMapCommand;
+        public RelayCommand DrawPilePositionMapCommand => _DrawPilePositionMapCommand ?? (_DrawPilePositionMapCommand = new RelayCommand(ExecuteDrawPilePositionMapCommand));
+        public void ExecuteDrawPilePositionMapCommand()
+        {
+            PilePositionMap posMap = new PilePositionMap(_Piles);
+            posMap.CreateMap();
+        }
 
         private RelayCommand _Test;
         public RelayCommand Test => _Test ?? (_Test = new RelayCommand(ExecuteTest));

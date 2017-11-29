@@ -54,7 +54,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <!--  Menu  -->
-        <Menu Grid.Row="0">
+        <Menu Grid.Row="0" Padding="3">
             <MenuItem
                 Command="{Binding GetPilesInfoFromDgnCommand}"
                 Header="提取桩轴线"
@@ -63,7 +63,7 @@
                     <Image Source="../Resources/Icons/ExtractList.ico" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="统计分析" ToolTip="根据列表中的桩信息，得到设计承载力和桩端土层信息">
+            <!--<MenuItem Header="统计分析" ToolTip="根据列表中的桩信息，得到设计承载力和桩端土层信息">
                 <MenuItem.Icon>
                     <Image Source="../Resources/Icons/Analysis.ico" />
                 </MenuItem.Icon>
@@ -77,13 +77,16 @@
                 <MenuItem.Icon>
                     <Image Source="../Resources/Icons/CollisionTest.ico" />
                 </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Header="输出计算表" ToolTip="将计算结果输出成桩基承载力计算书">
+            </MenuItem>-->
+            <MenuItem
+                Command="{Binding OutputCalculationSheetCommand}"
+                Header="输出计算表"
+                ToolTip="将计算结果输出成桩基承载力计算书">
                 <MenuItem.Icon>
                     <Image Source="../Resources/Icons/OutputToExcel.ico" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="绘制桩位图" ToolTip="根据桩的信息，绘制桩位图，存放在[桩位图]模型中">
+            <MenuItem Header="绘制桩位图" ToolTip="根据桩的信息，绘制桩位图，存放在[桩位图]模型中" Command="{Binding DrawPilePositionMapCommand}">
                 <MenuItem.Icon>
                     <Image Source="../Resources/Icons/DrawPilePosition.ico" />
                 </MenuItem.Icon>
@@ -117,54 +120,62 @@
                     <GroupBox Grid.Row="0" Header="桩信息">
                         <ListBox
                             Name="listbox_piles"
-                            MinWidth="120"
+                            MinWidth="150"
                             Background="White"
                             ItemsSource="{Binding Piles}"
                             SelectedItem="{Binding SelectedPile}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition />
-                                            <RowDefinition />
-                                            <RowDefinition />
-                                            <RowDefinition />
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition />
-                                            <ColumnDefinition />
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock
-                                            Grid.Row="0"
-                                            Grid.Column="0"
-                                            Text="{Binding Code, StringFormat=编号：{0}}" />
-                                        <TextBlock
-                                            Grid.Row="0"
-                                            Grid.Column="1"
-                                            Text="{Binding ID, StringFormat=轴线ID：{0}}" />
-                                        <TextBlock
-                                            Grid.Row="1"
-                                            Grid.Column="0"
-                                            Text="{Binding TopPoint.Z, StringFormat=顶高程：{0:n2}}" />
-                                        <TextBlock
-                                            Grid.Row="1"
-                                            Grid.Column="1"
-                                            Text="{Binding BottomPoint.Z, StringFormat=顶底程：{0:n2}}" />
-                                        <TextBlock
-                                            Grid.Row="2"
-                                            Grid.Column="0"
-                                            Grid.ColumnSpan="2"
-                                            HorizontalAlignment="Center"
-                                            Text="{Binding ICrossSection, Mode=OneWay, Converter={StaticResource crosssectiontypeconverter}, StringFormat=截面形式：{0}}" />
-                                        <TextBlock
-                                            Grid.Row="3"
-                                            Grid.Column="0"
-                                            Text="{Binding ICrossSection, Mode=OneWay, Converter={StaticResource interface_piermeter}, ConverterParameter=0, StringFormat=截面周长：{0:n2}}" />
-                                        <TextBlock
-                                            Grid.Row="3"
-                                            Grid.Column="1"
-                                            Text="{Binding ICrossSection, Mode=OneWay, Converter={StaticResource interface_area}, ConverterParameter=0, StringFormat=截面面积：{0:n2}}" />
-                                    </Grid>
+                                    <Border
+                                        Padding="4"
+                                        HorizontalAlignment="Stretch"
+                                        BorderBrush="Black"
+                                        BorderThickness="2"
+                                        CornerRadius="4">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                Text="{Binding Code, StringFormat=编号：{0}}" />
+                                            <TextBlock
+                                                Grid.Row="0"
+                                                Grid.Column="1"
+                                                Text="{Binding ID, StringFormat=轴线ID：{0}}" />
+                                            <TextBlock
+                                                Grid.Row="1"
+                                                Grid.Column="0"
+                                                Text="{Binding TopPoint.Z, StringFormat=顶高程：{0:n2}}" />
+                                            <TextBlock
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Text="{Binding BottomPoint.Z, StringFormat=底高程：{0:n2}}" />
+                                            <TextBlock
+                                                Grid.Row="2"
+                                                Grid.Column="0"
+                                                Grid.ColumnSpan="2"
+                                                HorizontalAlignment="Center"
+                                                Text="{Binding ICrossSection, Mode=OneWay, Converter={StaticResource crosssectiontypeconverter}, StringFormat=截面形式：{0}}" />
+                                            <TextBlock
+                                                Grid.Row="3"
+                                                Grid.Column="0"
+                                                Text="{Binding ICrossSection, Mode=OneWay, Converter={StaticResource interface_piermeter}, ConverterParameter=0, StringFormat=截面周长：{0:n2}}" />
+                                            <TextBlock
+                                                Grid.Row="3"
+                                                Grid.Column="1"
+                                                Text="{Binding ICrossSection, Mode=OneWay, Converter={StaticResource interface_area}, ConverterParameter=0, StringFormat=截面面积：{0:n2}}" />
+                                        </Grid>
+                                    </Border>
+
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>

@@ -26,8 +26,7 @@ namespace PDIWT_MS_PiledWharf.Views
         private MainView()
         {
             InitializeComponent();
-            var locator = new ViewModels.ViewModelLocator();
-            this.DataContext = locator.MainVM;
+            this.DataContext = new ViewModels.MainViewModel();
             m_wpfHelper = new BMWPF.WPFInteropHelper(this);
             m_wpfHelper.Attach(Program.Addin, true, "MainView");
 

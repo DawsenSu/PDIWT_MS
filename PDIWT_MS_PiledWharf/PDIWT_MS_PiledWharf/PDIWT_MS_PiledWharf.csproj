@@ -178,7 +178,9 @@
     <Compile Include="Models\DrawAxisFromExcel.cs" />
     <Compile Include="Models\DrawPileAxisTool.cs" />
     <Compile Include="Models\HelperClasses.cs" />
+    <Compile Include="Models\OutputCalculationSheet.cs" />
     <Compile Include="Models\PileFactory.cs" />
+    <Compile Include="Models\PilePositionMap.cs" />
     <Compile Include="Models\Piles\CrossSection\AnnularCrossSection.cs" />
     <Compile Include="Models\Piles\CrossSection\PolygonCrossSection.cs" />
     <Compile Include="Models\Piles\CrossSection\SquareCrossSection.cs" />
